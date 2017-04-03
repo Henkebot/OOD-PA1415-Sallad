@@ -1,0 +1,26 @@
+-Waterfall Development
+
+-Iterative Development
+
+-Incremental Development
+
+-Agile
+
+-Scrum
+
+-Kanban
+
+-Minimum Viable Product (MVP)
+
+-Work Breakdown Structure (WBS)
+
+-GANTT chart
+
+-Earned Value Charts
+
+-Burn Charts (Also: Burndown charts and burn-up charts)
+
+-UML
+
+-Unified Process (Also: Rational Unified Process RUP)
+

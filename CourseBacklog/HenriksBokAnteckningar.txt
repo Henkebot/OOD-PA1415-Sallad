@@ -1,0 +1,157 @@
+﻿Kapitel 1
+Object-Oriented Analysis and Design är OOA/D förkortat.
+UML är Unified Modeling language.
+
+Det är viktigt att ha i åtanke med saker som "Responsibilities" för klasser. Hur ska objekt "interact". Vilka klasser ska göra vad?
+
+All softvara design är starkt relaterat till "prerequsite activity of requirements analysis", vilket innehåller "use cases". 
+
+Det finns många aktiviteter från att studera vad som krävs och implementatitions delen. Unifiied Process (UP) är en generel iterativ utvecklings proces som vägleder hur en grupp programmerar ska utveckla.
+
+Vad är analys?
+Analys är att man undersöker ett problem och dess krav, man tänker inte på lösningar.
+
+Design?
+Design är en konceptuell lösning till problemet som uppfyller kraven. Det är inte en implementation. Det är som en beskrivning till en lösning. 
+
+Går att att sammanfatta båda som "Do the right thing(analays), and do the thing right (design)".
+
+Objekt orienterad analys och design
+
+Objekt orienterad analys är att man hittar och förklarar problem objekt, elller koncept i problem domänen. Som ett exempel, ett bibliotek information system, så finns det koncept som Bok, bibliotek och kund. 
+
+Objekt orienterad design handlar om att man definerar objekt och hur de samarbetar för att uppfylla kraven. Som det förra exemplet så har en Bok en title-attribut och en getChapter() metod. 
+
+"Requirements analysis" kan innehålla en description av relaterade domän processer. 
+De är:
+-- Define use case -->-- Define domain model -->-- Define interaction diagrams -->-- Define design class diagrams --
+
+Define use case:
+Use case är inte objekt orienterat utan är enkla berättelser. I exempel handlar det om att kasta tärningar; 
+Play a Dice Game: A player picks up and rolls the dice. If the dice face value total seven, they win; otherwise, they lose.
+
+Define a Domain Model:
+_____________		   _____________
+| Player     | 1  Rolls  2 |   Die     |
+|------------|-------------|-----------|
+| name       |             | faceValue |
+|____________|             |___________|
+     | 1                        2 | 
+     |                            |
+     | Plays                      |
+     |                            |
+     | 1                          |
+_____|________                    |
+| Dice Game  | 1    Includes      |
+|------------|---------------------
+|____________|
+
+Objekt-orienterad analys är att skapa en förklaring av domänet från perspektivet av klasser av objekt. Man hittar alltså koncept, attributer och "associations" som är värdiga. Reslutatet blir bilden ovan. I bilden noterar man att spelaren, tärningen och spelet går att göra som objekt och associera med varandra.
+
+Define Interaction Diagrams:
+Obejkt orienterad design är att definera objekt och deras kopplingar. Man använder sig ofta av interaction diagram. Det visar strömmen av medelande mellan objekt och vilka metoder somkrävs. 
+
+         _____________         _______________  ______________
+         | :Dicegame |         |  die1 : Die |  | die2 : Die |
+         |___________|         |_____________|  |____________|
+	play()  |                  |              |
+--------------->|                  |              |
+               [ ]      roll()     |              |
+	       [ ]---------------->|              |
+	       [ ]                [ ]             |
+	       [ ]                 |              |
+	       [ ]fv1 := getFv()   |              |
+	       [ ]---------------->|              |
+	       [ ]                [ ]             |
+               [ ]        roll()   |              |
+	       [ ]------------------------------->|
+	       [ ]                 |             [ ]
+               [ ]fv2 := getFv()   |              |                   
+               [ ]------------------------------->|
+               [ ]                 |             [ ]
+	       [ ]                 |              |
+Att tänka på är att i den riktiga världen rullar spelaren tärningen, i softvara design så är det DiceGame objektet som rullar tärningen. Softvara design och program tar inspiration ifrån den värkliga domänen, men är inte en simulation av den riktiga världen.
+
+Define Design Class Diagrams:
+Detta är jämfört med domain modellen softvara klasser
+
+_____________                 ________________
+| Dice Game |                 |  Die          |
+|-----------| 1             2 |---------------|
+|die1 : Die |---------------->| faceValue :int|
+|die2 : Die |                 |---------------|
+|-----------|                 |getFVal() : int|
+|play()     |                 |roll()         |
+|___________|                 |_______________|
+
+
+-Kapitel 2
+
+Software development process beskriver hur man möter building, depolying och underhållning av softvara. The Unified Process (UP) är en populär software development process för att bygga objekt orienterade system. Framför allt the Rational Unified Process (RUP).
+
+Unified process är en samling av de bästa "practices" som den iterativa livcyklen och en risk-driven utveckling, till en "cohesive" och väl dokumenterat förklaring. 
+
+Iterativ utveckling är att man har delat upp utveckling till små mini projekt (tex 4 veckor) som kallas för iterationer. Varje iteration har sin egna "requirements analysis", design, implementation och testning. Varje iteration gör att systemet växer incrementally över tid och tar emot feedback. Denna approach heter även "iterative and incremental development"
+
+Poängen är att man ska dels ta emot feedback och eftersom allt sker i iterationer så ska man ta emot feedback. Denna feedback väger guld, speciellt i början då det handlar ofta om attman antar saker. 
+
+--Fördelar med iterativ utveckling:
+ - Ganska tidig jämfört med senare när det kommer till begränsnig av hög risk
+ - Tidig synlig progression.
+ - Tidig feedback, användar engagemang och anpassning. Det leder till ett mer likt system som önskas.
+ - kontrollerad komplexitiet. Teamet är inte överbelastat med "analysis paralysis" eller långa och komplicerade steg.
+ - Att ha det iterativt kan metodvis förbättra utvecklings processen.
+
+Iterativ utveckling rekommenderar att varje iteration är mellan två till sex veckor. Då ska det vara små steg och snabb feedback och anpassning som är de centrala ideérna bakom iterativ utveckling. 
+
+--Fraser:
+
+Inception - Ungefärlig vision, affärs fall, begränsning, vaga uppskattningar.
+Elaboration - Skarpare vision, iterativ implementation av kärn arkiteturen, identifikation av de mesta "requirements" och begränsning, mer realistiska uppskattningar.
+Construction - Iterativ implementation och de kvarlämnade mindre risk elementen, och preparation för deployment.
+Transition - Beta tests och deployment.
+
+Inception är inte en requirements fas, utan mer en investigation för att stödja beslutet av att fortsätta eller sluta.
+
+Elaboration är inte häller en requirements fas eller design fas, utan mer där kärn arkitetkturen är iterativt implementerat och hög risk problem är flyttade. 
+
+--UP disipliner (Hette innan workflows)
+UP beskriver arbets aktiviter, som att skriva use cases.
+I UP så är en "Artifact" en generel term för vilken arbetes produkt som till exempel: kod, webb grafik, database schema, text dokument....
+De finns olika disipliner i UP, tre artifakter är:
+
+Business Modeling - När man utvecklar ett program, då ingår domän objekt modelering. 
+Requirements - Requirements analys för en applikation som att skriva use cases och identifiera non-functional requirements.
+Design - Alla aspekter av design, inkluderat arkitekturen, objekt, databas, nätverk....
+
+Discipline		Artifact		Incep.11	Elab	Const	Trans
+Business Modeling	Domain Model				s			
+Requirements		Use-Case Model		S		r
+			Vision			s		r
+			Supplementary Spec	s		r
+			Glossary		s		r
+Design			Design Model				s	r
+			SW Architecture Doc			s
+			Data Model				s	r
+Implementation		Implementation Model			s	r	r
+Project Mgmt		SW Development Plan	s		r	r	r
+Testing			Test Model				s	r
+Environment		Development Case	s		r
+
+-- The Agile UP
+Pedagoger pratar om processor som tunga mot lätta, förutsägbara mot anpassningsbara.
+En tung process är en kränkande term som förutspråkar följande kvaliteter:
+ - Många artifakter skapas [ i en större organsiation atmospfär ]
+ - Stelhet och kontrol
+ - detaljerad planering
+ - Förutsägbar istället för anspassningsbar
+
+ En förutsägsbar process är en som försöker planera och förutspå aktiviter och resurser och allokerar i detalj över en relativt långs tid period. Går att beskriva med vattenfalls modelen. Först definerar man requirementsen, sen en detaljerad design, och tredje implementationen. I kontrasten en anpassningsbar prcoess är en som accepterar förändringar
+
+
+
+
+
+
+
+

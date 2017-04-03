@@ -1,0 +1,170 @@
+﻿This is a list of use cases.
+_________________________________________________
+|Use Case: Movement of Player                   |
+|-----------------------------------------------|
+|Actors: Player                                 |
+|-----------------------------------------------|
+|Description: A player move with the arrow keys |
+|or with the numpad and have the choise to move:|
+|up, up-right, right, down-right, down,         |
+|down-left, left and up-left.                   |
+|_______________________________________________|
+
+_________________________________________________
+|Use Case: Pick up an item                      |
+|-----------------------------------------------|
+|Actors: Player                                 |
+|-----------------------------------------------|
+|Description: A player picks up an item from the|
+|ground.                                        |
+|_______________________________________________|
+
+_________________________________________________
+|Use Case: Trade item with other player         |
+|-----------------------------------------------|
+|Actors: The player, other player               |
+|-----------------------------------------------|
+|Description: The player selects an item in its |
+|inventory and gives it to the other player.    |
+|_______________________________________________|
+
+_________________________________________________
+|Use Case: Slay a Creature                      |
+|-----------------------------------------------|
+|Actors: Player                                 |
+|-----------------------------------------------|
+|Description: A player attacks a creature until |
+|the creature has been slain. This gives the    |
+|player experience points and the creature drops|
+|an item on the floor.                          |
+|_______________________________________________|
+
+
+_________________________________________________
+|Use case: Drink from fountain		        |
+|-----------------------------------------------|
+|Actors: Player					|
+|-----------------------------------------------|
+|Description: The player drinks from a fountain.|
+|This replenish the players thirst status.      |
+|_______________________________________________|
+
+
+_________________________________________________
+|Use case: Wield Armor                          |
+|-----------------------------------------------|
+|Actors: Player                                 |
+|-----------------------------------------------|
+|Description: A player selects any armor from   |
+|their inventory and equips it.                 |
+|_______________________________________________|
+
+
+_________________________________________________
+|Use case: Walk down stairs                     |
+|-----------------------------------------------|
+|Actors: Player                                 |
+|-----------------------------------------------|
+|Description: A player is standing on           |
+|stairs and walks down the next level.          |
+|_______________________________________________|
+
+
+_________________________________________________
+|Use case: Fall down from a trap door           |
+|-----------------------------------------------|
+|Actors: Player                                 |
+|-----------------------------------------------|
+|Description: A player is standing on a         |
+|trap door and will fall down to later levels   |
+|_______________________________________________|
+
+
+_________________________________________________
+|Use Case: Open inventory                       |
+|-----------------------------------------------|
+|Actors: Player                                 |
+|-----------------------------------------------|
+|Description: The player presses the "I" button	|
+|and opens the inventory which shows all of the	|
+|items. 					|
+|_______________________________________________|
+
+
+_________________________________________________
+|Use Case: Using bow and arrow                  |
+|-----------------------------------------------|
+|Actors: Player                                 |
+|-----------------------------------------------|
+|Description: The player has a bow and an arrow,|
+|they can be used together by pressing "F" and  |
+|then any diagonal or straight direction,in     |
+|which the arrow is to be shot.	                |
+|_______________________________________________|
+
+
+_________________________________________________
+|Use Case: Check Discovery list                 |
+|-----------------------------------------------|
+|Actors: Player                                 |
+|-----------------------------------------------|
+|Description: The player checks all new 	|
+|discoveries made by typing "\". This will 	|
+|show a list of all of them.			|
+|_______________________________________________|
+
+
+_________________________________________________
+|Use Case: Using Scroll of Genocide             |
+|-----------------------------------------------|
+|Actors: Player                       	        |
+|-----------------------------------------------|
+|Description: The player has a scroll of        |
+|genocide and types in the name of the          |
+|monster-type which will be removed.            |
+|_______________________________________________|
+
+
+_________________________________________________
+|Use Case: Start New Game	                |
+|-----------------------------------------------|
+|Actors: Player                       	        |
+|-----------------------------------------------|
+|Description: At the main menu the player       |
+|presses N which starts a new game	        |  
+|_______________________________________________|
+
+
+_________________________________________________
+|Use Case: Join an existing Game                |
+|-----------------------------------------------|
+|Actors: Player                       	        |
+|-----------------------------------------------|
+|Description: At the main menu the player       |
+|presses J which joins an active game		|  
+|_______________________________________________|
+
+
+_________________________________________________
+|Use Case: Commincate with other players        |
+|-----------------------------------------------|
+|Actors: Player                       	        |
+|-----------------------------------------------|
+|Description: The player presses C to open a    |
+|chat window and types in a message which will  |
+|be seen by other players in the current game   |
+|session.                                       |
+|_______________________________________________|
+
+
+_____________________________________________________
+|Author Name|Social Security Number|Thinking|Writing|
+|-----------|----------------------|--------|-------|
+|Magnus N.  |940429-xxxx           |25%     |27%    |
+|-----------|----------------------|--------|-------|
+|Henrik N.  |970416-xxxx	   |25%     |27%    |
+|-----------|----------------------|--------|-------|
+|Victor O.  |970612-xxxx   	   |25%	    |27%    |
+|-----------|----------------------|--------|-------| 
+|Morgan L.  |971107-xxxx	   |25%     |20%    |
+|___________|______________________|________|_______|
