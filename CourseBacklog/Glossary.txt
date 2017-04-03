@@ -1,15 +1,15 @@
-﻿-Waterfall Development Henrik
+﻿-Waterfall Development Magnus 
 	Vattenfallsmodellen är en sekventiell systemutvecklingsprocess där man ser framstegen
 	som ett flöde (som ett vattenfall) nedåt genom olika faser:
 	förberedelse, etablering, analys, design, konstruktion, test, produktionssättning och underhåll.
 	Detta betyder att den inte är "Iterative". Man går aldrig tillbaka i processen. = Dålig.
 
--Iterative Development Henrik
+-Iterative Development Magnus 
 	"Iterative development" används för att bryta ner utvecklingen av ett stort program till
 	mindre bitar. Koden designas, utvecklas och testas hela tiden och vid varje iteration så
 	designas, utvecklas och testas mer kod tills alla saker som ska vara med i programmet fungerar.
 
--Incremental Development Henrik
+-Incremental Development Magnus 
 	"Det verkar vara samma sak som Iterative Development". vid varje iteration så adderas fler
 	funktioner.
 -Agile Victor
