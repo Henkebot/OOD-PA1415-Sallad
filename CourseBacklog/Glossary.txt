@@ -1,26 +1,28 @@
--Waterfall Development
+﻿-Waterfall Development Henrik
 	Vattenfallsmodellen är en sekventiell systemutvecklingsprocess där man ser framstegen
 	som ett flöde (som ett vattenfall) nedåt genom olika faser:
 	förberedelse, etablering, analys, design, konstruktion, test, produktionssättning och underhåll.
 	Detta betyder att den inte är "Iterative". Man går aldrig tillbaka i processen. = Dålig.
 
--Iterative Development
+-Iterative Development Henrik
 	"Iterative development" används för att bryta ner utvecklingen av ett stort program till
 	mindre bitar. Koden designas, utvecklas och testas hela tiden och vid varje iteration så
 	designas, utvecklas och testas mer kod tills alla saker som ska vara med i programmet fungerar.
 
--Incremental Development
+-Incremental Development Henrik
 	"Det verkar vara samma sak som Iterative Development". vid varje iteration så adderas fler
 	funktioner.
--Agile
+-Agile Victor
 
--Scrum
+-Scrum Victor
 
--Kanban
+-Kanban Victor
 
--Minimum Viable Product (MVP)
+-Minimum Viable Product (MVP) Morgan
+Minimum viable product har endast de mest nödvändiga funktonerna för att använda producten. det är tillför att man enkelt och biligt ska kunna testa producten och få feedback
 
--Work Breakdown Structure (WBS)
+-Work Breakdown Structure (WBS) Morgan
+Work breakdown structure är att dela in arbeter i flera minder bitar. man börjar med att komma fram till vad man vill sen delar man up projectet i mindre bitar.
 
 -GANTT chart
 
@@ -28,7 +30,9 @@
 
 -Burn Charts (Also: Burndown charts and burn-up charts)
 
--UML
+-UML Morgan
+Unified Modeling Language är ett "språck" som används för att göra en model över hur olika delar av ett program sitter ihop och vad de olika delarna gör. 
+det finns olika sorters UML diagram. Behaviour diagrams och Structure Diagram.
 
 -Unified Process (Also: Rational Unified Process RUP)
 	Detta är en iterative och incremental development process som vägleder hur en grupp
