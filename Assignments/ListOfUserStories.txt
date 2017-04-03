@@ -1,0 +1,22 @@
+As a <Type of User> I want <some goal> so that  <Some Reason>.
+
+As a player I want to be able to start a new game or join an
+existing game so that I can play TwitterNethack.
+
+As a player I want to be able to customize my character so that i
+can roleplay.
+
+As a player I want to be able to move my character so that I can
+progress in the game.
+
+As a player I want to be able to interact with other characters
+in the game so that the game becomes more dynamic and challanging.
+
+As a player I want to be able to pick up items so that my 
+character stronger.
+
+As a player I want to be able to play and interact with other
+players so that I play with my friends.
+
+As a player I want to be able to experience dynamic changes to
+the game so that everytime I enter a cave I get a unique experience.
