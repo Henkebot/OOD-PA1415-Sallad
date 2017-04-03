@@ -31,4 +31,10 @@
 -UML
 
 -Unified Process (Also: Rational Unified Process RUP)
-
+	Detta är en iterative och incremental development process som vägleder hur en grupp
+	programmerare ska utveckla.
+	The Unified Process (UP) är en populär software development process för att bygga objekt
+	orienterade system. Framför allt the Rational Unified Process (RUP).
+	Unified process är en samling av de bästa "practices" som den iterativa livcyklen och en
+	risk-driven utveckling, till en "cohesive" och väl dokumenterat förklaring.
+	RUP har copyright på sig, så UP är en kopia som kan användas.
