@@ -1,9 +1,17 @@
 -Waterfall Development
+	Vattenfallsmodellen är en sekventiell systemutvecklingsprocess där man ser framstegen
+	som ett flöde (som ett vattenfall) nedåt genom olika faser:
+	förberedelse, etablering, analys, design, konstruktion, test, produktionssättning och underhåll.
+	Detta betyder att den inte är "Iterative". Man går aldrig tillbaka i processen. = Dålig.
 
 -Iterative Development
+	"Iterative development" används för att bryta ner utvecklingen av ett stort program till
+	mindre bitar. Koden designas, utvecklas och testas hela tiden och vid varje iteration så
+	designas, utvecklas och testas mer kod tills alla saker som ska vara med i programmet fungerar.
 
 -Incremental Development
-
+	"Det verkar vara samma sak som Iterative Development". vid varje iteration så adderas fler
+	funktioner.
 -Agile
 
 -Scrum
@@ -45,4 +53,10 @@ Hur mycket ansträngning var spenderad.
 -UML
 
 -Unified Process (Also: Rational Unified Process RUP)
-
+	Detta är en iterative och incremental development process som vägleder hur en grupp
+	programmerare ska utveckla.
+	The Unified Process (UP) är en populär software development process för att bygga objekt
+	orienterade system. Framför allt the Rational Unified Process (RUP).
+	Unified process är en samling av de bästa "practices" som den iterativa livcyklen och en
+	risk-driven utveckling, till en "cohesive" och väl dokumenterat förklaring.
+	RUP har copyright på sig, så UP är en kopia som kan användas.
