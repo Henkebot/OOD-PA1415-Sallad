@@ -1,0 +1,12 @@
+Minimum viable product
+Minimum viable product har endast de mest nödvändiga funktonerna för att använda producten. det är tillför att man enkelt och biligt ska kunna testa producten och få feedback
+
+
+Work breakdown structure
+Work breakdown structure är att dela in arbeter i flera minder bitar. man börjar med att komma fram till vad man vill sen delar man up projectet i mindre bitar.
+
+Unified Modeling Language
+Unified Modeling Language är ett "språck" som används för att göra en model över hur olika delar av ett program sitter ihop och vad de olika delarna gör. 
+det finns olika sorters UML diagram. Behaviour diagrams och Structure Diagram.
+
+Morgan
