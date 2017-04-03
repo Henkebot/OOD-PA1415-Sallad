@@ -4,11 +4,32 @@
 
 -Incremental Development
 
--Agile
+-Agile (Victor)
 
--Scrum
+Detta är ett samlingsnamn på systemutvecklingsmetoder. Dessa metoder följer den filosofi och principer som formades i 
+"Manifestet för Agil Systemutveckling" som skapades år 2001. Grundtanken bakom Agile och de metoder som det omfattar
+är att göra systemutvecklingsprocessen så smidig som möjligt med speciell fokus på kommunikationen mellan kund 
+och leverantör.
 
--Kanban
+-Scrum (Victor)
+
+Scrum är namnet på en sorts systemutvecklingsprocess. Denna innebär att man som ett team samlas varje dag under 
+utvecklingsprocessen och kollar hur man ligger till. Projektledaren frågar varje person i teamet:
+
+1) vad de har gjort sedan förra mötet.
+2) Mål för nästkommande dag.
+3) Vilka mål som är avklarade och som kan bockas av. 
+
+Under mötet kan även deltagarna inflika med egna åsikter och föra diskussion i teamet.
+Det är även så att kunden under hela processen kommer att ha kontakt med teamet och 
+inflika med eventuella ändringar angående de krav som ställs på projektet. 
+
+-Kanban (Victor)
+
+Detta är ett begrepp som anger den tillgängliga kapaciteten för arbetet.
+Det beskriver alltså vad som ska produceras, när det ska produceras
+och hur mycket av det som ska produceras. 
+Denna process ingår i Just-In-Time (JIT) filosofin. 
 
 -Minimum Viable Product (MVP)
 
