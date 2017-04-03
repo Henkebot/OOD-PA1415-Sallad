@@ -1,26 +1,51 @@
--Waterfall Development
+﻿-Waterfall Development Magnus 
 	Vattenfallsmodellen är en sekventiell systemutvecklingsprocess där man ser framstegen
 	som ett flöde (som ett vattenfall) nedåt genom olika faser:
 	förberedelse, etablering, analys, design, konstruktion, test, produktionssättning och underhåll.
 	Detta betyder att den inte är "Iterative". Man går aldrig tillbaka i processen. = Dålig.
 
--Iterative Development
+-Iterative Development Magnus 
 	"Iterative development" används för att bryta ner utvecklingen av ett stort program till
 	mindre bitar. Koden designas, utvecklas och testas hela tiden och vid varje iteration så
 	designas, utvecklas och testas mer kod tills alla saker som ska vara med i programmet fungerar.
 
--Incremental Development
+-Incremental Development Magnus 
 	"Det verkar vara samma sak som Iterative Development". vid varje iteration så adderas fler
 	funktioner.
--Agile
 
--Scrum
+-Agile (Victor)
 
--Kanban
+Detta är ett samlingsnamn på systemutvecklingsmetoder. Dessa metoder följer den filosofi och principer som formades i 
+"Manifestet för Agil Systemutveckling" som skapades år 2001. Grundtanken bakom Agile och de metoder som det omfattar
+är att göra systemutvecklingsprocessen så smidig som möjligt med speciell fokus på kommunikationen mellan kund 
+och leverantör.
 
--Minimum Viable Product (MVP)
+-Scrum (Victor)
 
--Work Breakdown Structure (WBS)
+Scrum är namnet på en sorts systemutvecklingsprocess. Denna innebär att man som ett team samlas varje dag under 
+utvecklingsprocessen och kollar hur man ligger till. Projektledaren frågar varje person i teamet:
+
+1) vad de har gjort sedan förra mötet.
+2) Mål för nästkommande dag.
+3) Vilka mål som är avklarade och som kan bockas av. 
+
+Under mötet kan även deltagarna inflika med egna åsikter och föra diskussion i teamet.
+Det är även så att kunden under hela processen kommer att ha kontakt med teamet och 
+inflika med eventuella ändringar angående de krav som ställs på projektet. 
+
+-Kanban (Victor)
+
+Detta är ett begrepp som anger den tillgängliga kapaciteten för arbetet.
+Det beskriver alltså vad som ska produceras, när det ska produceras
+och hur mycket av det som ska produceras. 
+Denna process ingår i Just-In-Time (JIT) filosofin. 
+
+
+-Minimum Viable Product (MVP) Morgan
+Minimum viable product har endast de mest nödvändiga funktonerna för att använda producten. det är tillför att man enkelt och biligt ska kunna testa producten och få feedback
+
+-Work Breakdown Structure (WBS) Morgan
+Work breakdown structure är att dela in arbeter i flera minder bitar. man börjar med att komma fram till vad man vill sen delar man up projectet i mindre bitar.
 
 -GANTT chart (Henrik)
 
@@ -50,7 +75,9 @@ Hur mycket ansträngning var spenderad.
 
 -Burn Charts (Also: Burndown charts and burn-up charts)
 
--UML
+-UML Morgan
+Unified Modeling Language är ett "språck" som används för att göra en model över hur olika delar av ett program sitter ihop och vad de olika delarna gör. 
+det finns olika sorters UML diagram. Behaviour diagrams och Structure Diagram.
 
 -Unified Process (Also: Rational Unified Process RUP)
 	Detta är en iterative och incremental development process som vägleder hur en grupp
