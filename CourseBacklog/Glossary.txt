@@ -14,9 +14,31 @@
 
 -Work Breakdown Structure (WBS)
 
--GANTT chart
+-GANTT chart (Henrik)
 
--Earned Value Charts
+GANTT chart är en tabell som visualiserar ditt projekt i termer av aktiviter och kalender datum. Det är även ett verktyg för att spåra progression. 
+Det ser ut såhär
+
+Task Name	Estimated Effort (in hours) 	Start date	End date	Responsible	Spent Time	Progress(in %)	Projected effort	Overtime/Undertime
+Example Task	20				2016-01-01	(start-date)	Example Person	12		50		(Spent time)
+								+ (Estimated 							/ (Projected Effort)	(Estimated effort)
+								effort )/ (										- (projected Effort)
+								length of 
+								workday)
+
+-Earned Value Charts (Henrik)
+
+I ett Earned Value Charts så finns det tre linjer:
+
+-- Planned Value
+Hur mycket av den beräknande ansträngningen (estimated effort) borde varit klart vid en specifik tid.
+
+-- Earned Value
+Hur mycket av den beräknande ansträngningen (estimated effort) blev implementerad viden specifik tid.
+
+-- Actual Cost
+Hur mycket ansträngning var spenderad.
+
 
 -Burn Charts (Also: Burndown charts and burn-up charts)
 
