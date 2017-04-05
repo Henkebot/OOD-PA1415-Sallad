@@ -170,7 +170,41 @@ Ett typiskt objekt orienterat information system är designade i många arkitekt
  - Application Logic and Domain Objects - objekt som representerar domän koncept ( som till exempel en class som heter Sale) som fulföljer applikationens krav. 
  - Technical Services - Generella objekt och subsystem som erbjuder teknisk service, som error logging. 
 
-Det stod inte så mycket i detta kapitel, bara att man ska jobba med detta POS system. 
+Det stod inte så mycket i detta kapitel, bara att man ska jobba med detta POS system.
+
+-Kapitel 21
+
+När iterationen 1 avslutas så ska följande vara åstakommet:
+ - All softvara ska vara kraftigt testat. Ideén för Unified Process (UP) är att göra tidiga, realistiska och kontinuerliga verifieringar av kvalitet, så att tidig feedback vägleder utveckling åt rätt håll.
+ - Kunderna ska vara regelbundet engagerade i utvärderingen av systemet. De ska även kunna se tidig utveckling av systemet.
+ - Systemet och alla subsystem har blivit integraderde och stabiliserat som en grund för release. 
+
+ Det finns fler saker som ska vara klara och de är:
+  - Göra UML diagram efter iterationen.
+  - UI jobbas på. Det är en faktor till att projektet ska lyckas. 
+  - Database modellering implementeras. 
+  - När man närmar sig slutet äv iterationen så börjar man att välja nya krav. 
+  - Ytterligare två dagar så försegår en requirement workshop där man skriver fler use cases. Under [ Elaboration ], lägs cirka 10 % av tid åt att designa och implementera de mest riskerade kraven. Man jobbar även med att definera ungefär 80 % av use cases för systemet. 
+
+I ett mer skickligt UP projekt så väls de krav från tidiga iteration och blir organiserade i risk och hög affärs värde. Så att de krav som har en hög risk blir identifierade och lösta tidigt. 
+
+Iteration 2 krav
+
+Iteration 2 av NextGen POS applikationen har många krav [ Requirements ]
+1. Stödja olika third-party externa tjänster. 
+2. Komplexa pris regler.
+3. Pluggbara business regler.
+4. En design att kunna uppdatera ett GUI fönster när försälningns siffran ändras. 
+
+Dessa krav lägs in i ett scenario som döpts till Process sale [ use case ]. 
+
+Main Success Scenario:
+1. Customer arrives at a POS checkout with goods and/or services to purchase.
+2. Chashier tells System to create a new sale.
+3. Cashier enters item identifier.
+4. System records sale line item and presents item description, price, and running total.
+ - Price calculated form a set of price rules - 
+
 
 
 
