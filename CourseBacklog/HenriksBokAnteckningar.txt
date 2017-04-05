@@ -146,7 +146,24 @@ En tung process är en kränkande term som förutspråkar följande kvaliteter:
  - detaljerad planering
  - Förutsägbar istället för anspassningsbar
 
- En förutsägsbar process är en som försöker planera och förutspå aktiviter och resurser och allokerar i detalj över en relativt långs tid period. Går att beskriva med vattenfalls modelen. Först definerar man requirementsen, sen en detaljerad design, och tredje implementationen. I kontrasten en anpassningsbar prcoess är en som accepterar förändringar
+En förutsägsbar process är en som försöker planera och förutspå aktiviter och resurser och allokerar i detalj över en relativt långs tid period. Går att beskriva med vattenfalls modelen. Först definerar man requirementsen, sen en detaljerad design, och tredje implementationen. I kontrasten är en anpassningsbar prcoess [ Adaptive process ] är en som accepterar förändringar. 
+
+En Agile process innebär en lätt (light) och [ Adaptive process ] som är flexible i respons för förändringar.
+Agile UP hanteras på följande vis:
+ - Föredrar en mindre mängd UP aktivitier och arifakter. Vissa projekt kommer att nyttja mer från andra, men generellt ska man hålla det lätt.
+ - Eftersom UP är iterativt, krav [ requirements ] och design är inte klart innan implementationen. Under iterationerna dyker dessa upp genom feedback. 
+ - Det finns ingen detaljerad plan för hela projektet. Det finns en [ high level plan] kallad för [ Phase plan ] som estimerar projektets slutdatum och andra målpunkter. En detaljerad plan [ Iteration Plan ] planerar bara i mer detalj varje iteration innan man börjar med den. 
+
+
+-- Vattenfalls cyklen
+Innan man började med den iterativa cyklen så använde man sig av vattenfalls modellen. Vatten falls modelen såg ut som följande:
+ - Förtydliga, skriva ner och begå en lista av färdiga och stilla krav [ Requirements ]
+ - Designa ett system baserat på dessa krav.
+ - Implementera baserat på designen.
+
+
+
+
 
 
 
