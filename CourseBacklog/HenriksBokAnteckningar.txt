@@ -162,6 +162,15 @@ Innan man började med den iterativa cyklen så använde man sig av vattenfalls 
  - Implementera baserat på designen.
 
 
+- Kapitel 3
+
+-- The NextGen POS System
+Ett typiskt objekt orienterat information system är designade i många arkitektur lager eller subsystem, dessa är följande:
+ - User Interface - graphical interface; windows.
+ - Application Logic and Domain Objects - objekt som representerar domän koncept ( som till exempel en class som heter Sale) som fulföljer applikationens krav. 
+ - Technical Services - Generella objekt och subsystem som erbjuder teknisk service, som error logging. 
+
+Det stod inte så mycket i detta kapitel, bara att man ska jobba med detta POS system. 
 
 
 
