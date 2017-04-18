@@ -1,0 +1,10 @@
+-3.1 Concepts, Classes and Objects
+Kolla i den riktiga världen efter objekt. Hitta vad de genererlla typerna tillhör. Detta är koncept som man ska modelera. 
+Senare kollar man efter relationer mellan koncepten och beskriver dem så tydligt det går. Dessa relationerna hjälper oss senare om hur koncepten(eller objekten) interatgerar för att lösa ett specifikt problem. Detta hjälper senare oss att bestämma begränsningen för produkten, vad som ska göras inom system och vad som ska göras utan på.
+
+Koncept kan ha attributer eller egenskaper. Till exempel har en "person" ett namn och en adress. 
+
+Koncept liknar klasser, men de är inte samma. Klasser har metoder 	
+
+
+

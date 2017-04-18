@@ -1,0 +1,172 @@
+﻿<-Test Items>
+ 
+<-Features to be Tested>
+
+<-Approach>
+Reading when needed.
+
+<-Item Pass/Fail Criteria>
+
+<-Schedule>
+
+Tentan är den 29 maj. Anmälan öppnar den 29 april och stänger den 15 maj.
+
+<-Planning Risks and Contingencies>
+
+<-Glossary>
+
+- Agile
+Agile software development describes a set of principles for software development under which requirements and solutions evolve through the collaborative effort of self-organizing cross-functional teams. It advocates apdative planning, evolutionary development, early delievery and continuous improvement and it encourages rapid and flexible response to change. 
+
+- Burn Charts (Also: Burndown charts and burn-up charts)
+Burn Charts are the same as Earned Value Charts but turned upside down. This is done because of psychological reasons. 
+A burn chart makes it easily to visualise what happends when we add more work in the moddle of the project.
+- Earned Value Charts
+Earned value charts is about showing the progress of the project in terms of earned value. In a Earned value chart there is three lines in it. 
+
+- Planned value
+	How much of the estimated effort should have been completed at a specific point in time, usally each week.
+- Earned Value
+	How much of the estimated effort was actually implemented at a specific point in time.
+- Actual cost
+	How much effort was actually spent. 
+
+This chart is typically presented in a cumulative earned value chart (Where the previous assessment period are added to the next, so that planned value end up at 100% at the far right of the chart. 
+X-axis represent the time.
+Y-axis is some measure of value. This can be in hours, progress, pounds, story points, etc..
+
+- GANTT chart
+GANTT charts visualise your projects in terms of activites and calendar dates, but you may as well add more information to it to make it a full-fledged project tracking tool. 
+
+- Iterative Development
+Iterative development is about spliting the development into small mini projects, called iterations. Every iteration have their own "requirements analysis, design, implementation and testing". After every iteration the system grows incrementally.
+
+- Incremental Development
+
+
+- Kanban
+Kanban is an highly individualised development process. Kanban is a method for managing knowledge work which balances demands for work with the available capacity for new work. Work items are visualized to give participants a view of progress and process, from task definition to customer delivery. Team memebers "pull" work as capacity permits, rather than work being "pushed" into the process when requested.
+
+- Minimum Viable Product (MVP)
+A minimum viable product, or an MVP, is a product that supports an entire end to end flow. An example is that you're building an hotel booking system. The MVP is the ability to search and book one single room. Other features such as loging in, room payment, etc comes later. 
+
+- Scrum
+Scrum is an agile development methodology.
+
+[From "Getting Agile with scrum"]
+Scrum is about working together. Interdisciplinary(Tvärvetenskap, handlar om kunskaper, metoder, teminologi och expertis) design all working together deep collaboration.
+
+-- Self-organizing teams
+There is no one leader who gets to assign out all the tasks. There teams self organizes, which means that they figure out how to tackle a task collaboratively. 
+
+-- Product progresses in a series of month-long "sprints"
+The product is built in a series of sprints, were each sprint ranges from one to four weeks. Each sprint is focusing on building some part of the system. After a sprint the team will get feedback or give feedback to the customers.
+
+-- Requirements are captured as items in a list of "product backlog"
+Product backlog is sometimes called user stories. They are just a way of capturing requirements. The product backlog is a prioritized features list who is sorted by someone called the product owner. 
+
+-- Uses generative rules to create an agile envionment for delivering projects
+A rule for scrum is typically a daily scrum meeting, where the team comes and talk once a day for ten to 15 minutes.
+
+-- One of the "agile processes"
+Scrum is the most popular of all agile processes!
+
+-- Scrum framework
+
+---Roles
+
+----Product owner
+Define the features of the product
+Makes scope vs. schedule decisions
+Resonsible for achieving financial goals of the project
+Prioritize the product backlog
+Adjust features and priority every sprint, as needed
+Accept or reject work results
+
+----ScrumMaster
+Helps the team go as quickly as they can, but not neccesarily in the right direction, that's the product owners job
+
+----Team
+Typically 5-9 people
+cross-functional: Programmers, testers, user experience designers..
+Members should be full-time
+Teams are self-organizing
+Membership should change only between sprints
+
+---Cermonies
+
+----Sprint planning
+Who:
+Team, scrumMaster & product owner
+Agenda:
+Discuss top priority product backlog items
+Team selects what to do
+Why:
+Know what will be worked on
+Understand it enough to do it
+
+When the planning is done, a Sprint goal and Sprint backlog is created!
+----Sprint review
+Team presents what is accompluished during the sprint
+Typically takes the form of a demo of new features or underlying architecture
+Informal
+	2-hour prep time rule
+	no slides
+Whole team participates
+Invite the world
+
+----Sprint retrospective
+In the Sprint retrospective we're looking for things that we should change in the process. 
+Periodically take a look at what is and is not working
+Typically around 30 minutes
+Done after every sprint
+Whole team participates
+----Daily scrum meeting
+A daily meeting that takes about 15 minutes. It is not meant for problem solving, just to synchornise the teams. 
+
+---Artifacts
+
+----Product backlog
+The requirements
+A list of all desired work on the project
+Ideally expressed such that each item has value to the users or customers of the product
+Prioritized by the product owner
+Reprioritized at the start of each sprint
+
+----Sprint backlog
+Sprint goal is a short statment of that the work will be focused on during the sprint.
+Usally made to desribe a specific sprint. 
+for example sprint 7:
+Implement basic shopping cart functionality including add, remove and update.
+
+-----Managin the sprint backlog
+Individuals sign up for work of their own choosing, work is never assigned
+Estimated work remaining is updated daily
+Any team member cann add, delete or change the sprint backlog
+Work for the sprint emerges
+If work is unclear, define a sprint backlog item with a larger amount of time and break it down later
+Update work remaining as more becomes known
+
+- Sprint
+Sprints are short iterations that focus on a small number of issues per sprint. 
+
+- Test Plan
+(Sprint) test plan is an overview of what I expect in the course. 
+
+- UML
+UML is a dominating design documentation format and is called the Unified Modelling Language(UML). UML prescribes a certain way of doing the design, and a certain order for things to be done. The process is known as the Unified Proces (UP).
+
+- Unified Process (Also: Rational Unified Process RUP)
+UP claims to be agile and is iterative and incremental. UP is a way of doing design and a order for things to be done. 
+
+- User Story
+A user story is a sort of stylised requirement. A user story contains information about which perspective you should have, the goals you should achieve, and a brief explanation of why this goal is important.
+
+Example, As a player I want a big map so that I can explore. 
+
+- Waterfall development 
+Waterfall development is about first writing down the requirements, then later design a system based on these requirements. Last we implement the system. 
+
+- Work Breakdown Structure (WBS)
+Work breakdown structure is a graph that is often graphically represented as a tree, but may also be represented as several columns in a spreadsheet. 
+In a WBS you have a main task, for example "Search for Room" in a hotel management system. This task may consist of the tasks "database design", "GUI Design", "Implementation" and "testing". 
