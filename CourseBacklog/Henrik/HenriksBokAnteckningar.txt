@@ -196,6 +196,8 @@ Iteration 2 av NextGen POS applikationen har många krav [ Requirements ]
 3. Pluggbara business regler.
 4. En design att kunna uppdatera ett GUI fönster när försälningns siffran ändras. 
 
+Detta är inte nya upptäckta krav utan de var definerade under [ inception ]
+
 Dessa krav lägs in i ett scenario som döpts till Process sale [ use case ]. 
 
 Main Success Scenario:
@@ -205,11 +207,30 @@ Main Success Scenario:
 4. System records sale line item and presents item description, price, and running total.
  - Price calculated form a set of price rules - 
 
+På grund av [ Supplementary Specification record ] detaljer för regler av pris så måste vårt system supporta ett system som handlar om att priset ändras beroende på olika skatter. 
+
+Det krävdes inga förfiningar av [ use cases ] under denna iteration. Under tiden som det förstegår programmering och objekt design så sker det en anna verksamhet under denna iteration. Det är en investering i use cases och renskrivning. 
 
 
+- Kapitel 40 More on Iterative Development and Agile Project Management
 
+Hur man planerar en iteration
+1. Steg ett är att besluta längden för iterationen. Längden ska vara relativ till hur stora grupperna är. 
+2. Sammankalla ett iteration plannerings möte. Detta brukar man göra efter varje iteration. 
+3. En lista av potetionella mål (nya funktioner eller use cases) för iterationen presenteras. Dessa rangordnas i ett prioriterings schema. Listan kommer ifrån både kunden ([ bussiness goals]) och chief architect ([technical goals]).
+4. Varje medlem i laget frågas om deras egna resurser ( i timmar eller dagar ). Efter det så lägs resurser ihop. '
+5. För ett mål ( som ett use case ), är det beskrivet i detalj och frågor är lösta. Sen brainstormar utvecklare en mer detaljerad lista av målet och några vaga uppskattnignar. 
+6. Steg 5 upprepas tills tillräckligt med arbete har valts. Iterationens mål totala är dividerat med resurs budgets totala. Om målet är nära de tillgängliga resurserna och deadline datumet så är mötet avslutat. 
 
+En av de stora idéerna bakom en iterativ utveckling är anpassningen för feedback, istället för att försöka förutspå och planera i detalj för eller projektet. I Unified Process så skapar man bara en iterations plan för nästa iteration. 
 
+Bortom nästa iteration är planen öppen och justerbar för framtiden. Adaptive utveckling betyder att man ska inte planera för framtiden. Om man vill förtidsplanera så ska man max göra det en eller två iterationer och låta de vara anpassningsbara. 
+Man ska sätta ett mål som är kanske två månader fram i tiden. 
+
+Det finns två planer och de är [ Phase Plan ] och [ Iteration Plan ]. 
+[ Phase Plan ] är milstolp datum och mål. [ Iteration Plan ] definerar arbetet för den nuvarande och nästa iteration. 
+
+Under [ Inception ] så förustpår man [ Phase Plan ] med vaga beräkningar. När man går in i [ Elaboration ] så förbättras beräkningarna. Ett mål av [ Elaboration ] fasen är att ha realistisk information för laget att fullfölja målstolpsdatumen och målen i slutat av [ Construction ] och [ Transition ]. Alltså då produkten ska vara klar. 
 
 
 
