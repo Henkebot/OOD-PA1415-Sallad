@@ -1,0 +1,47 @@
+Fundamental Design Principles
+
+Visa design principer har fina namn. Desas är
+
+Princip				Beskrivning
+Abstraction			Fokusera på relevanta egenskaper.
+
+Coupling and Cohesion		Självständiga enheter, men interna egenskaper är mycket relaterade.
+
+Decomposition and 		Små enheter med väl definerade och icke överlappande funktioner eller ansvar.
+Moudularisation
+
+Encapsulation			Gömma intern data så det är icke nåbart utanför enheten
+
+Separation of interface and	Separera den publika interfacen från implementations detaljerna
+Implementation
+
+Sufficiently, Completeness,	Håll enheter så små som möjligt, men inte mindre. Enhter ska fånga alla viktiga egenskaper av abstraktioner och inte mer. 
+and Primitiveness
+
+En bra klass har:
+ - En väl definerad abstraction och ansvar
+ 	- Låt klasser dela på arbete
+	- Undvik "Gud" klasser som försöker göra allt
+ - Har låg [ Coupling ] med andra klasser
+ 	- Minimera spridning i en klass
+ - Har en tillräcklig och komplett publik inteface för att kunna nå beteende och stadie relaterat till den abstract som klassen modelerar. 
+ - Har en primitiv publik interface som inte utstrålar något mer än nödvändigt för andra. 
+ 	- All data ska vara inom klassen
+	- Läg inte till saker i den publika interfacen med saker som användaren av klassen inte är intresserad av.
+ - Har en stark relation till metoderna och attributerna
+ 	- Mesta delen av metoderna definerade i en klass ska använda mesta av datan hela tiden.
+
+
+Responsibility Driven Design
+Ovan är bara några av pinciperna om hur man definerar en klass. I boken används samlingsordet GRASP patterns. 
+Ska kunna följande:
+
+ - Information Expert
+ - Creator
+ - Controller
+ - Low Coupling
+ - High Cohesion
+ - Polymorphism
+ - Pure Fabrication
+ - Indirection
+ - Protected Variations

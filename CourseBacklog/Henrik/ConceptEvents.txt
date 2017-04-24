@@ -1,10 +1,80 @@
 -3.1 Concepts, Classes and Objects
 Kolla i den riktiga världen efter objekt. Hitta vad de genererlla typerna tillhör. Detta är koncept som man ska modelera. 
+
 Senare kollar man efter relationer mellan koncepten och beskriver dem så tydligt det går. Dessa relationerna hjälper oss senare om hur koncepten(eller objekten) interatgerar för att lösa ett specifikt problem. Detta hjälper senare oss att bestämma begränsningen för produkten, vad som ska göras inom system och vad som ska göras utan på.
 
 Koncept kan ha attributer eller egenskaper. Till exempel har en "person" ett namn och en adress. 
 
-Koncept liknar klasser, men de är inte samma. Klasser har metoder 	
+Koncept liknar klasser, men de är inte samma. Klasser har metoder och attributer. Ett koncept focuserar bara på attributer ochrelationer som existerar i den riktiga världen.
 
+Koncept kan även ses som en arketyp för en samling objekt. T.ex en Volvo, Ford och Wolkswagen är exempel för konceptet "Bil". 
 
+Man ska tänka inom ramarna för problem domänen (Konceptuella modelen refereras även som [ Domain Model ]). 
 
+För att inte fastna så ska man fokusera på att bara modelera det som är genast användbart för sig själv. 
+
+System Events:
+
+Av alla saker som användaren gör med systemet, så frågar man sig själv vad systemet reagerar på. Det kallas för System Events.Eftersom de kommer i en vis ordning, så kan man se dem som en sekvens av system events. Denna model kallas för System SequenceDiagram. 
+
+User					System
+1. User approaches replicatior.		2. System bleeps friendly.
+3. User orders Tea.			4. System asks "Which flavour?"
+5. User decides "Earl Grey"		6. System asks "What temperature?"
+7. User decides "Hot!"			8. System bleeps achnowledgingly and delivers the ordered beverage.  
+
+System events som kan genereras från detta är:
+- initiateTransaction()
+- orderBeverage("tea")
+- setFlavour("earl grey")
+- setTemperature("hot")
+
+Visar vi detta som ett system sequence diagram så ser det ut som följande:
+
+User			:System
+| initiateTransaction()    |
+|------------------------->|
+|  <friendly bleep>        |
+|<-------------------------|
+| orderBeverage("tea")     |
+|------------------------->|
+|  request flavor          |
+|<-------------------------|
+| setFlavour("Earl grey")  |
+|------------------------->|
+|  request temperature     |
+|<-------------------------|
+|setTemperature("hot")     |
+|------------------------->|
+|  <achnowledging beep>    |
+|<-------------------------|
+
+Man föreställer System som en svart låda. Man stoppar in saker i lådan och saker kommer ut. Vi vet inte vad som händer inuti lådan. Sequence Diagram är till för att se vad som händer inuti lådan. 
+
+Attaching a User Interface
+Nästan alla applikationer med någon form av användar intergration kan bli separerade i tre delar, eller lager.
+
+			User Interface
+			Application Logic
+			Storage
+
+Varje lager har en API, ett gäng metoder som vi kan anropa för att komma åt den. I fallet för User Interface så kan den innehålla knappar och text rutor. Är man detta lagret så behöver man bara bry sig av API:n för Application logic lagret.
+
+I application logic lagret så är metoderna system events från System sequence diagrammet!
+
+Testing 
+I denna sprint så introducerade det två nya modeler; domain models och System sequence diagrams. Båda är bra för testing. Domän modelen visar hur man ska tänka ut funktioner för domain problem. När man konstruerar test så är det en bra början att utgå ifrån domän modelen. 
+Domän modelen delar up problem domänen till mindre koncept som är möjliga att [ Unit Test ]. Senare kan man kombinera redan testade enehter och köra [ intergration tests ] för att bekräfta att enheterna funkar tillsammans. 
+
+System sequence digrammet berättar vilka [ API endpoints ] som man har i systemet. Dessa är utmärkta start punkter för att skriva [ regression tests ]. Om man kollar tillbaka på lagren som jag skrev ovan så kan man flytta User Interface åt sidan och göra plats för Testing Interface.
+Detta gör att man har automatiska tester för applikationen, Vet inte vad detta betyder!!.
+
+Sammanfattning
+
+		Software Requirements
+		        |
+	           UML Use cases
+	        /                 \
+	UML Domain Model	UML System Sequence Diagram
+                \                 /
+		Test Sprcification

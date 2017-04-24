@@ -35,20 +35,31 @@ This chart is typically presented in a cumulative earned value chart (Where the 
 X-axis represent the time.
 Y-axis is some measure of value. This can be in hours, progress, pounds, story points, etc..
 
+- Class
+Classes are like concept but also feature methods. They represent an software point of view of concepts. 
+
+- Concept
+Concept is a description of an real life object. For example a the concept of a person. As a person you have a name and an adress. Concepts alsohave relations with things. 
+
 - GANTT chart
 GANTT charts visualise your projects in terms of activites and calendar dates, but you may as well add more information to it to make it a full-fledged project tracking tool. 
 
-- Iterative Development
-Iterative development is about spliting the development into small mini projects, called iterations. Every iteration have their own "requirements analysis, design, implementation and testing". After every iteration the system grows incrementally.
-
 - Incremental Development
 
+- Instance
+An instance is an object in memory.
+
+- Iterative Development
+Iterative development is about spliting the development into small mini projects, called iterations. Every iteration have their own "requirements analysis, design, implementation and testing". After every iteration the system grows incrementally.
 
 - Kanban
 Kanban is an highly individualised development process. Kanban is a method for managing knowledge work which balances demands for work with the available capacity for new work. Work items are visualized to give participants a view of progress and process, from task definition to customer delivery. Team memebers "pull" work as capacity permits, rather than work being "pushed" into the process when requested.
 
 - Minimum Viable Product (MVP)
 A minimum viable product, or an MVP, is a product that supports an entire end to end flow. An example is that you're building an hotel booking system. The MVP is the ability to search and book one single room. Other features such as loging in, room payment, etc comes later. 
+
+- Object
+
 
 - Scrum
 Scrum is an agile development methodology.
