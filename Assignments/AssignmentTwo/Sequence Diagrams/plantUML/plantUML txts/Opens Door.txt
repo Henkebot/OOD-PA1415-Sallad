@@ -37,7 +37,7 @@ loop nrOfStructure
 end
 
 alt isInteract == true
-	eh -> struct : effect = getInteractionEffect(structCoord)
+	eh -> struct : effect = getInteractionEffect()
 	activate struct
 	deactivate struct
 end

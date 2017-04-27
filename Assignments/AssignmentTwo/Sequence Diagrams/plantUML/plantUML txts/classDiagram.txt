@@ -1,0 +1,98 @@
+@startuml
+abstract class Window {
++update() = 0 : void
+}
+class Menu {
++update() : void
++getState() : enum
++setState(state : enum) : void
+}
+class Game 
+class Client {
+-states : stack<Window>
+-game : Game
++run() : void
+}
+class Map {
+-Cave[] cave
++generateCave(url : String) : void
+}
+
+class Room {
+-String tweet
++generateRooms(tweet) : void
+}
+class Cave {
+-Room[][] rooms
+-String feed
++generateCave() : void
+
+}
+
+
+class EntityHandler {
++playerAttack() : void
++getProgression() : Effect
+-calculateDMG(stats1 : Stats, stats2 : Stats) : Integer
+-xpMath(stats1 : Stats, stats2 : Stats) : Integer
+}
+class TwitterAnalyser
+class Twitter {
++getFeed(url) : String
+}
+class Stats
+class Effect
+
+class CollisionHandler { 
++isCol(coords1 : Vector2i, coords2 : Vector2i) : boolean
+}
+class InputManager {
++input(btn : Button) : String
+}
+class Identifier
+class MasterSpawner
+
+abstract class Entity {
++getCoords() : Vector2i
++getStats() : Stats
++setXp(xp : Integer) : void
++moveRequest(dt : Float, coords : Vector2i) : Vector2i
++setHealth(health : Integer) : void
++setPos(coords : Vector2i) : void
+}
+class Player {
++attack() : Vector2i
++interact() : Vector2i
+}
+class Enemy
+class Item
+class Structure { 
++getInteractionEffect()
+}
+
+Window <|-- Menu
+Window <|-- Game
+
+Window -- Client
+
+Client -- Map
+
+Map -- Cave
+
+Cave -- Room
+Cave -- Twitter
+
+Room -- EntityHandler
+Room -- TwitterAnalyser
+
+EntityHandler -- Player
+EntityHandler -- Enemy
+EntityHandler -- Item
+EntityHandler -- Structure
+
+Entity <|-- Player
+Entity <|-- Enemy
+Entity <|-- Item
+Entity <|-- Structure
+
+@enduml
