@@ -1,0 +1,65 @@
+@startuml
+hide footbox
+title Open Door
+
+participant ":EntityHandler" as eh
+participant ":Player" as player
+participant ":Structure" as struct
+participant "CollisionHandler" as ch
+
+note right of ch
+	CollisionHandler is a static
+	class. That means that it can 
+	be reached from anywhere
+end note
+
+[-> eh : playerInteract()
+activate eh
+
+eh -> player : interctCoord = interact()
+activate player
+deactivate player
+
+note right
+	When the player interacts, the tile
+	which is pointed from the direction
+	of the player is the interactCoord
+end note
+
+loop nrOfStructure
+	eh -> struct : structCoord = getCoords()
+	activate struct
+	deactivate struct
+
+	eh -> ch : isInteract = isCol(structCoord, interactCoord)
+	activate ch
+	deactivate ch
+end
+
+alt isInteract == true
+	eh -> struct : effect = getInteractionEffect(structCoord)
+	activate struct
+	deactivate struct
+end
+
+note right 
+	The effect in this case is
+	that the player will enter a new
+	room
+end note
+
+deactivate eh
+
+activate eh
+[->eh : progressDir = getProgression()
+activate eh
+deactivate eh
+
+note right
+	Here is the method to gather the
+	effect, which will make the player
+	change room
+end note
+
+
+@enduml

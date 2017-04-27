@@ -1,0 +1,58 @@
+@startuml
+hide footbox
+title Enter feed and start Singleplayer
+
+participant ":Client" as client
+participant ":Menu" as menu
+participant ":Game" as game
+participant "InputManager" as im
+participant ":Map" as map
+
+note right of im
+	InputManager is a static class.
+	This means that it can be 
+	reached from anywhere.
+end note
+
+[-> client : run()
+activate client
+
+client -> menu : update()
+activate menu
+
+menu -> im : state = input(startGameButton)
+activate im
+deactivate im
+
+alt state == game
+	menu -> menu : setState(gameState)
+
+end
+deactivate menu
+
+
+client -> menu : state = getState()
+activate menu
+deactivate menu
+
+alt state == game
+	client -> game : game = createGame()
+	activate game
+
+	game -> im : url = input(form)
+	activate im
+	deactivate im
+
+	game -> map : generateCave(url)
+	activate map
+	deactivate map
+
+	deactivate game
+	
+	client -> client : stack.push(game)
+
+end
+
+deactivate client
+
+@enduml

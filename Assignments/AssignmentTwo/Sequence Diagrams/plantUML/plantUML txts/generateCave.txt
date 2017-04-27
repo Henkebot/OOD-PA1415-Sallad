@@ -1,0 +1,33 @@
+@startuml
+hide footbox
+title Generate Cave
+
+participant ":Map" as map
+participant ":Cave" as cave
+participant ":Twitter" as twitter
+participant ":Room" as room
+
+[->map : generateCave(url)
+activate map
+
+map -> cave : cave = createCave(url)
+activate cave
+deactivate cave
+
+map -> cave : generateCave()
+activate cave
+
+cave -> twitter : feed = getFeed(url)
+activate twitter
+deactivate twitter
+
+loop nrOfTweets
+	cave -> room : rooms = generateRooms(tweet)
+	activate room
+	deactivate room
+end
+deactivate cave
+
+deactivate map
+
+@enduml

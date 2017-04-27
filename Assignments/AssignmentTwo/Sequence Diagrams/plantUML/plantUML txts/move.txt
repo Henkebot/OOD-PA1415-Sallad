@@ -1,0 +1,79 @@
+@startuml
+hide footbox
+title Move
+
+participant "InputManger" as im
+participant ":EntityHandler" as eh
+participant ":Player" as player
+participant ":Structure" as struct
+participant "CollisionHandler" as ch
+participant ":Enemy" as enemy
+participant ":Item" as item
+
+
+note left of im
+	InputManager is a static class.
+	This means that it can be 
+	reached from anywhere
+end note
+
+note right of ch
+	CollisionHandler is a static 
+	class. This means that it
+	can be reached from anywhere.
+end note
+
+[-> im : move()
+activate im
+
+im -> eh : playerMove()
+deactivate im
+activate eh
+
+eh -> player : playerCoord = moveRequest()
+activate player
+deactivate player
+
+loop nrOfStructures
+	eh -> struct : structCoord = getCoords()
+	activate struct
+	deactivate struct
+
+	eh -> ch : structCol = isCol(structCoord, playerCoord)
+	activate ch
+	deactivate ch
+end
+
+loop nrOfEnemies
+	eh -> enemy : enemyCoord = getCoords()
+	activate enemy
+	deactivate enemy
+
+	eh -> ch : enemyCol = isCol(enemyCoord, playerCoord)
+	activate ch
+	deactivate ch
+end
+
+loop nrOfItems
+	eh -> item : itemCoord = getCoords()
+	activate item
+	deactivate item
+
+	eh -> ch : itemCol = isCol(itemCoord, playerCoord)
+	activate ch
+	deactivate ch
+
+end
+
+alt !(structCol && enemyCol && itemCol)
+	eh -> player : setPos(playerCoord)
+end
+
+note right
+	If the player didnt collide with anyhting,
+	it will move
+end note
+
+deactivate eh
+
+@enduml

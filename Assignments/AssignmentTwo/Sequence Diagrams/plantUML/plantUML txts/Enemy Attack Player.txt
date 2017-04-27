@@ -1,0 +1,75 @@
+@startuml
+hide footbox
+title Enemy Attack Player
+
+participant ":EntityHandler" as eh
+participant ":Player" as player
+participant ":Enemy" as enemy
+participant ":Structure" as struct
+participant "CollisionHandler" as ch
+
+note right of ch
+	CollisionHandler is a static
+	class. This means that it can
+	be reached from anywhere.
+end note
+
+[-> eh : update(dt)
+activate eh
+
+eh -> player : playerCoord = getCoords()
+activate player
+deactivate player
+
+loop nrOfEnemies
+	eh -> enemy : enemyCoord = moveRequest(dt, pc)
+	activate enemy
+	deactivate enemy
+	
+	loop nrOfStructures
+		eh -> struct : struct = getCoords()
+		activate struct
+		deactivate struct
+		
+		eh -> ch : structCol = isCol(structCoord, enemyCoord)
+		activate ch
+		deactivate ch
+	end
+
+	eh -> ch : playerCol = isCol(enemyCoord, playerCoord)
+	activate ch
+	deactivate ch
+		
+	alt playerCol == true
+		eh -> enemy : enemyStat = getStats()
+		activate enemy
+		deactivate enemy
+
+		eh -> player : playerStat = getStats()
+		activate player
+		deactivate player
+
+		eh -> eh : dmg = calculateDmg(enemyStat, playerStat)
+
+		eh -> player : setHealth(dmg)
+		activate player
+		deactivate player		
+	end
+	note right
+		If the enemy did collide with the player,
+		the player will get damaged.
+	end note
+	
+	alt !(structCol && playerCol)
+		eh -> enemy : setPos(enemyCoord)
+	end
+	note right
+		If the enemy didnt collide with anything
+		the ability to move is allowed.
+	end note
+end
+
+deactivate eh
+
+
+@enduml
