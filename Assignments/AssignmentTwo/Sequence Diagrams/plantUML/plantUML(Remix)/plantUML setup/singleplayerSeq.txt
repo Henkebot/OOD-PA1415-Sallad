@@ -1,0 +1,22 @@
+@startuml
+hide footbox
+title Start Singleplayer
+
+participant ":MenuState" as menu
+participant ":Application" as app
+participant "g:GameState" as game
+
+[->menu : startSingeplayer() 
+activate menu
+
+menu -> app : changeState(game)
+activate app
+deactivate menu
+app -> game : init()
+activate game 
+deactivate game
+
+app -> app : stack.push(g)
+
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+hide footbox
+title Generate Cave With Twitter
+
+actor ":Player" as player
+participant ":System" as system
+actor ":Twitter" as twitter
+
+alt if a feed was specified
+	system->twitter : getFeed()
+	twitter --> system
+end
+
+system --> player : generated cave
+
+@enduml
