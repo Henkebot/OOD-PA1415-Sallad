@@ -1,0 +1,12 @@
+@startuml
+hide footbox
+title Generate Room With Twitter
+
+actor ":Twitter" as twitter
+actor ":Player" as player
+participant ":System" as system
+
+twitter -> system : generateRoom(tweet)
+system --> player : generated room
+
+@enduml

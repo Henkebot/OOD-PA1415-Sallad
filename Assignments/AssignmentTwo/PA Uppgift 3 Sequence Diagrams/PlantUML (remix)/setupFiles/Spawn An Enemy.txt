@@ -1,0 +1,12 @@
+@startuml
+hide footbox
+title Spawn an Enemy
+
+actor ":Player" as player
+actor ":Twitter" as twitter
+participant ":System" as system
+
+system -> twitter : requestTweet()
+system --> player : display enemy
+
+@enduml

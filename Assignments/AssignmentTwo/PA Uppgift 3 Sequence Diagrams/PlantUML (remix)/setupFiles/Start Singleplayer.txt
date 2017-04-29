@@ -1,0 +1,11 @@
+@startuml
+hide footbox
+title Start Singleplayer
+
+actor ":Player" as player
+participant ":System" as system
+
+player->system : startSingleplayer()
+system --> player : running game
+
+@enduml
