@@ -1,0 +1,17 @@
+@startuml
+hide footbox
+title Input a Twitter feed
+
+participant ":CaveHandler" as ch
+participant "twitterData:TwitterAnalyser" as t
+
+[->ch: inputTwitterFeed(url)
+activate ch
+
+ch -> t : twitterData = getTwitterData(url)
+activate t
+
+
+
+
+@enduml
