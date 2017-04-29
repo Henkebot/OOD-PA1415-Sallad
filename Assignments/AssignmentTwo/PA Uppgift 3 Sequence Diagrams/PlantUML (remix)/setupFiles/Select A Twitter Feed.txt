@@ -3,7 +3,7 @@ hide footbox
 title Select a Twitter Feed
 
 actor ":Player" as player
-participant ":Twitter" as twitter
+participant ":System" as twitter
 
 player -> twitter : inputTwitterFeed(Url)
 

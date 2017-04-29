@@ -1,0 +1,21 @@
+@startuml
+hide footbox
+title Open Door
+
+actor ":Player" as player
+participant ":System" as system
+
+player -> system : interact()
+note right
+	In this scenario the player
+	is standing next to a 
+	door and this will make
+	the player move to another
+	room.
+end note
+alt interacts with door
+	system --> player : change room
+	system --> player : place player in new room
+end
+
+@enduml

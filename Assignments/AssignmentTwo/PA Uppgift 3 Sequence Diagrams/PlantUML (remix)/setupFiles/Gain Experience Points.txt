@@ -1,0 +1,11 @@
+@startuml
+hide footbox
+title Gain Experince Points
+
+actor ":Player" as player
+participant ":System" as system
+
+player -> system : attack() 
+system --> player : killed an enemy and gains experience points
+
+@enduml

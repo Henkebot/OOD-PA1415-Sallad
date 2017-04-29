@@ -1,0 +1,12 @@
+@startuml
+hide footbox
+title Open Inventory
+
+actor ":Player" as player
+participant ":System" as system
+
+player->system : openInventory()
+system --> player : displays inventory
+
+
+@enduml
