@@ -1,0 +1,21 @@
+@startuml
+hide footbox
+title Spawn Enemy
+
+actor ":Player" as player
+actor ":Twitter" as twitter
+participant ":System" as system
+
+player -> system : enterRoom()
+note left
+	When a player is entering a room,
+	the system will create enemies and
+	place them in the room.
+end note
+
+system -> twitter : requestTweet()
+twitter --> system : a tweet from a specified feed
+system --> player : displays enemies in a room
+
+
+@enduml

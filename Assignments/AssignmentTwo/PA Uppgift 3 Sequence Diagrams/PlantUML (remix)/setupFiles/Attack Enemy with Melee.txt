@@ -1,0 +1,17 @@
+@startuml
+hide footbox
+title Attack Enemy with Melee Weapon
+
+actor ":Player" as player
+participant ":System" as system
+
+player -> system : attack()
+
+alt if hit
+	system --> player : reduce enemy health
+end
+
+
+
+
+@enduml

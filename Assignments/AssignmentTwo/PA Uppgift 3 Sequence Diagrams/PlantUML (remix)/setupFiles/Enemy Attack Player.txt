@@ -1,15 +1,15 @@
 @startuml
 hide footbox
-title Enemy Detect and Attack Player
+title Enemy Attack Player
 
 actor ":Player" as player
 participant ":System" as system
 
 player -> system : move()
-system --> player : enemy detect player
-system --> player : enemy hits player
 
-system -->  player : new player health
+system --> player : enemy detects and hits player
+
+system --> player : loses health
 
 
 @enduml

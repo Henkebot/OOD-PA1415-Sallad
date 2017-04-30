@@ -1,0 +1,13 @@
+@startuml
+hide footbox
+title Input a Twitter feed
+
+actor ":Player" as player
+participant ":System" as system
+
+player -> system : startGame() 
+system --> player : requesting a twitter URL
+player -> system : setTwitterURL(URL) 
+
+
+@enduml

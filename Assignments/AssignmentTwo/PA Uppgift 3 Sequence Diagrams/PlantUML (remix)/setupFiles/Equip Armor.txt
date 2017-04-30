@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+title Equip Armor
+
+actor ":Player" as player
+participant ":System" as system
+
+player -> system : openInventory() 
+
+system --> player : displays inventory
+
+player -> system : selectItem() 
+
+system --> player : displays item options
+
+player -> system : equipArmor()
+
+system --> player : displays the armor on the player
+
+@enduml
