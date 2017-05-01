@@ -1,0 +1,17 @@
+@startuml
+hide footbox
+title Set Twitter URL
+
+participant ":TwitterHandler" as twitter
+
+
+[->twitter : setTwitterURL(url) 
+activate twitter
+
+twitter -> twitter : twitterURL = url
+activate twitter
+deactivate twitter
+
+
+
+@enduml

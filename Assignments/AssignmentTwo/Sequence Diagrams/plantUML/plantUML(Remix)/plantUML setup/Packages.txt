@@ -1,0 +1,205 @@
+@startuml
+hide footbox
+title Class Diagram 2
+
+package UserInterface {
+
+
+
+	class Application {
+	-states : Stack<State>
+	-running : boolean
+
+	+changeState(state : State) : void
+	+pushState(state : State) : void
+	+popState(state : State) : void
+
+	+handleEvents() : void
+	+update() : void
+	+draw() : void
+	}
+
+	abstract class State {
+	+init() = 0 : void
+	+handleEvents(app : Application*) = 0 : void
+	+update(app : Application*) = 0 : void
+	+draw(app : Application*) ) = 0 : void
+
+	}
+
+	class MenuState {
+	+init() : void
+	+handleEvents(app : Application*) : void
+	+update(app : Application*) = 0 : void
+	+draw(app :Application*) = 0 : void
+	}
+
+	class GameState {
+	+init() : void
+	+handleEvents(app : Application*) : void
+	+update(app : Application*) = 0 : void
+	+draw(app :Application*) = 0 : void
+	}
+
+}
+
+package Utility {
+	class TwitterHandler {
+		-twitterURL : String
+		+requestTweet() : String
+		-getTweet() : String
+	}
+
+
+}
+
+package Container {
+	class CaveHandler {
+		-caves : ArrayList<>()
+	}
+
+	class RoomHandler {
+	-currentRoom : Room
+	+enterRoom(coord : Vector2i) : void
+	-connectRoom(room : Room, coord : Vector2i) : void
+	+collision(entity : Entity) : boolean
+	+update(dt : float, player : Player) : void
+	}
+	 
+	class EntityHandler {
+	-nrOfEntities : Integer
+	+updateEntites(dt : float, room : Room, player : Player) : void
+	}
+
+	class Inventory {
+	-currentItem : Item
+	+displayInventory() : void
+	+closeInventory() : void
+	+selectInventoryItem(slot : Vector2i) : Item
+	+isSlotOcc(slot : Vector2i) : boolean
+	+equipArmor() : Item
+	}
+
+
+
+
+}
+
+package GameEnvironment {
+	class Cave {
+		-rooms : RoomHandler
+	}
+
+	class Room {
+	+createRoom(twitterData : String) : void
+	+update(dt : float, player : Player) : void 
+	+changeRoom(coord : Vector2i)
+	}
+
+	abstract class Structure {
+		-interacted : boolean
+		+update(room : Room, player : Player) : void
+		+isInteract() : boolean
+	}
+
+	class Door {
+		+update(room : Room, player : Player) : void
+		+isInteract() : boolean
+	}
+
+
+
+
+}
+package Characters {
+	abstract class Mob { 
+	-health : Integer
+	+move() = 0 : void
+	+attack() = 0 : void
+	+moveRequest() = 0 : void
+	+reduceHealth(stats : Stats) : void
+	}
+
+	class Player {
+	+render() : void
+	+update(dt : float) : void
+	+move() : void
+	+attack() : void
+	+moveRequest() : void
+	+interact() : void
+	+isInteract() : boolean
+	}
+
+	class Enemy {
+	+render() : void
+	+update(dt : float, room : Room, player : Player) : void
+	+move() : void
+	+attack() : void
+	+moveRequest() : void
+	+collision(player : Entity) : boolean
+
+	}
+
+
+
+}
+
+package Artifacts {
+
+	class Item {
+	+itemType : TypeEnum 
+	+getItemInfo() : String
+	+getItem() : Item
+	}
+
+	enum TypeEnum {
+	 armor
+	 weapon
+	}
+
+
+	class Entity {
+	-coord : Vector2i
+	+getCoord() : Vector2i
+	+render() : void
+	+update() : void
+	}
+
+	class Stats {
+
+	}
+
+
+
+}
+
+Application *--"1..*" State
+State <-- MenuState
+State <-- GameState
+
+Entity <-- Mob
+Entity <-- Item
+Entity <-- Structure
+Mob <-- Player
+Mob <-- Enemy
+
+Mob *--"1" Stats
+
+CaveHandler *--"1" GameState
+CaveHandler *--"1..*" Cave
+RoomHandler o--"1" TwitterHandler
+Cave *--"1" RoomHandler
+
+RoomHandler *--"1..*" Room
+Cave *--"1" Player
+
+Player *--"1" Inventory
+Inventory *--"0..*" Item
+Room *--"1" EntityHandler
+
+EntityHandler *--"0..*" Item
+EntityHandler *--"0..3" Enemy
+EntityHandler *--"0..*" Structure
+TypeEnum <-- Item
+Structure <-- Door
+@enduml

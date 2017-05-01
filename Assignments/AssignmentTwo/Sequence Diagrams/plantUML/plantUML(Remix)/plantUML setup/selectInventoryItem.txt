@@ -1,0 +1,24 @@
+@startuml
+hide footbox
+title Select Item in Inventory
+
+participant ":Inventory" as inv
+participant "item1:Item" as item
+
+[->inv : selectInventoryItem(slot)
+activate inv
+
+inv->inv : result = isSlotOcc(slot)
+activate inv
+deactivate inv
+
+alt result == true
+	inv -> item : getItemInfo()
+	activate item
+	item --> inv : currentItem = item1
+	deactivate item
+end
+
+[<--inv : item1
+
+@enduml

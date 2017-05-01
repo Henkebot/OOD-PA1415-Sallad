@@ -1,0 +1,19 @@
+@startuml
+hide footbox
+title Open Inventory
+
+participant ":Player" as player
+participant ":Inventory" as inv
+
+[->player : openInventory()
+activate player
+
+player -> inv : displayInventory()
+activate inv
+alt player closes inventory
+	player -> inv : closeInventory()
+	deactivate inv
+end
+
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+hide footbox
+title Enter Room
+
+participant ":RoomHandler" as rh
+participant ":TwitterHandler" as twitter
+participant "room:Room" as room
+
+note left of rh
+	In this instance, the player
+	enters a not discovered room.
+end note
+
+[->rh : enterRoom(coord : Vector2i)
+activate rh
+
+alt neverVisitedRoom
+
+	rh -> twitter : requestTweet() 
+	activate twitter
+	twitter --> rh : twitterData
+	deactivate twitter
+
+	rh -> room : createRoom(twitterData)
+	activate room
+	deactivate room
+
+	rh -> rh : connectRoom(room, coord)
+
+
+end
+
+rh -> rh : currentRoom = room
+
+
+
+
+
+@enduml

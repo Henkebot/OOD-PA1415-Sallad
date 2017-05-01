@@ -1,0 +1,47 @@
+@startuml
+hide footbox
+title Attack
+
+participant ":Cave" as cave
+participant "player:Player" as player
+participant ":RoomHandler" as rh
+participant "room:Room" as room
+participant ":EntityHandler" as eh
+participant ":Enemy" as enemy
+
+cave -> player : attack()
+activate cave
+activate player
+deactivate player
+
+cave -> rh : update(dt, player)
+activate rh
+	
+	rh -> room : update(dt, player)
+	activate room
+		loop nrOfEntites
+			room -> eh : updateEntites(dt, room, player)
+			activate eh
+				
+				eh -> enemy : update(dt, room, player)
+				activate enemy
+				
+				alt isPlayerAttacking
+					enemy -> enemy : isCol = collision(player)
+					activate enemy
+					deactivate enemy
+					alt isCol
+						enemy -> enemy : reduceHealth(player.stats)
+						activate enemy
+						deactivate enemy
+					end
+				end
+				deactivate enemy
+			deactivate eh
+		end
+	deactivate room
+deactivate rh		
+
+
+
+@enduml

@@ -1,0 +1,48 @@
+@startuml
+hide footbox
+title Interact
+
+participant ":Cave" as cave
+participant "player:Player" as player
+participant ":RoomHandler" as rh
+participant "room:Room" as room
+participant ":EntityHandler" as eh
+participant ":Door" as door
+
+activate cave
+cave -> player : interact()
+activate player
+deactivate player
+
+	cave -> rh : update(dt, player)
+	activate rh
+		
+		rh -> room : update(dt, player)
+		activate room
+			
+			loop nrOfEntites
+				room -> eh : updateEntites(dt, room, player)
+				activate eh
+
+					eh -> door : update(room, player)
+					activate door
+					
+						door -> door : isInteract = player.isInteract()
+						activate door
+						deactivate door
+						alt isInteract == true
+							door -> door : room.changeRoom(player.getCoord())
+							activate door
+							deactivate door
+
+						end
+						
+				deactivate eh
+			end	
+		deactivate room
+
+	deactivate rh
+deactivate cave
+
+
+@enduml

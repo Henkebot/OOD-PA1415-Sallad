@@ -1,0 +1,23 @@
+@startuml
+package UserInterface {}
+package Artifacts {}
+package Container {}
+package GameEnvironment {}
+package Utility {}
+package Characters {}
+
+UserInterface -- Container
+
+Container -- GameEnvironment
+Container -- Characters
+Container -- Artifacts
+Container - Utility
+
+GameEnvironment -- Artifacts
+GameEnvironment -- Characters
+
+Artifacts - Characters
+
+
+
+@enduml

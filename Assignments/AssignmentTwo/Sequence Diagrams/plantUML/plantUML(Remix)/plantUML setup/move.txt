@@ -1,0 +1,30 @@
+@startuml
+hide footbox
+title Move
+
+participant ":Cave" as cave
+participant "player:Player" as player
+participant ":RoomHandler" as rh
+
+[->cave : move()
+activate cave
+
+cave -> player : moveRequest()
+activate player
+deactivate player
+
+cave -> rh : collision(player)
+activate rh
+
+
+rh --> cave : result
+deactivate rh
+
+alt result == false
+	cave -> player : move()
+	activate player
+	deactivate player
+end 
+
+
+@enduml

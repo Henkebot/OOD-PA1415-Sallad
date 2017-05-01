@@ -1,0 +1,25 @@
+@startuml
+hide footbox 
+title Request Tweet
+
+participant ":TwitterHandler" as twitter
+
+
+[->twitter : requestTweet()
+activate twitter
+
+alt a twitter url was set
+	twitter -> twitter : twitterData = getTweet()
+	activate twitter
+	deactivate twitter
+
+else else
+	twitter -> twitter : twitterData = empty string
+	activate twitter
+	deactivate twitter
+end
+
+[<--twitter : twitterData
+
+
+@enduml
