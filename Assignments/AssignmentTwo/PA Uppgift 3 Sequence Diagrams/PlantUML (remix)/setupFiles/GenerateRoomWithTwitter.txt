@@ -6,7 +6,13 @@ actor ":Player" as player
 actor ":Twitter" as twitter
 participant ":System" as system
 
-player -> system : enterRoom()
+player -> system : enterRoom(coord) 
+
+note left 
+	coord variable is telling the system
+	what room the player wants to enter.
+end note
+
 
 system -> twitter : requestTweet() 
 
