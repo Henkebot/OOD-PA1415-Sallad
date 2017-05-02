@@ -1,1 +1,5 @@
 Ändra startGame
+
+
+Start Singleplayer and enter feed 
+Ändra så den matchar struckuren
