@@ -1,0 +1,73 @@
+ColisClient
+-----------------------
+states : Stack<State>
+running : bool
+-----------------------
+changeState(state : State) : void
+pushState(state : State) : void
+popState(state : State) : void
+handleEvents() : void
+update(dt : float) : void
+draw() : void
+-----------------------
+
+State
+-----------------------
+-----------------------
+init() = 0 : void
+handleEvents(cl : Client*) = 0 : void
+update(cl : Client*) = 0 : void
+draw(cl : Client*) = 0 : void
+
+Menu
+-----------------------
+-----------------------
+init() : void
+handleEvents(cl : Client*) : void
+update(cl : Client*) : void
+draw(cl : Client*) : void
+
+Game
+-----------------------
+-----------------------
+init() : void
+handleEvents(cl : Client*) : void
+update(cl : Client*) : void
+draw(cl : Client*) : void
+
+Map
+------------------------
+caves : ArrayList<Cave>
+------------------------
+generateCave(URL)
+
+Cave
+------------------------
+rooms : Room[][]
+URL : String
+------------------------
+createCave(URL) : void
+generateCave() : void
+
+Twitter
+------------------------
+------------------------
+getFeed(URL) : String
+
+TwitterAnalyser
+------------------------
+nrOfKeywords : int
+------------------------
+- nrOfKeyords(tweet) : int
++ getInRoom(tweet, inRoom*) : int
+
+Identifier
+------------------------
+------------------------
+createInRoom(tyipeID : string) : void
+
+ColisionHandler
+------------------------
+------------------------
+isCol(c1, c2) : bool
+

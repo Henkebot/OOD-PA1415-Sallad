@@ -1,0 +1,30 @@
+EntityHandler
+------------------------
+playerAttack() void
+playerMove() void 
+playerInteract() void
+getProgressio() enum
+createEntities(inRoom[],size) void 
+update(dt) 
+isFloor(coord) boolean
+------------------------
+Player player
+Enemys[] enemy
+Items[] item
+Floor[] floor
+Structures[] structur
+nrOfEntetis int
+------------------------
+
+Room
+------------------------
+generateRoom() void
+------------------------
+EH entityHandler
+size int
+------------------------
+
+MasterSpawner
+------------------------
+create()
+------------------------
