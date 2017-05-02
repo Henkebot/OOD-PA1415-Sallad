@@ -1,0 +1,66 @@
+Floor
+----------
+----------
++create()
++Update(float dt)
+----------
+
+Structure
+----------
+----------
++create()
++Update(double dt)
+----------
+
+Entity
+----------
+-coordinates : Vector2
+-texture : texture2D
+-health : int
+
+----------
+-getHealth()
+-setHealth()
+-getTexture()
+-setTexture()
+-getCoordinates()
+-setCoordinates()
++Update(float dt)
++create()
+----------
+
+Item
+----------
+----------
++create()
++Update(double dt)
+----------
+
+MOB
+---------
+
+---------
++attack()
++move()
++getStats()
++setPos()
++interact()
++isDead()
+---------
+
+Player
+--------
+--------
++setXP(long)
++create´()
++update(float dt)
+--------
+
+Enemy
+----------
+----------
++create()
++update(float dt)
+----------
+
+
