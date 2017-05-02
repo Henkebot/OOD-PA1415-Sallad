@@ -1,0 +1,63 @@
+@startuml
+hide footbox
+title Create Entity 
+
+participant ":EntityHandler" as eh
+participant ":MasterSpawner" as ms
+participant ":Floor" as floor
+participant ":Enemy" as enemy
+participant ":Item" as item
+participant ":Structure" as struct
+
+[->eh : createEntities(inRoom[], size)
+activate eh
+
+	loop size
+		alt inRoom == floor
+
+			eh -> ms : floor = setFloor(inRoom)
+			activate ms
+				
+				ms -> floor : create()
+				activate floor
+				deactivate floor
+			deactivate ms
+			
+		else inRoom == enemy
+			
+			eh -> ms : spawnEnemy(inRoom)
+			activate ms
+				
+				ms -> enemy : create()
+				activate enemy
+				deactivate enemy
+			deactivate ms
+	
+		else inRoom == item
+	
+			eh -> ms : spawnItem(inRoom)
+			activate ms
+				
+				ms -> item : create()
+				activate item
+				deactivate item
+			deactivate ms
+			
+		else inRoom == structure
+			eh -> ms : spawnStructure(inRoom)
+				activate ms
+					
+					ms -> struct : create()
+					activate struct
+					deactivate struct
+				deactivate ms
+				
+
+		end
+
+	
+	end
+		
+
+
+@enduml

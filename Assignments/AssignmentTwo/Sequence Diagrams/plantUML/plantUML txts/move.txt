@@ -30,42 +30,50 @@ im -> eh : playerMove()
 deactivate im
 activate eh
 
-eh -> player : playerCoord = moveRequest()
+eh -> player : reqPlayerCoord= moveRequest()
 activate player
 deactivate player
 
-loop nrOfStructures
+loop nrOfStructures && !structCol
 	eh -> struct : structCoord = getCoords()
 	activate struct
 	deactivate struct
 
-	eh -> ch : structCol = isCol(structCoord, playerCoord)
+	eh -> ch : structCol = isCol(structCoord, reqPlayerCoord)
 	activate ch
 	deactivate ch
 end
 
-loop nrOfEnemies
-	eh -> enemy : enemyCoord = getCoords()
-	activate enemy
-	deactivate enemy
+alt !structCol
+	loop nrOfEnemies && !enemyCol
+		eh -> enemy : enemyCoord = getCoords()
+		activate enemy
+		deactivate enemy
 
-	eh -> ch : enemyCol = isCol(enemyCoord, playerCoord)
-	activate ch
-	deactivate ch
+		eh -> ch : enemyCol = isCol(enemyCoord, reqPlayerCoord)
+		activate ch
+		deactivate ch
+	end
 end
 
-loop nrOfItems
+loop nrOfItems && !itemCol
 	eh -> item : itemCoord = getCoords()
 	activate item
 	deactivate item
 
-	eh -> ch : itemCol = isCol(itemCoord, playerCoord)
+	eh -> ch : itemCol = isCol(itemCoord, reqPlayerCoord)
 	activate ch
 	deactivate ch
+	
+	alt itemCol
+		eh -> player : pickUpItem(item)
+		activate player
+		deactivate player
+	end
 
 end
 
-alt !(structCol && enemyCol && itemCol)
+alt !(structCol && enemyCol)
 	eh -> player : setPos(playerCoord)
 end
 
