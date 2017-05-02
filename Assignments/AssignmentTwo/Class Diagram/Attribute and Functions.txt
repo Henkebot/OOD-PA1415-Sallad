@@ -1,4 +1,4 @@
-Client
+ColisClient
 -----------------------
 states : Stack<State>
 running : bool
@@ -53,4 +53,21 @@ Twitter
 ------------------------
 ------------------------
 getFeed(URL) : String
+
+TwitterAnalyser
+------------------------
+nrOfKeywords : int
+------------------------
+- nrOfKeyords(tweet) : int
++ getInRoom(tweet, inRoom*) : int
+
+Identifier
+------------------------
+------------------------
+createInRoom(tyipeID : string) : void
+
+ColisionHandler
+------------------------
+------------------------
+isCol(c1, c2) : bool
 
