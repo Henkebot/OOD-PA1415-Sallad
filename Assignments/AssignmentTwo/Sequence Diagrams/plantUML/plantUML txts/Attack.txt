@@ -57,7 +57,7 @@ alt hit == true
 	activate enemy
 	deactivate enemy
 
-	eh -> eh : dmg = calculateDMG(playerStats,enemyStats)
+	eh -> eh : dmg = calculateDmg(playerStats,enemyStats)
 
 	eh -> enemy : setHealth(dmg)
 	activate enemy

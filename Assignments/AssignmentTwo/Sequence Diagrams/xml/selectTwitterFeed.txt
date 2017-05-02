@@ -1,0 +1,35 @@
+@startuml
+hide footbox
+title Select Twitter Feed
+
+participant ":Cave" as cave
+participant ":Twitter" as twitter
+
+[->cave : selectTwitterFeed(URL) 
+activate cave
+	cave -> twitter : validateURL(url)
+	activate twitter
+
+	twitter --> cave : result
+	deactivate twitter
+
+	alt result == true
+	
+	cave -> cave : twitterURL = URL
+	activate cave
+	deactivate cave
+	
+	[<--cave : return true
+
+	else result == false
+
+	
+	[<--cave : return false
+
+	end
+
+
+deactivate cave
+
+
+@enduml
