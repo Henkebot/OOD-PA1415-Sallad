@@ -22,25 +22,23 @@ activate player
 deactivate player
 
 loop nrOfEnemies
-	eh -> enemy : enemyCoord = moveRequest(dt, pc)
+	eh -> enemy : update(dt, player)
 	activate enemy
-	deactivate enemy
 	
-	loop nrOfStructures
-		eh -> struct : struct = getCoords()
-		activate struct
-		deactivate struct
+	
+	enemy -> enemy : setState(attack)
+	activate enemy
+	note right
+		In this case the player
+		is close enough to the
+		enemy to be attacked.
+	end note
 		
-		eh -> ch : structCol = isCol(structCoord, enemyCoord)
-		activate ch
-		deactivate ch
-	end
+	deactivate enemy
+	deactivate enemy
 
-	eh -> ch : playerCol = isCol(enemyCoord, playerCoord)
-	activate ch
-	deactivate ch
-		
-	alt playerCol == true
+
+	alt enemy.getState() == attack
 		eh -> enemy : enemyStat = getStats()
 		activate enemy
 		deactivate enemy
@@ -55,18 +53,6 @@ loop nrOfEnemies
 		activate player
 		deactivate player		
 	end
-	note right
-		If the enemy did collide with the player,
-		the player will get damaged.
-	end note
-	
-	alt !(structCol && playerCol)
-		eh -> enemy : setPos(enemyCoord)
-	end
-	note right
-		If the enemy didnt collide with anything
-		the ability to move is allowed.
-	end note
 end
 
 deactivate eh

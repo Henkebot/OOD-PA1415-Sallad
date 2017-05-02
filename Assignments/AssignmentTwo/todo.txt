@@ -1,3 +1,1 @@
 Ändra startGame
-Lägg till inventory
-cuta equip armor
