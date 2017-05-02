@@ -22,3 +22,9 @@ generateRoom() void
 ------------------------
 EH entityHandler
 size int
+------------------------
+
+MasterSpawner
+------------------------
+create()
+------------------------
