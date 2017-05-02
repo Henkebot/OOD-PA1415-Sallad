@@ -30,7 +30,7 @@ activate im
 			eh -> ch : col = isCol(c1,c2)
 			activate ch
 			deactivate ch
-
+			end
 			alt col == false
 				loop nrOfStructures
 					eh -> struct : c2 = getCoords()
@@ -45,7 +45,7 @@ activate im
 				end
 
 			end
-		end
+	
 		
 		alt col == true
 			eh -> player : ps = getStats()
