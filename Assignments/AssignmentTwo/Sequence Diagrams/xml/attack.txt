@@ -1,0 +1,81 @@
+@startuml
+hide footbox
+title Attack
+
+participant ":InputManager" as im
+participant ":EntityHandler" as eh
+participant ":Player" as player
+participant ";Enemy" as enemy
+participant "CollisionHandler" as ch
+participant ":Strucutre" as struct
+
+
+[->im : attack() 
+activate im
+	im -> eh : playerAttack() 
+	activate eh
+		
+		eh -> player : c1 =  attack()
+		activate player
+		
+		deactivate player
+
+		loop nrOfEnemies
+			
+			eh -> enemy : c2 = getCoords()
+			activate enemy
+
+			deactivate enemy
+
+			eh -> ch : col = isCol(c1,c2)
+			activate ch
+			deactivate ch
+
+			alt col == false
+				loop nrOfStructures
+					eh -> struct : c2 = getCoords()
+					activate struct
+
+					deactivate struct
+
+					eh -> ch : col = isCol(c1, c2)
+					activate ch
+					deactivate ch
+
+				end
+
+			end
+		end
+		
+		alt col == true
+			eh -> player : ps = getStats()
+			activate player
+			deactivate player
+			
+		
+			note left 
+				In this scenario the player
+				is hitting a structure.
+			end note
+
+
+			
+			eh -> struct : os = getStats()
+			activate struct
+			deactivate struct
+
+			eh -> eh : dmg = dmgMath(ps, os)
+			activate eh
+			deactivate eh
+
+			eh -> struct : setHealth(dmg)
+			activate struct
+
+		end
+
+	deactivate eh
+
+
+deactivate im
+
+@enduml

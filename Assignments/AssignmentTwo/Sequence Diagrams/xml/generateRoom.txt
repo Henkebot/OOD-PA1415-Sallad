@@ -1,0 +1,32 @@
+@startuml
+hide footbox
+title Generate Room
+
+participant ":Room" as room
+participant ":TwitterAnalyser" as ta
+participant ":Identifier" as id
+participant ":EntityHandler" as eh
+
+[-> room : generateRoom() 
+activate room
+
+	room -> ta : size = getInRoom(tweet, inRoom)
+	activate ta
+		
+		loop nrOfWords
+			ta -> id : createInRoom(type ID)
+			activate id
+
+			deactivate id
+		end
+
+	deactivate ta
+	
+	room -> eh : createEntities(inRoom[], size)
+	activate eh
+	deactivate eh
+
+deactivate room
+
+
+@enduml
