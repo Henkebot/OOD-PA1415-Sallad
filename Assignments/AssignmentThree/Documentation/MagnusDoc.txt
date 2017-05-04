@@ -1,0 +1,30 @@
+[2017-05-04]
+I've decided that we need a class wich is called Application. This class is where the game loop is.
+Created Application class : public sf::Drawable
+	- Added void run() 			//Here are the game loop
+	- Added void update(float dt) 		//This updates the stack.peek()
+	- Added sf::RenderWindow window		//This is the window the game will be running on
+I removed the game loop from the source.cpp
+Created IStack.h
+	- Added push(), pop(), peek(), set() and isEmpty().
+
+Created Stack.h : public :IStack<T>
+	I made the IDS with an array.
+	- Added copy-constructor and Assignment operator.
+
+Created test_Stack
+	Stack.h passes my tests.
+
+Created State.h & Client.h
+	- State & Client some what are holding eachothers hands... So I was forced to create these paralell to eachother,
+	- There will only be one Client and all States will have a pointer to that Client.
+	- The Client will be deleted in the destructor of application, where it will also be created.
+	- I've decided to actually put a protected variable to the Client in the State class so that every state can reach it.
+
+In the Client class I've decided to remove the bool "running". This is because we use SFML and we will use window.isOpen() instead.
+
+I get a compiling problem:
+	...\state.h(9): error C2061: syntax error: identifier 'Client'
+	...\state.h(20): error C2143: syntax error: missing ';' before '*'
+	...\state.h(20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+	...\state.h(20): error C2238: unexpected token(s) preceding ';'
