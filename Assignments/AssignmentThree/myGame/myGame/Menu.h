@@ -19,6 +19,7 @@ private:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 private:
 	sf::CircleShape shape;
+	bool wasReturnPressed;
 };
 
 #endif

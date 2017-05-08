@@ -7,15 +7,17 @@
 
 class Application : public sf::Drawable
 {
-	static const int SCREEN_WIDTH;
-	static const int SCREEN_HEIGHT;
 public:
 	Application();
 	virtual ~Application();
+
+	static const int SCREEN_WIDTH;
+	static const int SCREEN_HEIGHT;
 private:
 	void run();
 	void update(float dt);
 
+private:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 	sf::RenderWindow window;
 	GameStateManager* gsm;
