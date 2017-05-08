@@ -28,3 +28,21 @@ I get a compiling problem:
 	...\state.h(20): error C2143: syntax error: missing ';' before '*'
 	...\state.h(20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
 	...\state.h(20): error C2238: unexpected token(s) preceding ';'
+
+[2017-05-05]
+After a conversation with Chefen I've decided not to use my stack anymore... This is because I feel that it takes to much time to handle
+pointers and the possible memory leaks.
+
+I solved the compiling problems by adding a forward declaration in State.h
+
+I've tested to push both Menu and Game down the stack with states and it works. I get memory leaks tho when I quit and I belive it's 
+because the Stack don't handle the memory so good... I will once again write my own stack :)
+
+After some testing I've decided to add my own stack again, this is because the pop() function in the "standard" stack don't give a return.
+This is needed so I can clear the memory.
+
+[2017-05-08]
+I've now added my own stack again and also fixed all the memory leaks that was created. I forgot to add the pop() fuction in the 
+GameStateManager-destructor. Everything is now working fine and the next thing I'll do is to create a menu. To do this I need an
+InputManager. I will talk to the group later today to see what they think of my solution.s
+
