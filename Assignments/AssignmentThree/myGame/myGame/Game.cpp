@@ -6,7 +6,6 @@ Game::Game(GameStateManager * gsm) :
 	std::cout << "Game State pushed!\n";
 	this->shape.setSize(sf::Vector2f(200, 200));
 	this->shape.setFillColor(sf::Color(255, 100, 55));
-	this->wasAPressed = false;
 }
 
 Game::Game(const Game & other) :
@@ -28,13 +27,12 @@ void Game::update(float dt)
 
 void Game::handleEvents()
 {
-	bool isReturnPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
-	if (isReturnPressed && !this->wasAPressed)
+	if (InputManager::keyPressed(sf::Keyboard::Return))
 	{
-		std::cout << "A pressed" << std::endl;
 		this->gsm->popState();
 	}
-	this->wasAPressed = isReturnPressed;
+
+
 }
 
 Game & Game::operator=(const Game & other)

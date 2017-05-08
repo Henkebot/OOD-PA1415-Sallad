@@ -19,6 +19,5 @@ private:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 private:
 	sf::RectangleShape shape;
-	bool wasAPressed;
 };
 #endif // !GAME_H

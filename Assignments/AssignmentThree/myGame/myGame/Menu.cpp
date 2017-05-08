@@ -4,9 +4,12 @@ Menu::Menu(GameStateManager * gsm) :
 	State(gsm)
 {
 	std::cout << "Menu state pushed!\n";
+	this->texture.loadFromFile("textures/menu_wallpaper.jpg");
+	this->wallpaper.setTexture(this->texture);
+	this->wallpaper.setPosition(0.0f, 0.0f);
+
 	this->shape.setRadius(50);
 	this->shape.setFillColor(sf::Color(100, 250, 50));
-	this->wasReturnPressed = false;
 }
 
 Menu::Menu(const Menu & other):
@@ -31,13 +34,10 @@ void Menu::update(float dt)
 
 void Menu::handleEvents()
 {
-	bool isReturnPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Return);
-	if (isReturnPressed && !this->wasReturnPressed)
+	if (InputManager::keyPressed(sf::Keyboard::Return))
 	{
-		std::cout << "Return is pressed" << std::endl;
 		this->gsm->pushState(new Game(this->gsm));
 	}
-	this->wasReturnPressed = isReturnPressed;
 }
 
 Menu & Menu::operator=(const Menu & other)
@@ -54,5 +54,6 @@ Menu & Menu::operator=(const Menu & other)
 
 void Menu::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	target.draw(this->shape, states);
+	target.draw(this->wallpaper, states);
+	//target.draw(this->shape, states);
 }
