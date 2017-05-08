@@ -46,3 +46,6 @@ I've now added my own stack again and also fixed all the memory leaks that was c
 GameStateManager-destructor. Everything is now working fine and the next thing I'll do is to create a menu. To do this I need an
 InputManager. I will talk to the group later today to see what they think of my solution.s
 
+I've created an Inputmanager class that can manage all sorts of inputs. I did this because I didn't find it as "Hantverk" to put every single button that can be pressed as a member variable.
+This InputManager is overpowerd and this ONE function can chech if any key is pressed!
+You check if (for example) Return is pressed do following: if (InputManager::keyPressed(sf::Keyboard::Return)) {do studff;}
