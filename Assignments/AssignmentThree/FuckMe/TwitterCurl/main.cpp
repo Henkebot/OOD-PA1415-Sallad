@@ -17,12 +17,18 @@ int main()
 	if (twitterObj.accountVerifyCredGet())
 	{
 		twitterObj.getLastWebResponse(replyMsg);
-		printf("\ntwitterClient:: twitCurl::accountVerifyCredGet web response:\n%s\n", replyMsg.c_str());
+	//	printf("\ntwitterClient:: twitCurl::accountVerifyCredGet web response:\n%s\n", replyMsg.c_str());
 	}
 
-	std::string statusMsg("TA MIG I ANDRA SIDAN!");
-	twitterObj.statusUpdate(statusMsg);
-
+	
+	std::string timeline = "";
+	if (twitterObj.timelineUserGet(true, true, 0))
+	{
+		twitterObj.getLastWebResponse(timeline);
+		printf("\ntwitterClient:: twitCurl::timelineUserGet web response:\n%s\n", timeline.c_str());
+	}
+	
+	system("pause");
 
 	return 0;
 }
