@@ -18,6 +18,8 @@ public:
 private:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 private:
+	sf::Texture texture;
+	sf::Sprite wallpaper;
 	sf::CircleShape shape;
 };
 

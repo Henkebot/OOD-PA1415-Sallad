@@ -27,7 +27,12 @@ void Game::update(float dt)
 
 void Game::handleEvents()
 {
-	//Do stuff
+	if (InputManager::keyPressed(sf::Keyboard::Return))
+	{
+		this->gsm->popState();
+	}
+
+
 }
 
 Game & Game::operator=(const Game & other)
