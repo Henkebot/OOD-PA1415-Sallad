@@ -2,6 +2,7 @@
 #define GAME_H
 #include "State.h"
 #include "Menu.h"
+#include "Container\Map.h"
 #include <iostream>
 
 class Game : public State
@@ -18,6 +19,7 @@ public:
 private:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 private:
+	Container::Map map;
 	sf::RectangleShape shape;
 };
 #endif // !GAME_H

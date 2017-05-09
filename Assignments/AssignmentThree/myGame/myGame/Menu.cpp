@@ -4,7 +4,10 @@ Menu::Menu(GameStateManager * gsm) :
 	State(gsm)
 {
 	std::cout << "Menu state pushed!\n";
-	this->texture.loadFromFile("textures/menu_wallpaper.jpg");
+	if (!this->texture.loadFromFile("textures/menu_wallpaper.jpg"))
+	{
+		std::cout << "Failed to load menu texture!" << std::endl;
+	}
 	this->wallpaper.setTexture(this->texture);
 	this->wallpaper.setPosition(0.0f, 0.0f);
 
