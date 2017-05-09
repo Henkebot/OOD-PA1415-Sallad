@@ -30,6 +30,7 @@ void Game::handleEvents()
 	if (InputManager::keyPressed(sf::Keyboard::Return))
 	{
 		this->gsm->popState();
+		std::cout << "Game poped\n";
 	}
 
 
