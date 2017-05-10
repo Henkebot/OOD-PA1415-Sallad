@@ -17,7 +17,13 @@ Twitter::~Twitter()
 	delete[] this->tweets;
 }
 
-std::string& Twitter::getFeed() const
+std::string Twitter::getRandomTweet() const
+{
+	std::string aTweet = *this->tweets[rand() % this->size];
+	return aTweet;
+}
+
+std::string Twitter::getFeed() const
 {
 	std::string feed;
 	std::ifstream feedFile;
@@ -39,20 +45,43 @@ void Twitter::getTweets(const std::string & feed)
 {
 	int currentIndex = 0;
 	int nrOfTweets = 0;
+	int skipper = 0;
 
 	std::string beforeTweet = "\"text\":\"";
 	std::string afterTweet = "\",\"truncated\":";
 
-	//find out how many tweets
+	
 	if (feed[0] != '#')
 	{
+		//find out how many tweets
 		while (currentIndex != -1)
 		{
-			currentIndex = feed.find(beforeTweet, currentIndex);
-
-			nrOfTweets
+			currentIndex = feed.find(beforeTweet, currentIndex + skipper);
+			nrOfTweets++;
+			skipper = 1;
 		}
-		
+		nrOfTweets--;
+		if (nrOfTweets != 0)
+		{
+			this->size = nrOfTweets;
+			this->tweets = new std::string*[this->size];
+			int startIndex = 0;
+			int endIndex = 0;
+			skipper = 0;
+			for (int i = 0; i < this->size; i++)
+			{
+				startIndex = feed.find(beforeTweet, startIndex + skipper);
+				endIndex = feed.find(afterTweet, startIndex);
+				std::string tweet = "";
+				for (int k = startIndex + 8; k < endIndex; k++)
+				{
+					tweet += feed[k];
+				}
+				std::cout << tweet << std::endl;
+				this->tweets[i] = new std::string(tweet);
+				skipper = 1;
+			}
+		}
 	}
 	
 }
