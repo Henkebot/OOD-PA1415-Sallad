@@ -1,243 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Container\Cave.cpp" />
+    <ClCompile Include="Container\Map.cpp" />
+    <ClCompile Include="Container\Room.cpp" />
+    <ClCompile Include="main - kopia.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="UserInterface\Application.cpp" />
+    <ClCompile Include="UserInterface\Game.cpp" />
+    <ClCompile Include="UserInterface\GameStateManager.cpp" />
+    <ClCompile Include="UserInterface\Menu.cpp" />
+    <ClCompile Include="UserInterface\State.cpp" />
+    <ClCompile Include="Tests\main - kopia.cpp" />
+    <ClCompile Include="Tests\test_Stack.cpp" />
+    <ClCompile Include="Tests\test_twitter.cpp" />
+    <ClCompile Include="Tests\testMap.cpp" />
+    <ClCompile Include="Gameplay\Enemy.cpp" />
+    <ClCompile Include="Gameplay\Entity.cpp" />
+    <ClCompile Include="Gameplay\Floor.cpp" />
+    <ClCompile Include="Gameplay\Item.cpp" />
+    <ClCompile Include="Gameplay\Mob.cpp" />
+    <ClCompile Include="Gameplay\NonMoveable.cpp" />
+    <ClCompile Include="Gameplay\Player.cpp" />
+    <ClCompile Include="Gameplay\Structure.cpp" />
+    <ClCompile Include="Container\Inventory.cpp" />
+    <ClCompile Include="Utility\InputManager.cpp" />
+    <ClCompile Include="Utility\Twitter.cpp" />
+    <ClCompile Include="Container\EntityHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-=======
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
->>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
-    <ClCompile Include="Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="EntityHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-=======
->>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
-    <ClCompile Include="Floor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameStateManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-=======
-    <ClCompile Include="main - kopia.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
->>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mob.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NonMoveable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-=======
->>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
-    <ClCompile Include="State.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Structure.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-<<<<<<< HEAD
+    <ClInclude Include="Container\Cave.h" />
+    <ClInclude Include="Container\Map.h" />
+    <ClInclude Include="Container\Room.h" />
+    <ClInclude Include="include\curl\curl.h" />
+    <ClInclude Include="include\curl\curlbuild.h" />
+    <ClInclude Include="include\curl\curlrules.h" />
+    <ClInclude Include="include\curl\curlver.h" />
+    <ClInclude Include="include\curl\easy.h" />
+    <ClInclude Include="include\curl\mprintf.h" />
+    <ClInclude Include="include\curl\multi.h" />
+    <ClInclude Include="include\curl\stdcheaders.h" />
+    <ClInclude Include="include\curl\typecheck-gcc.h" />
+    <ClInclude Include="include\oauthlib.h" />
+    <ClInclude Include="include\twitcurl.h" />
+    <ClInclude Include="twitterClient.h" />
+    <ClInclude Include="UserInterface\Application.h" />
+    <ClInclude Include="UserInterface\Game.h" />
+    <ClInclude Include="UserInterface\GameStateManager.h" />
+    <ClInclude Include="UserInterface\IStack.h" />
+    <ClInclude Include="UserInterface\Menu.h" />
+    <ClInclude Include="UserInterface\Stack.h" />
+    <ClInclude Include="UserInterface\State.h" />
+    <ClInclude Include="Gameplay\Enemy.h" />
+    <ClInclude Include="Gameplay\Entity.h" />
+    <ClInclude Include="Gameplay\Floor.h" />
+    <ClInclude Include="Gameplay\Item.h" />
+    <ClInclude Include="Gameplay\Mob.h" />
+    <ClInclude Include="Gameplay\NonMoveable.h" />
+    <ClInclude Include="Gameplay\Player.h" />
+    <ClInclude Include="Gameplay\Structure.h" />
+    <ClInclude Include="Container\Inventory.h" />
+    <ClInclude Include="Utility\InputManager.h" />
+    <ClInclude Include="Utility\Twitter.h" />
+    <ClInclude Include="Utility\twitterClient.h" />
+    <ClInclude Include="Container\EntityHandler.h" />
   </ItemGroup>
   <ItemGroup>
-=======
-    <ClCompile Include="test_Stack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Container\Cave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Container\Map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Container\Room.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="test_twitter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Twitter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NonMoveable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
->>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
-    <ClInclude Include="Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="EntityHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-=======
->>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
-    <ClInclude Include="Floor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStateManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IStack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mob.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="NonMoveable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Stack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Structure.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-=======
-    <ClInclude Include="Stack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Structure.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="twitterClient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\twitcurl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\curl\curl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\curl\curlbuild.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\curl\curlrules.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\curl\curlver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\curl\easy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\curl\mprintf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\curl\multi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\curl\stdcheaders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\curl\typecheck-gcc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\oauthlib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Container\Cave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Container\Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Container\Room.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Twitter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <Library Include="lib\twitcurl.lib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="libeay32.dll" />
-    <None Include="ssleay32.dll" />
     <None Include="openal32.dll" />
     <None Include="sfml-audio-2.dll" />
     <None Include="sfml-audio-d-2.dll" />
@@ -249,9 +81,7 @@
     <None Include="sfml-system-d-2.dll" />
     <None Include="sfml-window-2.dll" />
     <None Include="sfml-window-d-2.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="lib\twitcurl.lib" />
->>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
+    <None Include="ssleay32.dll" />
+    <None Include="UserInterface\libeay32.dll" />
   </ItemGroup>
 </Project>

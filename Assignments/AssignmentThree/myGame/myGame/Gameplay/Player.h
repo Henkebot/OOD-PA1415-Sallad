@@ -1,7 +1,7 @@
 #ifndef PLAYER_H 
 #define PLAYER_H
 #include "Mob.h"
-#include "Inventory.h"
+#include "../Container/Inventory.h"
 #include "Item.h"
 class Player : public Mob
 {

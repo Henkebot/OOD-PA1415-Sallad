@@ -15,7 +15,7 @@ void Enemy::create()
 
 }
 
-void Enemy::update(float dt, sf::Vector2f playerCoords)
+void Enemy::update(float dt)
 {
 
 }

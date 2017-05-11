@@ -1,11 +1,12 @@
 #ifndef ENTITYHANDLER_H
 #define ENTITYHANDLER_H
 
-#include "Player.h"
-#include "Enemy.h"
-#include "Floor.h"
-#include "Structure.h"
-#include "InputManager.h"
+
+#include "../Gameplay/Player.h"
+#include "../Gameplay/Enemy.h"
+#include "../Gameplay/Floor.h"
+#include "../Gameplay/Structure.h"
+#include "../Utility/InputManager.h"
 using namespace sf;
 namespace Container
 {

@@ -63,7 +63,7 @@ void EntityHandler::update(float dt)
 		Vector2f playerCoords = player->getCoords();
 		for (int i = 0; i < nrOfEnemys; i++)
 		{
-			enemys[i]->update(dt, playerCoords);
+			enemys[i]->update(dt/*, playerCoords*/);
 			/*if (enemys[i]->getState() == attack)
 			{
 				Stats enemyStat = enemys[i]->getStats();
@@ -233,4 +233,8 @@ bool EntityHandler::isFloor(Vector2f coords)
 		isFloor = true;
 	}
 	return isFloor;
+}
+
+void Container::EntityHandler::removeItem(int index)
+{
 }

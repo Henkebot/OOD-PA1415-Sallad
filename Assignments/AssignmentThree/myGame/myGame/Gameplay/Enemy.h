@@ -9,7 +9,8 @@ public:
 	Enemy(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0,0), int health = 0);
 	~Enemy();
 	void create(); 
-	void update(float dt, sf::Vector2f playerCoords);
+	//update needs to be checked
+	void update(float dt); 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const; 
 };
 #endif

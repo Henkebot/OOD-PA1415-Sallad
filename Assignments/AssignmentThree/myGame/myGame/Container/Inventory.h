@@ -1,6 +1,6 @@
 #ifndef  INVENTORY_H 
 #define INVENTORY_H
-#include "Item.h"
+#include "../Gameplay/Item.h"
 class Inventory
 {
 private:

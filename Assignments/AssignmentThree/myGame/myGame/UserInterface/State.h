@@ -2,7 +2,7 @@
 #define STATE_H
 #include <SFML/Graphics.hpp>
 #include "GameStateManager.h"
-#include "../InputManager.h"
+#include "../Utility/InputManager.h"
 
 class GameStateManager;
 class State : public sf::Drawable
