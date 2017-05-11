@@ -88,9 +88,6 @@
     <ClInclude Include="include\curl\typecheck-gcc.h" />
     <ClInclude Include="include\oauthlib.h" />
     <ClInclude Include="include\twitcurl.h" />
-    <ClInclude Include="twitterClient.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="UserInterface\Application.h" />
     <ClInclude Include="UserInterface\Game.h" />
     <ClInclude Include="UserInterface\GameStateManager.h" />
