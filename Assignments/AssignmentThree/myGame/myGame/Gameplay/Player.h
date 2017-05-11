@@ -7,7 +7,7 @@ class Player : public Mob
 {
 private:
 	long xp;
-	Inventory inventory;
+	Inventory* inventory;
 public:
 	Player(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0, 0), int health = 0);
 	~Player(); 

@@ -158,6 +158,7 @@ namespace Container
 			else
 				setSprite(spriteArray, 5, 5, 1, 1);
 
+			
 			//DOORS
 			if (roomPointers.at(i)->getLeftD() != nullptr)
 				setSprite(spriteArray, 0, 5, 1, 2);
@@ -190,12 +191,16 @@ namespace Container
 
 		}
 
+
+
 		for (int i = 0; i < 20; i++)
 		{
 			delete[] spriteArray[i];
 		}
 		delete[] spriteArray;
-		
+		//DISKUTERA DENNA
+		EntityHandler* currentEntityHandler = new EntityHandler();
+		currentRoom->setEh(currentEntityHandler);
 
 	}
 
@@ -212,14 +217,55 @@ namespace Container
 	}
 	void Cave::update(float dt)
 	{
-		if (InputManager::keyPressed(sf::Keyboard::A))
+		/*if (InputManager::keyPressed(sf::Keyboard::A))
 			currentRoom = currentRoom->getLeftD();
 		if (InputManager::keyPressed(sf::Keyboard::D))
 			currentRoom = currentRoom->getRightD();
 		if (InputManager::keyPressed(sf::Keyboard::S))
 			currentRoom = currentRoom->getDownD();
 		if (InputManager::keyPressed(sf::Keyboard::W))
+			currentRoom = currentRoom->getUpD();*/
+		currentRoom->update(dt);
+
+		
+		
+		
+		
+		Player* playerPos = currentRoom->getCurrentEntityHandler()->getPlayer();
+		//DOOR LEFT (0,5)
+		if ((playerPos->getCoords().x / 64) == 0 && (playerPos->getCoords().y / 64) == 5 && 
+			currentRoom->getLeftD() != nullptr)
+		{
+			EntityHandler* currentH = currentRoom->getCurrentEntityHandler();
+			currentRoom = currentRoom->getLeftD();
+			currentRoom->setEh(currentH);
+			currentRoom->getCurrentEntityHandler()->getPlayer()->setCoords(sf::Vector2f(18*64, 5*64));
+			
+		} //DOOR UP: (10,0)
+		else if ((playerPos->getCoords().x / 64) == 10 && (playerPos->getCoords().y / 64) == 0 &&
+			currentRoom->getUpD() != nullptr)
+		{
+			EntityHandler* currentH = currentRoom->getCurrentEntityHandler();
 			currentRoom = currentRoom->getUpD();
+			currentRoom->setEh(currentH);
+			currentRoom->getCurrentEntityHandler()->getPlayer()->setCoords(sf::Vector2f(10 * 64, 9 * 64));
+		}//DOOR RIGHT: (19,5)
+		else if ((playerPos->getCoords().x / 64) == 19 && (playerPos->getCoords().y / 64) == 5 &&
+			currentRoom->getRightD() != nullptr)
+		{
+			EntityHandler* currentH = currentRoom->getCurrentEntityHandler();
+			currentRoom = currentRoom->getRightD();
+			currentRoom->setEh(currentH);
+			currentRoom->getCurrentEntityHandler()->getPlayer()->setCoords(sf::Vector2f(1 * 64, 5 * 64));
+		}//DOOR DOWN: (10,10)
+		else if ((playerPos->getCoords().x / 64) == 10 && (playerPos->getCoords().y / 64) == 10 &&
+			currentRoom->getDownD() != nullptr)
+		{
+			EntityHandler* currentH = currentRoom->getCurrentEntityHandler();
+			currentRoom = currentRoom->getDownD();
+			currentRoom->setEh(currentH);
+			currentRoom->getCurrentEntityHandler()->getPlayer()->setCoords(sf::Vector2f(10 * 64, 1 * 64));
+		}
 		
 	}
 }

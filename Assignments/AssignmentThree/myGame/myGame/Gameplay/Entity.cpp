@@ -16,6 +16,7 @@ Entity::~Entity()
 void Entity::setCoords(sf::Vector2f coords)
 {
 	this->coords = coords; 
+	sprite.setPosition(coords);
 }
 
 sf::Vector2f Entity::getCoords() const
@@ -55,7 +56,6 @@ sf::Sprite Entity::getSprite() const
 
 void Entity::update(float dt)
 {
-
 }
 
 void Entity::create()

@@ -22,12 +22,17 @@ void Application::run()
 {
 	this->gsm->pushState(new Menu(this->gsm));
 	
+	sf::Clock clock;
+
 	while (this->window.isOpen())
 	{
 		sf::Event event;
 		sf::Clock gameTime;
 		while (this->window.pollEvent(event))
 		{
+			float currentTime = clock.restart().asSeconds();
+			float fps = 1.0f / currentTime;
+			window.setTitle("TwitterNethack\t            |    \t" + std::to_string(fps));
 			if (event.type == sf::Event::Closed ||
 				InputManager::keyPressed(sf::Keyboard::Escape)) // if Escape was pressed, the game will terminate!
 			{

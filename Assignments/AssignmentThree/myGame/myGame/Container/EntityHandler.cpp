@@ -3,7 +3,9 @@ using namespace Container;
 
 EntityHandler::EntityHandler()
 {
-	player = new Player(nullptr, Vector2f(0, 0));
+	playerTexture = new sf::Texture();
+	playerTexture->loadFromFile(".\\textures\\player.png");
+	player = new Player(playerTexture, Vector2f(0, 0));
 	extraCon();
 }
 EntityHandler::EntityHandler(Vector2f playerCoords)
@@ -54,6 +56,7 @@ EntityHandler::~EntityHandler()
 
 void EntityHandler::update(float dt)
 {
+	player->update(dt);
 	if (playersTurn == true)
 	{
 		handleInput();
@@ -92,6 +95,11 @@ void EntityHandler::update(float dt)
 			}*/
 		}
 	}
+}
+
+Player * Container::EntityHandler::getPlayer() const
+{
+	return player;
 }
 
 void EntityHandler::handleInput()
@@ -205,22 +213,22 @@ void EntityHandler::playerMove()
 
 void EntityHandler::playerTurnUp()
 {
-	//player->setDirection(Up);
+	player->move(0,-1);
 }
 
 void EntityHandler::playerTurnLeft()
 {
-	//player->setDirection(Left);
+	player->move(-1,0);
 }
 
 void EntityHandler::playerTurnDown()
 {
-	//player->setDirection(Down);
+	player->move(0, 1);
 }
 
 void EntityHandler::playerTurnRight()
 {
-	//player->setDirection(Right);
+	player->move(1, 0);
 }
 
 bool EntityHandler::isFloor(Vector2f coords)

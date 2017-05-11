@@ -10,7 +10,7 @@ public:
 	~Mob(); 
 	sf::Vector2f attack(); 
 	sf::Vector2f moveRequest(); 
-	void move();
+	void move(int xDir, int yDir);
 	//ONLY HAS RETURN TYPE VOID TEMPORARLY, UNTILL THE STATS CLASS IS IMPLEMENTED
 	void getStats() const; 
 	void setPos(sf::Vector2f coords); 

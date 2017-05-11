@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include <iostream>
 Player::Player(sf::Texture* texture, sf::Vector2f coords, int health) : Mob(texture,coords,health)
 {
 
@@ -27,7 +27,7 @@ void Player::create()
 
 void Player::update(float dt)
 {
-
+	
 }
 
 sf::Vector2f Player::interact()

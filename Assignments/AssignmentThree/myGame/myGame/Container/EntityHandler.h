@@ -19,6 +19,7 @@ namespace Container
 		EntityHandler(Player* player, Vector2f playerCoords);
 		~EntityHandler();
 		void update(float dt);
+		Player* getPlayer() const;
 
 	private:
 		//player intraction
@@ -38,6 +39,7 @@ namespace Container
 		void removeItem(int index);
 
 		Player* player;
+		sf::Texture* playerTexture;
 		Enemy** enemys;
 		Structure** structures;
 		Item** items;

@@ -1,19 +1,34 @@
-#ifndef DBG_NEW
-#define _CRTDBG_MAP_ALLOC
-#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-#define new DBG_NEW
-#endif
 #ifndef ROOM_H
 #define ROOM_H
 #include <SFML\Graphics.hpp>
-
+#include "EntityHandler.h"
 
 namespace Container
 {
 	class Room : public sf::Drawable
 	{
+	private:
+
+		Room* left;
+		Room* right;
+		Room* up;
+		Room* down;
+
+		void deleteSpriteArray();
+		int roomNumber;
+		int roomRole;
+		EntityHandler* eh;
+		//DEBUG
+		/*sf::RectangleShape doorLeft;
+		sf::RectangleShape doorRight;
+		sf::RectangleShape doorUp;
+		sf::RectangleShape doorDown;*/
+	
 	public:
 		static const int SPRITE_SIZE;
+		void setEh(EntityHandler* eh);
+
+		EntityHandler* getCurrentEntityHandler() const;
 
 		sf::Sprite** spritesArray;
 
@@ -34,24 +49,13 @@ namespace Container
 		int getRole() const;
 
 		void setSpriteArray(sf::Sprite** array);
+		void update(float dt);
 
 	private:
-
-		Room* left;
-		Room* right;
-		Room* up;
-		Room* down;
-
-		void deleteSpriteArray();
-		int roomNumber;
-		int roomRole;
-		//DEBUG
-		/*sf::RectangleShape doorLeft;
-		sf::RectangleShape doorRight;
-		sf::RectangleShape doorUp;
-		sf::RectangleShape doorDown;*/
-
+		
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	
 
 	};
 
