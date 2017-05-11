@@ -19,6 +19,7 @@ Twitter::~Twitter()
 
 std::string Twitter::getRandomTweet() const
 {
+	if (size == 0) throw "Zero size";
 	std::string aTweet = *this->tweets[rand() % this->size];
 	return aTweet;
 }

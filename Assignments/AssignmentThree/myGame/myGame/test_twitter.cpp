@@ -8,7 +8,15 @@ int main()
 
 	for (int i = 0; i < 10; i++)
 	{
-		std::cout << t.getRandomTweet() << std::endl;
+		try {
+			std::cout << t.getRandomTweet() << std::endl;
+
+		}
+		catch (char* e)
+		{
+			std::cout << e << std::endl;
+			break;
+		}
 		system("pause");
 		std::cout << std::endl;
 	}

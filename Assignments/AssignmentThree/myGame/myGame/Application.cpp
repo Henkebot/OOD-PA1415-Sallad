@@ -1,6 +1,6 @@
 #include "Application.h"
-const int Application::SCREEN_WIDTH = 800;
-const int Application::SCREEN_HEIGHT = 600;
+const int Application::SCREEN_WIDTH = 1280;
+const int Application::SCREEN_HEIGHT = 720;
 
 Application::Application()
 {

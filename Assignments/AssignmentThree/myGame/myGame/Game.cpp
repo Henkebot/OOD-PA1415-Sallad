@@ -4,6 +4,7 @@ Game::Game(GameStateManager * gsm) :
 	State(gsm)
 {
 	std::cout << "Game State pushed!\n";
+	map.createMap();
 	this->shape.setSize(sf::Vector2f(200, 200));
 	this->shape.setFillColor(sf::Color(255, 100, 55));
 }
@@ -16,7 +17,7 @@ Game::Game(const Game & other) :
 
 Game::~Game()
 {
-
+	
 }
 
 void Game::update(float dt)
@@ -50,5 +51,6 @@ Game & Game::operator=(const Game & other)
 
 void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	target.draw(this->shape, states);
+	map.render(target);
+	//target.draw(this->shape, states);
 }
