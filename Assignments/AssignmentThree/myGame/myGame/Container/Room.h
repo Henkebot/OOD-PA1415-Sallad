@@ -16,7 +16,24 @@ namespace Container
 		Room();
 		virtual~Room();
 		sf::RectangleShape shape;
+
+		void setLeftD(Room* room);
+		void setRightD(Room* room);
+		void setUpD(Room* room);
+		void setDownD(Room* room);
+
+		Room* getLeftD() const;
+		Room* getRightD() const;
+		Room* getUpD() const;
+		Room* getDownD() const;
+
 	private:
+
+		Room* left;
+		Room* right;
+		Room* up;
+		Room* down;
+
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	};

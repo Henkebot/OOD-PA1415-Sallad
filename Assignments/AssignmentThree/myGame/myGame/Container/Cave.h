@@ -9,8 +9,7 @@ namespace Container
 	class Cave : public sf::Drawable
 	{
 	private:
-		Room** rooms;
-		int nrOfRooms = 1;
+		Room* currentRoom;
 		std::string twitterURL;
 
 		sf::RectangleShape bg;
