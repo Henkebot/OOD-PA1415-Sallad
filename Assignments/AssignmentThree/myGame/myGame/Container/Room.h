@@ -13,7 +13,7 @@ namespace Container
 	class Room : public sf::Drawable
 	{
 	public:
-		Room();
+		Room(int number);
 		virtual~Room();
 		sf::RectangleShape shape;
 
@@ -33,6 +33,12 @@ namespace Container
 		Room* right;
 		Room* up;
 		Room* down;
+
+		int roomNumber;
+		sf::RectangleShape doorLeft;
+		sf::RectangleShape doorRight;
+		sf::RectangleShape doorUp;
+		sf::RectangleShape doorDown;
 
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

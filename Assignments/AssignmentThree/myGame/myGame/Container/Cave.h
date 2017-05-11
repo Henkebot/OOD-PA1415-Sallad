@@ -3,6 +3,8 @@
 #include <string>
 #include <SFML\Graphics.hpp>
 #include "Room.h"
+#include <vector>
+
 namespace Container
 {
 
@@ -10,10 +12,14 @@ namespace Container
 	{
 	private:
 		Room* currentRoom;
+		int numberOfRooms;
+		std::vector<Room*> roomPointers;
+
 		std::string twitterURL;
 
 		sf::RectangleShape bg;
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+		void connectRoom(Room* rootRoom, int lastRoom = -1);
 	public:
 		Cave();
 		virtual~Cave();

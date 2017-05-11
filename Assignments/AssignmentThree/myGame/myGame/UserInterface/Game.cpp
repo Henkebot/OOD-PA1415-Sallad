@@ -23,11 +23,13 @@ Game::~Game()
 void Game::update(float dt)
 {
 	this->handleEvents();
+	map.update(dt);
 
 }
 
 void Game::handleEvents()
 {
+	
 	if (InputManager::keyPressed(sf::Keyboard::Return))
 	{
 		this->gsm->popState();

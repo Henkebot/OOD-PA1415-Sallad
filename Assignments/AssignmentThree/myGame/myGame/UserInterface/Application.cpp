@@ -26,14 +26,18 @@ void Application::run()
 		sf::Clock gameTime;
 		while (this->window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed ||
+				InputManager::keyPressed(sf::Keyboard::Escape)) // if Escape was pressed, the game will terminate!
 			{
 				this->window.close();
 			}
 		}
 
 		this->window.clear();
-		this->update(gameTime.restart().asSeconds());
+		//Updates the window if it is focused :D
+		if(window.hasFocus())
+			this->update(gameTime.restart().asSeconds());
+
 		this->window.draw(*this);
 		this->window.display();
 	}
