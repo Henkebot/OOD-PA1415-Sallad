@@ -43,7 +43,6 @@
     <ClInclude Include="include\curl\typecheck-gcc.h" />
     <ClInclude Include="include\oauthlib.h" />
     <ClInclude Include="include\twitcurl.h" />
-    <ClInclude Include="twitterClient.h" />
     <ClInclude Include="UserInterface\Application.h" />
     <ClInclude Include="UserInterface\Game.h" />
     <ClInclude Include="UserInterface\GameStateManager.h" />
