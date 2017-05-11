@@ -13,9 +13,13 @@ namespace Container
 	class Room : public sf::Drawable
 	{
 	public:
-		Room(int number);
+		static const int SPRITE_SIZE;
+
+		sf::Sprite** spritesArray;
+
+		Room(int number, int role = 0);
 		virtual~Room();
-		sf::RectangleShape shape;
+		
 
 		void setLeftD(Room* room);
 		void setRightD(Room* room);
@@ -27,6 +31,10 @@ namespace Container
 		Room* getUpD() const;
 		Room* getDownD() const;
 
+		int getRole() const;
+
+		void setSpriteArray(sf::Sprite** array);
+
 	private:
 
 		Room* left;
@@ -34,11 +42,14 @@ namespace Container
 		Room* up;
 		Room* down;
 
+		void deleteSpriteArray();
 		int roomNumber;
-		sf::RectangleShape doorLeft;
+		int roomRole;
+		//DEBUG
+		/*sf::RectangleShape doorLeft;
 		sf::RectangleShape doorRight;
 		sf::RectangleShape doorUp;
-		sf::RectangleShape doorDown;
+		sf::RectangleShape doorDown;*/
 
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

@@ -2,14 +2,14 @@
 #include <iostream>
 namespace Container
 {
-	Room::Room(int number)
-	{
-		shape.setFillColor(sf::Color::Green);
-		shape.setSize(sf::Vector2f(64 * 20, 64 * 11));
+	const int Room::SPRITE_SIZE = 64;
 
+	Room::Room(int number, int role)
+	{	
+		roomRole = role;
 		left = right = up = down = nullptr;
 
-		doorDown.setFillColor(sf::Color::Blue);
+		/*doorDown.setFillColor(sf::Color::Blue);
 		doorDown.setSize(sf::Vector2f(128, 16));
 		doorDown.setPosition(64 * 9.5f, 64 * 10.5f);
 		
@@ -23,7 +23,7 @@ namespace Container
 
 		doorLeft.setFillColor(sf::Color::Blue);
 		doorLeft.setSize(sf::Vector2f(16, 128));
-		doorLeft.setPosition(0, 64 * 5);
+		doorLeft.setPosition(0, 64 * 5);*/
 
 
 		roomNumber = number;
@@ -32,7 +32,7 @@ namespace Container
 
 	Room::~Room()
 	{
-
+		deleteSpriteArray();
 	}
 
 	void Room::setLeftD(Room * room)
@@ -77,14 +77,50 @@ namespace Container
 		return down;
 	}
 
+	int Room::getRole() const
+	{
+		return roomRole;
+	}
+
+	void Room::setSpriteArray(sf::Sprite ** array)
+	{
+		sf::Sprite** newArray = new sf::Sprite*[20];
+		for (int i = 0; i < 20; i++)
+		{
+			newArray[i] = new sf::Sprite[11];
+			for (int j = 0; j < 11; j++)
+			{
+				newArray[i][j] = array[i][j];
+			}
+		}
+		spritesArray = newArray;
+	}
+
+	void Room::deleteSpriteArray()
+	{
+		for (int x = 0; x < 20; x++)
+		{
+			delete[] spritesArray[x];
+		}
+		delete[] spritesArray;
+	}
+
 	void Room::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	{
-		target.draw(shape);
-		if(down != nullptr) target.draw(doorDown);
+		
+		for (int x = 0; x < 20; x++)
+		{
+			for (int y = 0; y < 11; y++)
+			{
+				target.draw(spritesArray[x][y]);
+
+			}
+
+		}
+		/*if(down != nullptr) target.draw(doorDown);
 		if(up != nullptr) target.draw(doorUp);
 		if (right != nullptr) target.draw(doorRight);
-		if (left != nullptr) 	target.draw(doorLeft);
-		std::cout << roomNumber << std::endl;
+		if (left != nullptr) 	target.draw(doorLeft);*/
 	}
 
 }

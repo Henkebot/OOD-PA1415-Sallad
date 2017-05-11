@@ -1,9 +1,11 @@
 #include "Application.h"
+#include <ctime>
 const int Application::SCREEN_WIDTH = 1280;
 const int Application::SCREEN_HEIGHT = 720;
 
 Application::Application()
 {
+	srand(static_cast<unsigned>(time(0)));
 	std::cout << "Application created\n";
 	this->window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "TwitterNethack");
 	this->gsm = new GameStateManager();

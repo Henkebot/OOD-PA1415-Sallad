@@ -10,64 +10,64 @@ namespace Container
 		
 	}
 
-	void Cave::connectRoom(Room * rootRoom, int lastRoom)
+	void Cave::connectRoom(Room * rootRoom, int role, int lastRoom)
 	{
 		int door = rand() % 4;
 		// 0 = up
 		// 1 = right
 		// 2 = down
 		// 3 = left
-		if (door == lastRoom) connectRoom(rootRoom, door);
+		while (door == lastRoom) door = rand() % 4;
 		switch (door)
 		{
 		case 0:
 			if (rootRoom->getUpD() == nullptr)
 			{
-				Room* newRoom = new Room(numberOfRooms++);
+				Room* newRoom = new Room(numberOfRooms++, role);
 				rootRoom->setUpD(newRoom);
 				newRoom->setDownD(rootRoom);
 
 				roomPointers.push_back(newRoom);
 			}
 			else
-				connectRoom(rootRoom->getUpD(),door);
+				connectRoom(rootRoom->getUpD(),role, door);
 			break;
 		case 1:
 			if (rootRoom->getRightD() == nullptr)
 			{
-				Room* newRoom = new Room(numberOfRooms++);
+				Room* newRoom = new Room(numberOfRooms++, role);
 				rootRoom->setRightD(newRoom);
 				newRoom->setLeftD(rootRoom);
 
 				roomPointers.push_back(newRoom);
 			}
 			else
-				connectRoom(rootRoom->getRightD(),door);
+				connectRoom(rootRoom->getRightD(),role, door);
 			
 			break;
 		case 2:
 			if (rootRoom->getDownD() == nullptr)
 			{
-				Room* newRoom = new Room(numberOfRooms++);
+				Room* newRoom = new Room(numberOfRooms++, role);
 				rootRoom->setDownD(newRoom);
 				newRoom->setUpD(rootRoom);
 
 				roomPointers.push_back(newRoom);
 			}
 			else
-				connectRoom(rootRoom->getDownD(),door);
+				connectRoom(rootRoom->getDownD(),role, door);
 			break;
 		case 3:
 			if (rootRoom->getLeftD() == nullptr)
 			{
-				Room* newRoom = new Room(numberOfRooms++);
+				Room* newRoom = new Room(numberOfRooms++, role);
 				rootRoom->setLeftD(newRoom);
 				newRoom->setRightD(rootRoom);
 
 				roomPointers.push_back(newRoom);
 			}
 			else
-				connectRoom(rootRoom->getLeftD(),door);
+				connectRoom(rootRoom->getLeftD(),role, door);
 			break;
 		}
 
@@ -75,8 +75,12 @@ namespace Container
 
 	Cave::Cave()
 	{
-		bg.setFillColor(sf::Color::Red);
+		bg.setFillColor(sf::Color::Black);
 		bg.setSize(sf::Vector2f(Application::SCREEN_WIDTH, Application::SCREEN_HEIGHT));
+
+		tiles = new sf::Texture();
+		if (tiles->loadFromFile(".\\textures\\sheet.png"))
+			std::cout << "Failed to load file!" << std::endl;
 		numberOfRooms = 0;
 	}
 
@@ -88,22 +92,123 @@ namespace Container
 		{
 			delete roomPointers.at(i);
 		}
+
+		delete tiles;
 	}
 
 	void Cave::generateCave()
 	{
-		currentRoom = new Room(numberOfRooms++);
+		currentRoom = new Room(numberOfRooms++, 1);
 		roomPointers.push_back(currentRoom);
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 10; i++)
 		{
-			connectRoom(currentRoom);
+			connectRoom(currentRoom,0);
 		}
+		connectRoom(currentRoom, 2);
+		sf::Sprite** spriteArray = new sf::Sprite*[20];
+		for (int i = 0; i < 20; i++)
+		{
+			spriteArray[i] = new sf::Sprite[11];
+		}
+		setSprite(spriteArray, 0, 0, 0, 0); // VÄNSTER UPP HÖRN
+		for (int i = 1; i < 19; i++) // TOPPEN
+		{
+			setSprite(spriteArray, i, 0, 1, 0);
+		}
+		setSprite(spriteArray, 19, 0, 2, 0); // HÖGER UPP HÖRN
+		for (int i = 1; i < 10; i++) // VÄNSTER
+		{
+			setSprite(spriteArray, 0, i, 0, 1);
+		}
+		for (int i = 1; i < 10; i++) // HÖGER
+		{
+			setSprite(spriteArray, 19, i, 2, 1);
+		}
+		for (int x = 1; x < 19; x++) // MITTEN
+		{
+			for (int y = 1; y < 10; y++)
+			{
+				setSprite(spriteArray, x, y, 1, 1);
+			}
+		}
+		for (int i = 0; i < 20; i++) // BOTTEN
+		{
+			setSprite(spriteArray, i, 10, 0, 2);
+		}
+
+
+
+		for (int i = 0; i < roomPointers.size(); i++)
+		{
+
+			//Ladders
+			if (roomPointers.at(i)->getRole() == 1)
+			{
+				setSprite(spriteArray, 10, 5, 3, 1);
+				setSprite(spriteArray, 10, 6, 3, 2);
+			}
+			else
+			{
+				setSprite(spriteArray, 10, 5, 1, 1);
+				setSprite(spriteArray, 10, 6, 1, 1);
+			}
+
+			if (roomPointers.at(i)->getRole() == 2)
+				setSprite(spriteArray, 5, 5, 3, 3);
+			else
+				setSprite(spriteArray, 5, 5, 1, 1);
+
+			//DOORS
+			if (roomPointers.at(i)->getLeftD() != nullptr)
+				setSprite(spriteArray, 0, 5, 1, 2);
+			else
+				setSprite(spriteArray, 0, 5, 0, 1);
+
+			if (roomPointers.at(i)->getUpD() != nullptr)
+				setSprite(spriteArray, 10, 0, 2, 2);
+			else
+				setSprite(spriteArray, 10, 0, 1, 0);
+
+			if (roomPointers.at(i)->getRightD() != nullptr)
+				setSprite(spriteArray, 19, 5, 3, 0);
+			else
+				setSprite(spriteArray, 19, 5, 2, 1);
+
+			if (roomPointers.at(i)->getDownD() != nullptr)
+			{
+				setSprite(spriteArray, 9, 10, 0, 3);
+				setSprite(spriteArray, 10, 10, 1, 3);
+				setSprite(spriteArray, 11, 10, 2, 3);
+			}
+			else
+			{
+				setSprite(spriteArray, 9, 10, 0, 2);
+				setSprite(spriteArray, 10, 10, 0, 2);
+				setSprite(spriteArray, 11, 10, 0, 2);
+			}
+			roomPointers.at(i)->setSpriteArray(spriteArray);
+
+		}
+
+		for (int i = 0; i < 20; i++)
+		{
+			delete[] spriteArray[i];
+		}
+		delete[] spriteArray;
+		
 
 	}
 
 	bool Cave::selectTwitterFeed(const std::string & URL)
 	{
 		return false;
+	}
+	void Cave::setSprite(sf::Sprite** spritesArray, int xIndex, int yIndex, int xSheet, int ySheet)
+	{
+		spritesArray[xIndex][yIndex].setTexture(*tiles);
+		spritesArray[xIndex][yIndex].setTextureRect(sf::IntRect(xSheet*64, ySheet* 64, 64, 64));
+		spritesArray[xIndex][yIndex].setPosition(sf::Vector2f(64 * xIndex, 64 * yIndex));
+
 	}
 	void Cave::update(float dt)
 	{

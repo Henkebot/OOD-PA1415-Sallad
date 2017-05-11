@@ -12,6 +12,7 @@ namespace Container
 	{
 	private:
 		Room* currentRoom;
+		sf::Texture* tiles;
 		int numberOfRooms;
 		std::vector<Room*> roomPointers;
 
@@ -19,13 +20,15 @@ namespace Container
 
 		sf::RectangleShape bg;
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-		void connectRoom(Room* rootRoom, int lastRoom = -1);
+		void connectRoom(Room* rootRoom, int role, int lastRoom = 0);
 	public:
 		Cave();
 		virtual~Cave();
 		void generateCave();
 		bool selectTwitterFeed(const std::string& URL);
+		void setSprite(sf::Sprite** spritesArray, int xIndex, int yIndex, int xSheet, int ySheet);
 
+		
 		void update(float dt);
 
 
