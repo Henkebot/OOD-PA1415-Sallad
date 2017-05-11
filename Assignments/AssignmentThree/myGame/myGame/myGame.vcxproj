@@ -20,23 +20,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityHandler.cpp" />
+=======
     <ClCompile Include="Container\Cave.cpp" />
     <ClCompile Include="Container\Map.cpp" />
     <ClCompile Include="Container\Room.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="Main.cpp" />
+=======
     <ClCompile Include="main - kopia.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Mob.cpp" />
     <ClCompile Include="NonMoveable.cpp" />
@@ -46,6 +56,17 @@
     </ClCompile>
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Structure.cpp" />
+<<<<<<< HEAD
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityHandler.h" />
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameStateManager.h" />
+=======
     <ClCompile Include="test_Stack.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -73,6 +94,7 @@
     <ClInclude Include="include\curl\typecheck-gcc.h" />
     <ClInclude Include="include\oauthlib.h" />
     <ClInclude Include="include\twitcurl.h" />
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="IStack.h" />
@@ -84,6 +106,8 @@
     <ClInclude Include="Stack.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Structure.h" />
+<<<<<<< HEAD
+=======
     <ClInclude Include="Twitter.h" />
     <ClInclude Include="twitterClient.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -106,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\twitcurl.lib" />
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DD945508-BB62-4A97-805C-E422C13599FC}</ProjectGuid>

@@ -18,9 +18,12 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -30,6 +33,12 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="EntityHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+=======
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
     <ClCompile Include="Floor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,9 +57,12 @@
     <ClCompile Include="Item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
     <ClCompile Include="main - kopia.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,12 +75,22 @@
     <ClCompile Include="NonMoveable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+=======
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
     <ClCompile Include="State.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Structure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+  </ItemGroup>
+  <ItemGroup>
+=======
     <ClCompile Include="test_Stack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -95,6 +117,7 @@
     <ClInclude Include="NonMoveable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
     <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -104,6 +127,12 @@
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="EntityHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+=======
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
     <ClInclude Include="Floor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -131,6 +160,23 @@
     <ClInclude Include="Mob.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="NonMoveable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Structure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+=======
     <ClInclude Include="Stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -206,5 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\twitcurl.lib" />
+>>>>>>> 3a54b3443bb1d0219f4a850224db27ddcb5d7d1f
   </ItemGroup>
 </Project>
