@@ -10,7 +10,7 @@ namespace Container
 	{
 	private:
 		sf::RectangleShape shape;
-		std::vector<Cave*> caves;
+		Cave caves;
 	public:
 		Map();
 		virtual ~Map();

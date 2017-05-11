@@ -6,6 +6,11 @@ Container::Room::Room()
 	shape.setSize(sf::Vector2f(32*30, 32*13));
 }
 
+Container::Room::~Room()
+{
+
+}
+
 void Container::Room::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(shape);

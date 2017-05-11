@@ -17,7 +17,7 @@ namespace Container
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	public:
 		Cave();
-
+		virtual~Cave();
 		void generateCave();
 		bool selectTwitterFeed(const std::string& URL);
 

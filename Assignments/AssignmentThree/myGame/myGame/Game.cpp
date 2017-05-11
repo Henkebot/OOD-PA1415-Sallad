@@ -17,7 +17,7 @@ Game::Game(const Game & other) :
 
 Game::~Game()
 {
-
+	
 }
 
 void Game::update(float dt)
