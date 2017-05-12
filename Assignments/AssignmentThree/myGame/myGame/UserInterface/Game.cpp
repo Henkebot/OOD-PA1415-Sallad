@@ -22,8 +22,9 @@ Game::~Game()
 
 void Game::update(float dt)
 {
-	this->handleEvents();
 	this->map.update(dt);
+
+	this->handleEvents();
 
 }
 
