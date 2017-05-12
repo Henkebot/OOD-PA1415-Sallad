@@ -24,7 +24,7 @@ namespace Container
 		virtual~Cave();
 		void generateCave();
 		bool selectTwitterFeed(const std::string& URL);
-		void setSprite(sf::Sprite** spritesArray, int xIndex, int yIndex, int xSheet, int ySheet);
+		void setSprite(sf::Sprite** spritesArray, float xIndex, float yIndex, int xSheet, int ySheet);
 
 		
 		void update(float dt);

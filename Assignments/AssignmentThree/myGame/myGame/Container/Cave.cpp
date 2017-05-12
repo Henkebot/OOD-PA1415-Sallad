@@ -27,7 +27,7 @@ namespace Container
 				bool overlapingRoom = false;
 				int overlapingRoomIndex = -1;
 
-				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				for (unsigned i = 0; i < roomPointers.size() && !overlapingRoom; i++)
 				{
 					if (roomPointers.at(i)->getCoord() == newRoomCoord)
 					{
@@ -62,7 +62,7 @@ namespace Container
 				bool overlapingRoom = false;
 				int overlapingRoomIndex = -1;
 
-				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				for (unsigned i = 0; i < roomPointers.size() && !overlapingRoom; i++)
 				{
 					if (roomPointers.at(i)->getCoord() == newRoomCoord)
 					{
@@ -97,7 +97,7 @@ namespace Container
 				bool overlapingRoom = false;
 				int overlapingRoomIndex = -1;
 
-				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				for (unsigned i = 0; i < roomPointers.size() && !overlapingRoom; i++)
 				{
 					if (roomPointers.at(i)->getCoord() == newRoomCoord)
 					{
@@ -132,7 +132,7 @@ namespace Container
 				bool overlapingRoom = false;
 				int overlapingRoomIndex = -1;
 
-				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				for (unsigned i = 0; i < roomPointers.size() && !overlapingRoom; i++)
 				{
 					if (roomPointers.at(i)->getCoord() == newRoomCoord)
 					{
@@ -187,7 +187,7 @@ namespace Container
 		currentRoom = new Room(numberOfRooms++, 1);
 		currentRoom->setCoord(sf::Vector2i(0, 0));
 		roomPointers.push_back(currentRoom);
-		for (int i = 0; i < 400; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			connectRoom(currentRoom,0);
 		}
@@ -203,34 +203,34 @@ namespace Container
 			spriteArray[i] = new sf::Sprite[11];
 		}
 		setSprite(spriteArray, 0, 0, 0, 0); // VÄNSTER UPP HÖRN
-		for (int i = 1; i < 19; i++) // TOPPEN
+		for (float i = 1; i < 19; i++) // TOPPEN
 		{
-			setSprite(spriteArray, i, 0, 1, 0);
+			setSprite(spriteArray, i, 0.0f, 1, 0);
 		}
 		setSprite(spriteArray, 19, 0, 2, 0); // HÖGER UPP HÖRN
-		for (int i = 1; i < 10; i++) // VÄNSTER
+		for (float i = 1; i < 10; i++) // VÄNSTER
 		{
 			setSprite(spriteArray, 0, i, 0, 1);
 		}
-		for (int i = 1; i < 10; i++) // HÖGER
+		for (float i = 1; i < 10; i++) // HÖGER
 		{
 			setSprite(spriteArray, 19, i, 2, 1);
 		}
-		for (int x = 1; x < 19; x++) // MITTEN
+		for (float x = 1; x < 19; x++) // MITTEN
 		{
-			for (int y = 1; y < 10; y++)
+			for (float y = 1; y < 10; y++)
 			{
 				setSprite(spriteArray, x, y, 1, 1);
 			}
 		}
-		for (int i = 0; i < 20; i++) // BOTTEN
+		for (float i = 0; i < 20; i++) // BOTTEN
 		{
 			setSprite(spriteArray, i, 10, 0, 2);
 		}
 
 
 
-		for (int i = 0; i < roomPointers.size(); i++)
+		for (unsigned i = 0; i < roomPointers.size(); i++)
 		{
 
 			//Ladders
@@ -302,11 +302,13 @@ namespace Container
 	{
 		return false;
 	}
-	void Cave::setSprite(sf::Sprite** spritesArray, int xIndex, int yIndex, int xSheet, int ySheet)
+	void Cave::setSprite(sf::Sprite** spritesArray, float xIndex, float yIndex, int xSheet, int ySheet)
 	{
-		spritesArray[xIndex][yIndex].setTexture(*tiles);
-		spritesArray[xIndex][yIndex].setTextureRect(sf::IntRect(xSheet*64, ySheet* 64, 64, 64));
-		spritesArray[xIndex][yIndex].setPosition(sf::Vector2f(64 * xIndex, 64 * yIndex));
+		int xDex = static_cast<int>(xIndex);
+		int yDex = static_cast<int>(yIndex);
+		spritesArray[xDex][yDex].setTexture(*tiles);
+		spritesArray[xDex][yDex].setTextureRect(sf::IntRect(xSheet*64, ySheet* 64, 64, 64));
+		spritesArray[xDex][yDex].setPosition(sf::Vector2f(64 * xIndex, 64 * yIndex));
 
 	}
 	void Cave::update(float dt)
