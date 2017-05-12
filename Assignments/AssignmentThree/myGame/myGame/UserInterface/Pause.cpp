@@ -56,6 +56,10 @@ void Pause::initiateText()
 	this->goToGame.setString("Press ESC to continue");
 	this->goToMenu.setString("Press HOME to exit");
 
+	this->pause.setOutlineThickness(2.0f);
+	this->goToGame.setOutlineThickness(1.5f);
+	this->goToMenu.setOutlineThickness(1.0f);
+
 	this->pause.setCharacterSize(128);
 	this->goToGame.setCharacterSize(32);
 	this->goToMenu.setCharacterSize(16);
