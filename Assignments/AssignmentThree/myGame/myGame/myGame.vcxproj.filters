@@ -27,6 +27,7 @@
     <ClCompile Include="Utility\InputManager.cpp" />
     <ClCompile Include="Utility\Twitter.cpp" />
     <ClCompile Include="Container\EntityHandler.cpp" />
+    <ClCompile Include="UserInterface\Pause.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container\Cave.h" />
@@ -64,6 +65,7 @@
     <ClInclude Include="Utility\twitterClient.h" />
     <ClInclude Include="Container\EntityHandler.h" />
     <ClInclude Include="Utility\enums.h" />
+    <ClInclude Include="UserInterface\Pause.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\twitcurl.lib" />

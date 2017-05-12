@@ -12,10 +12,10 @@ public:
 	GameStateManager();
 	GameStateManager(const GameStateManager & other);
 	virtual ~GameStateManager();
-
+	bool emptyStack() const;
 	void changeState(State* state);
 	void pushState(State* state);
-	void popState();
+	void popState(int amount = 1);
 	void update(float dt);
 	GameStateManager& operator=(const GameStateManager & other);
 

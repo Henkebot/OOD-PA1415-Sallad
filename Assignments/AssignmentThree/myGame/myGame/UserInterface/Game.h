@@ -1,9 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 #include "State.h"
-#include "Menu.h"
 #include "../Container\Map.h"
 #include <iostream>
+#include "Pause.h"
 
 class Game : public State
 {

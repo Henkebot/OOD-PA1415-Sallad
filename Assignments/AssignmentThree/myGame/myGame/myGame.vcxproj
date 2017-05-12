@@ -59,6 +59,7 @@
     <ClCompile Include="UserInterface\Game.cpp" />
     <ClCompile Include="UserInterface\GameStateManager.cpp" />
     <ClCompile Include="UserInterface\Menu.cpp" />
+    <ClCompile Include="UserInterface\Pause.cpp" />
     <ClCompile Include="UserInterface\State.cpp" />
     <ClCompile Include="Utility\InputManager.cpp" />
     <ClCompile Include="Utility\Twitter.cpp" />
@@ -93,6 +94,7 @@
     <ClInclude Include="UserInterface\GameStateManager.h" />
     <ClInclude Include="UserInterface\IStack.h" />
     <ClInclude Include="UserInterface\Menu.h" />
+    <ClInclude Include="UserInterface\Pause.h" />
     <ClInclude Include="UserInterface\Stack.h" />
     <ClInclude Include="UserInterface\State.h" />
     <ClInclude Include="Utility\enums.h" />

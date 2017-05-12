@@ -30,13 +30,10 @@ void Game::update(float dt)
 
 void Game::handleEvents()
 {
-	//Press esc pause state
-
-
-	if (InputManager::keyPressed(sf::Keyboard::Return))
+	if (InputManager::keyPressed(sf::Keyboard::Escape))
 	{
-		this->gsm->popState();
-		std::cout << "Game poped\n";
+		this->gsm->pushState(new Pause(this->gsm));
+		std::cout << "Pause pushed\n";
 	}
 
 }

@@ -40,6 +40,10 @@ void Menu::handleEvents()
 	{
 		this->gsm->pushState(new Game(this->gsm));
 	}
+	else if (InputManager::keyPressed(sf::Keyboard::Escape))
+	{
+		this->gsm->popState();
+	}
 }
 
 Menu & Menu::operator=(const Menu & other)
