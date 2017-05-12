@@ -14,6 +14,8 @@ namespace Container
 		Room* up;
 		Room* down;
 
+		sf::Vector2i coord;
+
 		void deleteSpriteArray();
 		int roomNumber;
 		int roomRole;
@@ -35,6 +37,8 @@ namespace Container
 		Room(int number, int role = 0);
 		virtual~Room();
 		
+		sf::Vector2i getCoord() const;
+		void setCoord(const sf::Vector2i & coord);
 
 		void setLeftD(Room* room);
 		void setRightD(Room* room);

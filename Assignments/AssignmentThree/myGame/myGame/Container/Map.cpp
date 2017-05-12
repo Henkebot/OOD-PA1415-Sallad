@@ -4,9 +4,7 @@ namespace Container
 
 	Map::Map()
 	{
-		shape.setFillColor(sf::Color::Blue);
-		shape.setSize(sf::Vector2f(800, 600));
-		caves.generateCave();
+		generateCave("");
 	}
 
 	Map::~Map()

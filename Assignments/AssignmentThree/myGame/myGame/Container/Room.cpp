@@ -45,6 +45,16 @@ namespace Container
 		deleteSpriteArray();
 	}
 
+	sf::Vector2i Room::getCoord() const
+	{
+		return coord;
+	}
+
+	void Room::setCoord(const sf::Vector2i & coord)
+	{
+		this->coord = coord;
+	}
+
 	void Room::setLeftD(Room * room)
 	{
 		left = room;
