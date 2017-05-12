@@ -63,6 +63,7 @@
     <ClInclude Include="Utility\Twitter.h" />
     <ClInclude Include="Utility\twitterClient.h" />
     <ClInclude Include="Container\EntityHandler.h" />
+    <ClInclude Include="Utility\enums.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\twitcurl.lib" />

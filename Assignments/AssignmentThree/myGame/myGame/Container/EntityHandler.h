@@ -23,7 +23,7 @@ namespace Container
 
 	private:
 		//player intraction
-		void playerMove();
+		bool playerMove();
 		void playerInteract();
 		void playerAttack();
 		void playerTurnUp();

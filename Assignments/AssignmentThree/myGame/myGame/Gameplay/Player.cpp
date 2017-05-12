@@ -2,7 +2,7 @@
 #include <iostream>
 Player::Player(sf::Texture* texture, sf::Vector2f coords, int health) : Mob(texture,coords,health)
 {
-
+	direction = up;
 }
 
 Player::~Player()
@@ -43,4 +43,36 @@ void Player::pickUpItem(Item item)
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(this->getSprite(), states); 
+}
+
+void Player::setDirection(directions newDirection)
+{
+	direction = newDirection;
+}
+
+directions Player::getDirection() const
+{
+	return direction;
+}
+
+sf::Vector2f Player::moveRequest()
+{
+	sf::Vector2f request = getCoords();
+	if (direction == up)
+	{
+		request.y--;
+	}
+	else if(direction == left)
+	{
+		request.x--;
+	}
+	else if (direction == down)
+	{
+		request.y++;
+	}
+	else if (direction == right)
+	{
+		request.x++;
+	}
+	return request;
 }

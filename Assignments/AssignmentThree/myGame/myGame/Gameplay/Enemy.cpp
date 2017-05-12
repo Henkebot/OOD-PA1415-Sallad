@@ -24,3 +24,13 @@ void Enemy::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(this->getSprite(), states); 
 }
+
+states Enemy::getState() const
+{
+	return states();
+}
+
+void Enemy::setState(states newState)
+{
+	state = newState;
+}

@@ -4,7 +4,7 @@
 class Enemy : public Mob
 {
 private:
-
+	states state;
 public:
 	Enemy(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0,0), int health = 0);
 	~Enemy();
@@ -12,5 +12,8 @@ public:
 	//update needs to be checked
 	void update(float dt); 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const; 
+
+	states getState() const;
+	void setState(states newState);
 };
 #endif

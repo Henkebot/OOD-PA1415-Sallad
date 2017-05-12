@@ -95,6 +95,7 @@
     <ClInclude Include="UserInterface\Menu.h" />
     <ClInclude Include="UserInterface\Stack.h" />
     <ClInclude Include="UserInterface\State.h" />
+    <ClInclude Include="Utility\enums.h" />
     <ClInclude Include="Utility\InputManager.h" />
     <ClInclude Include="Utility\Twitter.h" />
     <ClInclude Include="Utility\twitterClient.h" />

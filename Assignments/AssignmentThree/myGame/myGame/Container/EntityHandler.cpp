@@ -28,6 +28,9 @@ EntityHandler::EntityHandler(Player* player, Vector2f playerCoords)
 void EntityHandler::extraCon()
 {
 	playersTurn = true;
+	nrOfEnemys = 0;
+	nrOfItems = 0;
+	nrOfStructures = 0;
 }
 
 EntityHandler::~EntityHandler()
@@ -112,23 +115,19 @@ void EntityHandler::handleInput()
 	{
 		playerInteract();
 	}
-	else if (InputManager::keyPressed(sf::Keyboard::Space))
-	{
-		playerMove();
-	}
-	else if (InputManager::keyPressed(sf::Keyboard::W))
+	else if (InputManager::keyPressed(sf::Keyboard::W) || InputManager::keyPressed(sf::Keyboard::Up))
 	{
 		playerTurnUp();
 	}
-	else if (InputManager::keyPressed(sf::Keyboard::A))
+	else if (InputManager::keyPressed(sf::Keyboard::A) || InputManager::keyPressed(sf::Keyboard::Left))
 	{
 		playerTurnLeft();
 	}
-	else if (InputManager::keyPressed(sf::Keyboard::S))
+	else if (InputManager::keyPressed(sf::Keyboard::S) || InputManager::keyPressed(sf::Keyboard::Down))
 	{
 		playerTurnDown();
 	}
-	else if (InputManager::keyPressed(sf::Keyboard::D))
+	else if (InputManager::keyPressed(sf::Keyboard::D) || InputManager::keyPressed(sf::Keyboard::Right))
 	{
 		playerTurnRight();
 	}
@@ -186,11 +185,10 @@ void EntityHandler::playerInteract()
 	}
 }
 
-void EntityHandler::playerMove()
+bool EntityHandler::playerMove()
 {
 	Vector2f requestedCoords = player->moveRequest();
-	bool floor = isFloor(requestedCoords);
-	bool col = false;
+	bool col = isFloor(requestedCoords);	
 	for (int i = 0; i < nrOfEnemys && col == false; i++)
 	{
 		Vector2f otherCoords = enemys[i]->getCoords();
@@ -201,45 +199,89 @@ void EntityHandler::playerMove()
 		Vector2f otherCoords = structures[i]->getCoords();
 		//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
 	}
-	for (int i = 0; i < nrOfStructures; i++)
+	for (int i = 0; i < nrOfItems; i++)
 	{
 		Vector2f otherCoords = items[i]->getCoords();
 		//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
 		player->pickUpItem(*items[i]);
 		removeItem(i);
 	}
-	player->setPos(requestedCoords);
+	return col;
 }
 
 void EntityHandler::playerTurnUp()
 {
-	player->move(0,-1);
+	if (player->getDirection() == up)
+	{
+		if (playerMove() == true)
+		{
+			//player->move(0, -1);
+		}
+		player->move(0, -1);//ta bort efter att playerMove är färdig
+	}
+	else
+	{
+		player->setDirection(up);
+	}
 }
 
 void EntityHandler::playerTurnLeft()
 {
-	player->move(-1,0);
+	if (player->getDirection() == left)
+	{
+		if (playerMove() == true)
+		{
+			//player->move(-1, 0);
+		}
+		player->move(-1,0);//ta bort efter att playerMove är färdig
+	}
+	else
+	{
+		player->setDirection(left);
+	}
 }
 
 void EntityHandler::playerTurnDown()
 {
-	player->move(0, 1);
+	if (player->getDirection() == down)
+	{
+		if (playerMove() == true)
+		{
+			//player->move(0, 1);
+		}
+		player->move(0, 1);//ta bort efter att playerMove är färdig
+	}
+	else
+	{
+		player->setDirection(down);
+	}
 }
 
 void EntityHandler::playerTurnRight()
 {
-	player->move(1, 0);
+	if (player->getDirection() == right)
+	{
+		if (playerMove() == true)
+		{
+			//player->move(1, 0);
+		}
+		player->move(1,0);//ta bort efter att playerMove är färdig
+	}
+	else
+	{
+		player->setDirection(right);
+	}
 }
 
 bool EntityHandler::isFloor(Vector2f coords)
 {
 	bool isFloor = false;
-	int x = coords.x;
+	/*int x = coords.x;
 	int y = coords.y;
 	if (floor[x][y] != nullptr)
 	{
 		isFloor = true;
-	}
+	}*/
 	return isFloor;
 }
 

@@ -1,6 +1,7 @@
 #ifndef MOB_H 
 #define MOB_H
 #include "Entity.h"
+#include "../Utility//enums.h"
 class Mob : public Entity
 {
 private:
