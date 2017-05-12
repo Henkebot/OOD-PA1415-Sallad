@@ -19,7 +19,7 @@ namespace Container
 		void deleteSpriteArray();
 		int roomNumber;
 		int roomRole;
-		EntityHandler* eh;
+		EntityHandler eh;
 		//DEBUG
 		/*sf::RectangleShape doorLeft;
 		sf::RectangleShape doorRight;
@@ -28,9 +28,9 @@ namespace Container
 	
 	public:
 		static const int SPRITE_SIZE;
-		void setEh(EntityHandler* eh);
+		void setEh(EntityHandler eh);
 
-		EntityHandler* getCurrentEntityHandler() const;
+		EntityHandler& getCurrentEntityHandler();
 
 		sf::Sprite** spritesArray;
 

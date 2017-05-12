@@ -6,6 +6,7 @@ Entity::Entity(sf::Texture* texture, sf::Vector2f coords, int health)
 	this->coords = coords; 
 	this->health = health; 
 	this->sprite.setTexture(this->texture); 
+	delete texture;
 }
 
 Entity::~Entity()
@@ -44,9 +45,9 @@ int Entity::getHealth() const
 	return this->health; 
 }
 
-void Entity::setSprite(sf::Texture texture)
+void Entity::setSprite(sf::Sprite sprite)
 {
-	this->sprite.setTexture(texture);
+	this->sprite = sprite;
 }
 
 sf::Sprite Entity::getSprite() const

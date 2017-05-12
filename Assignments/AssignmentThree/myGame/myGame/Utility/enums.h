@@ -12,7 +12,8 @@ enum states
 {
 	attack,
 	move,
-	idle
+	idle,
+	interact
 };
 	
 #endif
