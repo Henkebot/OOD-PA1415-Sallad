@@ -4,12 +4,12 @@ namespace Container
 {
 	const int Room::SPRITE_SIZE = 64;
 
-	void Room::setEh(EntityHandler * eh)
+	void Room::setEh(EntityHandler eh)
 	{
 		this->eh = eh;
 	}
 
-	EntityHandler * Room::getCurrentEntityHandler() const
+	EntityHandler& Room::getCurrentEntityHandler() 
 	{
 		return eh;
 	}
@@ -118,7 +118,7 @@ namespace Container
 
 	void Room::update(float dt)
 	{
-		eh->update(dt);
+		eh.update(dt);
 		
 	}
 
@@ -143,7 +143,7 @@ namespace Container
 			}
 
 		}
-		target.draw(*eh->getPlayer());
+		target.draw(*eh.getPlayer());
 		/*if(down != nullptr) target.draw(doorDown);
 		if(up != nullptr) target.draw(doorUp);
 		if (right != nullptr) target.draw(doorRight);

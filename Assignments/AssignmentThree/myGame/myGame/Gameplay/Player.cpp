@@ -76,3 +76,13 @@ sf::Vector2f Player::moveRequest()
 	}
 	return request;
 }
+
+void Player::copy(Player player)
+{
+	this->xp = player.xp;
+	this->inventory = player.inventory;
+	this->direction = player.direction;
+	this->setHealth(player.getHealth());
+	this->setCoords(player.getCoords());
+	this->setSprite(player.getSprite());
+}

@@ -3,14 +3,7 @@ using namespace Container;
 
 EntityHandler::EntityHandler()
 {
-	playerTexture = new sf::Texture();
-	playerTexture->loadFromFile(".\\textures\\player.png");
-	player = new Player(playerTexture, Vector2f(0, 0));
-	extraCon();
-}
-EntityHandler::EntityHandler(Vector2f playerCoords)
-{
-	player = new Player(nullptr, playerCoords);
+	player = nullptr;
 	extraCon();
 }
 EntityHandler::EntityHandler(Player* player)
@@ -35,7 +28,6 @@ void EntityHandler::extraCon()
 
 EntityHandler::~EntityHandler()
 {
-	delete player;
 	for (int i = 0; i < nrOfEnemys; i++)
 	{
 		delete enemys[i];
@@ -103,6 +95,16 @@ void EntityHandler::update(float dt)
 Player * Container::EntityHandler::getPlayer() const
 {
 	return player;
+}
+
+void Container::EntityHandler::setPlayer(Player* player)
+{
+	this->player = player;
+}
+
+void Container::EntityHandler::destroyPlayer()
+{
+	delete player;
 }
 
 void EntityHandler::handleInput()

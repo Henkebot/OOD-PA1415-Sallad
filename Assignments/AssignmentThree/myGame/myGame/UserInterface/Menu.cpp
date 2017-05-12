@@ -59,7 +59,7 @@ void Menu::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void Menu::initiateVars()
 {
-	if (!this->texture.loadFromFile("textures/menu_wallpaper.jpg"))
+	if (!this->texture.loadFromFile("textures/menu_wallpaper2.jpg"))
 	{
 		std::cout << "Failed to load menu texture!" << std::endl;
 	}
