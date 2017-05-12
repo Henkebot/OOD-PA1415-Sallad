@@ -28,11 +28,11 @@ void Application::run()
 	{
 		sf::Event event;
 		sf::Clock gameTime;
+		float currentTime = clock.restart().asSeconds();
+		float fps = 1.0f / currentTime;
+		this->window.setTitle("TwitterNethack\t            |    \t" + std::to_string(fps));
 		while (this->window.pollEvent(event))
 		{
-			float currentTime = clock.restart().asSeconds();
-			float fps = 1.0f / currentTime;
-			window.setTitle("TwitterNethack\t            |    \t" + std::to_string(fps));
 			if (event.type == sf::Event::Closed ||
 				InputManager::keyPressed(sf::Keyboard::Escape)) // if Escape was pressed, the game will terminate!
 			{
@@ -42,8 +42,10 @@ void Application::run()
 
 		this->window.clear();
 		//Updates the window if it is focused :D
-		if(window.hasFocus())
+		if (this->window.hasFocus())
+		{
 			this->update(gameTime.restart().asSeconds());
+		}
 
 		this->window.draw(*this);
 		this->window.display();

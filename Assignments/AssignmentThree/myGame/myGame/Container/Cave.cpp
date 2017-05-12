@@ -5,9 +5,7 @@ namespace Container
 {
 	void Cave::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	{
-		target.draw(bg);
 		target.draw(*currentRoom);
-		
 	}
 
 	void Cave::connectRoom(Room * rootRoom, int role, int lastRoom)
@@ -23,11 +21,34 @@ namespace Container
 		case 0:
 			if (rootRoom->getUpD() == nullptr)
 			{
-				Room* newRoom = new Room(numberOfRooms++, role);
-				rootRoom->setUpD(newRoom);
-				newRoom->setDownD(rootRoom);
+				sf::Vector2i rootRoomCoord = rootRoom->getCoord();
+				sf::Vector2i newRoomCoord(sf::Vector2i(rootRoomCoord.x, rootRoomCoord.y - 1));
 
-				roomPointers.push_back(newRoom);
+				bool overlapingRoom = false;
+				int overlapingRoomIndex = -1;
+
+				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				{
+					if (roomPointers.at(i)->getCoord() == newRoomCoord)
+					{
+						overlapingRoom = true;
+						overlapingRoomIndex = i;
+					}
+				}
+
+				if (overlapingRoom)
+				{
+					rootRoom->setUpD(roomPointers.at(overlapingRoomIndex));
+					roomPointers.at(overlapingRoomIndex)->setDownD(rootRoom);
+				}
+				else
+				{
+					Room* newRoom = new Room(numberOfRooms++, role);
+					newRoom->setCoord(newRoomCoord);
+					rootRoom->setUpD(newRoom);
+					newRoom->setDownD(rootRoom);
+					roomPointers.push_back(newRoom);
+				}
 			}
 			else
 				connectRoom(rootRoom->getUpD(),role, door);
@@ -35,11 +56,34 @@ namespace Container
 		case 1:
 			if (rootRoom->getRightD() == nullptr)
 			{
-				Room* newRoom = new Room(numberOfRooms++, role);
-				rootRoom->setRightD(newRoom);
-				newRoom->setLeftD(rootRoom);
+				sf::Vector2i rootRoomCoord = rootRoom->getCoord();
+				sf::Vector2i newRoomCoord(sf::Vector2i(rootRoomCoord.x + 1, rootRoomCoord.y));
 
-				roomPointers.push_back(newRoom);
+				bool overlapingRoom = false;
+				int overlapingRoomIndex = -1;
+
+				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				{
+					if (roomPointers.at(i)->getCoord() == newRoomCoord)
+					{
+						overlapingRoom = true;
+						overlapingRoomIndex = i;
+					}
+				}
+
+				if (overlapingRoom)
+				{
+					rootRoom->setRightD(roomPointers.at(overlapingRoomIndex));
+					roomPointers.at(overlapingRoomIndex)->setLeftD(rootRoom);
+				}
+				else
+				{
+					Room* newRoom = new Room(numberOfRooms++, role);
+					newRoom->setCoord(newRoomCoord);
+					rootRoom->setRightD(newRoom);
+					newRoom->setLeftD(rootRoom);
+					roomPointers.push_back(newRoom);
+				}
 			}
 			else
 				connectRoom(rootRoom->getRightD(),role, door);
@@ -48,11 +92,33 @@ namespace Container
 		case 2:
 			if (rootRoom->getDownD() == nullptr)
 			{
-				Room* newRoom = new Room(numberOfRooms++, role);
-				rootRoom->setDownD(newRoom);
-				newRoom->setUpD(rootRoom);
+				sf::Vector2i rootRoomCoord = rootRoom->getCoord();
+				sf::Vector2i newRoomCoord(sf::Vector2i(rootRoomCoord.x, rootRoomCoord.y + 1));
+				bool overlapingRoom = false;
+				int overlapingRoomIndex = -1;
 
-				roomPointers.push_back(newRoom);
+				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				{
+					if (roomPointers.at(i)->getCoord() == newRoomCoord)
+					{
+						overlapingRoom = true;
+						overlapingRoomIndex = i;
+					}
+				}
+
+				if (overlapingRoom)
+				{
+					rootRoom->setDownD(roomPointers.at(overlapingRoomIndex));
+					roomPointers.at(overlapingRoomIndex)->setUpD(rootRoom);
+				}
+				else
+				{
+					Room* newRoom = new Room(numberOfRooms++, role);
+					newRoom->setCoord(newRoomCoord);
+					rootRoom->setDownD(newRoom);
+					newRoom->setUpD(rootRoom);
+					roomPointers.push_back(newRoom);
+				}
 			}
 			else
 				connectRoom(rootRoom->getDownD(),role, door);
@@ -60,11 +126,34 @@ namespace Container
 		case 3:
 			if (rootRoom->getLeftD() == nullptr)
 			{
-				Room* newRoom = new Room(numberOfRooms++, role);
-				rootRoom->setLeftD(newRoom);
-				newRoom->setRightD(rootRoom);
+				sf::Vector2i rootRoomCoord = rootRoom->getCoord();
+				sf::Vector2i newRoomCoord(sf::Vector2i(rootRoomCoord.x - 1, rootRoomCoord.y));
 
-				roomPointers.push_back(newRoom);
+				bool overlapingRoom = false;
+				int overlapingRoomIndex = -1;
+
+				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				{
+					if (roomPointers.at(i)->getCoord() == newRoomCoord)
+					{
+						overlapingRoom = true;
+						overlapingRoomIndex = i;
+					}
+				}
+
+				if (overlapingRoom)
+				{
+					rootRoom->setLeftD(roomPointers.at(overlapingRoomIndex));
+					roomPointers.at(overlapingRoomIndex)->setRightD(rootRoom);
+				}
+				else
+				{
+					Room* newRoom = new Room(numberOfRooms++, role);
+					newRoom->setCoord(newRoomCoord);
+					rootRoom->setLeftD(newRoom);
+					newRoom->setRightD(rootRoom);
+					roomPointers.push_back(newRoom);
+				}
 			}
 			else
 				connectRoom(rootRoom->getLeftD(),role, door);
@@ -75,9 +164,6 @@ namespace Container
 
 	Cave::Cave()
 	{
-		bg.setFillColor(sf::Color::Black);
-		bg.setSize(sf::Vector2f(Application::SCREEN_WIDTH, Application::SCREEN_HEIGHT));
-
 		tiles = new sf::Texture();
 		if (tiles->loadFromFile(".\\textures\\sheet.png"))
 			std::cout << "Failed to load file!" << std::endl;
@@ -99,8 +185,9 @@ namespace Container
 	void Cave::generateCave()
 	{
 		currentRoom = new Room(numberOfRooms++, 1);
+		currentRoom->setCoord(sf::Vector2i(0, 0));
 		roomPointers.push_back(currentRoom);
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 400; i++)
 		{
 			connectRoom(currentRoom,0);
 		}
@@ -228,7 +315,7 @@ namespace Container
 		currentRoom->update(dt);
 
 		
-		
+		// Förändringar inkomming
 		
 		
 		Player* playerPos = currentRoom->getCurrentEntityHandler()->getPlayer();
