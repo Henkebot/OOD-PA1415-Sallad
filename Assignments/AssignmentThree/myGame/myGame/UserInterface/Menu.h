@@ -19,9 +19,13 @@ public:
 private:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 	void initiateVars();
+	void initiateText();
 private:
 	sf::Texture texture;
 	sf::Sprite wallpaper;
+
+	float alpha;
+
 	sf::Font aFont;
 	sf::Text startGame;
 	sf::Text endGame;

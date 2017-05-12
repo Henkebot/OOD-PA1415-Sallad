@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include <cmath>
 
 Menu::Menu(GameStateManager * gsm) :
 	State(gsm)
@@ -23,8 +24,12 @@ Menu::~Menu()
 void Menu::update(float dt)
 {
 	this->handleEvents();
+	
+	sf::Color aColor(255, 255, 255, static_cast<int>(this->alpha));
+	
+	this->startGame.setFillColor(aColor);
 
-	//Stuff goind down	
+	this->alpha -= dt * 500;
 
 
 }
@@ -71,6 +76,13 @@ void Menu::initiateVars()
 		std::cout << "Failed to load fonts" << std::endl;
 	}
 
+	this->initiateText();
+
+	
+}
+
+void Menu::initiateText()
+{
 	this->startGame.setFont(aFont);
 	this->endGame.setFont(aFont);
 	this->nethack.setFont(aFont);
@@ -83,7 +95,9 @@ void Menu::initiateVars()
 	this->endGame.setCharacterSize(16);
 	this->nethack.setCharacterSize(128);
 
-	this->startGame.setPosition(sf::Vector2f(Application::SCREEN_WIDTH / 2 - (15 * 32)/2, Application::SCREEN_HEIGHT / 2 + 120));
-	this->endGame.setPosition(sf::Vector2f(Application::SCREEN_WIDTH / 2 - (15 * 16)/2, Application::SCREEN_HEIGHT / 2 + 250));
-	this->nethack.setPosition(sf::Vector2f(Application::SCREEN_WIDTH / 2 - (17 * 64)/2, Application::SCREEN_HEIGHT / 2 - 150));
+	this->startGame.setPosition(sf::Vector2f(Application::SCREEN_WIDTH / 2 - (15 * 32) / 2, Application::SCREEN_HEIGHT / 2 + 120));
+	this->endGame.setPosition(sf::Vector2f(Application::SCREEN_WIDTH / 2 - (15 * 16) / 2, Application::SCREEN_HEIGHT / 2 + 250));
+	this->nethack.setPosition(sf::Vector2f(Application::SCREEN_WIDTH / 2 - (17 * 64) / 2, Application::SCREEN_HEIGHT / 2 - 150));
+
+	this->alpha = 255.0;
 }
