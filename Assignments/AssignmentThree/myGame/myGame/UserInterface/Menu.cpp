@@ -24,12 +24,17 @@ Menu::~Menu()
 void Menu::update(float dt)
 {
 	this->handleEvents();
+	timeCollector += dt *3;
 	
+	alpha = (std::sin(timeCollector) * 255);
+	if (alpha < 0) alpha = -alpha;
+	if (alpha > 255) alpha = 255;
+
 	sf::Color aColor(255, 255, 255, static_cast<int>(this->alpha));
 	
 	this->startGame.setFillColor(aColor);
 
-	this->alpha -= dt * 500;
+	//this->alpha -= dt * 500;
 
 
 }
@@ -79,7 +84,7 @@ void Menu::initiateVars()
 	{
 		std::cout << "Failed to load fonts" << std::endl;
 	}
-
+	timeCollector = 0;
 	this->initiateText();
 
 	

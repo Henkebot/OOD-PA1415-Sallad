@@ -20,6 +20,8 @@ private:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 	void initiateVars();
 	void initiateText();
+
+	float timeCollector;
 private:
 	sf::Texture texture;
 	sf::Sprite wallpaper;
