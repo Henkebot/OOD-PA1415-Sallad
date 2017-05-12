@@ -19,7 +19,7 @@ public:
 	sf::Texture getTexture() const; 
 	void setHealth(int health); 
 	int getHealth() const;
-	void setSprite(sf::Texture texture); 
+	void setSprite(sf::Sprite sprite); 
 	sf::Sprite getSprite() const; 
 	virtual void update(float dt) = 0;
 	virtual void create() = 0; 

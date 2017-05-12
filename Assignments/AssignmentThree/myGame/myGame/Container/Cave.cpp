@@ -172,7 +172,7 @@ namespace Container
 
 	Cave::~Cave()
 	{
-		
+		currentRoom->getCurrentEntityHandler().destroyPlayer();
 		int oldSize = roomPointers.size();
 		for (int i = 0; i < oldSize; i++)
 		{
@@ -291,8 +291,10 @@ namespace Container
 		}
 		delete[] spriteArray;
 		//DISKUTERA DENNA
-		EntityHandler* currentEntityHandler = new EntityHandler();
-		currentRoom->setEh(currentEntityHandler);
+		Texture* texture = new Texture();
+		texture->loadFromFile(".\\textures\\player.png");
+		Player* player = new Player(texture);
+		currentRoom->getCurrentEntityHandler().setPlayer(player);
 
 	}
 
@@ -323,40 +325,40 @@ namespace Container
 		// Förändringar inkomming
 		
 		
-		Player* playerPos = currentRoom->getCurrentEntityHandler()->getPlayer();
+		Player* playerPos = currentRoom->getCurrentEntityHandler().getPlayer();
 		//DOOR LEFT (0,5)
 		if ((playerPos->getCoords().x / 64) == 0 && (playerPos->getCoords().y / 64) == 5 && 
 			currentRoom->getLeftD() != nullptr)
 		{
-			EntityHandler* currentH = currentRoom->getCurrentEntityHandler();
+			Player* currentPlayer = currentRoom->getCurrentEntityHandler().getPlayer();
 			currentRoom = currentRoom->getLeftD();
-			currentRoom->setEh(currentH);
-			currentRoom->getCurrentEntityHandler()->getPlayer()->setCoords(sf::Vector2f(18*64, 5*64));
+			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
+			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(18*64, 5*64));
 			
 		} //DOOR UP: (10,0)
 		else if ((playerPos->getCoords().x / 64) == 10 && (playerPos->getCoords().y / 64) == 0 &&
 			currentRoom->getUpD() != nullptr)
 		{
-			EntityHandler* currentH = currentRoom->getCurrentEntityHandler();
+			Player* currentPlayer = currentRoom->getCurrentEntityHandler().getPlayer();
 			currentRoom = currentRoom->getUpD();
-			currentRoom->setEh(currentH);
-			currentRoom->getCurrentEntityHandler()->getPlayer()->setCoords(sf::Vector2f(10 * 64, 9 * 64));
+			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
+			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(10 * 64, 9 * 64));
 		}//DOOR RIGHT: (19,5)
 		else if ((playerPos->getCoords().x / 64) == 19 && (playerPos->getCoords().y / 64) == 5 &&
 			currentRoom->getRightD() != nullptr)
 		{
-			EntityHandler* currentH = currentRoom->getCurrentEntityHandler();
+			Player* currentPlayer = currentRoom->getCurrentEntityHandler().getPlayer();
 			currentRoom = currentRoom->getRightD();
-			currentRoom->setEh(currentH);
-			currentRoom->getCurrentEntityHandler()->getPlayer()->setCoords(sf::Vector2f(1 * 64, 5 * 64));
+			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
+			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(1 * 64, 5 * 64));
 		}//DOOR DOWN: (10,10)
 		else if ((playerPos->getCoords().x / 64) == 10 && (playerPos->getCoords().y / 64) == 10 &&
 			currentRoom->getDownD() != nullptr)
 		{
-			EntityHandler* currentH = currentRoom->getCurrentEntityHandler();
+			Player* currentPlayer = currentRoom->getCurrentEntityHandler().getPlayer();
 			currentRoom = currentRoom->getDownD();
-			currentRoom->setEh(currentH);
-			currentRoom->getCurrentEntityHandler()->getPlayer()->setCoords(sf::Vector2f(10 * 64, 1 * 64));
+			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
+			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(10 * 64, 1 * 64));
 		}
 		
 	}

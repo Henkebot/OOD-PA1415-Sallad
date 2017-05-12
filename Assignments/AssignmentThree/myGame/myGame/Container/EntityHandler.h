@@ -14,13 +14,13 @@ namespace Container
 	{
 	public:
 		EntityHandler();
-		EntityHandler(Vector2f playerCoords);
 		EntityHandler(Player* player);
 		EntityHandler(Player* player, Vector2f playerCoords);
 		~EntityHandler();
 		void update(float dt);
 		Player* getPlayer() const;
-
+		void setPlayer(Player* player);
+		void destroyPlayer();
 	private:
 		//player intraction
 		bool playerMove();

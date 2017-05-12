@@ -24,6 +24,7 @@ public:
 	void setDirection(directions newDirection);
 	directions getDirection() const;
 	sf::Vector2f moveRequest();
+	void copy(Player player);
 };
 
 #endif 
