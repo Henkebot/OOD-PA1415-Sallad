@@ -100,11 +100,16 @@ namespace Container
 	{
 		currentRoom = new Room(numberOfRooms++, 1);
 		roomPointers.push_back(currentRoom);
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 400; i++)
 		{
 			connectRoom(currentRoom,0);
 		}
 		connectRoom(currentRoom, 2);
+
+
+
+		//Sprite Stuff
+
 		sf::Sprite** spriteArray = new sf::Sprite*[20];
 		for (int i = 0; i < 20; i++)
 		{

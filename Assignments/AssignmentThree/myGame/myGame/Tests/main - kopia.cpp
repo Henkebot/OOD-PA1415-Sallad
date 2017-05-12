@@ -1,5 +1,6 @@
 #include <iostream>
-#include "twitterClient.h"
+#include "../Utility/Twitter.h"
+
 int main()
 {
 	twitCurl twitterObj;
