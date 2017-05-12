@@ -18,7 +18,7 @@ namespace Container
 
 		std::string twitterURL;
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-		void connectRoom(Room* rootRoom, int role, int lastRoom = 0); //role is what type of room: 0 Basic, 1 start, 2 end
+		bool connectRoom(Room* rootRoom, int role, int lastRoom = 0); //role is what type of room: 0 Basic, 1 start, 2 end
 	public:
 		Cave();
 		virtual~Cave();

@@ -8,8 +8,9 @@ namespace Container
 		target.draw(*currentRoom);
 	}
 
-	void Cave::connectRoom(Room * rootRoom, int role, int lastRoom)
+	bool Cave::connectRoom(Room * rootRoom, int role, int lastRoom)
 	{
+		bool newRoomCreated = false;
 		int door = rand() % 4;
 		// 0 = up
 		// 1 = right
@@ -48,10 +49,11 @@ namespace Container
 					rootRoom->setUpD(newRoom);
 					newRoom->setDownD(rootRoom);
 					roomPointers.push_back(newRoom);
+					newRoomCreated = true;
 				}
 			}
 			else
-				connectRoom(rootRoom->getUpD(),role, door);
+				newRoomCreated = connectRoom(rootRoom->getUpD(),role, door);
 			break;
 		case 1:
 			if (rootRoom->getRightD() == nullptr)
@@ -83,10 +85,11 @@ namespace Container
 					rootRoom->setRightD(newRoom);
 					newRoom->setLeftD(rootRoom);
 					roomPointers.push_back(newRoom);
+					newRoomCreated = true;
 				}
 			}
 			else
-				connectRoom(rootRoom->getRightD(),role, door);
+				newRoomCreated = connectRoom(rootRoom->getRightD(),role, door);
 			
 			break;
 		case 2:
@@ -118,10 +121,11 @@ namespace Container
 					rootRoom->setDownD(newRoom);
 					newRoom->setUpD(rootRoom);
 					roomPointers.push_back(newRoom);
+					newRoomCreated = true;
 				}
 			}
 			else
-				connectRoom(rootRoom->getDownD(),role, door);
+				newRoomCreated = connectRoom(rootRoom->getDownD(),role, door);
 			break;
 		case 3:
 			if (rootRoom->getLeftD() == nullptr)
@@ -153,13 +157,14 @@ namespace Container
 					rootRoom->setLeftD(newRoom);
 					newRoom->setRightD(rootRoom);
 					roomPointers.push_back(newRoom);
+					newRoomCreated = true;
 				}
 			}
 			else
-				connectRoom(rootRoom->getLeftD(),role, door);
+				newRoomCreated = connectRoom(rootRoom->getLeftD(),role, door);
 			break;
 		}
-
+		return newRoomCreated;
 	}
 
 	Cave::Cave()
@@ -191,7 +196,8 @@ namespace Container
 		{
 			connectRoom(currentRoom,0);
 		}
-		connectRoom(currentRoom, 2);
+		bool lastRoomCreated = false;
+		while (!lastRoomCreated) lastRoomCreated = connectRoom(currentRoom, 2);
 
 
 

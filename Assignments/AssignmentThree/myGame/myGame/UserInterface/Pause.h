@@ -15,8 +15,14 @@ public:
 
 private:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+	void initiateText();
 private:
+	sf::Texture tBg;
+	sf::Sprite sBg;
+
 	sf::Text pause;
+	sf::Text goToGame;
+	sf::Text goToMenu;
 	sf::Font aFont;
 };
 
