@@ -24,7 +24,7 @@ Menu::~Menu()
 void Menu::update(float dt)
 {
 	this->handleEvents();
-	timeCollector += dt *3;
+	timeCollector += dt *4;
 	
 	alpha = (std::sin(timeCollector) * 255);
 	if (alpha < 0) alpha = -alpha;
