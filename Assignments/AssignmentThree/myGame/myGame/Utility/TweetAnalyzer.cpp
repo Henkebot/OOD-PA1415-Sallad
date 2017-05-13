@@ -22,7 +22,7 @@ int TweetAnalyser::getInRoom(const std::string & tweet, Identifier *& inRoom)
 	std::string keyword = "";
 	std::string id = "";
 
-	for (int i = 0; i < nrOfKeywords && keywordsFound <= 50; i++)
+	for (int i = 0; i < nrOfKeywords && keywordsFound < 50; i++)
 	{
 		std::getline(keywords, keyword);
 		std::getline(keywords, id);
@@ -46,7 +46,7 @@ int TweetAnalyser::getInRoom(const std::string & tweet, Identifier *& inRoom)
 			}
 			skipper = 1;
 		}
-		if (found)
+		if (wordFound)
 		{
 			inRoom[keywordsFound - 1].setNewId(id);
 			inRoom[keywordsFound - 1].setNewAmount(nrOfStuffToSpawn);
