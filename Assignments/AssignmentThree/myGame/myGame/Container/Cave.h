@@ -15,7 +15,10 @@ namespace Container
 		
 
 		Room* currentRoom;
-		sf::Texture* tiles;
+		int tilesNumber;
+		sf::Texture* tiles1;
+		sf::Texture* tiles2;
+		sf::Texture* tiles3;
 		int numberOfRooms;
 		std::vector<Room*> roomPointers;
 		Twitter twitterObj;

@@ -4,6 +4,7 @@
 #include "../UserInterface/Application.h"
 namespace Container
 {
+	std::string Room::owner = "";
 	const int Room::SPRITE_SIZE = 64;
 
 	void Room::setEh(EntityHandler eh)
@@ -29,14 +30,15 @@ namespace Container
 		left = right = up = down = nullptr;
 		std::cout << tweet << std::endl;
 		this->tweet = tweet;
-		sf::Font* tweetFont = new sf::Font();
+		tweetFont = new sf::Font();
 		if (!tweetFont->loadFromFile("font/D3Stonism.ttf"))
 			std::cout << "Lol" << std::endl;
 		currentTweet.setFont(*tweetFont);
 		currentTweet.setString("Tweet: " + tweet);
 		currentTweet.setCharacterSize(16);
-		currentTweet.setPosition(sf::Vector2f(150, Application::SCREEN_HEIGHT - 150));
+		currentTweet.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 150));
 		currentTweet.setFillColor(sf::Color::Black);
+
 
 		/*doorDown.setFillColor(sf::Color::Blue);
 		doorDown.setSize(sf::Vector2f(128, 16));
@@ -118,6 +120,16 @@ namespace Container
 		return roomRole;
 	}
 
+	void Room::setOwner(const std::string & owner)
+	{
+		this->owner = owner;
+		tweetOwner.setFont(*tweetFont);
+		tweetOwner.setString("@" + this->owner);
+		tweetOwner.setCharacterSize(20);
+		tweetOwner.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 170));
+		tweetOwner.setFillColor(sf::Color::Black);
+	}
+
 	void Room::setSpriteArray(sf::Sprite ** array)
 	{
 		sf::Sprite** newArray = new sf::Sprite*[20];
@@ -161,6 +173,7 @@ namespace Container
 		}
 		target.draw(*eh.getPlayer());
 		target.draw(currentTweet);
+		target.draw(tweetOwner);
 		/*if(down != nullptr) target.draw(doorDown);
 		if(up != nullptr) target.draw(doorUp);
 		if (right != nullptr) target.draw(doorRight);

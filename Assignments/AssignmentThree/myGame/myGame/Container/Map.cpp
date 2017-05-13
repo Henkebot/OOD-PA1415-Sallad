@@ -10,7 +10,7 @@ namespace Container
 		hudSprite = new sf::Sprite();
 		hudSprite->setTexture(*hudTexture);
 
-		generateCave("");
+		generateCave("PA1415_Sallad");
 	}
 
 	Map::~Map()
