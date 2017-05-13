@@ -2,6 +2,7 @@
 #define ROOM_H
 #include <SFML\Graphics.hpp>
 #include "EntityHandler.h"
+#include <string>
 
 namespace Container
 {
@@ -20,6 +21,8 @@ namespace Container
 		int roomNumber;
 		int roomRole;
 		EntityHandler eh;
+		std::string tweet;
+		sf::Text currentTweet;
 		//DEBUG
 		/*sf::RectangleShape doorLeft;
 		sf::RectangleShape doorRight;
@@ -27,6 +30,9 @@ namespace Container
 		sf::RectangleShape doorDown;*/
 	
 	public:
+		Room(const std::string& tweet, int role = 0);
+		virtual~Room();
+
 		static const int SPRITE_SIZE;
 		void setEh(EntityHandler eh);
 
@@ -34,8 +40,6 @@ namespace Container
 
 		sf::Sprite** spritesArray;
 
-		Room(int number, int role = 0);
-		virtual~Room();
 		
 		sf::Vector2i getCoord() const;
 		void setCoord(const sf::Vector2i & coord);

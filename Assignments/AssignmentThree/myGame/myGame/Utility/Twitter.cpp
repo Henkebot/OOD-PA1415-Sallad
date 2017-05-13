@@ -4,8 +4,9 @@ Twitter::Twitter()
 {
 	this->tweets = nullptr;
 	this->size = 0;
-	std::string theFeed = this->getFeed();
-	this->getTweets(theFeed);
+	succAuth = false;
+	/*std::string theFeed = this->getFeed();
+	this->getTweets(theFeed);*/
 }
 
 Twitter::~Twitter()
@@ -22,6 +23,47 @@ std::string Twitter::getRandomTweet() const
 	if (size == 0) throw "Zero size";
 	std::string aTweet = *this->tweets[rand() % this->size];
 	return aTweet;
+}
+
+bool Twitter::authenticate()
+{
+	twitterObj.setTwitterUsername("PA1415_Sallad");
+	twitterObj.setTwitterPassword("SalladSallad");
+
+	twitterObj.getOAuth().setConsumerKey(std::string("LeDeJ8IzR6KJqmZbz5lZyUjTD"));
+	twitterObj.getOAuth().setConsumerSecret(std::string("syL8i7g3ywcTJXJyzs8qoV3fa2Rp2y7xwI4XTybUY4iV632Umq"));
+
+	twitterObj.getOAuth().setOAuthTokenKey("861520933361766400-k2knHKKE9ZihiJQ9LPiyMRY0MfGS8kp");
+	twitterObj.getOAuth().setOAuthTokenSecret("UdpYdeG7Ussg82YQfXFXDsawozUqAlkeLTOvy2LpXpi33");
+
+	succAuth = twitterObj.accountVerifyCredGet();
+
+	return succAuth;
+}
+
+
+void Twitter::readFeed()
+{
+	if (succAuth)
+	{
+		std::cout << "köres1" << std::endl;
+		std::string timeline = "";
+		//Sista är namnet
+		if (twitterObj.timelineUserGet(true, true, 0))
+			twitterObj.getLastWebResponse(timeline);
+
+		getTweets(timeline);
+	}
+	else
+	{
+		std::cout << "köres2" << std::endl;
+		getTweets(getFeed());
+	}
+}
+
+int Twitter::getNumberOfTweets() const
+{
+	return size;
 }
 
 std::string Twitter::getFeed() const
@@ -78,7 +120,7 @@ void Twitter::getTweets(const std::string & feed)
 				{
 					tweet += feed[k];
 				}
-				std::cout << tweet << std::endl;
+				//std::cout << tweet << std::endl;
 				this->tweets[i] = new std::string(tweet);
 				skipper = 1;
 			}

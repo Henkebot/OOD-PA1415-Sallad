@@ -1,10 +1,17 @@
-#ifndef TWITTERCLIENT_H
-#define TWITTERCLIENT_H
+#pragma once
 #pragma comment(lib, "legacy_stdio_definitions.lib") 
 #include <cstdio>
+
 #include <iostream>
 #include <fstream>
-FILE _iob[] = { *stdin, *stdout, *stderr };
-extern "C" FILE * __cdecl __iob_func(void) { return _iob; }
 #include "../include/twitcurl.h"
-#endif
+
+namespace Twitter
+{
+	void init();
+
+	bool auth();
+
+	std::string getFeed();
+	
+}

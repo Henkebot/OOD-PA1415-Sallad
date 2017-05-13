@@ -7,6 +7,8 @@ Game::Game(GameStateManager * gsm) :
 	this->map.createMap();
 	this->shape.setSize(sf::Vector2f(200, 200));
 	this->shape.setFillColor(sf::Color(255, 100, 55));
+
+	Textures::init();
 }
 
 Game::Game(const Game & other) :

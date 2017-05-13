@@ -1,5 +1,7 @@
 #include "Room.h"
 #include <iostream>
+#include "../Utility/Textures.h"
+#include "../UserInterface/Application.h"
 namespace Container
 {
 	const int Room::SPRITE_SIZE = 64;
@@ -14,10 +16,18 @@ namespace Container
 		return eh;
 	}
 
-	Room::Room(int number, int role)
+	Room::Room(const std::string& tweet, int role)
 	{	
 		roomRole = role;
 		left = right = up = down = nullptr;
+		this->tweet = tweet;
+		sf::Font* tweetFont = new sf::Font();
+		if (!tweetFont->loadFromFile("font/D3Stonism.ttf"))
+			std::cout << "Lol" << std::endl;
+		currentTweet.setFont(*tweetFont);
+		currentTweet.setString("Tweet: " + tweet);
+		currentTweet.setCharacterSize(32);
+		currentTweet.setPosition(sf::Vector2f(10, Application::SCREEN_HEIGHT - 150));
 
 		/*doorDown.setFillColor(sf::Color::Blue);
 		doorDown.setSize(sf::Vector2f(128, 16));
@@ -34,9 +44,6 @@ namespace Container
 		doorLeft.setFillColor(sf::Color::Blue);
 		doorLeft.setSize(sf::Vector2f(16, 128));
 		doorLeft.setPosition(0, 64 * 5);*/
-
-
-		roomNumber = number;
 
 	}
 
@@ -144,6 +151,7 @@ namespace Container
 
 		}
 		target.draw(*eh.getPlayer());
+		target.draw(currentTweet);
 		/*if(down != nullptr) target.draw(doorDown);
 		if(up != nullptr) target.draw(doorUp);
 		if (right != nullptr) target.draw(doorRight);

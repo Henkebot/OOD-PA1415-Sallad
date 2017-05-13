@@ -18,7 +18,10 @@ public:
 	Menu& operator=(const Menu& other);
 private:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+
+private:
 	void initiateVars();
+private:
 	void initiateText();
 
 	float timeCollector;

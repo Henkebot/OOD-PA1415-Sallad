@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include "Room.h"
 #include <vector>
+#include "../Utility/Twitter.h"
 
 namespace Container
 {
@@ -11,10 +12,13 @@ namespace Container
 	class Cave : public sf::Drawable
 	{
 	private:
+		
+
 		Room* currentRoom;
 		sf::Texture* tiles;
 		int numberOfRooms;
 		std::vector<Room*> roomPointers;
+		Twitter twitterObj;
 
 		std::string twitterURL;
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -28,6 +32,8 @@ namespace Container
 
 		
 		void update(float dt);
+
+		static const float SCALE;
 
 
 	};
