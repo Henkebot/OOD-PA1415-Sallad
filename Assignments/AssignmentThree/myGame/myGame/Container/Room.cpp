@@ -18,8 +18,12 @@ namespace Container
 
 	Room::Room(const std::string& tweet, int role)
 	{	
+		//This should be sent to EH (check class /interaction diagram)
 		Identifier* inRoom = nullptr;
 		int size = TweetAnalyser::getInRoom(tweet, inRoom);
+		//remove this delete and move it into EH destructor
+		delete[] inRoom;
+
 		std::cout << tweet << "has " << size << "words" << std::endl;
 		roomRole = role;
 		left = right = up = down = nullptr;

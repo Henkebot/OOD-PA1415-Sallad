@@ -3,12 +3,12 @@
 int TweetAnalyser::getInRoom(const std::string & tweet, Identifier *& inRoom)
 {
 	std::string lowerCaseTweet = TweetAnalyser::toLower(tweet);
-	
 	int nrOfKeywords = 0;
 	int keywordsFound = 0;
 
-	std::string tweetAsOneLine = TweetAnalyser::filterTweet(lowerCaseTweet);
+	inRoom = new Identifier[50];
 
+	std::string tweetAsOneLine = TweetAnalyser::filterTweet(lowerCaseTweet);
 
 	std::ifstream keywords;
 	keywords.open("keywords/keywords.txt");
@@ -22,7 +22,7 @@ int TweetAnalyser::getInRoom(const std::string & tweet, Identifier *& inRoom)
 	std::string keyword = "";
 	std::string id = "";
 
-	for (int i = 0; i < nrOfKeywords; i++)
+	for (int i = 0; i < nrOfKeywords && keywordsFound <= 50; i++)
 	{
 		std::getline(keywords, keyword);
 		std::getline(keywords, id);
@@ -30,12 +30,14 @@ int TweetAnalyser::getInRoom(const std::string & tweet, Identifier *& inRoom)
 		int found = 0;
 		int skipper = 0;
 		bool wordFound = false;
+		int nrOfStuffToSpawn = 0;
 		while (found != -1)
 		{
 			found = tweetAsOneLine.find(keyword, found + skipper);
 			if (found != -1)
 			{
 				std::cout << "Found a keyword! It's a " << id << std::endl;
+				nrOfStuffToSpawn++;
 				if (wordFound == false)
 				{
 					keywordsFound++;
@@ -44,6 +46,12 @@ int TweetAnalyser::getInRoom(const std::string & tweet, Identifier *& inRoom)
 			}
 			skipper = 1;
 		}
+		if (found)
+		{
+			inRoom[keywordsFound - 1].setNewId(id);
+			inRoom[keywordsFound - 1].setNewAmount(nrOfStuffToSpawn);
+		}
+			
 	}
 	keywords.close();
 
