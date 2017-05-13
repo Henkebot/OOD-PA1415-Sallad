@@ -366,8 +366,6 @@ namespace Container
 		
 		Player* playerPos = currentRoom->getCurrentEntityHandler().getPlayer();
 		//DOOR LEFT (0,5)
-		std::cout << (playerPos->getCoords().x / (64 * SCALE)) << " " << doorLeftX << std::endl;
-		std::cout << (playerPos->getCoords().y / (64 * SCALE)) << " " << doorLeftY << std::endl << std::endl;
 		if ((playerPos->getCoords().x / (64 * SCALE)) == doorLeftX && (playerPos->getCoords().y / (64 * SCALE)) == doorLeftY &&
 			currentRoom->getLeftD() != nullptr)
 		{
