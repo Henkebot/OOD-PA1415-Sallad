@@ -4,7 +4,9 @@ Twitter::Twitter()
 {
 	this->tweets = nullptr;
 	this->size = 0;
+
 	succAuth = false;
+
 	/*std::string theFeed = this->getFeed();
 	this->getTweets(theFeed);*/
 }
@@ -49,7 +51,7 @@ void Twitter::readFeed()
 		std::cout << "köres1" << std::endl;
 		std::string timeline = "";
 		//Sista är namnet
-		if (twitterObj.timelineUserGet(true, true, 0))
+		if (twitterObj.timelineUserGet(true, true, 0, "henrikHafboy"))
 			twitterObj.getLastWebResponse(timeline);
 
 		getTweets(timeline);

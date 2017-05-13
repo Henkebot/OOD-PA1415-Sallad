@@ -9,7 +9,8 @@ namespace Container
 	class Map 
 	{
 	private:
-		sf::RectangleShape shape;
+		sf::Texture* hudTexture;
+		sf::Sprite* hudSprite;
 		Cave caves;
 	public:
 		Map();

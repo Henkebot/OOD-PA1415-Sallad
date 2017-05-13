@@ -4,12 +4,19 @@ namespace Container
 
 	Map::Map()
 	{
+		hudTexture = new sf::Texture();
+		if (hudTexture->loadFromFile(".\\textures\\hud.png"))
+			std::cout << "HUD loading" << std::endl;
+		hudSprite = new sf::Sprite();
+		hudSprite->setTexture(*hudTexture);
+
 		generateCave("");
 	}
 
 	Map::~Map()
 	{
-		
+		delete hudTexture;
+		delete hudSprite;
 	}
 
 	void Map::update(float dt)
@@ -19,6 +26,7 @@ namespace Container
 
 	void Map::render(sf::RenderTarget & target) const
 	{
+		target.draw(*hudSprite);
 		target.draw(caves);
 	}
 
