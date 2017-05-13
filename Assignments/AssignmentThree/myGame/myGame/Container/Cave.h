@@ -36,7 +36,6 @@ namespace Container
 		void generateCave();
 		bool selectTwitterFeed(const std::string& user = "");
 		void setSprite(sf::Sprite** spritesArray, float xIndex, float yIndex, int xSheet, int ySheet);
-
 		
 		void update(float dt);
 

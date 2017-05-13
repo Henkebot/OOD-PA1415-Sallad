@@ -23,7 +23,6 @@ namespace Container
 		int size = TweetAnalyser::getInRoom(tweet, inRoom);
 		//remove this delete and move it into EH destructor
 		delete[] inRoom;
-
 		std::cout << tweet << "has " << size << "words" << std::endl;
 		roomRole = role;
 		left = right = up = down = nullptr;
@@ -147,6 +146,16 @@ namespace Container
 	{
 		eh.update(dt);
 		
+	}
+
+	bool* Room::getDoorStatus() const
+	{
+		bool doors[4];
+		doors[0] = (up != nullptr);
+		doors[1] = (right != nullptr);
+		doors[2] = (down != nullptr);
+		doors[3] = (left != nullptr);
+		return doors;
 	}
 
 	void Room::deleteSpriteArray()

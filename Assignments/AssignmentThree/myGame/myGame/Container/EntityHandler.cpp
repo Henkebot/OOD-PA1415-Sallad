@@ -5,21 +5,9 @@ EntityHandler::EntityHandler()
 {
 	player = nullptr;
 	extraCon();
-	for (int i = 0; i < Cave::ROOM_WIDTH; i++)
-	{
-		lineX[i][0].position = sf::Vector2f(i * (Cave::SPRITE_SIZE * Cave::SCALE), 0);
-			lineX[i][0].color = sf::Color::Red;
-			lineX[i][1].position = sf::Vector2f(i * (Cave::SPRITE_SIZE * Cave::SCALE), (Cave::SPRITE_SIZE * Cave::SCALE) *11);
-			lineX[i][1].color = sf::Color::Red;
-	}
-	for (int i = 0; i < Cave::ROOM_HEIGHT; i++)
-	{
-		lineY[i][0].position = sf::Vector2f(0, i * (Cave::SPRITE_SIZE * Cave::SCALE));
-		lineY[i][0].color = sf::Color::Red;
-		lineY[i][1].position = sf::Vector2f(20*(Cave::SPRITE_SIZE * Cave::SCALE),i* (Cave::SPRITE_SIZE * Cave::SCALE) );
-		lineY[i][1].color = sf::Color::Red;
-	}
+	initLines();
 }
+
 EntityHandler::EntityHandler(Player* player)
 {
 	this->player = player;
@@ -132,6 +120,14 @@ void Container::EntityHandler::destroyPlayer()
 	delete player;
 }
 
+void Container::EntityHandler::setDoors(bool * doors)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		doorStatus[i] = doors[i];
+	}
+}
+
 void EntityHandler::handleInput()
 {
 	if (InputManager::keyPressed(sf::Keyboard::Q))
@@ -233,18 +229,42 @@ bool EntityHandler::playerMove()
 		player->pickUpItem(*items[i]);
 		removeItem(i);
 	}
-	return col;
+
+	int width = (20 - 1) * (64 * 0.75f);
+	int height = (11 - 1) * (64 * 0.75f);
+	if (requestedCoords.x == width ||
+		requestedCoords.x == 0 ||
+		requestedCoords.y == height ||
+		requestedCoords.y == 0)
+		col = true;
+	
+	float scale = 0.75f;
+	float spriteSize = 64;
+	float reqIndexX = requestedCoords.x / (scale * spriteSize);
+	float reqIndexY = requestedCoords.y / (scale * spriteSize);
+
+	// DÖRRAR 
+	// VÄNSTER
+	if (reqIndexX == 0 && reqIndexY == 5 && doorStatus[3])
+		col = false;
+	else if (reqIndexX == 10 && reqIndexY == 0 && doorStatus[0]) // UP
+		col = false;
+	else if (reqIndexX == 19 && reqIndexY == 5 && doorStatus[1]) // HÖGER
+		col = false;
+	else if (reqIndexX == 10 && reqIndexY == 10 && doorStatus[2])
+		col = false;
+	return !col;
 }
 
 void EntityHandler::playerTurnUp()
 {
 	if (player->getDirection() == up)
 	{
-		if (playerMove() == true)
+		if (playerMove())
 		{
-			//player->move(0, -1);
+			player->move(0, -1);
 		}
-		player->move(0, -1);//ta bort efter att playerMove är färdig
+		//player->move(0, -1);//ta bort efter att playerMove är färdig
 		
 	}
 	else
@@ -258,11 +278,11 @@ void EntityHandler::playerTurnLeft()
 {
 	if (player->getDirection() == left)
 	{
-		if (playerMove() == true)
+		if (playerMove())
 		{
-			//player->move(-1, 0);
+			player->move(-1, 0);
 		}
-		player->move(-1,0);//ta bort efter att playerMove är färdig
+		//player->move(-1,0);//ta bort efter att playerMove är färdig
 	}
 	else
 	{
@@ -275,11 +295,11 @@ void EntityHandler::playerTurnDown()
 {
 	if (player->getDirection() == down)
 	{
-		if (playerMove() == true)
+		if (playerMove())
 		{
-			//player->move(0, 1);
+			player->move(0, 1);
 		}
-		player->move(0, 1);//ta bort efter att playerMove är färdig
+		//player->move(0, 1);//ta bort efter att playerMove är färdig
 	}
 	else
 	{
@@ -292,11 +312,11 @@ void EntityHandler::playerTurnRight()
 {
 	if (player->getDirection() == right)
 	{
-		if (playerMove() == true)
+		if (playerMove())
 		{
-			//player->move(1, 0);
+			player->move(1, 0);
 		}
-		player->move(1,0);//ta bort efter att playerMove är färdig
+		//player->move(1,0);//ta bort efter att playerMove är färdig
 	}
 	else
 	{
@@ -319,4 +339,22 @@ bool EntityHandler::isFloor(Vector2f coords)
 
 void Container::EntityHandler::removeItem(int index)
 {
+}
+
+void Container::EntityHandler::initLines()
+{
+	for (int i = 0; i < Cave::ROOM_WIDTH; i++)
+	{
+		lineX[i][0].position = sf::Vector2f(i * (Cave::SPRITE_SIZE * Cave::SCALE), 0);
+		lineX[i][0].color = sf::Color::Red;
+		lineX[i][1].position = sf::Vector2f(i * (Cave::SPRITE_SIZE * Cave::SCALE), (Cave::SPRITE_SIZE * Cave::SCALE) * 11);
+		lineX[i][1].color = sf::Color::Red;
+	}
+	for (int i = 0; i < Cave::ROOM_HEIGHT; i++)
+	{
+		lineY[i][0].position = sf::Vector2f(0, i * (Cave::SPRITE_SIZE * Cave::SCALE));
+		lineY[i][0].color = sf::Color::Red;
+		lineY[i][1].position = sf::Vector2f(20 * (Cave::SPRITE_SIZE * Cave::SCALE), i* (Cave::SPRITE_SIZE * Cave::SCALE));
+		lineY[i][1].color = sf::Color::Red;
+	}
 }

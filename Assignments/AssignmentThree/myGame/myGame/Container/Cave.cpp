@@ -344,6 +344,7 @@ namespace Container
 		texture->loadFromFile(".\\textures\\playerCool.png");
 		Player* player = new Player(texture, sf::Vector2f((SPRITE_SIZE*SCALE)*5, 5 * (Cave::SPRITE_SIZE * Cave::SCALE)));
 		currentRoom->getCurrentEntityHandler().setPlayer(player);
+		currentRoom->getCurrentEntityHandler().setDoors(currentRoom->getDoorStatus());
 
 	}
 
@@ -396,6 +397,7 @@ namespace Container
 			currentRoom = currentRoom->getLeftD();
 			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
 			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(18*64*SCALE, 5*64*SCALE));
+			currentRoom->getCurrentEntityHandler().setDoors(currentRoom->getDoorStatus());
 			
 		} //DOOR UP: (10,0)
 		else if ((playerPos->getCoords().x / (64 * SCALE)) == doorUpX && (playerPos->getCoords().y / (64 * SCALE)) == doorUpY &&
@@ -405,6 +407,7 @@ namespace Container
 			currentRoom = currentRoom->getUpD();
 			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
 			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(10 * 64*SCALE, 9 * 64*SCALE));
+			currentRoom->getCurrentEntityHandler().setDoors(currentRoom->getDoorStatus());
 		}//DOOR RIGHT: (19,5)
 		else if ((playerPos->getCoords().x / (64 * SCALE)) == doorRightX && (playerPos->getCoords().y / (64 * SCALE)) == doorRightY &&
 			currentRoom->getRightD() != nullptr)
@@ -413,6 +416,7 @@ namespace Container
 			currentRoom = currentRoom->getRightD();
 			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
 			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(1 * 64*SCALE, 5 * 64*SCALE));
+			currentRoom->getCurrentEntityHandler().setDoors(currentRoom->getDoorStatus());
 		}//DOOR DOWN: (10,10)
 		else if ((playerPos->getCoords().x / (64 * SCALE)) == doorDownX && (playerPos->getCoords().y / (64 * SCALE)) == doorDownX &&
 			currentRoom->getDownD() != nullptr)
@@ -421,6 +425,7 @@ namespace Container
 			currentRoom = currentRoom->getDownD();
 			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
 			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(10 * 64*SCALE, 1 * 64*SCALE));
+			currentRoom->getCurrentEntityHandler().setDoors(currentRoom->getDoorStatus());
 		}
 		
 	}

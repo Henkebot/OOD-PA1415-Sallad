@@ -7,6 +7,7 @@
 #include "../Gameplay/Floor.h"
 #include "../Gameplay/Structure.h"
 #include "../Utility/InputManager.h"
+
 using namespace sf;
 namespace Container
 {
@@ -24,6 +25,8 @@ namespace Container
 
 		void setPlayer(Player* player);
 		void destroyPlayer();
+
+		void setDoors(bool* doors);
 	private:
 		//player intraction
 		bool playerMove();
@@ -57,6 +60,10 @@ namespace Container
 		//DEBUG
 		sf::Vertex lineX[20][2];
 		sf::Vertex lineY[11][2];
+
+		void initLines();
+
+		bool doorStatus[4];
 	};
 }
 

@@ -63,6 +63,8 @@ namespace Container
 		void setSpriteArray(sf::Sprite** array);
 		void update(float dt);
 
+		bool* getDoorStatus() const;
+
 	private:
 
 		void deleteSpriteArray();
@@ -72,7 +74,7 @@ namespace Container
 
 	};
 
-}
+};
 
 #endif
 
