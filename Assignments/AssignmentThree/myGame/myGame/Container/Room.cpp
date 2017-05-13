@@ -20,6 +20,7 @@ namespace Container
 	{	
 		roomRole = role;
 		left = right = up = down = nullptr;
+		std::cout << tweet << std::endl;
 		this->tweet = tweet;
 		sf::Font* tweetFont = new sf::Font();
 		if (!tweetFont->loadFromFile("font/D3Stonism.ttf"))

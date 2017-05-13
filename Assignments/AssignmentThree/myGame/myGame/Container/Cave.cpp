@@ -330,12 +330,12 @@ namespace Container
 
 	}
 
-	bool Cave::selectTwitterFeed(const std::string & URL)
+	bool Cave::selectTwitterFeed(const std::string & user)
 	{
 		bool result = twitterObj.authenticate();
 		if (result)
 		{
-			twitterObj.readFeed();
+			twitterObj.readFeed(user);
 		}
 		return result;
 	}
