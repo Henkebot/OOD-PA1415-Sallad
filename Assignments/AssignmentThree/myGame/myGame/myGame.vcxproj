@@ -64,6 +64,7 @@
     <ClCompile Include="UserInterface\State.cpp" />
     <ClCompile Include="Utility\Identifier.cpp" />
     <ClCompile Include="Utility\InputManager.cpp" />
+    <ClCompile Include="Utility\MasterSpawner.cpp" />
     <ClCompile Include="Utility\Textures.cpp" />
     <ClCompile Include="Utility\TweetAnalyzer.cpp" />
     <ClCompile Include="Utility\Twitter.cpp" />
@@ -105,6 +106,7 @@
     <ClInclude Include="Utility\enums.h" />
     <ClInclude Include="Utility\Identifier.h" />
     <ClInclude Include="Utility\InputManager.h" />
+    <ClInclude Include="Utility\MasterSpawner.h" />
     <ClInclude Include="Utility\Textures.h" />
     <ClInclude Include="Utility\TweetAnalyzer.h" />
     <ClInclude Include="Utility\Twitter.h" />
