@@ -27,8 +27,9 @@ namespace Container
 			std::cout << "Lol" << std::endl;
 		currentTweet.setFont(*tweetFont);
 		currentTweet.setString("Tweet: " + tweet);
-		currentTweet.setCharacterSize(32);
-		currentTweet.setPosition(sf::Vector2f(10, Application::SCREEN_HEIGHT - 150));
+		currentTweet.setCharacterSize(16);
+		currentTweet.setPosition(sf::Vector2f(150, Application::SCREEN_HEIGHT - 150));
+		currentTweet.setFillColor(sf::Color::Black);
 
 		/*doorDown.setFillColor(sf::Color::Blue);
 		doorDown.setSize(sf::Vector2f(128, 16));
