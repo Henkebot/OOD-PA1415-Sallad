@@ -29,7 +29,9 @@
     <ClCompile Include="Utility\Twitter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Utility\TweetAnalyzer.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Tests\test_TweetAnal.cpp" />
+    <ClCompile Include="Utility\Identifier.cpp" />
+    <ClCompile Include="Utility\MasterSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container\Cave.h" />
@@ -70,6 +72,8 @@
     <ClInclude Include="Utility\Twitter.h" />
     <ClInclude Include="Utility\TweetAnalyzer.h" />
     <ClInclude Include="Utility\Identifier.h" />
+    <ClInclude Include="Gameplay\IncludeEntites.h" />
+    <ClInclude Include="Utility\MasterSpawner.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\twitcurl.lib" />

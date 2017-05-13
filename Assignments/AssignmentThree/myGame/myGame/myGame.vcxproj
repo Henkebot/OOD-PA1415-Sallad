@@ -32,7 +32,10 @@
     <ClCompile Include="Gameplay\NonMoveable.cpp" />
     <ClCompile Include="Gameplay\Player.cpp" />
     <ClCompile Include="Gameplay\Structure.cpp" />
-    <ClCompile Include="Main.cpp" />
+   <ClCompile Include="Main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Tests\main - kopia.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -42,6 +45,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Tests\test_Stack.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Tests\test_TweetAnal.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -55,7 +62,9 @@
     <ClCompile Include="UserInterface\Menu.cpp" />
     <ClCompile Include="UserInterface\Pause.cpp" />
     <ClCompile Include="UserInterface\State.cpp" />
+    <ClCompile Include="Utility\Identifier.cpp" />
     <ClCompile Include="Utility\InputManager.cpp" />
+    <ClCompile Include="Utility\MasterSpawner.cpp" />
     <ClCompile Include="Utility\Textures.cpp" />
     <ClCompile Include="Utility\TweetAnalyzer.cpp" />
     <ClCompile Include="Utility\Twitter.cpp" />
@@ -69,6 +78,7 @@
     <ClInclude Include="Gameplay\Enemy.h" />
     <ClInclude Include="Gameplay\Entity.h" />
     <ClInclude Include="Gameplay\Floor.h" />
+    <ClInclude Include="Gameplay\IncludeEntites.h" />
     <ClInclude Include="Gameplay\Item.h" />
     <ClInclude Include="Gameplay\Mob.h" />
     <ClInclude Include="Gameplay\NonMoveable.h" />
@@ -96,6 +106,7 @@
     <ClInclude Include="Utility\enums.h" />
     <ClInclude Include="Utility\Identifier.h" />
     <ClInclude Include="Utility\InputManager.h" />
+    <ClInclude Include="Utility\MasterSpawner.h" />
     <ClInclude Include="Utility\Textures.h" />
     <ClInclude Include="Utility\TweetAnalyzer.h" />
     <ClInclude Include="Utility\Twitter.h" />
