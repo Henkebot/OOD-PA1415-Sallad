@@ -42,6 +42,7 @@ void Player::pickUpItem(Item item)
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+
 	target.draw(this->getSprite(), states); 
 }
 

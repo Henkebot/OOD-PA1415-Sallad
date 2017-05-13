@@ -5,7 +5,6 @@
 namespace Container
 {
 	std::string Room::owner = "";
-	const int Room::SPRITE_SIZE = 64;
 
 	void Room::setEh(EntityHandler eh)
 	{
@@ -167,9 +166,12 @@ namespace Container
 			}
 
 		}
-		target.draw(*eh.getPlayer());
+
+		eh.render(target);
+
 		target.draw(currentTweet);
 		target.draw(tweetOwner);
+
 		/*if(down != nullptr) target.draw(doorDown);
 		if(up != nullptr) target.draw(doorUp);
 		if (right != nullptr) target.draw(doorRight);

@@ -5,6 +5,11 @@ namespace Container
 {
 	const float Cave::SCALE		= 0.75f;
 
+	const int Cave::SPRITE_SIZE = 64;
+	const int Cave::ROOM_WIDTH = 20;
+	const int Cave::ROOM_HEIGHT = 11;
+
+
 	const float doorLeftX		= 0;
 	const float doorLeftY		= 5;
 
@@ -235,14 +240,14 @@ namespace Container
 
 		sf::Sprite** spriteArray = new sf::Sprite*[20];
 		
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < ROOM_WIDTH; i++)
 		{
 			spriteArray[i] = new sf::Sprite[11];
 	
 		}
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < ROOM_WIDTH; i++)
 		{
-			for (int j = 0; j < 11; j++)
+			for (int j = 0; j < ROOM_HEIGHT; j++)
 			{
 				spriteArray[i][j].scale(SCALE, SCALE);
 			}
@@ -252,41 +257,41 @@ namespace Container
 			tilesNumber = rand() % 3;
 	
 			setSprite(spriteArray, 0, 0, 0, 0); // VÄNSTER UPP HÖRN
-			for (float i = 1; i < 19; i++) // TOPPEN
+			for (float i = 1; i < ROOM_WIDTH - 1; i++) // TOPPEN
 			{
 				setSprite(spriteArray, i, 0.0f, 1, 0);
 			}
-			setSprite(spriteArray, 19, 0, 2, 0); // HÖGER UPP HÖRN
-			for (float i = 1; i < 10; i++) // VÄNSTER
+			setSprite(spriteArray, ROOM_WIDTH - 1, 0, 2, 0); // HÖGER UPP HÖRN
+			for (float i = 1; i < ROOM_HEIGHT - 1; i++) // VÄNSTER
 			{
 				setSprite(spriteArray, 0, i, 0, 1);
 			}
-			for (float i = 1; i < 10; i++) // HÖGER
+			for (float i = 1; i < ROOM_HEIGHT - 1; i++) // HÖGER
 			{
-				setSprite(spriteArray, 19, i, 2, 1);
+				setSprite(spriteArray, ROOM_WIDTH - 1, i, 2, 1);
 			}
-			for (float x = 1; x < 19; x++) // MITTEN
+			for (float x = 1; x < ROOM_WIDTH - 1; x++) // MITTEN
 			{
-				for (float y = 1; y < 10; y++)
+				for (float y = 1; y < ROOM_HEIGHT - 1; y++)
 				{
 					setSprite(spriteArray, x, y, 1, 1);
 				}
 			}
-			for (float i = 0; i < 20; i++) // BOTTEN
+			for (float i = 0; i < ROOM_WIDTH; i++) // BOTTEN
 			{
-				setSprite(spriteArray, i, 10, 0, 2);
+				setSprite(spriteArray, i, ROOM_HEIGHT - 1, 0, 2);
 			}
 		
 			//Ladders
 			if (roomPointers.at(i)->getRole() == 1)
 			{
-				setSprite(spriteArray, 10, 5, 3, 1);
-				setSprite(spriteArray, 10, 6, 3, 2);
+				setSprite(spriteArray, ROOM_HEIGHT - 1, 5, 3, 1);
+				setSprite(spriteArray, ROOM_HEIGHT - 1, 6, 3, 2);
 			}
 			else
 			{
-				setSprite(spriteArray, 10, 5, 1, 1);
-				setSprite(spriteArray, 10, 6, 1, 1);
+				setSprite(spriteArray, ROOM_HEIGHT - 1, 5, 1, 1);
+				setSprite(spriteArray, ROOM_HEIGHT - 1, 6, 1, 1);
 			}
 
 			if (roomPointers.at(i)->getRole() == 2)
@@ -302,14 +307,14 @@ namespace Container
 				setSprite(spriteArray, 0, 5, 0, 1);
 
 			if (roomPointers.at(i)->getUpD() != nullptr)
-				setSprite(spriteArray, 10, 0, 2, 2);
+				setSprite(spriteArray, ROOM_HEIGHT - 1, 0, 2, 2);
 			else
-				setSprite(spriteArray, 10, 0, 1, 0);
+				setSprite(spriteArray, ROOM_HEIGHT - 1, 0, 1, 0);
 
 			if (roomPointers.at(i)->getRightD() != nullptr)
-				setSprite(spriteArray, 19, 5, 3, 0);
+				setSprite(spriteArray, ROOM_WIDTH - 1, 5, 3, 0);
 			else
-				setSprite(spriteArray, 19, 5, 2, 1);
+				setSprite(spriteArray, ROOM_WIDTH  -1, 5, 2, 1);
 
 			if (roomPointers.at(i)->getDownD() != nullptr)
 			{
@@ -334,10 +339,10 @@ namespace Container
 			delete[] spriteArray[i];
 		}
 		delete[] spriteArray;
-		//DISKUTERA DENNA
+
 		Texture* texture = new Texture();
-		texture->loadFromFile(".\\textures\\player.png");
-		Player* player = new Player(texture);
+		texture->loadFromFile(".\\textures\\playerCool.png");
+		Player* player = new Player(texture, sf::Vector2f((SPRITE_SIZE*SCALE)*5, 5 * (Cave::SPRITE_SIZE * Cave::SCALE)));
 		currentRoom->getCurrentEntityHandler().setPlayer(player);
 
 	}

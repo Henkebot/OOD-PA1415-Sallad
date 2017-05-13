@@ -4,7 +4,6 @@
     <ClCompile Include="Container\Cave.cpp" />
     <ClCompile Include="Container\Map.cpp" />
     <ClCompile Include="Container\Room.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="UserInterface\Application.cpp" />
     <ClCompile Include="UserInterface\Game.cpp" />
     <ClCompile Include="UserInterface\GameStateManager.cpp" />
@@ -30,7 +29,7 @@
     <ClCompile Include="Utility\Twitter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Utility\TweetAnalyzer.cpp" />
-    <ClCompile Include="Tests\test_TweetAnal.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container\Cave.h" />

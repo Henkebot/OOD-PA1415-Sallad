@@ -11,6 +11,10 @@ namespace Container
 
 	class Cave : public sf::Drawable
 	{
+	public:
+		static const int SPRITE_SIZE;
+		static const int ROOM_WIDTH;
+		static const int ROOM_HEIGHT;
 	private:
 		
 

@@ -19,7 +19,7 @@ namespace Container
 
 		sf::Vector2i coord;
 
-		void deleteSpriteArray();
+		
 		int roomNumber;
 		int roomRole;
 		EntityHandler eh;
@@ -36,7 +36,6 @@ namespace Container
 		Room(const std::string& tweet, int role = 0);
 		virtual~Room();
 
-		static const int SPRITE_SIZE;
 		void setEh(EntityHandler eh);
 
 		EntityHandler& getCurrentEntityHandler();
@@ -65,7 +64,8 @@ namespace Container
 		void update(float dt);
 
 	private:
-		
+
+		void deleteSpriteArray();
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	

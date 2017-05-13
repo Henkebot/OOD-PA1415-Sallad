@@ -17,8 +17,11 @@ namespace Container
 		EntityHandler(Player* player);
 		EntityHandler(Player* player, Vector2f playerCoords);
 		~EntityHandler();
+
 		void update(float dt);
+		void render(sf::RenderTarget& target) const;
 		Player* getPlayer() const;
+
 		void setPlayer(Player* player);
 		void destroyPlayer();
 	private:
@@ -50,6 +53,10 @@ namespace Container
 		int nrOfItems;
 
 		bool playersTurn;
+
+		//DEBUG
+		sf::Vertex lineX[20][2];
+		sf::Vertex lineY[11][2];
 	};
 }
 

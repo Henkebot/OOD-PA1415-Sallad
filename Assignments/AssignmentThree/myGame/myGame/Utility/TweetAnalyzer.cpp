@@ -94,7 +94,3 @@ std::string TweetAnalyser::toLower(const std::string & tweet)
 	return lower;
 }
 
-int TweetAnalyser::getNrOfWords(const std::string & tweet)
-{
-	return 0;
-}

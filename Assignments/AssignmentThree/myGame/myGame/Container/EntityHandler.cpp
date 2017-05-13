@@ -1,10 +1,24 @@
 #include "EntityHandler.h"
 using namespace Container;
-
+#include "Cave.h"
 EntityHandler::EntityHandler()
 {
 	player = nullptr;
 	extraCon();
+	for (int i = 0; i < Cave::ROOM_WIDTH; i++)
+	{
+		lineX[i][0].position = sf::Vector2f(i * (Cave::SPRITE_SIZE * Cave::SCALE), 0);
+			lineX[i][0].color = sf::Color::Red;
+			lineX[i][1].position = sf::Vector2f(i * (Cave::SPRITE_SIZE * Cave::SCALE), (Cave::SPRITE_SIZE * Cave::SCALE) *11);
+			lineX[i][1].color = sf::Color::Red;
+	}
+	for (int i = 0; i < Cave::ROOM_HEIGHT; i++)
+	{
+		lineY[i][0].position = sf::Vector2f(0, i * (Cave::SPRITE_SIZE * Cave::SCALE));
+		lineY[i][0].color = sf::Color::Red;
+		lineY[i][1].position = sf::Vector2f(20*(Cave::SPRITE_SIZE * Cave::SCALE),i* (Cave::SPRITE_SIZE * Cave::SCALE) );
+		lineY[i][1].color = sf::Color::Red;
+	}
 }
 EntityHandler::EntityHandler(Player* player)
 {
@@ -90,6 +104,17 @@ void EntityHandler::update(float dt)
 			}*/
 		}
 	}
+}
+
+void Container::EntityHandler::render(sf::RenderTarget & target) const
+{
+	target.draw(*player);
+	for (int i = 0; i < Cave::ROOM_WIDTH; i++)
+		target.draw(lineX[i], 2, sf::Lines);	
+	for (int i = 0; i < Cave::ROOM_HEIGHT; i++)
+		target.draw(lineY[i], 2, sf::Lines);
+
+	
 }
 
 Player * Container::EntityHandler::getPlayer() const
@@ -220,10 +245,12 @@ void EntityHandler::playerTurnUp()
 			//player->move(0, -1);
 		}
 		player->move(0, -1);//ta bort efter att playerMove är färdig
+		
 	}
 	else
 	{
 		player->setDirection(up);
+		player->setCurrentSpriteFrame(0, 0);
 	}
 }
 
@@ -240,6 +267,7 @@ void EntityHandler::playerTurnLeft()
 	else
 	{
 		player->setDirection(left);
+		player->setCurrentSpriteFrame(0, 3);
 	}
 }
 
@@ -255,6 +283,7 @@ void EntityHandler::playerTurnDown()
 	}
 	else
 	{
+		player->setCurrentSpriteFrame(0, 2);
 		player->setDirection(down);
 	}
 }
@@ -271,6 +300,7 @@ void EntityHandler::playerTurnRight()
 	}
 	else
 	{
+		player->setCurrentSpriteFrame(0, 1);
 		player->setDirection(right);
 	}
 }
