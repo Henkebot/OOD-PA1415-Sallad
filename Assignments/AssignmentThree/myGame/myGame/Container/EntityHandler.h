@@ -21,11 +21,12 @@ namespace Container
 
 		void update(float dt);
 		void render(sf::RenderTarget& target) const;
+
 		Player* getPlayer() const;
 
 		void setPlayer(Player* player);
 		void destroyPlayer();
-
+		
 		void setDoors(bool* doors);
 	private:
 		//player intraction

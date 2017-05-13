@@ -15,21 +15,7 @@ namespace Container
 		static const int SPRITE_SIZE;
 		static const int ROOM_WIDTH;
 		static const int ROOM_HEIGHT;
-	private:
-		
-
-		Room* currentRoom;
-		int tilesNumber;
-		sf::Texture* tiles1;
-		sf::Texture* tiles2;
-		sf::Texture* tiles3;
-		int numberOfRooms;
-		std::vector<Room*> roomPointers;
-		Twitter twitterObj;
-
-		std::string twitterUser;
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-		bool connectRoom(Room* rootRoom, int role, int lastRoom = 0); //role is what type of room: 0 Basic, 1 start, 2 end
+	
 	public:
 		Cave();
 		virtual~Cave();
@@ -40,6 +26,24 @@ namespace Container
 		void update(float dt);
 
 		static const float SCALE;
+	private:
+
+
+		Room* currentRoom;
+		int tilesNumber;
+		sf::Texture* tiles1;
+		sf::Texture* tiles2;
+		sf::Texture* tiles3;
+		int numberOfRooms;
+		std::vector<Room*> roomPointers;
+		Twitter twitterObj;
+
+		void applyRoomTextures();
+		void changeRoom(Room* newRoom, int startX, int startY);
+		void checkDoors();
+		std::string twitterUser;
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+		bool connectRoom(Room* rootRoom, int role, int lastRoom = 0); //role is what type of room: 0 Basic, 1 start, 2 end
 
 
 	};

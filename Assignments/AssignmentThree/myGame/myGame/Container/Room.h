@@ -19,7 +19,6 @@ namespace Container
 
 		sf::Vector2i coord;
 
-		
 		int roomNumber;
 		int roomRole;
 		EntityHandler eh;
