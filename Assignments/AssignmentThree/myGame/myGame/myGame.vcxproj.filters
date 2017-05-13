@@ -4,6 +4,7 @@
     <ClCompile Include="Container\Cave.cpp" />
     <ClCompile Include="Container\Map.cpp" />
     <ClCompile Include="Container\Room.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="UserInterface\Application.cpp" />
     <ClCompile Include="UserInterface\Game.cpp" />
     <ClCompile Include="UserInterface\GameStateManager.cpp" />

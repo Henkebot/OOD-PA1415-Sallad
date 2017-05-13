@@ -34,6 +34,8 @@ void Game::handleEvents()
 {
 	if (InputManager::keyPressed(sf::Keyboard::Escape))
 	{
+		sf::Image gameScreen;
+		
 		this->gsm->pushState(new Pause(this->gsm));
 		std::cout << "Pause pushed\n";
 	}

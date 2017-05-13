@@ -105,9 +105,9 @@ void Menu::initiateText()
 	this->endGame.setCharacterSize(16);
 	this->nethack.setCharacterSize(128);
 
-	this->startGame.setPosition(sf::Vector2f(Application::SCREEN_WIDTH / 2 - (15 * 32) / 2, Application::SCREEN_HEIGHT / 2 + 120));
-	this->endGame.setPosition(sf::Vector2f(Application::SCREEN_WIDTH / 2 - (15 * 16) / 2, Application::SCREEN_HEIGHT / 2 + 250));
-	this->nethack.setPosition(sf::Vector2f(Application::SCREEN_WIDTH / 2 - (17 * 64) / 2, Application::SCREEN_HEIGHT / 2 - 150));
+	this->startGame.setPosition(sf::Vector2f(static_cast<float>(Application::SCREEN_WIDTH) / 2 - (15 * 32) / 2, static_cast<float>(Application::SCREEN_HEIGHT) / 2 + 120));
+	this->endGame.setPosition(sf::Vector2f(static_cast<float>(Application::SCREEN_WIDTH) / 2 - (15 * 16) / 2, static_cast<float>(Application::SCREEN_HEIGHT) / 2 + 250));
+	this->nethack.setPosition(sf::Vector2f(static_cast<float>(Application::SCREEN_WIDTH) / 2 - (17 * 64) / 2, static_cast<float>(Application::SCREEN_HEIGHT) / 2 - 150));
 
 	this->alpha = 255.0;
 }

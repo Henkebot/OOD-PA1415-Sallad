@@ -21,7 +21,6 @@ Application::~Application()
 void Application::run()
 {
 	this->gsm->pushState(new Menu(this->gsm));
-	
 	sf::Clock clock;
 
 	while (this->window.isOpen())
