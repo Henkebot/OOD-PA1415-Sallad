@@ -22,6 +22,8 @@ public:
 	int getNumberOfTweets() const;
 	std::string* getAllTweets() const;
 
+	std::string getUser() const;
+
 private:
 	std::string getFeed() const; //Import the the feed from file and return the string
 
@@ -33,6 +35,7 @@ private:
 	int size;
 	twitCurl twitterObj;
 	bool succAuth;
+	std::string user;
 
 };
 

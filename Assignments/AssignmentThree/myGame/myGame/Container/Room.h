@@ -21,14 +21,15 @@ namespace Container
 		int roomNumber;
 		int roomRole;
 		EntityHandler eh;
+
+		sf::Font* tweetFont;
+
+		static std::string owner;
+		sf::Text tweetOwner;
+
 		std::string tweet;
 		sf::Text currentTweet;
-		//DEBUG
-		/*sf::RectangleShape doorLeft;
-		sf::RectangleShape doorRight;
-		sf::RectangleShape doorUp;
-		sf::RectangleShape doorDown;*/
-	
+		
 	public:
 		Room(const std::string& tweet, int role = 0);
 		virtual~Room();
@@ -55,6 +56,8 @@ namespace Container
 		Room* getDownD() const;
 
 		int getRole() const;
+
+		void setOwner(const std::string& owner);
 
 		void setSpriteArray(sf::Sprite** array);
 		void update(float dt);
