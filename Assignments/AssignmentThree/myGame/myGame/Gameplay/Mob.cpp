@@ -44,6 +44,46 @@ sf::Vector2f Mob::interact()
 	return sf::Vector2f(0, 0);
 }
 
+bool Mob::getIsAllowedLeft()
+{
+	return this->isAllowedLeft; 
+}
+
+void Mob::setIsAllowedLeft(bool isAllowed)
+{
+	this->isAllowedLeft = isAllowed; 
+}
+
+bool Mob::getIsAllowedRight()
+{
+	return this->isAllowedRight; 
+}
+
+void Mob::setIsAllowedRight(bool isAllowed)
+{
+	this->isAllowedRight = isAllowed;
+}
+
+bool Mob::getIsAllowedUp()
+{
+	return this->isAllowedUp; 
+}
+
+void Mob::setIsAllowedUp(bool isAllowed)
+{
+	this->isAllowedUp = isAllowed; 
+}
+
+bool Mob::getIsAllowedDown()
+{
+	return this->isAllowedDown; 
+}
+
+void Mob::setIsAllowedDown(bool isAllowed)
+{
+	this->isAllowedDown = isAllowed; 
+}
+
 //Rätt uppfattat? 
 bool Mob::isDead() const
 {

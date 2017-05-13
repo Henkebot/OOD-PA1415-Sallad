@@ -31,7 +31,9 @@
     <ClCompile Include="Gameplay\Mob.cpp" />
     <ClCompile Include="Gameplay\NonMoveable.cpp" />
     <ClCompile Include="Gameplay\Player.cpp" />
+    <ClCompile Include="Gameplay\Stats.cpp" />
     <ClCompile Include="Gameplay\Structure.cpp" />
+    <ClCompile Include="Gameplay\Zombie.cpp" />
     <ClCompile Include="main - kopia.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -76,7 +78,9 @@
     <ClInclude Include="Gameplay\Mob.h" />
     <ClInclude Include="Gameplay\NonMoveable.h" />
     <ClInclude Include="Gameplay\Player.h" />
+    <ClInclude Include="Gameplay\Stats..h" />
     <ClInclude Include="Gameplay\Structure.h" />
+    <ClInclude Include="Gameplay\Zombie.h" />
     <ClInclude Include="include\curl\curl.h" />
     <ClInclude Include="include\curl\curlbuild.h" />
     <ClInclude Include="include\curl\curlrules.h" />

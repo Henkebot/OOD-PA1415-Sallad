@@ -17,7 +17,8 @@ void Enemy::create()
 
 void Enemy::update(float dt)
 {
-
+	this->setTileXIndex(this->getSprite().getPosition().x / 64);
+	this->setTileXIndex(this->getSprite().getPosition().y / 64);
 }
 
 void Enemy::draw(sf::RenderTarget& target, sf::RenderStates states) const

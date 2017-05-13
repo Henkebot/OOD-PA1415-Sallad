@@ -9,6 +9,8 @@ private:
 	int health; 
 	sf::Sprite sprite;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	int tileX;
+	int tileY; 
 
 public:
 	Entity(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0,0), int health = 0); 
@@ -20,7 +22,11 @@ public:
 	void setHealth(int health); 
 	int getHealth() const;
 	void setSprite(sf::Sprite sprite); 
-	sf::Sprite getSprite() const; 
+	sf::Sprite getSprite() const;
+	void setTileXIndex(int tileX); 
+	int getTileXIndex();
+	void setTileYIndex(int tileY); 
+	int getTileYIndex(); 
 	virtual void update(float dt) = 0;
 	virtual void create() = 0; 
 };

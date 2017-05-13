@@ -5,7 +5,10 @@
 class Mob : public Entity
 {
 private:
-
+	bool isAllowedLeft; 
+	bool isAllowedRight; 
+	bool isAllowedUp; 
+	bool isAllowedDown; 
 public:
 	Mob(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0,0) , int health = 0);
 	~Mob(); 
@@ -16,6 +19,14 @@ public:
 	void getStats() const; 
 	void setPos(sf::Vector2f coords); 
 	virtual sf::Vector2f interact() = 0; 
+	bool getIsAllowedLeft(); 
+	void setIsAllowedLeft(bool isAllowed); 
+	bool getIsAllowedRight(); 
+	void setIsAllowedRight(bool isAllowed); 
+	bool getIsAllowedUp(); 
+	void setIsAllowedUp(bool isAllowed); 
+	bool getIsAllowedDown(); 
+	void setIsAllowedDown(bool isAllowed); 
 	bool isDead() const; 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
