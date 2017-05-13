@@ -22,10 +22,10 @@ namespace Container
 		target.draw(caves);
 	}
 
-	void Map::generateCave(const std::string & url)
+	void Map::generateCave(const std::string & user)
 	{
 		std::cout << "Authenticating twitter..." << std::endl;
-		if (caves.selectTwitterFeed(url))
+		if (caves.selectTwitterFeed(user))
 			std::cout << "Succesfully authenticated!" << std::endl;
 		else
 			std::cout << "Failed to authenticate, will use local feed!" << std::endl;

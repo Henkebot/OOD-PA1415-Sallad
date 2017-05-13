@@ -11,17 +11,28 @@ Twitter::Twitter()
 
 Twitter::~Twitter()
 {
-	for (int i = 0; i < this->size; i++)
-	{
-		delete this->tweets[i];
-	}
 	delete[] this->tweets;
 }
 
 std::string Twitter::getRandomTweet() const
 {
 	if (size == 0) throw "Zero size";
-	std::string aTweet = *this->tweets[rand() % this->size];
+	bool foundTweet = false;
+	const bool NOT_USED = false;
+	std::string aTweet = "";
+
+	while (!foundTweet)
+	{
+		int index = rand() % this->size;
+		if (this->usedTweets[index] == NOT_USED)
+		{
+			foundTweet = true;
+			aTweet = this->tweets[index];
+			this->usedTweets[index] = true;
+		}
+
+	}
+
 	return aTweet;
 }
 
@@ -42,14 +53,14 @@ bool Twitter::authenticate()
 }
 
 
-void Twitter::readFeed()
+void Twitter::readFeed(const std::string user, int maxAmountOfRooms)
 {
 	if (succAuth)
 	{
 		std::cout << "köres1" << std::endl;
 		std::string timeline = "";
 		//Sista är namnet
-		if (twitterObj.timelineUserGet(true, true, 0))
+		if (twitterObj.timelineUserGet(false, true, maxAmountOfRooms, user))
 			twitterObj.getLastWebResponse(timeline);
 
 		getTweets(timeline);
@@ -64,6 +75,11 @@ void Twitter::readFeed()
 int Twitter::getNumberOfTweets() const
 {
 	return size;
+}
+
+std::string * Twitter::getAllTweets() const
+{
+	return new std::string(*this->tweets);
 }
 
 std::string Twitter::getFeed() const
@@ -104,10 +120,12 @@ void Twitter::getTweets(const std::string & feed)
 			skipper = 1;
 		}
 		nrOfTweets--;
+		std::cout << "nrOfTweets:" << nrOfTweets << std::endl;
 		if (nrOfTweets != 0)
 		{
 			this->size = nrOfTweets;
-			this->tweets = new std::string*[this->size];
+			this->tweets = new std::string[this->size];
+			this->usedTweets = new bool[this->size]{ false };
 			int startIndex = 0;
 			int endIndex = 0;
 			skipper = 0;
@@ -121,10 +139,11 @@ void Twitter::getTweets(const std::string & feed)
 					tweet += feed[k];
 				}
 				//std::cout << tweet << std::endl;
-				this->tweets[i] = new std::string(tweet);
+				this->tweets[i] = std::string(tweet);
 				skipper = 1;
 			}
 		}
+
 	}
 	
 }

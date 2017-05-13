@@ -60,6 +60,7 @@
     <ClCompile Include="UserInterface\State.cpp" />
     <ClCompile Include="Utility\InputManager.cpp" />
     <ClCompile Include="Utility\Textures.cpp" />
+    <ClCompile Include="Utility\TweetAnalyzer.cpp" />
     <ClCompile Include="Utility\Twitter.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -96,8 +97,10 @@
     <ClInclude Include="UserInterface\Stack.h" />
     <ClInclude Include="UserInterface\State.h" />
     <ClInclude Include="Utility\enums.h" />
+    <ClInclude Include="Utility\Identifier.h" />
     <ClInclude Include="Utility\InputManager.h" />
     <ClInclude Include="Utility\Textures.h" />
+    <ClInclude Include="Utility\TweetAnalyzer.h" />
     <ClInclude Include="Utility\Twitter.h" />
   </ItemGroup>
   <ItemGroup>
