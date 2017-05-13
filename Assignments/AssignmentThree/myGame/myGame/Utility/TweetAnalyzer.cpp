@@ -85,7 +85,7 @@ std::string TweetAnalyser::toLower(const std::string & tweet)
 {
 	std::string lower = "";
 
-	for (int i = 0; i < tweet.length(); i++)
+	for (int i = 0; i < static_cast<int>(tweet.length()); i++)
 	{
 		if (static_cast<int>(tweet[i]) >= 64 && static_cast<int>(tweet[i] < 90))
 		{
@@ -100,9 +100,4 @@ std::string TweetAnalyser::toLower(const std::string & tweet)
 
 
 	return lower;
-}
-
-int TweetAnalyser::getNrOfWords(const std::string & tweet)
-{
-	return 0;
 }
