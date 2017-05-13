@@ -3,6 +3,8 @@
 #include <SFML\Graphics.hpp>
 #include "EntityHandler.h"
 #include <string>
+#include "../Utility/TweetAnalyzer.h"
+#include "../Utility/Identifier.h"
 
 namespace Container
 {
