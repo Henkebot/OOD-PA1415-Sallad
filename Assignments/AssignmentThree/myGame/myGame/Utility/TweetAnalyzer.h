@@ -3,12 +3,15 @@
 #include "Identifier.h"
 #include <string>
 #include <algorithm>
-static class TweetAnalyser
+#include <iostream>
+#include <fstream>
+class TweetAnalyser
 {
 public:
 	static int getInRoom(const std::string & tweet, Identifier *& inRoom);
 private:
-	static int getNrOfWords(const std::string & tweet);
+	static std::string filterTweet(const std::string & tweet);
+	static std::string toLower(const std::string & tweet);
 };
 
 

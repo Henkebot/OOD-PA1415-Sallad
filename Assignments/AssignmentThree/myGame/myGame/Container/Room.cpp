@@ -18,6 +18,9 @@ namespace Container
 
 	Room::Room(const std::string& tweet, int role)
 	{	
+		Identifier* inRoom = nullptr;
+		int size = TweetAnalyser::getInRoom(tweet, inRoom);
+		std::cout << tweet << "has " << size << "words" << std::endl;
 		roomRole = role;
 		left = right = up = down = nullptr;
 		std::cout << tweet << std::endl;

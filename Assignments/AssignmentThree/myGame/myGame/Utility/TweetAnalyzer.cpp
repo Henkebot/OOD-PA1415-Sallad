@@ -2,34 +2,94 @@
 
 int TweetAnalyser::getInRoom(const std::string & tweet, Identifier *& inRoom)
 {
-	int nrOfWords = TweetAnalyser::getNrOfWords(tweet);
-	std::string lowerCaseTweet = tweet;
-	std::transform(lowerCaseTweet.begin(), lowerCaseTweet.end(), lowerCaseTweet.begin(), ::tolower);
-	return 0;
+	std::string lowerCaseTweet = TweetAnalyser::toLower(tweet);
+	
+	int nrOfKeywords = 0;
+	int keywordsFound = 0;
+
+	std::string tweetAsOneLine = TweetAnalyser::filterTweet(lowerCaseTweet);
+
+
+	std::ifstream keywords;
+	keywords.open("keywords/keywords.txt");
+	if (!keywords)
+	{
+		//do stuff
+	}
+	keywords >> nrOfKeywords;
+	keywords.ignore();
+
+	std::string keyword = "";
+	std::string id = "";
+
+	for (int i = 0; i < nrOfKeywords; i++)
+	{
+		std::getline(keywords, keyword);
+		std::getline(keywords, id);
+
+		int found = 0;
+		int skipper = 0;
+		bool wordFound = false;
+		while (found != -1)
+		{
+			found = tweetAsOneLine.find(keyword, found + skipper);
+			if (found != -1)
+			{
+				std::cout << "Found a keyword! It's a " << id << std::endl;
+				if (wordFound == false)
+				{
+					keywordsFound++;
+					wordFound = true;
+				}
+			}
+			skipper = 1;
+		}
+	}
+	keywords.close();
+
+	return nrOfKeywords;
 }
 
-int TweetAnalyser::getNrOfWords(const std::string & tweet)
+std::string TweetAnalyser::filterTweet(const std::string & tweet)
 {
-	int nSpaces = 0;
-	unsigned int i = 0;
+	//this function filters the tweet from unwanted chars.
+	char chars[] = "abcdefghijklmnopqrstuvwxyz1234567890";
+	int length = tweet.length();
+	std::string str = "";
+	bool found = false;
 
-	// Skip over spaces at the beginning of the word
-	while (isspace(tweet.at(i)))
-		i++;
-
-	for (; i < tweet.length(); i++)
+	for (int i = 0; i < length; i++)
 	{
-		if (isspace(tweet.at(i)))
+		found = false;
+		for (int k = 0; k < 36 && !found; k++)
 		{
-			nSpaces++;
+			if (tweet[i] == chars[k])
+			{
+				found = true;
+				str += chars[k];
+			}
+		}
+	}
+	return str;
+}
 
-			// Skip over duplicate spaces & if a NULL character is found, we're at the end of the string
-			while (isspace(tweet.at(i++)))
-				if (tweet.at(i) == '\0')
-					nSpaces--;
+std::string TweetAnalyser::toLower(const std::string & tweet)
+{
+	std::string lower = "";
+
+	for (int i = 0; i < tweet.length(); i++)
+	{
+		if (static_cast<int>(tweet[i]) >= 64 && static_cast<int>(tweet[i] < 90))
+		{
+			char c = static_cast<int>(tweet[i]) + 32;
+			lower += c;
+		}
+		else
+		{
+			lower += tweet[i];
 		}
 	}
 
-	// The number of words = the number of spaces + 1
-	return nSpaces + 1;
+
+	return lower;
 }
