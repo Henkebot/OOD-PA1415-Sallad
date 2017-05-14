@@ -36,7 +36,6 @@ void Entity::setTexture(const sf::Texture& texture)
 void Entity::setCurrentSpriteFrame(int x, int y)
 {
 	sprite.setTextureRect(sf::IntRect(Container::Cave::SPRITE_SIZE * x, Container::Cave::SPRITE_SIZE * y, Container::Cave::SPRITE_SIZE, Container::Cave::SPRITE_SIZE));
-		
 }
 
 sf::Texture Entity::getTexture() const

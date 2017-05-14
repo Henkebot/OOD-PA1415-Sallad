@@ -2,7 +2,27 @@
 #include <iostream>
 Mob::Mob(sf::Texture* texture, sf::Vector2f coords, int health) : Entity(texture,coords,health)
 {
-
+	int startDirection = (rand() % 4) + 1; 
+	if (startDirection == 1)
+	{
+		this->m_direction = directions::up; 
+		this->setCurrentSpriteFrame(0, 0);
+	}
+	else if (startDirection == 2)
+	{
+		this->m_direction = directions::right;
+		this->setCurrentSpriteFrame(0, 1);
+	}
+	else if (startDirection == 3)
+	{
+		this->m_direction = directions::down;
+		this->setCurrentSpriteFrame(0, 2);
+	}
+	else
+	{
+		this->m_direction = directions::left; 
+		this->setCurrentSpriteFrame(0, 3);
+	}
 }
 
 Mob::~Mob()
@@ -17,7 +37,28 @@ sf::Vector2f Mob::attack()
 
 sf::Vector2f Mob::moveRequest()
 {
-	return sf::Vector2f(0, 0);
+	sf::Vector2f request = getCoords();
+	// MÅSTE FIXA DETTA
+
+	float tile = 0.75f * 64;
+
+	if (m_direction == up)
+	{
+		request.y -= tile;
+	}
+	else if (m_direction == left)
+	{
+		request.x -= tile;
+	}
+	else if (m_direction == down)
+	{
+		request.y += tile;
+	}
+	else if (m_direction == right)
+	{
+		request.x += tile;
+	}
+	return request;
 }
 
 void Mob::move(int xDir, int yDir)
@@ -31,6 +72,16 @@ void Mob::move(int xDir, int yDir)
 void Mob::getStats() const
 {
 
+}
+
+void Mob::setDirection(directions direction)
+{
+	this->m_direction = direction;
+}
+
+directions Mob::getDirection()
+{
+	return this->m_direction; 
 }
 
 //Är detta rätt uppfattat?
@@ -93,6 +144,12 @@ bool Mob::isDead() const
 		isDead = true;
 	}
 	return isDead; 
+}
+
+void Mob::update(float dt)
+{
+	sf::Vector2f newPos = this->moveRequest();
+	this->move(newPos.x, newPos.y); 
 }
 
 void Mob::draw(sf::RenderTarget& target, sf::RenderStates states) const

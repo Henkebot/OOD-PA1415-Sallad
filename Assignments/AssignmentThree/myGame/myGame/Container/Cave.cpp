@@ -379,7 +379,7 @@ namespace Container
 
 		Texture* texture = new Texture();
 		texture->loadFromFile(".\\textures\\playerCool.png");
-		Player* player = new Player(texture, sf::Vector2f((SPRITE_SIZE*SCALE)*5, 5 * (Cave::SPRITE_SIZE * Cave::SCALE)));
+		Player* player = new Player(texture, sf::Vector2f((SPRITE_SIZE*SCALE)*6, 5 * (Cave::SPRITE_SIZE * Cave::SCALE)));
 
 		currentRoom->getCurrentEntityHandler().setPlayer(player);
 		currentRoom->getCurrentEntityHandler().setDoors(currentRoom->getDoorStatus());

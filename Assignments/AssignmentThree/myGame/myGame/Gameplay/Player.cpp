@@ -2,7 +2,6 @@
 #include <iostream>
 Player::Player(sf::Texture* texture, sf::Vector2f coords, int health) : Mob(texture,coords,health)
 {
-	direction = up;
 }
 
 Player::~Player()

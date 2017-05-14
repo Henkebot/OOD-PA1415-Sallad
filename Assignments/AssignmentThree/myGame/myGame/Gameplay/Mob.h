@@ -9,6 +9,7 @@ private:
 	bool isAllowedRight; 
 	bool isAllowedUp; 
 	bool isAllowedDown; 
+	directions m_direction;
 public:
 	Mob(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0,0) , int health = 0);
 	~Mob(); 
@@ -26,8 +27,11 @@ public:
 	bool getIsAllowedUp(); 
 	void setIsAllowedUp(bool isAllowed); 
 	bool getIsAllowedDown(); 
-	void setIsAllowedDown(bool isAllowed); 
+	void setIsAllowedDown(bool isAllowed);
+	directions getDirection(); 
+	void setDirection(directions direction); 
 	bool isDead() const; 
+	void update(float dt);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
