@@ -17,7 +17,7 @@ public:
 
 	// If the authentication fails it will use the local feed instead!
 	bool authenticate(); 
-	void readFeed(const std::string user = "", int maxAmountOfRooms = 0);
+	void readFeed(const std::string& user = "", int maxAmountOfRooms = 0);
 
 	int getNumberOfTweets() const;
 	std::string* getAllTweets() const;

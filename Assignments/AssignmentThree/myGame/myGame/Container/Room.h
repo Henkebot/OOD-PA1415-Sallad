@@ -18,8 +18,6 @@ namespace Container
 		Room* down;
 
 		sf::Vector2i coord;
-
-		int roomNumber;
 		int roomRole;
 		EntityHandler eh;
 
@@ -30,6 +28,7 @@ namespace Container
 
 		std::string tweet;
 		sf::Text currentTweet;
+		sf::Sprite** spritesArray;
 		
 	public:
 		Room(const std::string& tweet, int role = 0);
@@ -39,7 +38,6 @@ namespace Container
 
 		EntityHandler& getCurrentEntityHandler();
 
-		sf::Sprite** spritesArray;
 
 		
 		sf::Vector2i getCoord() const;

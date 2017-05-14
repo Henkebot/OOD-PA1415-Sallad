@@ -28,7 +28,7 @@ sf::Vector2f Entity::getCoords() const
 	return this->coords;
 }
 
-void Entity::setTexture(sf::Texture texture)
+void Entity::setTexture(const sf::Texture& texture)
 {
 	this->texture = texture; 
 }
@@ -54,7 +54,7 @@ int Entity::getHealth() const
 	return this->health; 
 }
 
-void Entity::setSprite(sf::Sprite sprite)
+void Entity::setSprite(const sf::Sprite& sprite)
 {
 	this->sprite = sprite;
 }
