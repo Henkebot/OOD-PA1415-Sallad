@@ -86,6 +86,34 @@ directions Mob::getDirection()
 	return this->m_direction; 
 }
 
+int Mob::getDirX() const
+{
+	int dirX = 0; 
+	if (m_direction == directions::left)
+	{
+		dirX = -1; 
+	}
+	else if (m_direction == directions::right)
+	{
+		dirX = 1; 
+	}
+	return dirX; 
+}
+
+int Mob::getDirY() const
+{
+	int dirY = 0; 
+	if (m_direction == directions::down)
+	{
+		dirY = 1;
+	}
+	else if (m_direction == directions::up)
+	{
+		dirY = -1; 
+	}
+	return dirY; 
+}
+
 //Är detta rätt uppfattat?
 void Mob::setPos(sf::Vector2f coords)
 {

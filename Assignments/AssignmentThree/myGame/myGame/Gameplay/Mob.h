@@ -29,7 +29,9 @@ public:
 	bool getIsAllowedDown(); 
 	void setIsAllowedDown(bool isAllowed);
 	directions getDirection(); 
-	void setDirection(directions direction); 
+	void setDirection(directions direction);
+	int getDirX() const; 
+	int getDirY() const;
 	bool isDead() const; 
 	void update(float dt);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;

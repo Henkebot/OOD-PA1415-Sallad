@@ -55,6 +55,10 @@ EntityHandler::~EntityHandler()
 void EntityHandler::update(float dt)
 {
 	player->update(dt);
+	for (int i = 0; i < this->nrOfEnemies; i++)
+	{
+		this->enemys[i]->update(dt); 
+	}
 	if (playersTurn == true)
 	{
 		handleInput();
@@ -277,6 +281,7 @@ void EntityHandler::playerTurnUp()
 		{
 			player->move(0, -1);
 		}
+		EnemyMove();
 		//player->move(0, -1);//ta bort efter att playerMove är färdig
 		
 	}
@@ -295,6 +300,7 @@ void EntityHandler::playerTurnLeft()
 		{
 			player->move(-1, 0);
 		}
+		EnemyMove();
 		//player->move(-1,0);//ta bort efter att playerMove är färdig
 	}
 	else
@@ -312,6 +318,7 @@ void EntityHandler::playerTurnDown()
 		{
 			player->move(0, 1);
 		}
+		EnemyMove();
 		//player->move(0, 1);//ta bort efter att playerMove är färdig
 	}
 	else
@@ -329,12 +336,47 @@ void EntityHandler::playerTurnRight()
 		{
 			player->move(1, 0);
 		}
+		EnemyMove(); 
 		//player->move(1,0);//ta bort efter att playerMove är färdig
 	}
 	else
 	{
 		player->setCurrentSpriteFrame(0, 1);
 		player->setDirection(right);
+	}
+}
+
+void Container::EntityHandler::EnemyMove()
+{
+	for (int i = 0; i < this->nrOfEnemies; i++)
+	{
+		Vector2f requestedCoords = enemys[i]->moveRequest();
+		bool col = isFloor(requestedCoords);
+
+		for (int i = 0; i < nrOfStructures && col == false; i++)
+		{
+			Vector2f otherCoords = structures[i]->getCoords();
+			//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
+		}
+		for (int i = 0; i < nrOfItems; i++)
+		{
+			Vector2f otherCoords = items[i]->getCoords();
+			//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
+			player->pickUpItem(*items[i]);
+			removeItem(i);
+		}
+
+		int width = (20 - 1) * (64 * 0.75f);
+		int height = (11 - 1) * (64 * 0.75f);
+		if (requestedCoords.x == width ||
+			requestedCoords.x == 0 ||
+			requestedCoords.y == height ||
+			requestedCoords.y == 0)
+			col = true;
+		if (!col)
+		{
+			this->enemys[i]->move(enemys[i]->getDirX(), enemys[i]->getDirY());
+		}
 	}
 }
 

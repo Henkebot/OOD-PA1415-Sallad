@@ -6,7 +6,6 @@ class Enemy : public Mob
 {
 private:
 	states state;
-	directions m_direction; 
 public:
 	Enemy(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0,0), int health = 0);
 	~Enemy();
