@@ -35,29 +35,38 @@ int MasterSpawner::spawnEnemies(Enemy **& enemies) const
 {
 	int sizeOfEnemiesArr = this->getAmountOfEnemiesInRoom();
 	
+	int nrOfEmy = 0;
 	//enemies = new Enemy*[sizeOfEnemiesArr];
 
 	for (int i = 0; i < this->size; i++)
 	{
 		if (this->inRoom[i].getId() == "goblin")
 		{
-			//enemies[i] = new Goblin();
-			//enemies[i] = new Enemy("goblin");
+			for (int k = 0; k < inRoom[i].getAmount(); k++)
+			{
+				//enemies[nrOfEmy++] = new Enemy("goblin");
+			}
 		}
 		else if (this->inRoom[i].getId() == "spider")
 		{
-			//enemies[i] = new Spider();
-			//enemies[i] = new Enemy("spider");
+			for (int k = 0; k < inRoom[i].getAmount(); k++)
+			{
+				//enemies[nrOfEmy++] = new Enemy("goblin");
+			}
 		}
 		else if (this->inRoom[i].getId() == "skeleton")
 		{
-			//enemies[i] = new Skeleton();
-			//enemies[i] = new Enemy("skeleton");
+			for (int k = 0; k < inRoom[i].getAmount(); k++)
+			{
+				//enemies[nrOfEmy++] = new Enemy("goblin");
+			}
 		}
 		else if (this->inRoom[i].getId() == "zombie")
 		{
-			//enemies[i] = new Zombie;
-			//enemies[i] = new Enemy("zombie");
+			for (int k = 0; k < inRoom[i].getAmount(); k++)
+			{
+				//enemies[nrOfEmy++] = new Enemy("goblin");
+			}
 		}
 	}
 
