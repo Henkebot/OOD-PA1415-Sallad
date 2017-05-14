@@ -1,5 +1,6 @@
 #include "Mob.h"
-#include <iostream>
+#include "../Utility/Values.h"
+
 Mob::Mob(sf::Texture* texture, sf::Vector2f coords, int health) : Entity(texture,coords,health)
 {
 	int startDirection = (rand() % 4) + 1; 
@@ -63,9 +64,10 @@ sf::Vector2f Mob::moveRequest()
 
 void Mob::move(int xDir, int yDir)
 {	
-	float scale = 0.75f;
-	int playerNewX = getSprite().getPosition().x + ((64 * scale) * xDir);
-	int playerNewY = getSprite().getPosition().y + ((64 * scale) * yDir);
+	float size = Val::SPRITE_SIZE;
+	float scale = Val::SCALE;
+	int playerNewX = getSprite().getPosition().x + ((size * scale) * xDir);
+	int playerNewY = getSprite().getPosition().y + ((size * scale) * yDir);
 	setPos(sf::Vector2f(playerNewX, playerNewY));
 }
 //ONLY TEMPORARY RETURNTYPE VOID UNTILL STATS ARE IMPLEMENTED

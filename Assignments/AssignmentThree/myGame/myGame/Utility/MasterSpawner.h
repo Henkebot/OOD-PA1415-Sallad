@@ -2,7 +2,7 @@
 #define MASTERSPAWNER_H
 #include "Identifier.h"
 #include "../Gameplay/IncludeEntites.h"
-
+#include "Values.h"
 
 class MasterSpawner
 {

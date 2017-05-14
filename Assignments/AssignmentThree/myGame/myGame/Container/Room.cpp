@@ -1,6 +1,5 @@
 #include "Room.h"
 #include <iostream>
-#include "../Utility/Textures.h"
 #include "../UserInterface/Application.h"
 namespace Container
 {
@@ -21,38 +20,27 @@ namespace Container
 		//This should be sent to EH (check class /interaction diagram)
 		Identifier* inRoom = nullptr;
 		int size = TweetAnalyser::getInRoom(tweet, inRoom);
+		eh.createEntities(inRoom, size);
 		//remove this delete and move it into EH destructor
 		delete[] inRoom;
 		std::cout << tweet << "has " << size << "words" << std::endl;
 		roomRole = role;
+
 		left = right = up = down = nullptr;
+
 		std::cout << tweet << std::endl;
 		this->tweet = tweet;
+
 		tweetFont = new sf::Font();
+
 		if (!tweetFont->loadFromFile("font/D3Stonism.ttf"))
 			std::cout << "Lol" << std::endl;
+
 		currentTweet.setFont(*tweetFont);
 		currentTweet.setString(tweet);
 		currentTweet.setCharacterSize(16);
 		currentTweet.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 140));
 		currentTweet.setFillColor(sf::Color::Black);
-
-
-		/*doorDown.setFillColor(sf::Color::Blue);
-		doorDown.setSize(sf::Vector2f(128, 16));
-		doorDown.setPosition(64 * 9.5f, 64 * 10.5f);
-		
-		doorUp.setFillColor(sf::Color::Blue);
-		doorUp.setSize(sf::Vector2f(128, 16));
-		doorUp.setPosition(64 * 9.5f, 0);
-
-		doorRight.setFillColor(sf::Color::Blue);
-		doorRight.setSize(sf::Vector2f(16, 128));
-		doorRight.setPosition(64 * 19.5f, 64*5);
-
-		doorLeft.setFillColor(sf::Color::Blue);
-		doorLeft.setSize(sf::Vector2f(16, 128));
-		doorLeft.setPosition(0, 64 * 5);*/
 
 	}
 

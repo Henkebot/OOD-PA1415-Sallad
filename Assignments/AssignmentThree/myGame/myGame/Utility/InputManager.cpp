@@ -14,3 +14,4 @@ bool InputManager::keyPressed(sf::Keyboard::Key key)
 	InputManager::buttons[key] = isButtonPressed;
 	return keyIsPressed;
 }
+

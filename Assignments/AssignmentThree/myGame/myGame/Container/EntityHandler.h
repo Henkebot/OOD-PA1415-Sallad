@@ -7,6 +7,8 @@
 #include "../Gameplay/Floor.h"
 #include "../Gameplay/Structure.h"
 #include "../Utility/InputManager.h"
+#include "../Utility/Identifier.h"
+#include "../Utility/MasterSpawner.h"
 
 using namespace sf;
 namespace Container
@@ -28,6 +30,7 @@ namespace Container
 		void destroyPlayer();
 		
 		void setDoors(bool* doors);
+		void createEntities(Identifier* inRoom, int size);
 	private:
 		//player intraction
 		bool playerMove();
@@ -46,9 +49,11 @@ namespace Container
 		bool isFloor(Vector2f coords);
 		void removeItem(int index);
 
+		
 		Player* player;
 		sf::Texture* playerTexture;
 		Enemy** enemys;
+		int nrOfEnemies;
 		Structure** structures;
 		Item** items;
 		Floor* floor[25][25];
