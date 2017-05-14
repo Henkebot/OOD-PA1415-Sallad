@@ -35,3 +35,9 @@ void Enemy::setState(states newState)
 {
 	state = newState;
 }
+
+sf::Vector2f Enemy::interact()
+{
+	//LOLOLOLOLOLOLOOLOLOLL
+	return sf::Vector2f();
+}

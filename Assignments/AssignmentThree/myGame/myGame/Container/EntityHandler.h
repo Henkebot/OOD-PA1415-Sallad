@@ -38,6 +38,7 @@ namespace Container
 		void playerTurnDown();
 		void playerTurnRight();
 
+		void EnemyMove();
 
 		void handleInput();
 		void extraCon();

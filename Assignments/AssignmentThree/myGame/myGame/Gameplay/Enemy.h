@@ -16,5 +16,7 @@ public:
 
 	states getState() const;
 	void setState(states newState);
+
+	sf::Vector2f interact();
 };
 #endif

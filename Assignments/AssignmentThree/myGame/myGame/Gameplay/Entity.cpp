@@ -6,7 +6,7 @@ Entity::Entity(sf::Texture* texture, sf::Vector2f coords, int health)
 	this->coords = coords; 
 	this->health = health; 
 	this->sprite.setTexture(this->texture); 
-	setCurrentSpriteFrame(0, 2);
+	setCurrentSpriteFrame(0, 0);
 	this->sprite.setScale(Container::Cave::SCALE, Container::Cave::SCALE);
 	this->sprite.setPosition(coords);
 	delete texture;

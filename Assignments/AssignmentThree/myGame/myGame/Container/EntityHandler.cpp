@@ -6,6 +6,10 @@ EntityHandler::EntityHandler()
 	player = nullptr;
 	extraCon();
 	initLines();
+	enemys = new Enemy*[1];
+	sf::Texture* tjena = new sf::Texture();
+	tjena->loadFromFile(".\\textures\\zombieSheet.png");
+	enemys[0] = new Enemy(tjena, sf::Vector2f(5* (64 * 0.75f), 5* (64 * 0.75f)));
 }
 
 EntityHandler::EntityHandler(Player* player)
@@ -102,6 +106,7 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 	for (int i = 0; i < Cave::ROOM_HEIGHT; i++)
 		target.draw(lineY[i], 2, sf::Lines);
 
+	target.draw(*enemys[0]);
 	
 }
 
