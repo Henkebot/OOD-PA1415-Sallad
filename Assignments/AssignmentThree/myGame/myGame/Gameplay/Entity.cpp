@@ -1,5 +1,5 @@
 #include "Entity.h"
-#include "../Container/Cave.h"
+#include "../Utility/Values.h"
 Entity::Entity(sf::Texture* texture, sf::Vector2f coords, int health)
 {
 	this->texture = *texture; 
@@ -7,7 +7,7 @@ Entity::Entity(sf::Texture* texture, sf::Vector2f coords, int health)
 	this->health = health; 
 	this->sprite.setTexture(this->texture); 
 	setCurrentSpriteFrame(0, 0);
-	this->sprite.setScale(Container::Cave::SCALE, Container::Cave::SCALE);
+	this->sprite.setScale(Val::SCALE, Val::SCALE);
 	this->sprite.setPosition(coords);
 	delete texture;
 }
@@ -35,7 +35,7 @@ void Entity::setTexture(const sf::Texture& texture)
 
 void Entity::setCurrentSpriteFrame(int x, int y)
 {
-	sprite.setTextureRect(sf::IntRect(Container::Cave::SPRITE_SIZE * x, Container::Cave::SPRITE_SIZE * y, Container::Cave::SPRITE_SIZE, Container::Cave::SPRITE_SIZE));
+	sprite.setTextureRect(sf::IntRect(Val::SPRITE_SIZE * x, Val::SPRITE_SIZE * y, Val::SPRITE_SIZE, Val::SPRITE_SIZE));
 		
 }
 

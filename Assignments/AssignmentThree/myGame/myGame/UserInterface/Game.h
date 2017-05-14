@@ -4,7 +4,6 @@
 #include "../Container\Map.h"
 #include <iostream>
 #include "Pause.h"
-#include "../Utility/Textures.h"
 
 class Game : public State
 {

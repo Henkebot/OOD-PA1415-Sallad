@@ -34,15 +34,14 @@
     <ClCompile Include="UserInterface\Pause.cpp" />
     <ClCompile Include="UserInterface\State.cpp" />
     <ClCompile Include="Utility\InputManager.cpp" />
-    <ClCompile Include="Utility\Textures.cpp" />
     <ClCompile Include="Utility\TweetAnalyzer.cpp" />
     <ClCompile Include="Utility\Twitter.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Utility\TweetAnalyzer.cpp" />
     <ClCompile Include="Tests\test_TweetAnal.cpp" />
     <ClCompile Include="Utility\Identifier.cpp" />
     <ClCompile Include="Utility\MasterSpawner.cpp" />
     <ClCompile Include="Container\EntityHandler.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container\Cave.h" />
@@ -81,23 +80,23 @@
     <ClInclude Include="Utility\enums.h" />
     <ClInclude Include="Utility\Identifier.h" />
     <ClInclude Include="Utility\InputManager.h" />
-    <ClInclude Include="Utility\Textures.h" />
     <ClInclude Include="Utility\TweetAnalyzer.h" />
     <ClInclude Include="Utility\Twitter.h" />
     <ClInclude Include="Utility\Identifier.h" />
     <ClInclude Include="Gameplay\IncludeEntites.h" />
     <ClInclude Include="Utility\MasterSpawner.h" />
+    <ClInclude Include="Utility\Values.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\twitcurl.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\ground.png" />
     <Image Include="textures\menu_wallpaper.jpg" />
     <Image Include="textures\menu_wallpaper2.jpg" />
     <Image Include="textures\player.png" />
     <Image Include="textures\sheet.png" />
     <Image Include="textures\woodBrick.jpg" />
+    <Image Include="textures\brick.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="font\D3Stonism.ttf" />
