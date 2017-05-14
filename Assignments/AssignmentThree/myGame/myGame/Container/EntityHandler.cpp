@@ -55,10 +55,6 @@ EntityHandler::~EntityHandler()
 void EntityHandler::update(float dt)
 {
 	player->update(dt);
-	for (int i = 0; i < this->nrOfEnemies; i++)
-	{
-		this->enemys[i]->update(dt); 
-	}
 	if (playersTurn == true)
 	{
 		handleInput();
@@ -102,10 +98,10 @@ void EntityHandler::update(float dt)
 void Container::EntityHandler::render(sf::RenderTarget & target) const
 {
 	target.draw(*player);
-	for (int i = 0; i < Val::ROOM_WIDTH; i++)
+	/*for (int i = 0; i < Val::ROOM_WIDTH; i++)
 		target.draw(lineX[i], 2, sf::Lines);	
 	for (int i = 0; i < Val::ROOM_HEIGHT; i++)
-		target.draw(lineY[i], 2, sf::Lines);
+		target.draw(lineY[i], 2, sf::Lines);*/
 
 	for (int i = 0; i < nrOfEnemies; i++)
 	{
@@ -158,18 +154,34 @@ void EntityHandler::handleInput()
 	else if (InputManager::keyPressed(sf::Keyboard::W) || InputManager::keyPressed(sf::Keyboard::Up))
 	{
 		playerTurnUp();
+		for (int i = 0; i < this->nrOfEnemies; i++)
+		{
+			this->enemys[i]->update(0);
+		}
 	}
 	else if (InputManager::keyPressed(sf::Keyboard::A) || InputManager::keyPressed(sf::Keyboard::Left))
 	{
 		playerTurnLeft();
+		for (int i = 0; i < this->nrOfEnemies; i++)
+		{
+			this->enemys[i]->update(0);
+		}
 	}
 	else if (InputManager::keyPressed(sf::Keyboard::S) || InputManager::keyPressed(sf::Keyboard::Down))
 	{
 		playerTurnDown();
+		for (int i = 0; i < this->nrOfEnemies; i++)
+		{
+			this->enemys[i]->update(0);
+		}
 	}
 	else if (InputManager::keyPressed(sf::Keyboard::D) || InputManager::keyPressed(sf::Keyboard::Right))
 	{
 		playerTurnRight();
+		for (int i = 0; i < this->nrOfEnemies; i++)
+		{
+			this->enemys[i]->update(0);
+		}
 	}
 }
 

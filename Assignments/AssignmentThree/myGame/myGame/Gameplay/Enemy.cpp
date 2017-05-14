@@ -17,27 +17,27 @@ void Enemy::create()
 
 void Enemy::update(float dt)
 { 
-	/*this->setTileXIndex(this->getSprite().getPosition().x / (64 * 0.75));
-	this->setTileYIndex(this->getSprite().getPosition().y / (64 * 0.75));
-
-	sf::Vector2i currentTile = sf::Vector2i(this->getTileXIndex(), this->getTileYIndex());*/
 	int direction = (rand() % 4) + 1;
 
 	if (direction == 1)
 	{
-		this->setDirection(directions::up); 
+		this->setDirection(directions::up);
+		this->setCurrentSpriteFrame(0, 0);
 	}
 	else if (direction == 2)
 	{
 		this->setDirection(directions::right);
+		this->setCurrentSpriteFrame(0, 1);
 	}
 	else if (direction == 3)
 	{
 		this->setDirection(directions::down);
+		this->setCurrentSpriteFrame(0, 2);
 	}
 	else
 	{
 		this->setDirection(directions::left);
+		this->setCurrentSpriteFrame(0, 3);
 	}
 }
 

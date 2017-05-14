@@ -27,7 +27,7 @@ void Player::create()
 
 void Player::update(float dt)
 {
-	
+
 }
 
 sf::Vector2f Player::interact()
