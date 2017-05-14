@@ -344,7 +344,6 @@ namespace Container
 		tiles3 = new sf::Texture();
 		if (!tiles3->loadFromFile(".\\textures\\sheet3.png"))
 			std::cout << "Failed to load spritesheet!" << std::endl;
-		numberOfRooms = 0;
 
 	}
 

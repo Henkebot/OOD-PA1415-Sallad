@@ -55,7 +55,7 @@ bool Twitter::authenticate()
 }
 
 
-void Twitter::readFeed(const std::string user, int maxAmountOfRooms)
+void Twitter::readFeed(const std::string& user, int maxAmountOfRooms)
 {
 	if (succAuth)
 	{

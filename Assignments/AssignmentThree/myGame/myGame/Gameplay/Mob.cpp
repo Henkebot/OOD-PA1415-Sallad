@@ -22,7 +22,10 @@ sf::Vector2f Mob::moveRequest()
 
 void Mob::move(int xDir, int yDir)
 {	
-	setPos(sf::Vector2f(getSprite().getPosition().x + (64 * xDir), getSprite().getPosition().y + (64 * yDir)));
+	float scale = 0.75f;
+	int playerNewX = getSprite().getPosition().x + ((64 * scale) * xDir);
+	int playerNewY = getSprite().getPosition().y + ((64 * scale) * yDir);
+	setPos(sf::Vector2f(playerNewX, playerNewY));
 }
 //ONLY TEMPORARY RETURNTYPE VOID UNTILL STATS ARE IMPLEMENTED
 void Mob::getStats() const

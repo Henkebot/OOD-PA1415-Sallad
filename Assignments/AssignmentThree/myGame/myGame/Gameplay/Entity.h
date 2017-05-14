@@ -18,12 +18,12 @@ public:
 	~Entity(); 
 	void setCoords(sf::Vector2f coords); 
 	sf::Vector2f getCoords() const; 
-	void setTexture(sf::Texture texture); 
+	void setTexture(const sf::Texture& texture); 
 	void setCurrentSpriteFrame(int x, int y);
 	sf::Texture getTexture() const; 
 	void setHealth(int health); 
 	int getHealth() const;
-	void setSprite(sf::Sprite sprite); 
+	void setSprite(const sf::Sprite& sprite); 
 	sf::Sprite getSprite() const;
 	void setTileXIndex(int tileX); 
 	int getTileXIndex();
