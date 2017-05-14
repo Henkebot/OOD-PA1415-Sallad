@@ -13,6 +13,7 @@ public:
 
 	static const int SCREEN_WIDTH;
 	static const int SCREEN_HEIGHT;
+
 private:
 	void run();
 	void update(float dt);

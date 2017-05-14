@@ -2,6 +2,9 @@
 #define ROOM_H
 #include <SFML\Graphics.hpp>
 #include "EntityHandler.h"
+#include <string>
+#include "../Utility/TweetAnalyzer.h"
+#include "../Utility/Identifier.h"
 
 namespace Container
 {
@@ -20,13 +23,19 @@ namespace Container
 		int roomNumber;
 		int roomRole;
 		EntityHandler eh;
-		//DEBUG
-		/*sf::RectangleShape doorLeft;
-		sf::RectangleShape doorRight;
-		sf::RectangleShape doorUp;
-		sf::RectangleShape doorDown;*/
-	
+
+		sf::Font* tweetFont;
+
+		static std::string owner;
+		sf::Text tweetOwner;
+
+		std::string tweet;
+		sf::Text currentTweet;
+		
 	public:
+		Room(const std::string& tweet, int role = 0);
+		virtual~Room();
+
 		static const int SPRITE_SIZE;
 		void setEh(EntityHandler eh);
 
@@ -34,8 +43,6 @@ namespace Container
 
 		sf::Sprite** spritesArray;
 
-		Room(int number, int role = 0);
-		virtual~Room();
 		
 		sf::Vector2i getCoord() const;
 		void setCoord(const sf::Vector2i & coord);
@@ -51,6 +58,8 @@ namespace Container
 		Room* getDownD() const;
 
 		int getRole() const;
+
+		void setOwner(const std::string& owner);
 
 		void setSpriteArray(sf::Sprite** array);
 		void update(float dt);

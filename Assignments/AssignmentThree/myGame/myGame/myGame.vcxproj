@@ -34,13 +34,7 @@
     <ClCompile Include="Gameplay\Stats.cpp" />
     <ClCompile Include="Gameplay\Structure.cpp" />
     <ClCompile Include="Gameplay\Zombie.cpp" />
-    <ClCompile Include="main - kopia.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Tests\main - kopia.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -61,8 +55,11 @@
     <ClCompile Include="UserInterface\Game.cpp" />
     <ClCompile Include="UserInterface\GameStateManager.cpp" />
     <ClCompile Include="UserInterface\Menu.cpp" />
+    <ClCompile Include="UserInterface\Pause.cpp" />
     <ClCompile Include="UserInterface\State.cpp" />
     <ClCompile Include="Utility\InputManager.cpp" />
+    <ClCompile Include="Utility\Textures.cpp" />
+    <ClCompile Include="Utility\TweetAnalyzer.cpp" />
     <ClCompile Include="Utility\Twitter.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -97,12 +94,15 @@
     <ClInclude Include="UserInterface\GameStateManager.h" />
     <ClInclude Include="UserInterface\IStack.h" />
     <ClInclude Include="UserInterface\Menu.h" />
+    <ClInclude Include="UserInterface\Pause.h" />
     <ClInclude Include="UserInterface\Stack.h" />
     <ClInclude Include="UserInterface\State.h" />
     <ClInclude Include="Utility\enums.h" />
+    <ClInclude Include="Utility\Identifier.h" />
     <ClInclude Include="Utility\InputManager.h" />
+    <ClInclude Include="Utility\Textures.h" />
+    <ClInclude Include="Utility\TweetAnalyzer.h" />
     <ClInclude Include="Utility\Twitter.h" />
-    <ClInclude Include="Utility\twitterClient.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="libeay32.dll" />
@@ -118,10 +118,26 @@
     <None Include="sfml-window-2.dll" />
     <None Include="sfml-window-d-2.dll" />
     <None Include="ssleay32.dll" />
+    <None Include="textures\sheetPSD.psd" />
     <None Include="UserInterface\libeay32.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\twitcurl.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="font\D3Stonism.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="font\lol.txt" />
+    <Text Include="textures\This is text.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\ground.png" />
+    <Image Include="textures\menu_wallpaper.jpg" />
+    <Image Include="textures\menu_wallpaper2.jpg" />
+    <Image Include="textures\player.png" />
+    <Image Include="textures\sheet.png" />
+    <Image Include="textures\woodBrick.jpg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DD945508-BB62-4A97-805C-E422C13599FC}</ProjectGuid>
@@ -134,6 +150,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -173,18 +190,33 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>
+    </LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)/SFML-2.4.1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MinimalRebuild>true</MinimalRebuild>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)/SFML-2.4.1/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\SFML-2.4.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -202,6 +234,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)/SFML-2.4.1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

@@ -1,13 +1,12 @@
-#ifndef TWITTER_H
-#define TWITTER_H
-#include <iostream>
-#include <string>
-#include <fstream>
+#ifndef TWITTEsR_H
+#define TWITTEsR_H
+#pragma once
 #pragma comment(lib, "legacy_stdio_definitions.lib") 
 #include <cstdio>
-FILE _iob[] = { *stdin, *stdout, *stderr };
-extern "C" FILE * __cdecl __iob_func(void) { return _iob; }
+#include <iostream>
+#include <fstream>
 #include "../include/twitcurl.h"
+#include <string>
 
 class Twitter
 {
@@ -15,13 +14,29 @@ public:
 	Twitter();
 	~Twitter();
 	std::string getRandomTweet() const;
+
+	// If the authentication fails it will use the local feed instead!
+	bool authenticate(); 
+	void readFeed(const std::string user = "", int maxAmountOfRooms = 0);
+
+	int getNumberOfTweets() const;
+	std::string* getAllTweets() const;
+
+	std::string getUser() const;
+
 private:
 	std::string getFeed() const; //Import the the feed from file and return the string
+
 	void getTweets(const std::string & feed); //Reed the feed and filter it down to single tweets and stores them in the array
 
 private:
-	std::string** tweets;
+	std::string* tweets;
+	bool* usedTweets;
 	int size;
+	twitCurl twitterObj;
+	bool succAuth;
+	std::string user;
+
 };
 
 

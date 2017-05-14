@@ -17,6 +17,11 @@ GameStateManager::~GameStateManager()
 	}
 }
 
+bool GameStateManager::emptyStack() const
+{
+	return this->states.isEmpty();
+}
+
 void GameStateManager::changeState(State * state)
 {
 	delete this->states.pop();
@@ -28,14 +33,16 @@ void GameStateManager::pushState(State * state)
 	this->states.push(state);
 }
 
-void GameStateManager::popState()
+void GameStateManager::popState(int amount)
 {
-	delete this->states.pop();
+	for (int i = 0; i < amount && !this->states.isEmpty(); i++)
+		delete this->states.pop();
 }
 
 void GameStateManager::update(float dt)
 {
-	this->states.peek()->update(dt);
+	if (!this->states.isEmpty())
+		this->states.peek()->update(dt);
 }
 
 GameStateManager & GameStateManager::operator=(const GameStateManager & other)
@@ -49,5 +56,6 @@ GameStateManager & GameStateManager::operator=(const GameStateManager & other)
 
 void GameStateManager::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	target.draw(*this->states.peek(), states);
+	if (!this->states.isEmpty())
+		target.draw(*this->states.peek(), states);
 }

@@ -1,7 +1,10 @@
 #include "Room.h"
 #include <iostream>
+#include "../Utility/Textures.h"
+#include "../UserInterface/Application.h"
 namespace Container
 {
+	std::string Room::owner = "";
 	const int Room::SPRITE_SIZE = 64;
 
 	void Room::setEh(EntityHandler eh)
@@ -14,10 +17,24 @@ namespace Container
 		return eh;
 	}
 
-	Room::Room(int number, int role)
+	Room::Room(const std::string& tweet, int role)
 	{	
+		Identifier* inRoom = nullptr;
+		int size = TweetAnalyser::getInRoom(tweet, inRoom);
+		std::cout << tweet << "has " << size << "words" << std::endl;
 		roomRole = role;
 		left = right = up = down = nullptr;
+		std::cout << tweet << std::endl;
+		this->tweet = tweet;
+		tweetFont = new sf::Font();
+		if (!tweetFont->loadFromFile("font/D3Stonism.ttf"))
+			std::cout << "Lol" << std::endl;
+		currentTweet.setFont(*tweetFont);
+		currentTweet.setString("Tweet: " + tweet);
+		currentTweet.setCharacterSize(16);
+		currentTweet.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 150));
+		currentTweet.setFillColor(sf::Color::Black);
+
 
 		/*doorDown.setFillColor(sf::Color::Blue);
 		doorDown.setSize(sf::Vector2f(128, 16));
@@ -34,9 +51,6 @@ namespace Container
 		doorLeft.setFillColor(sf::Color::Blue);
 		doorLeft.setSize(sf::Vector2f(16, 128));
 		doorLeft.setPosition(0, 64 * 5);*/
-
-
-		roomNumber = number;
 
 	}
 
@@ -102,6 +116,16 @@ namespace Container
 		return roomRole;
 	}
 
+	void Room::setOwner(const std::string & owner)
+	{
+		this->owner = owner;
+		tweetOwner.setFont(*tweetFont);
+		tweetOwner.setString("@" + this->owner);
+		tweetOwner.setCharacterSize(20);
+		tweetOwner.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 170));
+		tweetOwner.setFillColor(sf::Color::Black);
+	}
+
 	void Room::setSpriteArray(sf::Sprite ** array)
 	{
 		sf::Sprite** newArray = new sf::Sprite*[20];
@@ -144,6 +168,8 @@ namespace Container
 
 		}
 		target.draw(*eh.getPlayer());
+		target.draw(currentTweet);
+		target.draw(tweetOwner);
 		/*if(down != nullptr) target.draw(doorDown);
 		if(up != nullptr) target.draw(doorUp);
 		if (right != nullptr) target.draw(doorRight);

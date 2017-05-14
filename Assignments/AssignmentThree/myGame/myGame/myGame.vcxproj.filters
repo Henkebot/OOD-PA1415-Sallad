@@ -2,19 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Container\Cave.cpp" />
+    <ClCompile Include="Container\Inventory.cpp" />
     <ClCompile Include="Container\Map.cpp" />
     <ClCompile Include="Container\Room.cpp" />
-    <ClCompile Include="main - kopia.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="UserInterface\Application.cpp" />
-    <ClCompile Include="UserInterface\Game.cpp" />
-    <ClCompile Include="UserInterface\GameStateManager.cpp" />
-    <ClCompile Include="UserInterface\Menu.cpp" />
-    <ClCompile Include="UserInterface\State.cpp" />
-    <ClCompile Include="Tests\main - kopia.cpp" />
-    <ClCompile Include="Tests\test_Stack.cpp" />
-    <ClCompile Include="Tests\test_twitter.cpp" />
-    <ClCompile Include="Tests\testMap.cpp" />
+    <ClCompile Include="Container\EntityHandler.cpp" />
     <ClCompile Include="Gameplay\Enemy.cpp" />
     <ClCompile Include="Gameplay\Entity.cpp" />
     <ClCompile Include="Gameplay\Floor.cpp" />
@@ -22,18 +13,41 @@
     <ClCompile Include="Gameplay\Mob.cpp" />
     <ClCompile Include="Gameplay\NonMoveable.cpp" />
     <ClCompile Include="Gameplay\Player.cpp" />
-    <ClCompile Include="Gameplay\Structure.cpp" />
-    <ClCompile Include="Container\Inventory.cpp" />
-    <ClCompile Include="Utility\InputManager.cpp" />
-    <ClCompile Include="Utility\Twitter.cpp" />
-    <ClCompile Include="Container\EntityHandler.cpp" />
     <ClCompile Include="Gameplay\Stats.cpp" />
+    <ClCompile Include="Gameplay\Structure.cpp" />
     <ClCompile Include="Gameplay\Zombie.cpp" />
+    <ClCompile Include="Tests\main - kopia.cpp" />
+    <ClCompile Include="Tests\testMap.cpp" />
+    <ClCompile Include="Tests\test_Stack.cpp" />
+    <ClCompile Include="Tests\test_twitter.cpp" />
+    <ClCompile Include="UserInterface\Application.cpp" />
+    <ClCompile Include="UserInterface\Game.cpp" />
+    <ClCompile Include="UserInterface\GameStateManager.cpp" />
+    <ClCompile Include="UserInterface\Menu.cpp" />
+    <ClCompile Include="UserInterface\Pause.cpp" />
+    <ClCompile Include="UserInterface\State.cpp" />
+    <ClCompile Include="Utility\InputManager.cpp" />
+    <ClCompile Include="Utility\Textures.cpp" />
+    <ClCompile Include="Utility\TweetAnalyzer.cpp" />
+    <ClCompile Include="Utility\Twitter.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container\Cave.h" />
+    <ClInclude Include="Container\Inventory.h" />
     <ClInclude Include="Container\Map.h" />
     <ClInclude Include="Container\Room.h" />
+    <ClInclude Include="Container\EntityHandler.h" />
+    <ClInclude Include="Gameplay\Enemy.h" />
+    <ClInclude Include="Gameplay\Entity.h" />
+    <ClInclude Include="Gameplay\Floor.h" />
+    <ClInclude Include="Gameplay\Item.h" />
+    <ClInclude Include="Gameplay\Mob.h" />
+    <ClInclude Include="Gameplay\NonMoveable.h" />
+    <ClInclude Include="Gameplay\Player.h" />
+    <ClInclude Include="Gameplay\Stats..h" />
+    <ClInclude Include="Gameplay\Structure.h" />
+    <ClInclude Include="Gameplay\Zombie.h" />
     <ClInclude Include="include\curl\curl.h" />
     <ClInclude Include="include\curl\curlbuild.h" />
     <ClInclude Include="include\curl\curlrules.h" />
@@ -50,27 +64,29 @@
     <ClInclude Include="UserInterface\GameStateManager.h" />
     <ClInclude Include="UserInterface\IStack.h" />
     <ClInclude Include="UserInterface\Menu.h" />
+    <ClInclude Include="UserInterface\Pause.h" />
     <ClInclude Include="UserInterface\Stack.h" />
     <ClInclude Include="UserInterface\State.h" />
-    <ClInclude Include="Gameplay\Enemy.h" />
-    <ClInclude Include="Gameplay\Entity.h" />
-    <ClInclude Include="Gameplay\Floor.h" />
-    <ClInclude Include="Gameplay\Item.h" />
-    <ClInclude Include="Gameplay\Mob.h" />
-    <ClInclude Include="Gameplay\NonMoveable.h" />
-    <ClInclude Include="Gameplay\Player.h" />
-    <ClInclude Include="Gameplay\Structure.h" />
-    <ClInclude Include="Container\Inventory.h" />
-    <ClInclude Include="Utility\InputManager.h" />
-    <ClInclude Include="Utility\Twitter.h" />
-    <ClInclude Include="Utility\twitterClient.h" />
-    <ClInclude Include="Container\EntityHandler.h" />
     <ClInclude Include="Utility\enums.h" />
-    <ClInclude Include="Gameplay\Stats..h" />
-    <ClInclude Include="Gameplay\Zombie.h" />
+    <ClInclude Include="Utility\Identifier.h" />
+    <ClInclude Include="Utility\InputManager.h" />
+    <ClInclude Include="Utility\Textures.h" />
+    <ClInclude Include="Utility\TweetAnalyzer.h" />
+    <ClInclude Include="Utility\Twitter.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\twitcurl.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\ground.png" />
+    <Image Include="textures\menu_wallpaper.jpg" />
+    <Image Include="textures\menu_wallpaper2.jpg" />
+    <Image Include="textures\player.png" />
+    <Image Include="textures\sheet.png" />
+    <Image Include="textures\woodBrick.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="font\D3Stonism.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="libeay32.dll" />
@@ -86,6 +102,11 @@
     <None Include="sfml-window-2.dll" />
     <None Include="sfml-window-d-2.dll" />
     <None Include="ssleay32.dll" />
+    <None Include="textures\sheetPSD.psd" />
     <None Include="UserInterface\libeay32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="font\lol.txt" />
+    <Text Include="textures\This is text.txt" />
   </ItemGroup>
 </Project>

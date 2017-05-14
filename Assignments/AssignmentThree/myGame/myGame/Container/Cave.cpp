@@ -3,13 +3,29 @@
 #include <iostream>
 namespace Container
 {
+	const float Cave::SCALE		= 0.75f;
+
+	const float doorLeftX		= 0;
+	const float doorLeftY		= 5;
+
+	const float doorUpX			= 10;
+	const float doorUpY			= 0;
+
+	const float doorRightX		= 19;
+	const float doorRightY		= 5;
+
+	const float doorDownX		= 10;
+	const float doorDownY		= 10;
+
+
 	void Cave::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	{
 		target.draw(*currentRoom);
 	}
 
-	void Cave::connectRoom(Room * rootRoom, int role, int lastRoom)
+	bool Cave::connectRoom(Room * rootRoom, int role, int lastRoom)
 	{
+		bool newRoomCreated = false;
 		int door = rand() % 4;
 		// 0 = up
 		// 1 = right
@@ -27,7 +43,7 @@ namespace Container
 				bool overlapingRoom = false;
 				int overlapingRoomIndex = -1;
 
-				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				for (unsigned i = 0; i < roomPointers.size() && !overlapingRoom; i++)
 				{
 					if (roomPointers.at(i)->getCoord() == newRoomCoord)
 					{
@@ -43,15 +59,17 @@ namespace Container
 				}
 				else
 				{
-					Room* newRoom = new Room(numberOfRooms++, role);
+					Room* newRoom = new Room(twitterObj.getRandomTweet(), role);
 					newRoom->setCoord(newRoomCoord);
+					newRoom->setOwner(twitterObj.getUser());
 					rootRoom->setUpD(newRoom);
 					newRoom->setDownD(rootRoom);
 					roomPointers.push_back(newRoom);
+					newRoomCreated = true;
 				}
 			}
 			else
-				connectRoom(rootRoom->getUpD(),role, door);
+				newRoomCreated = connectRoom(rootRoom->getUpD(),role, door);
 			break;
 		case 1:
 			if (rootRoom->getRightD() == nullptr)
@@ -62,7 +80,7 @@ namespace Container
 				bool overlapingRoom = false;
 				int overlapingRoomIndex = -1;
 
-				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				for (unsigned i = 0; i < roomPointers.size() && !overlapingRoom; i++)
 				{
 					if (roomPointers.at(i)->getCoord() == newRoomCoord)
 					{
@@ -78,15 +96,17 @@ namespace Container
 				}
 				else
 				{
-					Room* newRoom = new Room(numberOfRooms++, role);
+					Room* newRoom = new Room(twitterObj.getRandomTweet(), role);
 					newRoom->setCoord(newRoomCoord);
+					newRoom->setOwner(twitterObj.getUser());
 					rootRoom->setRightD(newRoom);
 					newRoom->setLeftD(rootRoom);
 					roomPointers.push_back(newRoom);
+					newRoomCreated = true;
 				}
 			}
 			else
-				connectRoom(rootRoom->getRightD(),role, door);
+				newRoomCreated = connectRoom(rootRoom->getRightD(),role, door);
 			
 			break;
 		case 2:
@@ -97,7 +117,7 @@ namespace Container
 				bool overlapingRoom = false;
 				int overlapingRoomIndex = -1;
 
-				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				for (unsigned i = 0; i < roomPointers.size() && !overlapingRoom; i++)
 				{
 					if (roomPointers.at(i)->getCoord() == newRoomCoord)
 					{
@@ -113,15 +133,17 @@ namespace Container
 				}
 				else
 				{
-					Room* newRoom = new Room(numberOfRooms++, role);
+					Room* newRoom = new Room(twitterObj.getRandomTweet(), role);
 					newRoom->setCoord(newRoomCoord);
+					newRoom->setOwner(twitterObj.getUser());
 					rootRoom->setDownD(newRoom);
 					newRoom->setUpD(rootRoom);
 					roomPointers.push_back(newRoom);
+					newRoomCreated = true;
 				}
 			}
 			else
-				connectRoom(rootRoom->getDownD(),role, door);
+				newRoomCreated = connectRoom(rootRoom->getDownD(),role, door);
 			break;
 		case 3:
 			if (rootRoom->getLeftD() == nullptr)
@@ -132,7 +154,7 @@ namespace Container
 				bool overlapingRoom = false;
 				int overlapingRoomIndex = -1;
 
-				for (int i = 0; i < roomPointers.size() && !overlapingRoom; i++)
+				for (unsigned i = 0; i < roomPointers.size() && !overlapingRoom; i++)
 				{
 					if (roomPointers.at(i)->getCoord() == newRoomCoord)
 					{
@@ -148,25 +170,34 @@ namespace Container
 				}
 				else
 				{
-					Room* newRoom = new Room(numberOfRooms++, role);
+					Room* newRoom = new Room(twitterObj.getRandomTweet(), role);
 					newRoom->setCoord(newRoomCoord);
+					newRoom->setOwner(twitterObj.getUser());
 					rootRoom->setLeftD(newRoom);
 					newRoom->setRightD(rootRoom);
 					roomPointers.push_back(newRoom);
+					newRoomCreated = true;
 				}
 			}
 			else
-				connectRoom(rootRoom->getLeftD(),role, door);
+				newRoomCreated = connectRoom(rootRoom->getLeftD(),role, door);
 			break;
 		}
-
+		return newRoomCreated;
 	}
 
 	Cave::Cave()
 	{
-		tiles = new sf::Texture();
-		if (tiles->loadFromFile(".\\textures\\sheet.png"))
-			std::cout << "Failed to load file!" << std::endl;
+		tilesNumber = 0;
+		tiles1 = new sf::Texture();
+		if (!tiles1->loadFromFile(".\\textures\\sheet.png"))
+			std::cout << "Failed to load spritesheet!" << std::endl;
+		tiles2 = new sf::Texture();
+		if (!tiles2->loadFromFile(".\\textures\\sheet2.png"))
+			std::cout << "Failed to load spritesheet!" << std::endl;
+		tiles3 = new sf::Texture();
+		if (!tiles3->loadFromFile(".\\textures\\sheet3.png"))
+			std::cout << "Failed to load spritesheet!" << std::endl;
 		numberOfRooms = 0;
 	}
 
@@ -179,60 +210,73 @@ namespace Container
 			delete roomPointers.at(i);
 		}
 
-		delete tiles;
+		delete tiles1;
 	}
 
 	void Cave::generateCave()
 	{
-		currentRoom = new Room(numberOfRooms++, 1);
+		
+
+		currentRoom = new Room(twitterObj.getRandomTweet(), 1);
 		currentRoom->setCoord(sf::Vector2i(0, 0));
+		currentRoom->setOwner(twitterObj.getUser());
+
 		roomPointers.push_back(currentRoom);
-		for (int i = 0; i < 400; i++)
+		for (int i = 0; i < twitterObj.getNumberOfTweets() - 2; i++)
 		{
 			connectRoom(currentRoom,0);
 		}
-		connectRoom(currentRoom, 2);
+		bool lastRoomCreated = false;
+		while (!lastRoomCreated) lastRoomCreated = connectRoom(currentRoom, 2);
 
 
 
 		//Sprite Stuff
 
 		sf::Sprite** spriteArray = new sf::Sprite*[20];
+		
 		for (int i = 0; i < 20; i++)
 		{
 			spriteArray[i] = new sf::Sprite[11];
+	
 		}
-		setSprite(spriteArray, 0, 0, 0, 0); // VÄNSTER UPP HÖRN
-		for (int i = 1; i < 19; i++) // TOPPEN
+		for (int i = 0; i < 20; i++)
 		{
-			setSprite(spriteArray, i, 0, 1, 0);
-		}
-		setSprite(spriteArray, 19, 0, 2, 0); // HÖGER UPP HÖRN
-		for (int i = 1; i < 10; i++) // VÄNSTER
-		{
-			setSprite(spriteArray, 0, i, 0, 1);
-		}
-		for (int i = 1; i < 10; i++) // HÖGER
-		{
-			setSprite(spriteArray, 19, i, 2, 1);
-		}
-		for (int x = 1; x < 19; x++) // MITTEN
-		{
-			for (int y = 1; y < 10; y++)
+			for (int j = 0; j < 11; j++)
 			{
-				setSprite(spriteArray, x, y, 1, 1);
+				spriteArray[i][j].scale(SCALE, SCALE);
 			}
 		}
-		for (int i = 0; i < 20; i++) // BOTTEN
+		for (unsigned i = 0; i < roomPointers.size(); i++)
 		{
-			setSprite(spriteArray, i, 10, 0, 2);
-		}
-
-
-
-		for (int i = 0; i < roomPointers.size(); i++)
-		{
-
+			tilesNumber = rand() % 3;
+	
+			setSprite(spriteArray, 0, 0, 0, 0); // VÄNSTER UPP HÖRN
+			for (float i = 1; i < 19; i++) // TOPPEN
+			{
+				setSprite(spriteArray, i, 0.0f, 1, 0);
+			}
+			setSprite(spriteArray, 19, 0, 2, 0); // HÖGER UPP HÖRN
+			for (float i = 1; i < 10; i++) // VÄNSTER
+			{
+				setSprite(spriteArray, 0, i, 0, 1);
+			}
+			for (float i = 1; i < 10; i++) // HÖGER
+			{
+				setSprite(spriteArray, 19, i, 2, 1);
+			}
+			for (float x = 1; x < 19; x++) // MITTEN
+			{
+				for (float y = 1; y < 10; y++)
+				{
+					setSprite(spriteArray, x, y, 1, 1);
+				}
+			}
+			for (float i = 0; i < 20; i++) // BOTTEN
+			{
+				setSprite(spriteArray, i, 10, 0, 2);
+			}
+		
 			//Ladders
 			if (roomPointers.at(i)->getRole() == 1)
 			{
@@ -298,15 +342,28 @@ namespace Container
 
 	}
 
-	bool Cave::selectTwitterFeed(const std::string & URL)
+	bool Cave::selectTwitterFeed(const std::string & user)
 	{
-		return false;
+		bool result = twitterObj.authenticate();
+		if (result)
+		{
+			twitterObj.readFeed(user);
+		}
+		return result;
 	}
-	void Cave::setSprite(sf::Sprite** spritesArray, int xIndex, int yIndex, int xSheet, int ySheet)
+	void Cave::setSprite(sf::Sprite** spritesArray, float xIndex, float yIndex, int xSheet, int ySheet)
 	{
-		spritesArray[xIndex][yIndex].setTexture(*tiles);
-		spritesArray[xIndex][yIndex].setTextureRect(sf::IntRect(xSheet*64, ySheet* 64, 64, 64));
-		spritesArray[xIndex][yIndex].setPosition(sf::Vector2f(64 * xIndex, 64 * yIndex));
+		int xDex = static_cast<int>(xIndex);
+		int yDex = static_cast<int>(yIndex);
+	
+		if(tilesNumber == 0)
+			spritesArray[xDex][yDex].setTexture(*tiles1);
+		else if(tilesNumber == 1)
+			spritesArray[xDex][yDex].setTexture(*tiles2);
+		else
+			spritesArray[xDex][yDex].setTexture(*tiles3);
+		spritesArray[xDex][yDex].setTextureRect(sf::IntRect(xSheet*64, ySheet* 64, 64, 64));
+		spritesArray[xDex][yDex].setPosition(sf::Vector2f(64 * xIndex * SCALE, 64 * yIndex * SCALE));
 
 	}
 	void Cave::update(float dt)
@@ -327,38 +384,38 @@ namespace Container
 		
 		Player* playerPos = currentRoom->getCurrentEntityHandler().getPlayer();
 		//DOOR LEFT (0,5)
-		if ((playerPos->getCoords().x / 64) == 0 && (playerPos->getCoords().y / 64) == 5 && 
+		if ((playerPos->getCoords().x / (64 * SCALE)) == doorLeftX && (playerPos->getCoords().y / (64 * SCALE)) == doorLeftY &&
 			currentRoom->getLeftD() != nullptr)
 		{
 			Player* currentPlayer = currentRoom->getCurrentEntityHandler().getPlayer();
 			currentRoom = currentRoom->getLeftD();
 			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
-			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(18*64, 5*64));
+			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(18*64*SCALE, 5*64*SCALE));
 			
 		} //DOOR UP: (10,0)
-		else if ((playerPos->getCoords().x / 64) == 10 && (playerPos->getCoords().y / 64) == 0 &&
+		else if ((playerPos->getCoords().x / (64 * SCALE)) == doorUpX && (playerPos->getCoords().y / (64 * SCALE)) == doorUpY &&
 			currentRoom->getUpD() != nullptr)
 		{
 			Player* currentPlayer = currentRoom->getCurrentEntityHandler().getPlayer();
 			currentRoom = currentRoom->getUpD();
 			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
-			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(10 * 64, 9 * 64));
+			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(10 * 64*SCALE, 9 * 64*SCALE));
 		}//DOOR RIGHT: (19,5)
-		else if ((playerPos->getCoords().x / 64) == 19 && (playerPos->getCoords().y / 64) == 5 &&
+		else if ((playerPos->getCoords().x / (64 * SCALE)) == doorRightX && (playerPos->getCoords().y / (64 * SCALE)) == doorRightY &&
 			currentRoom->getRightD() != nullptr)
 		{
 			Player* currentPlayer = currentRoom->getCurrentEntityHandler().getPlayer();
 			currentRoom = currentRoom->getRightD();
 			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
-			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(1 * 64, 5 * 64));
+			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(1 * 64*SCALE, 5 * 64*SCALE));
 		}//DOOR DOWN: (10,10)
-		else if ((playerPos->getCoords().x / 64) == 10 && (playerPos->getCoords().y / 64) == 10 &&
+		else if ((playerPos->getCoords().x / (64 * SCALE)) == doorDownX && (playerPos->getCoords().y / (64 * SCALE)) == doorDownX &&
 			currentRoom->getDownD() != nullptr)
 		{
 			Player* currentPlayer = currentRoom->getCurrentEntityHandler().getPlayer();
 			currentRoom = currentRoom->getDownD();
 			currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
-			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(10 * 64, 1 * 64));
+			currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(10 * 64*SCALE, 1 * 64*SCALE));
 		}
 		
 	}

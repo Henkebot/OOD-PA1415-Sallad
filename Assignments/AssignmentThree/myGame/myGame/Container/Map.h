@@ -9,7 +9,8 @@ namespace Container
 	class Map 
 	{
 	private:
-		sf::RectangleShape shape;
+		sf::Texture* hudTexture;
+		sf::Sprite* hudSprite;
 		Cave caves;
 	public:
 		Map();
@@ -17,7 +18,7 @@ namespace Container
 		
 		void update(float dt);
 		void render(sf::RenderTarget& target) const;
-		void generateCave(const std::string& url);
+		void generateCave(const std::string& user);
 		void createMap();
 
 

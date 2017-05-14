@@ -21,11 +21,8 @@ sf::Vector2f Mob::moveRequest()
 }
 
 void Mob::move(int xDir, int yDir)
-{
-
-	
+{	
 	setPos(sf::Vector2f(getSprite().getPosition().x + (64 * xDir), getSprite().getPosition().y + (64 * yDir)));
-
 }
 //ONLY TEMPORARY RETURNTYPE VOID UNTILL STATS ARE IMPLEMENTED
 void Mob::getStats() const

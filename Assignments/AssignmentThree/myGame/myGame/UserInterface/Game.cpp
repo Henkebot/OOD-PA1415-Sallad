@@ -7,6 +7,8 @@ Game::Game(GameStateManager * gsm) :
 	this->map.createMap();
 	this->shape.setSize(sf::Vector2f(200, 200));
 	this->shape.setFillColor(sf::Color(255, 100, 55));
+
+	Textures::init();
 }
 
 Game::Game(const Game & other) :
@@ -30,13 +32,12 @@ void Game::update(float dt)
 
 void Game::handleEvents()
 {
-	//Press esc pause state
-
-
-	if (InputManager::keyPressed(sf::Keyboard::Return))
+	if (InputManager::keyPressed(sf::Keyboard::Escape))
 	{
-		this->gsm->popState();
-		std::cout << "Game poped\n";
+		sf::Image gameScreen;
+		
+		this->gsm->pushState(new Pause(this->gsm));
+		std::cout << "Pause pushed\n";
 	}
 
 }
