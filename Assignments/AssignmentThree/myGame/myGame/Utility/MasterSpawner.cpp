@@ -48,8 +48,9 @@ int MasterSpawner::spawnEnemies(Enemy **& enemies) const
 		{
 			for (int k = 0; k < inRoom[i].getAmount(); k++)
 			{
-				int x = rand() % (static_cast<int>(Val::ROOM_WIDTH) - 1) + 1 ;
-				enemies[nrOfEmy++] = new Enemy(goblinTexure, sf::Vector2f(x * (64 * 0.75f), 5 * (64 * 0.75f)));
+				int y = rand() % (static_cast<int>(Val::ROOM_HEIGHT) - 2) + 1;
+				int x = rand() % (static_cast<int>(Val::ROOM_WIDTH) - 2) + 1;
+				enemies[nrOfEmy++] = new Enemy(goblinTexure, sf::Vector2f(x * (Val::SPRITE_SIZE * Val::SCALE), y * (Val::SPRITE_SIZE * 0.75f)));
 			}
 		}
 		else if (this->inRoom[i].getId() == "spider")
@@ -70,6 +71,8 @@ int MasterSpawner::spawnEnemies(Enemy **& enemies) const
 		{
 			for (int k = 0; k < inRoom[i].getAmount(); k++)
 			{
+				int y = rand() % (static_cast<int>(Val::ROOM_HEIGHT) - 2) + 1;
+				int x = rand() % (static_cast<int>(Val::ROOM_WIDTH) - 2) + 1;
 				enemies[nrOfEmy++] = new Enemy(zombieTexture, sf::Vector2f(5 * (64 * 0.75f), 7 * (64 * 0.75f)));
 			}
 		}
