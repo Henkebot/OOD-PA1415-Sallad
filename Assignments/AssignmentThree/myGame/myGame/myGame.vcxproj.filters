@@ -5,7 +5,15 @@
     <ClCompile Include="Container\Inventory.cpp" />
     <ClCompile Include="Container\Map.cpp" />
     <ClCompile Include="Container\Room.cpp" />
-    <ClCompile Include="Container\EntityHandler.cpp" />
+    <ClCompile Include="UserInterface\Application.cpp" />
+    <ClCompile Include="UserInterface\Game.cpp" />
+    <ClCompile Include="UserInterface\GameStateManager.cpp" />
+    <ClCompile Include="UserInterface\Menu.cpp" />
+    <ClCompile Include="UserInterface\State.cpp" />
+    <ClCompile Include="Tests\main - kopia.cpp" />
+    <ClCompile Include="Tests\test_Stack.cpp" />
+    <ClCompile Include="Tests\test_twitter.cpp" />
+    <ClCompile Include="Tests\testMap.cpp" />
     <ClCompile Include="Gameplay\Enemy.cpp" />
     <ClCompile Include="Gameplay\Entity.cpp" />
     <ClCompile Include="Gameplay\Floor.cpp" />
@@ -31,6 +39,10 @@
     <ClCompile Include="Utility\TweetAnalyzer.cpp" />
     <ClCompile Include="Utility\Twitter.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Utility\TweetAnalyzer.cpp" />
+    <ClCompile Include="Tests\test_TweetAnal.cpp" />
+    <ClCompile Include="Utility\Identifier.cpp" />
+    <ClCompile Include="Utility\MasterSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container\Cave.h" />
@@ -73,6 +85,9 @@
     <ClInclude Include="Utility\Textures.h" />
     <ClInclude Include="Utility\TweetAnalyzer.h" />
     <ClInclude Include="Utility\Twitter.h" />
+    <ClInclude Include="Utility\Identifier.h" />
+    <ClInclude Include="Gameplay\IncludeEntites.h" />
+    <ClInclude Include="Utility\MasterSpawner.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\twitcurl.lib" />

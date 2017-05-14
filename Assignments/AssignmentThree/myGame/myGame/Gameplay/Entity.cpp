@@ -1,11 +1,14 @@
 #include "Entity.h"
-
+#include "../Container/Cave.h"
 Entity::Entity(sf::Texture* texture, sf::Vector2f coords, int health)
 {
 	this->texture = *texture; 
 	this->coords = coords; 
 	this->health = health; 
 	this->sprite.setTexture(this->texture); 
+	setCurrentSpriteFrame(0, 2);
+	this->sprite.setScale(Container::Cave::SCALE, Container::Cave::SCALE);
+	this->sprite.setPosition(coords);
 	delete texture;
 }
 
@@ -28,6 +31,12 @@ sf::Vector2f Entity::getCoords() const
 void Entity::setTexture(sf::Texture texture)
 {
 	this->texture = texture; 
+}
+
+void Entity::setCurrentSpriteFrame(int x, int y)
+{
+	sprite.setTextureRect(sf::IntRect(Container::Cave::SPRITE_SIZE * x, Container::Cave::SPRITE_SIZE * y, Container::Cave::SPRITE_SIZE, Container::Cave::SPRITE_SIZE));
+		
 }
 
 sf::Texture Entity::getTexture() const
@@ -82,10 +91,11 @@ void Entity::update(float dt)
 
 void Entity::create()
 {
-
+	
 }
 
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+
 	target.draw(this->getSprite(), states); 
 }

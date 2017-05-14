@@ -1,6 +1,7 @@
 #ifndef  ENTITY_H
 #define ENTITY_H
 #include "SFML\Graphics.hpp"
+
 class Entity : public sf::Drawable
 {
 private:
@@ -18,6 +19,7 @@ public:
 	void setCoords(sf::Vector2f coords); 
 	sf::Vector2f getCoords() const; 
 	void setTexture(sf::Texture texture); 
+	void setCurrentSpriteFrame(int x, int y);
 	sf::Texture getTexture() const; 
 	void setHealth(int health); 
 	int getHealth() const;

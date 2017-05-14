@@ -5,7 +5,6 @@
 namespace Container
 {
 	std::string Room::owner = "";
-	const int Room::SPRITE_SIZE = 64;
 
 	void Room::setEh(EntityHandler eh)
 	{
@@ -19,8 +18,11 @@ namespace Container
 
 	Room::Room(const std::string& tweet, int role)
 	{	
+		//This should be sent to EH (check class /interaction diagram)
 		Identifier* inRoom = nullptr;
 		int size = TweetAnalyser::getInRoom(tweet, inRoom);
+		//remove this delete and move it into EH destructor
+		delete[] inRoom;
 		std::cout << tweet << "has " << size << "words" << std::endl;
 		roomRole = role;
 		left = right = up = down = nullptr;
@@ -30,9 +32,9 @@ namespace Container
 		if (!tweetFont->loadFromFile("font/D3Stonism.ttf"))
 			std::cout << "Lol" << std::endl;
 		currentTweet.setFont(*tweetFont);
-		currentTweet.setString("Tweet: " + tweet);
+		currentTweet.setString(tweet);
 		currentTweet.setCharacterSize(16);
-		currentTweet.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 150));
+		currentTweet.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 140));
 		currentTweet.setFillColor(sf::Color::Black);
 
 
@@ -146,6 +148,16 @@ namespace Container
 		
 	}
 
+	bool* Room::getDoorStatus() const
+	{
+		bool doors[4];
+		doors[0] = (up != nullptr);
+		doors[1] = (right != nullptr);
+		doors[2] = (down != nullptr);
+		doors[3] = (left != nullptr);
+		return doors;
+	}
+
 	void Room::deleteSpriteArray()
 	{
 		for (int x = 0; x < 20; x++)
@@ -167,9 +179,12 @@ namespace Container
 			}
 
 		}
-		target.draw(*eh.getPlayer());
+
+		eh.render(target);
+
 		target.draw(currentTweet);
 		target.draw(tweetOwner);
+
 		/*if(down != nullptr) target.draw(doorDown);
 		if(up != nullptr) target.draw(doorUp);
 		if (right != nullptr) target.draw(doorRight);

@@ -7,6 +7,7 @@
 #include "../Gameplay/Floor.h"
 #include "../Gameplay/Structure.h"
 #include "../Utility/InputManager.h"
+
 using namespace sf;
 namespace Container
 {
@@ -17,10 +18,16 @@ namespace Container
 		EntityHandler(Player* player);
 		EntityHandler(Player* player, Vector2f playerCoords);
 		~EntityHandler();
+
 		void update(float dt);
+		void render(sf::RenderTarget& target) const;
+
 		Player* getPlayer() const;
+
 		void setPlayer(Player* player);
 		void destroyPlayer();
+		
+		void setDoors(bool* doors);
 	private:
 		//player intraction
 		bool playerMove();
@@ -50,6 +57,14 @@ namespace Container
 		int nrOfItems;
 
 		bool playersTurn;
+
+		//DEBUG
+		sf::Vertex lineX[20][2];
+		sf::Vertex lineY[11][2];
+
+		void initLines();
+
+		bool doorStatus[4];
 	};
 }
 

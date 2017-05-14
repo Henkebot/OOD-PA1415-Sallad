@@ -42,6 +42,7 @@ void Player::pickUpItem(Item item)
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+
 	target.draw(this->getSprite(), states); 
 }
 
@@ -58,21 +59,25 @@ directions Player::getDirection() const
 sf::Vector2f Player::moveRequest()
 {
 	sf::Vector2f request = getCoords();
+	// MÅSTE FIXA DETTA
+	
+	float tile = 0.75f * 64;
+
 	if (direction == up)
 	{
-		request.y--;
+		request.y-=tile;
 	}
 	else if(direction == left)
 	{
-		request.x--;
+		request.x-=tile;
 	}
 	else if (direction == down)
 	{
-		request.y++;
+		request.y+=tile;
 	}
 	else if (direction == right)
 	{
-		request.x++;
+		request.x+=tile;
 	}
 	return request;
 }

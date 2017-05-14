@@ -1,4 +1,4 @@
-4
+6
 stefan
 goblin
 world
@@ -7,3 +7,27 @@ pa1415
 skeleton
 bth
 zombie
+donald
+water
+milk
+path
+**************************
+*    Instructions        *
+**************************
+* Put amount of keywords *
+* in file at the top.    *
+* Write like this:       *
+* keyword                *
+* id                     *
+**************************
+* Example:               *
+* donald                 *
+* water                  *
+**************************
+* keyword is donald      *
+* id is water            *
+**************************
+* OBS!                   *
+* everything must be     *
+* lowercase!             *
+**************************

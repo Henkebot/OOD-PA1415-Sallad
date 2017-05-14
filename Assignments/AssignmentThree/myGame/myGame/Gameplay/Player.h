@@ -3,6 +3,7 @@
 #include "Mob.h"
 #include "../Container/Inventory.h"
 #include "Item.h"
+
 class Player : public Mob
 {
 private:
@@ -10,7 +11,7 @@ private:
 	Inventory* inventory;
 	directions direction;
 public:
-	Player(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0, 0), int health = 0);
+	Player(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(64*5, 64*5), int health = 0);
 	~Player(); 
 	void setXP(long xp);
 	long getXP() const;
