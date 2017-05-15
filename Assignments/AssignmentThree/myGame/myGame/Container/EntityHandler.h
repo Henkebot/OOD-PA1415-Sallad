@@ -45,20 +45,20 @@ namespace Container
 
 		void handleInput();
 		void extraCon();
-		//float calculateDmg(Stats attackerStats, Stats defenderStats);
+		int calculateDmg(Stats attackerStats, Stats defenderStats);
 		bool isFloor(Vector2f coords);
+		bool isCol(Vector2f firstCoord, Vector2f SecondCoord);
 		void removeItem(int index);
 
 		
 		Player* player;
 		sf::Texture* playerTexture;
-		Enemy** enemys;
-		int nrOfEnemies;
+		Enemy** enemys;		
 		Structure** structures;
 		Item** items;
-		Floor* floor[25][25];
+		Floor* floor[11][20];
 
-		int nrOfEnemys;
+		int nrOfEnemies;
 		int nrOfStructures;
 		int nrOfItems;
 

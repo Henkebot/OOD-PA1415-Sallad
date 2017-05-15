@@ -1,6 +1,6 @@
 #include "Item.h"
 
-Item::Item(sf::Texture* texture, sf::Vector2f coords, int health) : Entity(texture, coords, health)
+Item::Item(sf::Texture* texture, sf::Vector2f coords) : Entity(texture, coords)
 {
 
 }

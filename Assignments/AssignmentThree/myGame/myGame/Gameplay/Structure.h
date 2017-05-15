@@ -6,7 +6,7 @@ class Structure : public NonMoveable
 private:
 
 public:
-	Structure(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0, 0), int health = 0);
+	Structure(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0, 0));
 	~Structure(); 
 	void create(); 
 	std::string getInteractionEffect(); 

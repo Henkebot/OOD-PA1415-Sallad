@@ -1,10 +1,9 @@
 #include "Entity.h"
 #include "../Utility/Values.h"
-Entity::Entity(sf::Texture* texture, sf::Vector2f coords, int health)
+Entity::Entity(sf::Texture* texture, sf::Vector2f coords)
 {
 	this->texture = *texture; 
 	this->coords = coords; 
-	this->health = health; 
 	this->sprite.setTexture(this->texture); 
 	setCurrentSpriteFrame(0, 0);
 	this->sprite.setScale(Val::SCALE, Val::SCALE);
@@ -41,17 +40,6 @@ sf::Texture Entity::getTexture() const
 {
 	return this->texture; 
 }
-
-void Entity::setHealth(int health)
-{
-	this->health = health; 
-}
-
-int Entity::getHealth() const
-{
-	return this->health; 
-}
-
 
 void Entity::setSprite(const sf::Sprite& sprite)
 {

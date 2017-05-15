@@ -1,6 +1,6 @@
 #include "Structure.h"
 
-Structure::Structure(sf::Texture* texture, sf::Vector2f coords, int health) : NonMoveable(texture, coords, health)
+Structure::Structure(sf::Texture* texture, sf::Vector2f coords) : NonMoveable(texture, coords)
 {
 
 }

@@ -1,7 +1,8 @@
 #include "Mob.h"
 #include "../Utility/Values.h"
+#include <iostream>
 
-Mob::Mob(sf::Texture* texture, sf::Vector2f coords, int health) : Entity(texture,coords,health)
+Mob::Mob(sf::Texture* texture, sf::Vector2f coords) : Entity(texture,coords)
 {
 	int startDirection = (rand() % 4) + 1; 
 	if (startDirection == 1)
@@ -24,6 +25,7 @@ Mob::Mob(sf::Texture* texture, sf::Vector2f coords, int health) : Entity(texture
 		this->m_direction = directions::left; 
 		this->setCurrentSpriteFrame(0, 3);
 	}
+	stats = new Stats(10,0.2f,10);
 }
 
 Mob::~Mob()
@@ -33,7 +35,28 @@ Mob::~Mob()
 
 sf::Vector2f Mob::attack()
 {
-	return sf::Vector2f(0, 0);
+	sf::Vector2f request = getCoords();
+	// MÅSTE FIXA DETTA
+
+	float tile = Val::SCALE * Val::SPRITE_SIZE;
+
+	if (m_direction == up)
+	{
+		request.y -= tile;
+	}
+	else if (m_direction == left)
+	{
+		request.x -= tile;
+	}
+	else if (m_direction == down)
+	{
+		request.y += tile;
+	}
+	else if (m_direction == right)
+	{
+		request.x += tile;
+	}
+	return request;
 }
 
 sf::Vector2f Mob::moveRequest()
@@ -41,7 +64,7 @@ sf::Vector2f Mob::moveRequest()
 	sf::Vector2f request = getCoords();
 	// MÅSTE FIXA DETTA
 
-	float tile = 0.75f * 64;
+	float tile = Val::SCALE * Val::SPRITE_SIZE;
 
 	if (m_direction == up)
 	{
@@ -71,9 +94,9 @@ void Mob::move(int xDir, int yDir)
 	setPos(sf::Vector2f(playerNewX, playerNewY));
 }
 //ONLY TEMPORARY RETURNTYPE VOID UNTILL STATS ARE IMPLEMENTED
-void Mob::getStats() const
+Stats* Mob::getStats() const
 {
-
+	return stats;
 }
 
 void Mob::setDirection(directions direction)
@@ -169,7 +192,7 @@ void Mob::setIsAllowedDown(bool isAllowed)
 bool Mob::isDead() const
 {
 	bool isDead = false; 
-	if (this->getHealth() <= 0)
+	if (stats->getHealth() <= 0)
 	{
 		isDead = true;
 	}
