@@ -43,7 +43,7 @@ void Menu::handleEvents()
 {
 	if (InputManager::keyPressed(sf::Keyboard::Return))
 	{
-		this->gsm->pushState(new Game(this->gsm));
+		this->gsm->pushState(new EnterFeed(this->gsm));
 	}
 	else if (InputManager::keyPressed(sf::Keyboard::Escape))
 	{

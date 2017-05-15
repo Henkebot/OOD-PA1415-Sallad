@@ -1,5 +1,5 @@
-#ifndef TWITTEsR_H
-#define TWITTEsR_H
+#ifndef TWITTER_H
+#define TWITTER_H
 #pragma once
 #pragma comment(lib, "legacy_stdio_definitions.lib") 
 #include <cstdio>

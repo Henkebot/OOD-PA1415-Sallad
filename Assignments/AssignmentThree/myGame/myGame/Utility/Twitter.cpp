@@ -113,6 +113,7 @@ void Twitter::getTweets(const std::string & feed)
 	int currentIndex = 0;
 	int nrOfTweets = 0;
 	int skipper = 0;
+	int tweetCounter = 0;
 
 	std::string beforeTweet = "\"text\":\"";
 	std::string afterTweet = "\",\"truncated\":";
@@ -147,11 +148,15 @@ void Twitter::getTweets(const std::string & feed)
 					tweet += feed[k];
 				}
 				//std::cout << tweet << std::endl;
-				this->tweets[i] = std::string(tweet);
+				if (tweet.size() <= 144)
+				{
+					this->tweets[tweetCounter++] = std::string(tweet);
+				}
+				
 				skipper = 1;
 			}
 		}
-
+		this->size -= (this->size - tweetCounter);
 	}
 	
 }

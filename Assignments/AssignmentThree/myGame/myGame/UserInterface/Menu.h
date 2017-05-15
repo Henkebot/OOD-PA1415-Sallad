@@ -2,7 +2,7 @@
 #define MENU_H
 #include "State.h"
 #include <iostream>
-#include "Game.h"
+#include "EnterFeed.h"
 #include "Application.h"
 
 class Menu : public State

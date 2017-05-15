@@ -10,7 +10,8 @@ namespace Container
 		hudSprite = new sf::Sprite();
 		hudSprite->setTexture(*hudTexture);
 
-		generateCave("PA1415_Sallad");
+		//generateCave("PA1415_Sallad");
+		
 	}
 
 	Map::~Map()
@@ -40,9 +41,9 @@ namespace Container
 		caves.generateCave();
 	}
 
-	void Map::createMap()
+	void Map::createMap(std::string rootUser)
 	{
-
+		generateCave(rootUser);
 	}
 
 }

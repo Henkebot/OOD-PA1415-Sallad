@@ -6,6 +6,7 @@ class InputManager
 {
 public:
 	static bool keyPressed(sf::Keyboard::Key key);
+	static int getIndexOfKeyPressed();
 private:
 	static bool buttons[200];
 	

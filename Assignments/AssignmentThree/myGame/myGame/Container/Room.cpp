@@ -32,7 +32,25 @@ namespace Container
 		if (!tweetFont->loadFromFile("font/D3Stonism.ttf"))
 			std::cout << "Lol" << std::endl;
 		currentTweet.setFont(*tweetFont);
-		currentTweet.setString(tweet);
+
+		//test
+		std::string aTweet = tweet;
+		bool wantNewLine = false;
+		for (int i = 0; i < aTweet.size(); i++)
+		{
+			if ((i + 1) % 60 == 0)
+			{
+				wantNewLine = true;
+			}
+			if (wantNewLine && tweet[i] == ' ')
+			{
+				aTweet[i] = '\n';
+				wantNewLine = false;
+			}
+		}
+
+
+		currentTweet.setString(aTweet);
 		currentTweet.setCharacterSize(16);
 		currentTweet.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 140));
 		currentTweet.setFillColor(sf::Color::Black);

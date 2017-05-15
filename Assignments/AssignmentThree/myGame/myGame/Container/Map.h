@@ -19,7 +19,7 @@ namespace Container
 		void update(float dt);
 		void render(sf::RenderTarget& target) const;
 		void generateCave(const std::string& user);
-		void createMap();
+		void createMap(std::string rootUser = "");
 
 
 

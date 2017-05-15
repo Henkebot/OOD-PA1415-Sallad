@@ -5,11 +5,12 @@
 #include <iostream>
 #include "Pause.h"
 #include "../Utility/Textures.h"
+#include <string>
 
 class Game : public State
 {
 public:
-	Game(GameStateManager* gsm = nullptr);
+	Game(GameStateManager* gsm = nullptr, std::string user = "");
 	Game(const Game& other);
 	virtual ~Game();
 

@@ -1,10 +1,10 @@
 #include "Game.h"
 
-Game::Game(GameStateManager * gsm) :
+Game::Game(GameStateManager * gsm, std::string user) :
 	State(gsm)
 {
 	std::cout << "Game State pushed!\n";
-	this->map.createMap();
+	this->map.createMap(user);
 	this->shape.setSize(sf::Vector2f(200, 200));
 	this->shape.setFillColor(sf::Color(255, 100, 55));
 
