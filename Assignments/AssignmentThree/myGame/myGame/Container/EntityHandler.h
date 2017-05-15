@@ -30,6 +30,7 @@ namespace Container
 		void destroyPlayer();
 		
 		void setDoors(bool* doors);
+		void setStructureProperty(int role, int spriteSheet);
 		void createEntities(Identifier* inRoom, int size);
 	private:
 		//player intraction
@@ -54,9 +55,11 @@ namespace Container
 		sf::Texture* playerTexture;
 		Enemy** enemys;
 		int nrOfEnemies;
+		int structureProperty;
 		Structure** structures;
 		Item** items;
-		Floor* floor[25][25];
+		int floorSheet;
+		Floor* floor[11][20];
 
 		int nrOfEnemys;
 		int nrOfStructures;

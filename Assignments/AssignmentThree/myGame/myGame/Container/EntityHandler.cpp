@@ -43,9 +43,9 @@ EntityHandler::~EntityHandler()
 	}
 	delete structures;
 
-	for (int i = 0; i < 25; i++)
+	for (int i = 1; i < Val::ROOM_HEIGHT - 1; i++)
 	{
-		for (int j = 0; j < 25; j++)
+		for (int j = 1; j < Val::ROOM_WIDTH - 1; j++)
 		{
 			delete floor[i][j];
 		}
@@ -97,17 +97,31 @@ void EntityHandler::update(float dt)
 
 void Container::EntityHandler::render(sf::RenderTarget & target) const
 {
+	for (int y = 1; y < Val::ROOM_HEIGHT - 1; y++)
+	{
+		for (int x = 1; x < Val::ROOM_WIDTH - 1; x++)
+		{
+			target.draw(*floor[y][x]);
+		}
+	}
+	if (structureProperty == 1)
+	{
+		target.draw(*structures[1]);
+
+	}
 	target.draw(*player);
-	/*for (int i = 0; i < Val::ROOM_WIDTH; i++)
+	for (int i = 0; i < Val::ROOM_WIDTH; i++)
 		target.draw(lineX[i], 2, sf::Lines);	
 	for (int i = 0; i < Val::ROOM_HEIGHT; i++)
-		target.draw(lineY[i], 2, sf::Lines);*/
+		target.draw(lineY[i], 2, sf::Lines);
 
 	for (int i = 0; i < nrOfEnemies; i++)
 	{
 		target.draw(*enemys[i]);
 	}
-	
+
+	if (structureProperty == 1)
+		target.draw(*structures[0]);
 }
 
 Player * Container::EntityHandler::getPlayer() const
@@ -133,10 +147,50 @@ void Container::EntityHandler::setDoors(bool * doors)
 	}
 }
 
+void Container::EntityHandler::setStructureProperty(int role, int spriteSheet)
+{
+	structureProperty = role;
+	floorSheet = spriteSheet;
+}
+
 void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 {
 	MasterSpawner spawner(inRoom, size);
 	nrOfEnemies = spawner.spawnEnemies(enemys);
+
+	sf::Texture* tiles = new sf::Texture();
+	if(floorSheet == 0)
+		tiles->loadFromFile("./textures/sheet.png", sf::IntRect(Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+	else if(floorSheet == 1)
+		tiles->loadFromFile("./textures/sheet2.png", sf::IntRect(Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+	else 
+		tiles->loadFromFile("./textures/sheet3.png", sf::IntRect(Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+
+	for (int y = 1; y < Val::ROOM_HEIGHT - 1; y++)
+	{
+		for (int x = 1; x < Val::ROOM_WIDTH - 1; x++)
+		{
+			floor[y][x] = new Floor(tiles, sf::Vector2f(x * Val::FINAL_SIZE, y * Val::FINAL_SIZE));
+		}
+	}
+
+	if (structureProperty == 1)
+	{
+		std::cout << "köres!!!!!!!!";
+		Texture* textureLadderLower = new sf::Texture();
+		Texture* textureLadderUpper = new sf::Texture();
+		textureLadderLower->loadFromFile("./textures/sheet.png", sf::IntRect(3 * Val::SPRITE_SIZE, 2 * Val::SPRITE_SIZE,
+			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+		textureLadderUpper->loadFromFile("./textures/sheet.png", sf::IntRect(3 * Val::SPRITE_SIZE, 1 * Val::SPRITE_SIZE,
+			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+
+		this->structures = new Structure*[2];
+		structures[0] = new Structure(textureLadderUpper, sf::Vector2f(5*Val::FINAL_SIZE, 5*Val::FINAL_SIZE));
+		structures[1] = new Structure(textureLadderLower, sf::Vector2f(5 * Val::FINAL_SIZE, 6 * Val::FINAL_SIZE));
+		
+	}
+	// Lägga till start och slut skiten när victor är klar
+
 
 }
 
@@ -259,8 +313,9 @@ bool EntityHandler::playerMove()
 		removeItem(i);
 	}
 
-	int width = (20 - 1) * (64 * 0.75f);
-	int height = (11 - 1) * (64 * 0.75f);
+	//Väggar
+	int width = (Val::ROOM_WIDTH - 1) * (Val::FINAL_SIZE);
+	int height = (Val::ROOM_HEIGHT - 1) * (Val::FINAL_SIZE);
 	if (requestedCoords.x == width ||
 		requestedCoords.x == 0 ||
 		requestedCoords.y == height ||

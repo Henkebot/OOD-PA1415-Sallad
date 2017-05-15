@@ -15,20 +15,13 @@ namespace Container
 		return eh;
 	}
 
-	Room::Room(const std::string& tweet, int role)
+	Room::Room(const std::string& tweet,int role)
 	{	
-		//This should be sent to EH (check class /interaction diagram)
-		Identifier* inRoom = nullptr;
-		int size = TweetAnalyser::getInRoom(tweet, inRoom);
-		eh.createEntities(inRoom, size);
-		//remove this delete and move it into EH destructor
-		delete[] inRoom;
-		std::cout << tweet << "has " << size << "words" << std::endl;
-		roomRole = role;
+	
+		
 
 		left = right = up = down = nullptr;
-
-		std::cout << tweet << std::endl;
+		roomRole = role;
 		this->tweet = tweet;
 
 		tweetFont = new sf::Font();
@@ -53,7 +46,6 @@ namespace Container
 				wantNewLine = false;
 			}
 		}
-
 
 		currentTweet.setString(aTweet);
 		currentTweet.setCharacterSize(16);
@@ -132,6 +124,17 @@ namespace Container
 		tweetOwner.setCharacterSize(20);
 		tweetOwner.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 170));
 		tweetOwner.setFillColor(sf::Color::Black);
+	}
+
+	void Room::customizeRoom(int spriteSheet)
+	{
+		Identifier* inRoom = nullptr;
+		int size = TweetAnalyser::getInRoom(tweet, inRoom);
+
+		eh.setStructureProperty(roomRole, spriteSheet);
+		eh.createEntities(inRoom, size);
+		//remove this delete and move it into EH destructor
+		delete[] inRoom;
 	}
 
 	void Room::setSpriteArray(sf::Sprite ** array)

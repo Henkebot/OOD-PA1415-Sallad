@@ -43,7 +43,7 @@ namespace Container
 
 	void Map::createMap(std::string rootUser)
 	{
-		generateCave(rootUser);
+		generateCave("PA1415_Sallad");
 	}
 
 }

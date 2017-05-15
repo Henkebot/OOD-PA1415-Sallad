@@ -22,7 +22,6 @@ namespace Container
 		EntityHandler eh;
 
 		sf::Font* tweetFont;
-
 		static std::string owner;
 		sf::Text tweetOwner;
 
@@ -56,7 +55,7 @@ namespace Container
 		int getRole() const;
 
 		void setOwner(const std::string& owner);
-
+		void customizeRoom(int spriteSheet);
 		void setSpriteArray(sf::Sprite** array);
 		void update(float dt);
 

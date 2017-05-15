@@ -56,13 +56,14 @@ namespace Container
 			{
 				setSprite(spriteArray, Val::ROOM_WIDTH - 1, i, 2, 1);
 			}
-			for (float x = 1; x < Val::ROOM_WIDTH - 1; x++) // MITTEN
-			{
-				for (float y = 1; y < Val::ROOM_HEIGHT - 1; y++)
-				{
-					setSprite(spriteArray, x, y, 1, 1);
-				}
-			}
+			// Detta sköter entityHandler
+			//for (float x = 1; x < Val::ROOM_WIDTH - 1; x++) // MITTEN
+			//{
+			//	for (float y = 1; y < Val::ROOM_HEIGHT - 1; y++)
+			//	{
+			//		setSprite(spriteArray, x, y, 1, 1);
+			//	}
+			//}
 			for (float i = 0; i < Val::ROOM_WIDTH; i++) // BOTTEN
 			{
 				setSprite(spriteArray, i, Val::ROOM_HEIGHT - 1, 0, 2);
@@ -114,6 +115,7 @@ namespace Container
 				setSprite(spriteArray, 10, 10, 0, 2);
 				setSprite(spriteArray, 11, 10, 0, 2);
 			}
+			roomPointers.at(i)->customizeRoom(tilesNumber);
 			roomPointers.at(i)->setSpriteArray(spriteArray);
 
 		}

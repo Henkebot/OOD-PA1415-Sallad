@@ -8,6 +8,7 @@ namespace Val
 	static const float SPRITE_SIZE = 64;
 	static const float ROOM_WIDTH = 20;
 	static const float ROOM_HEIGHT = 11;
+	static const float FINAL_SIZE = SPRITE_SIZE * SCALE;
 
 }
 
