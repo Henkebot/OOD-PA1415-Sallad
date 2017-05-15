@@ -3,8 +3,8 @@
 Stats::Stats()
 {
 	this->defence = 0.2f;
-	this->attack = 10;
-	this->health = 10;
+	this->attack = 10.0f;
+	this->health = 10.0f;
 }
 
 Stats::Stats(int attack, float defence, int health)
@@ -34,17 +34,17 @@ void Stats::setDefence(float defence)
 	this->defence = defence;
 }
 
-void Stats::setAttack(int attack)
+void Stats::setAttack(float attack)
 {
 	this->attack = attack;
 }
 
-void Stats::setHealth(int health)
+void Stats::setHealth(float health)
 {
 	this->health = health;
 }
 
-int Stats::getHealth() const
+float Stats::getHealth() const
 {
 	return this->health;
 }

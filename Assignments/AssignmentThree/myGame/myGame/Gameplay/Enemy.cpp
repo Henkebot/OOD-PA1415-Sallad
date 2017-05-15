@@ -8,6 +8,7 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2f coords)  : Mob(texture,coords)
 {
 	agro = 3;
 	state = states::idle;
+	getStats()->setAttack(2.0f);
 }
 
 Enemy::~Enemy()

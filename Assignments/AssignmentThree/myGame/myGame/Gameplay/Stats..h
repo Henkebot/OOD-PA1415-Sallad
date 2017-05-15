@@ -4,8 +4,8 @@ class Stats
 {
 private:
 	float defence;
-	int attack;
-	int health;
+	float attack;
+	float health;
 public:
 	Stats();
 	Stats(int attack, float defence, int health);
@@ -14,9 +14,9 @@ public:
 	float getDefence() const;
 	int getAttack() const;
 	void setDefence(float defence);
-	void setAttack(int attack);
-	void setHealth(int health);
-	int getHealth() const;
+	void setAttack(float attack);
+	void setHealth(float health);
+	float getHealth() const;
 	void takeDMG(int dmg);
 };
 #endif
