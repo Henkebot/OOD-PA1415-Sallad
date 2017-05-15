@@ -5,14 +5,14 @@ namespace Container
 	Map::Map()
 	{
 		hudTexture = new sf::Texture();
-		if (hudTexture->loadFromFile(".\\textures\\hud.png", sf::IntRect(957, 0, 1280 - 957, 720)))
+		if (hudTexture->loadFromFile(".\\textures\\hud.png", sf::IntRect(960, 0, 320, 293)))
 			std::cout << "HUD loading" << std::endl;
 		hudSprite = new sf::Sprite();
 		hudSprite->setTexture(*hudTexture);
 		hudSprite->setPosition(sf::Vector2f(957, 0));
 		//0, 528
 		tweetTexture = new sf::Texture();
-		tweetTexture->loadFromFile(".\\textures\\hud.png", sf::IntRect(0, 528, 1280, 1280 - 528));
+		tweetTexture->loadFromFile(".\\textures\\hud.png", sf::IntRect(0, 528, 960, 192));
 		tweetZone = new sf::Sprite();
 		tweetZone->setTexture(*tweetTexture);
 		tweetZone->setPosition(sf::Vector2f(0, 528));

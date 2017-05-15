@@ -132,9 +132,6 @@
     <Library Include="lib\twitcurl.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="font\D3Stonism.ttf" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="font\lol.txt" />
     <Text Include="textures\This is text.txt" />
   </ItemGroup>

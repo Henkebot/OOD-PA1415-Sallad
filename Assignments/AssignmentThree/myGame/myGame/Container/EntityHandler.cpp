@@ -1,6 +1,7 @@
 #include "EntityHandler.h"
 using namespace Container;
 #include "../Utility/Values.h"
+#include <algorithm>
 EntityHandler::EntityHandler()
 {
 	player = nullptr;
@@ -28,6 +29,31 @@ void EntityHandler::extraCon()
 	nrOfStructures = 0;
 	inputTimer.restart().asSeconds();
 	timeCollector = 0;
+
+	statusTexture.loadFromFile(".\\textures\\hud.png", sf::IntRect(960, 293, 320, 427));
+	statusSprite.setTexture(statusTexture);
+	statusSprite.setPosition(960, 293);
+
+	if (statusFont.loadFromFile(".\\font\\D3Stonism.ttf"))
+		std::cout << "statusFont couldnt load from file! " << std::endl;
+	
+	armorText.setFont(statusFont);
+	armorText.setString("10");
+	armorText.setCharacterSize(20);
+	armorText.setPosition(1005, 314);
+
+	attackText.setFont(statusFont);
+	attackText.setString("10");
+	attackText.setCharacterSize(20);
+	attackText.setPosition(1115, 314);
+
+	healthText.setFont(statusFont);
+	healthText.setString("10");
+	healthText.setCharacterSize(20);
+	healthText.setPosition(1212, 314);
+	
+
+
 }
 
 int Container::EntityHandler::calculateDmg(Stats attackerStats, Stats defenderStats)
@@ -110,10 +136,12 @@ void EntityHandler::update(float dt)
 		enemys[i]->updateHealthbar();
 	}
 	player->updateHealthbar();
+	updateStatusText();
 }
 
 void Container::EntityHandler::render(sf::RenderTarget & target) const
 {
+	target.draw(statusSprite);
 	for (int y = 1; y < Val::ROOM_HEIGHT - 1; y++)
 	{
 		for (int x = 1; x < Val::ROOM_WIDTH - 1; x++)
@@ -144,6 +172,10 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 
 	if (structureProperty == 1)
 		target.draw(*structures[1]);
+
+	target.draw(armorText);
+	target.draw(attackText);
+	target.draw(healthText);
 }
 
 Player * Container::EntityHandler::getPlayer() const
@@ -508,6 +540,19 @@ void Container::EntityHandler::remoceDead()
 			}
 		}
 	}
+}
+
+void Container::EntityHandler::updateStatusText()
+{
+	
+	std::string armor = std::to_string(player->getStats()->getDefence());
+	armor.erase(armor.find_first_not_of('0') + 2, std::string::npos);
+	std::string attack = std::to_string(player->getStats()->getAttack());
+	std::string health = std::to_string(player->getStats()->getHealth());
+	health.erase(armor.find_first_not_of('0') + 2, std::string::npos);
+	armorText.setString(armor);
+	attackText.setString(attack);
+	healthText.setString(health);
 }
 
 void Container::EntityHandler::initLines()
