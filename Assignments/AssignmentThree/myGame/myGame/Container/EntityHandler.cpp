@@ -436,7 +436,10 @@ void Container::EntityHandler::EnemyMove()
 	{
 		Vector2f requestedCoords = enemys[i]->moveRequest();
 		bool col = isFloor(requestedCoords);
+		for (int i = 0; i < this->nrOfEnemies; i++)
+		{
 
+		}
 		for (int i = 0; i < nrOfStructures && col == false; i++)
 		{
 			Vector2f otherCoords = structures[i]->getCoords();
@@ -450,13 +453,6 @@ void Container::EntityHandler::EnemyMove()
 			removeItem(i);
 		}
 
-	/*	int width = (20 - 1) * (64 * 0.75f);
-		int height = (11 - 1) * (64 * 0.75f);
-		if (requestedCoords.x == width ||
-			requestedCoords.x == 0 ||
-			requestedCoords.y == height ||
-			requestedCoords.y == 0)
-			col = true;*/
 		if (!col)
 		{
 			this->enemys[i]->move(enemys[i]->getDirX(), enemys[i]->getDirY());
