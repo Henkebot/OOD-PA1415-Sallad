@@ -88,15 +88,21 @@ void EntityHandler::update(float dt)
 			else if (enemys[i]->getState() == move)
 			{
 				std::cout << "move" << std::endl;
-				EnemyMove();
+				EnemyMove(i);
 			}
 			else
 			{
 				std::cout << "idle" << std::endl;
+				int rng = rand() % 10;
+				if (rng < 4)
+				{
+					EnemyMove(i);
+				}
 			}
 		}
 		playersTurn = true;
 	}
+	remoceDead();
 }
 
 void Container::EntityHandler::render(sf::RenderTarget & target) const
@@ -126,10 +132,7 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 
 	for (int i = 0; i < nrOfEnemies; i++)
 	{
-		if (enemys[i]->isDead() == false)
-		{
-			target.draw(*enemys[i]);
-		}
+		target.draw(*enemys[i]);	
 	}
 
 	if (structureProperty == 1)
@@ -231,20 +234,23 @@ void EntityHandler::handleInput(float dt)
 		playersTurn = false;
 	}
 	else if (inputTimer.getElapsedTime().asSeconds() > 500 * dt)
-	{
-		playerTurnUp();
-	}
-	else if (InputManager::keyPressed(sf::Keyboard::A) || InputManager::keyPressed(sf::Keyboard::Left))
-	{
-		playerTurnLeft();
-	}
-	else if (InputManager::keyPressed(sf::Keyboard::S) || InputManager::keyPressed(sf::Keyboard::Down))
-	{
-		playerTurnDown();
-	}
-	else if (InputManager::keyPressed(sf::Keyboard::D) || InputManager::keyPressed(sf::Keyboard::Right))
-	{
-		playerTurnRight();
+	{		
+		if (InputManager::keyPress(sf::Keyboard::W) || InputManager::keyPress(sf::Keyboard::Up))
+		{
+			playerTurnUp();
+		}
+		else if (InputManager::keyPress(sf::Keyboard::A) || InputManager::keyPress(sf::Keyboard::Left))
+		{
+			playerTurnLeft();
+		}
+		else if (InputManager::keyPress(sf::Keyboard::S) || InputManager::keyPress(sf::Keyboard::Down))
+		{
+			playerTurnDown();
+		}
+		else if (InputManager::keyPress(sf::Keyboard::D) || InputManager::keyPress(sf::Keyboard::Right))
+		{
+			playerTurnRight();
+		}
 	}
 }
 
@@ -408,34 +414,31 @@ void EntityHandler::playerTurnRight()
 	}
 }
 
-void Container::EntityHandler::EnemyMove()
+void Container::EntityHandler::EnemyMove(int index)
 {
-	for (int i = 0; i < this->nrOfEnemies; i++)
+	Vector2f requestedCoords = enemys[index]->moveRequest();
+	bool col = isFloor(requestedCoords);
+	if (col == false)
 	{
-		Vector2f requestedCoords = enemys[i]->moveRequest();
-		//bool col = isFloor(requestedCoords);
-		bool col = false;
-		if (col == false)
-		{
-			col = isCol(requestedCoords, player->getCoords());
-		}
-		for (int i = 0; i < nrOfEnemies && col == false; i++)
-		{
-			Vector2f otherCoords = enemys[i]->getCoords();
-			col = isCol(requestedCoords, otherCoords);
-		}
-		for (int i = 0; i < nrOfStructures && col == false; i++)
-		{
-			Vector2f otherCoords = structures[i]->getCoords();
-			col = isCol(requestedCoords, otherCoords);
-		}
-		for (int i = 0; i < nrOfItems; i++)
-		{
-			Vector2f otherCoords = items[i]->getCoords();
-			col = isCol(requestedCoords, otherCoords);
-			player->pickUpItem(*items[i]);
-			removeItem(i);
-		}
+		col = isCol(requestedCoords, player->getCoords());
+	}
+	for (int i = 0; i < nrOfEnemies && col == false; i++)
+	{
+		Vector2f otherCoords = enemys[i]->getCoords();
+		col = isCol(requestedCoords, otherCoords);
+	}
+	for (int i = 0; i < nrOfStructures && col == false; i++)
+	{
+		Vector2f otherCoords = structures[i]->getCoords();
+		col = isCol(requestedCoords, otherCoords);
+	}
+	for (int i = 0; i < nrOfItems; i++)
+	{
+		Vector2f otherCoords = items[i]->getCoords();
+		col = isCol(requestedCoords, otherCoords);
+		player->pickUpItem(*items[i]);
+		removeItem(i);
+	}
 
 	/*	int width = (20 - 1) * (64 * 0.75f);
 		int height = (11 - 1) * (64 * 0.75f);
@@ -444,10 +447,9 @@ void Container::EntityHandler::EnemyMove()
 			requestedCoords.y == height ||
 			requestedCoords.y == 0)
 			col = true;*/
-		if (!col)
-		{
-			this->enemys[i]->move(enemys[i]->getDirX(), enemys[i]->getDirY());
-		}
+	if (!col)
+	{
+		this->enemys[index]->move(enemys[index]->getDirX(), enemys[index]->getDirY());
 	}
 }
 
@@ -476,6 +478,22 @@ bool Container::EntityHandler::isCol(Vector2f firstCoord, Vector2f SecondCoord)
 
 void Container::EntityHandler::removeItem(int index)
 {
+}
+
+void Container::EntityHandler::remoceDead()
+{
+	for (int i = 0; i < nrOfEnemies; i++)
+	{
+		if (enemys[i]->isDead() == true)
+		{
+			delete enemys[i];
+			nrOfEnemies--;
+			for (int j = i; j < nrOfEnemies; j++)
+			{
+				enemys[j] = enemys[j + 1];
+			}
+		}
+	}
 }
 
 void Container::EntityHandler::initLines()

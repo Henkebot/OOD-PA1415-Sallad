@@ -15,5 +15,12 @@ enum states
 	idle,
 	interact
 };
+
+enum roomRoles
+{
+	start,
+	basic,
+	end
+};
 	
 #endif
