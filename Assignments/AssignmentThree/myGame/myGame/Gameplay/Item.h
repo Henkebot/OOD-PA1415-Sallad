@@ -6,7 +6,7 @@ class Item : public Entity
 private:
 
 public:
-	Item(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0,0), int health = 0); 
+	Item(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0,0)); 
 	~Item(); 
 	void create();
 	void update(float dt); 

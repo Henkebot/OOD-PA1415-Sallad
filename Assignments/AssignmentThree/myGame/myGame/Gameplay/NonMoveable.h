@@ -8,7 +8,7 @@ class NonMoveable : public Entity
 private:
 
 public:
-	NonMoveable(sf::Texture* texture, sf::Vector2f coords, int health); 
+	NonMoveable(sf::Texture* texture, sf::Vector2f coords); 
 	~NonMoveable(); 
 
 };

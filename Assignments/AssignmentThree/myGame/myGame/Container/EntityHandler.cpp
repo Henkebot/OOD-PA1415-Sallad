@@ -24,16 +24,23 @@ EntityHandler::EntityHandler(Player* player, Vector2f playerCoords)
 void EntityHandler::extraCon()
 {
 	playersTurn = true;
-	nrOfEnemys = 0;
 	nrOfItems = 0;
 	nrOfStructures = 0;
 	inputTimer.restart().asSeconds();
 	timeCollector = 0;
 }
 
+int Container::EntityHandler::calculateDmg(Stats attackerStats, Stats defenderStats)
+{
+	int dmg = attackerStats.getAttack();
+	float defenceModifier = 1 - defenderStats.getDefence();
+	dmg *= defenceModifier;
+	return dmg;
+}
+
 EntityHandler::~EntityHandler()
 {
-	for (int i = 0; i < nrOfEnemys; i++)
+	for (int i = 0; i < nrOfEnemies; i++)
 	{
 		delete enemys[i];
 	}
@@ -44,6 +51,7 @@ EntityHandler::~EntityHandler()
 		delete structures[i];
 	}
 	delete structures;
+
 
 	for (int i = 1; i < Val::ROOM_HEIGHT - 1; i++)
 	{
@@ -64,36 +72,31 @@ void EntityHandler::update(float dt)
 	else
 	{
 		Vector2f playerCoords = player->getCoords();
-		for (int i = 0; i < nrOfEnemys; i++)
+		for (int i = 0; i < nrOfEnemies; i++)
 		{
-			enemys[i]->update(dt/*, playerCoords*/);
-			/*if (enemys[i]->getState() == attack)
+			enemys[i]->checkState(playerCoords);
+			enemys[i]->update(dt);
+			if (enemys[i]->getState() == attack)
 			{
-				Stats enemyStat = enemys[i]->getStats();
-				Stats playerStat = player->getStats();
+				std::cout << "attack" << std::endl;
+				Stats enemyStat = *enemys[i]->getStats();
+				Stats playerStat = *player->getStats();
 
-				float dmg = calculateDmg(enemyStat, playerStat);
+				int dmg = calculateDmg(enemyStat, playerStat);
 
-				player->setHealth(player->getHealth()-dmg);
+				player->getStats()->takeDMG(dmg);
 			}
 			else if (enemys[i]->getState() == move)
 			{
-				Vector2f requestedCoords = enemys[i]->moveRequest();
-				bool floor = isFloor(requestedCoords);
-				bool col = false;
-				for (int j = 0; j < nrOfEnemys && col == false; j++)
-				{
-					Vector2f otherCoords = enemys[j]->getCoords();
-					//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
-				}
-				for (int j = 0; j < nrOfStructures && col == false; j++)
-				{
-					Vector2f otherCoords = structures[j]->getCoords();
-					//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
-				}
-				enemys[i]->setPos(requestedCoords);
-			}*/
+				std::cout << "move" << std::endl;
+				EnemyMove();
+			}
+			else
+			{
+				std::cout << "idle" << std::endl;
+			}
 		}
+		playersTurn = true;
 	}
 }
 
@@ -124,7 +127,10 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 
 	for (int i = 0; i < nrOfEnemies; i++)
 	{
-		target.draw(*enemys[i]);
+		if (enemys[i]->isDead() == false)
+		{
+			target.draw(*enemys[i]);
+		}
 	}
 
 	if (structureProperty == 1)
@@ -219,10 +225,12 @@ void EntityHandler::handleInput(float dt)
 	if (InputManager::keyPressed(sf::Keyboard::Q))
 	{
 		playerAttack();
+		playersTurn = false;
 	}
 	else if (InputManager::keyPressed(sf::Keyboard::E))
 	{
 		playerInteract();
+		playersTurn = false;
 	}
 	else if (timeCollector > 0.055f)
 	{
@@ -267,6 +275,7 @@ void EntityHandler::handleInput(float dt)
 			}
 			
 		}
+
 	}
 }
 
@@ -274,26 +283,27 @@ void EntityHandler::playerAttack()
 {
 	Vector2f attackCoord = player->attack();
 	bool col = false;
-	for (int i = 0; i < nrOfEnemys && col == false; i++)
+	for (int i = 0; i < nrOfEnemies && col == false; i++)
 	{
 		Vector2f enemyCoord = enemys[i]->getCoords();
 
-		//col = ColLisionHandler::isCol(attackCoord, enemyCoord);
-		/*if (col == true)
+		col = isCol(attackCoord, enemyCoord);
+		if (col == true)
 		{
-			Stats enemyStat = enemys[i]->getStats();
-			Stats playerStat = player->getStats();
+			Stats enemyStat = *enemys[i]->getStats();
+			Stats playerStat = *player->getStats();
 
 			float dmg = calculateDmg(playerStat, enemyStat);
 
-			enemys[i]->setHealth(player->getHealth() - dmg);
-		}*/
+			
+			enemys[i]->getStats()->takeDMG(dmg);
+		}
 	}
 	for (int i = 0; i < nrOfStructures && col == false; i++)
 	{
 		Vector2f structureCoord = structures[i]->getCoords();
 
-		//col = ColLisionHandler::isCol(attackCoord, enemyCoord);
+		//col = isCol(attackCoord, enemyCoord);
 		/*if (col == true)
 		{
 			Stats structureStat = structures[i]->getStats();
@@ -315,7 +325,7 @@ void EntityHandler::playerInteract()
 	{
 		Vector2f structureCoord = structures[i]->getCoords();
 
-		//col = ColLisionHandler::isCol(attackCoord, enemyCoord);
+		//col =isCol(attackCoord, enemyCoord);
 		if (col == true)
 		{
 		}
@@ -324,12 +334,13 @@ void EntityHandler::playerInteract()
 
 bool EntityHandler::playerMove()
 {
+	playersTurn = false;
 	Vector2f requestedCoords = player->moveRequest();
 	bool col = isFloor(requestedCoords);
 	for (int i = 0; i < nrOfEnemies && col == false; i++)
 	{
 		Vector2f otherCoords = enemys[i]->getCoords();
-		//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
+		col = isCol(requestedCoords, otherCoords);
 	}
 	for (int i = 0; i < nrOfStructures && col == false; i++)
 	{
@@ -342,7 +353,7 @@ bool EntityHandler::playerMove()
 	for (int i = 0; i < nrOfItems; i++)
 	{
 		Vector2f otherCoords = items[i]->getCoords();
-		//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
+		col = isCol(requestedCoords, otherCoords);
 		player->pickUpItem(*items[i]);
 		removeItem(i);
 	}
@@ -371,8 +382,6 @@ void EntityHandler::playerTurnUp()
 		{
 			player->move(0, -1);
 		}
-		EnemyMove();
-		//player->move(0, -1);//ta bort efter att playerMove är färdig
 		
 	}
 	else
@@ -390,8 +399,6 @@ void EntityHandler::playerTurnLeft()
 		{
 			player->move(-1, 0);
 		}
-		EnemyMove();
-		//player->move(-1,0);//ta bort efter att playerMove är färdig
 	}
 	else
 	{
@@ -408,8 +415,6 @@ void EntityHandler::playerTurnDown()
 		{
 			player->move(0, 1);
 		}
-		EnemyMove();
-		//player->move(0, 1);//ta bort efter att playerMove är färdig
 	}
 	else
 	{
@@ -426,8 +431,6 @@ void EntityHandler::playerTurnRight()
 		{
 			player->move(1, 0);
 		}
-		EnemyMove(); 
-		//player->move(1,0);//ta bort efter att playerMove är färdig
 	}
 	else
 	{
@@ -441,20 +444,27 @@ void Container::EntityHandler::EnemyMove()
 	for (int i = 0; i < this->nrOfEnemies; i++)
 	{
 		Vector2f requestedCoords = enemys[i]->moveRequest();
-		bool col = isFloor(requestedCoords);
-		for (int i = 0; i < this->nrOfEnemies; i++)
-		{
 
+		//bool col = isFloor(requestedCoords);
+		bool col = false;
+		if (col == false)
+		{
+			col = isCol(requestedCoords, player->getCoords());
+		}
+		for (int i = 0; i < nrOfEnemies && col == false; i++)
+		{
+			Vector2f otherCoords = enemys[i]->getCoords();
+			col = isCol(requestedCoords, otherCoords);
 		}
 		for (int i = 0; i < nrOfStructures && col == false; i++)
 		{
 			Vector2f otherCoords = structures[i]->getCoords();
-			//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
+			col = isCol(requestedCoords, otherCoords);
 		}
 		for (int i = 0; i < nrOfItems; i++)
 		{
 			Vector2f otherCoords = items[i]->getCoords();
-			//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
+			col = isCol(requestedCoords, otherCoords);
 			player->pickUpItem(*items[i]);
 			removeItem(i);
 		}
@@ -468,6 +478,7 @@ void Container::EntityHandler::EnemyMove()
 
 bool EntityHandler::isFloor(Vector2f coords)
 {
+
 	bool isFloor = true;
 	int x = coords.x / Val::FINAL_SIZE;
 	int y = coords.y / Val::FINAL_SIZE;
@@ -476,6 +487,16 @@ bool EntityHandler::isFloor(Vector2f coords)
 		isFloor = false;
 	}
 	return isFloor;
+}
+
+bool Container::EntityHandler::isCol(Vector2f firstCoord, Vector2f SecondCoord)
+{
+	bool col = false;
+	if (firstCoord == SecondCoord)
+	{
+		col = true;
+	}
+	return col;
 }
 
 void Container::EntityHandler::removeItem(int index)

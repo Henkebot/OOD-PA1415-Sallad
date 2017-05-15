@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 #include "../Utility/Values.h"
-Player::Player(sf::Texture* texture, sf::Vector2f coords, int health) : Mob(texture,coords,health)
+Player::Player(sf::Texture* texture, sf::Vector2f coords) : Mob(texture,coords)
 {
 }
 
@@ -47,12 +47,3 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 
-void Player::copy(Player player)
-{
-	this->xp = player.xp;
-	this->inventory = player.inventory;
-	this->direction = player.direction;
-	this->setHealth(player.getHealth());
-	this->setCoords(player.getCoords());
-	this->setSprite(player.getSprite());
-}
