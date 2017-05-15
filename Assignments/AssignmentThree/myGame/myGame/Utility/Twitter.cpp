@@ -59,7 +59,10 @@ void Twitter::readFeed(const std::string& user, int maxAmountOfRooms)
 		std::cout << "köres1" << std::endl;
 		std::string timeline = "";
 		//Sista är namnet
-		this->user = user;
+		if (user == "")
+			this->user = "Local";
+		else
+			this->user = user;
 		if (twitterObj.timelineUserGet(false, true, maxAmountOfRooms, user))
 		{
 			twitterObj.getLastWebResponse(timeline);
