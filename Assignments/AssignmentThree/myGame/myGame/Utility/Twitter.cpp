@@ -61,8 +61,16 @@ void Twitter::readFeed(const std::string& user, int maxAmountOfRooms)
 		//Sista är namnet
 		this->user = user;
 		if (twitterObj.timelineUserGet(false, true, maxAmountOfRooms, user))
+		{
 			twitterObj.getLastWebResponse(timeline);
-
+			std::cout << timeline << std::endl;
+			if (timeline.find("{\"errors\":[{\"code\":34,\"message\":\"Sorry, that page does not exist.\"}]}") != -1)
+			{
+				twitterObj.timelineUserGet(false, true, maxAmountOfRooms);
+				twitterObj.getLastWebResponse(timeline);
+				this->user = "Local";
+			}
+		}
 		getTweets(timeline);
 	}
 	else

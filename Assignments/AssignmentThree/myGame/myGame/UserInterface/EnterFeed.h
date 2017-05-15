@@ -14,18 +14,22 @@ public:
 	void handleEvents();
 private:
 	void initiateVars();
+	void initiateText();
+	void initiateBox();
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 private:
 	sf::Texture texture;
 	sf::Sprite wallpaper;
 
 	sf::Font aFont;
+	sf::Font inputFont;
 	sf::String input;
-
 
 	sf::Text enterFeed;
 	sf::Text aFeed;
 	sf::Text goBack;
+
+	sf::RectangleShape inputBox;
 
 };
 
