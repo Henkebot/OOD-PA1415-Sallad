@@ -42,7 +42,7 @@ namespace Container
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 		bool connectRoom(Room* rootRoom, int role, int lastRoom = 0); //role is what type of room: 0 Basic, 1 start, 2 end
 		void importMap();
-
+		void updateMiniMap(int xDir, int yDir);
 
 	};
 

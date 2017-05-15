@@ -27,6 +27,7 @@ void EntityHandler::extraCon()
 	nrOfItems = 0;
 	nrOfStructures = 0;
 	inputTimer.restart().asSeconds();
+	timeCollector = 0;
 }
 
 int Container::EntityHandler::calculateDmg(Stats attackerStats, Stats defenderStats)
@@ -220,6 +221,7 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 
 void EntityHandler::handleInput(float dt)
 {
+	timeCollector += dt;
 	if (InputManager::keyPressed(sf::Keyboard::Q))
 	{
 		playerAttack();
@@ -230,21 +232,50 @@ void EntityHandler::handleInput(float dt)
 		playerInteract();
 		playersTurn = false;
 	}
-	else if (inputTimer.getElapsedTime().asSeconds() > 500 * dt)
+	else if (timeCollector > 150 * dt)
 	{
-		playerTurnUp();
-	}
-	else if (InputManager::keyPressed(sf::Keyboard::A) || InputManager::keyPressed(sf::Keyboard::Left))
-	{
-		playerTurnLeft();
-	}
-	else if (InputManager::keyPressed(sf::Keyboard::S) || InputManager::keyPressed(sf::Keyboard::Down))
-	{
-		playerTurnDown();
-	}
-	else if (InputManager::keyPressed(sf::Keyboard::D) || InputManager::keyPressed(sf::Keyboard::Right))
-	{
-		playerTurnRight();
+		
+		if (InputManager::keyPress(sf::Keyboard::W) || InputManager::keyPress(sf::Keyboard::Up))
+		{
+			playerTurnUp();
+			timeCollector = 0;
+			for (int i = 0; i < this->nrOfEnemies; i++)
+			{
+				this->enemys[i]->update(0);
+			}
+		
+		}
+		else if (InputManager::keyPress(sf::Keyboard::A) || InputManager::keyPress(sf::Keyboard::Left))
+		{
+			playerTurnLeft();
+			timeCollector = 0;
+			for (int i = 0; i < this->nrOfEnemies; i++)
+			{
+				this->enemys[i]->update(0);
+			}
+			this->inputTimer.restart();
+		}
+		else if (InputManager::keyPress(sf::Keyboard::S) || InputManager::keyPress(sf::Keyboard::Down))
+		{
+			playerTurnDown();
+			timeCollector = 0;
+			for (int i = 0; i < this->nrOfEnemies; i++)
+			{
+				this->enemys[i]->update(0);
+			}
+		
+		}
+		else if (InputManager::keyPress(sf::Keyboard::D) || InputManager::keyPress(sf::Keyboard::Right))
+		{
+			playerTurnRight();
+			timeCollector = 0;
+			for (int i = 0; i < this->nrOfEnemies; i++)
+			{
+				this->enemys[i]->update(0);
+			}
+			
+		}
+
 	}
 }
 
@@ -413,6 +444,7 @@ void Container::EntityHandler::EnemyMove()
 	for (int i = 0; i < this->nrOfEnemies; i++)
 	{
 		Vector2f requestedCoords = enemys[i]->moveRequest();
+
 		//bool col = isFloor(requestedCoords);
 		bool col = false;
 		if (col == false)
@@ -437,13 +469,6 @@ void Container::EntityHandler::EnemyMove()
 			removeItem(i);
 		}
 
-	/*	int width = (20 - 1) * (64 * 0.75f);
-		int height = (11 - 1) * (64 * 0.75f);
-		if (requestedCoords.x == width ||
-			requestedCoords.x == 0 ||
-			requestedCoords.y == height ||
-			requestedCoords.y == 0)
-			col = true;*/
 		if (!col)
 		{
 			this->enemys[i]->move(enemys[i]->getDirX(), enemys[i]->getDirY());

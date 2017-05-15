@@ -10,7 +10,9 @@ namespace Container
 	{
 	private:
 		sf::Texture* hudTexture;
+		sf::Texture* tweetTexture;
 		sf::Sprite* hudSprite;
+		sf::Sprite* tweetZone;
 		Cave caves;
 	public:
 		Map();

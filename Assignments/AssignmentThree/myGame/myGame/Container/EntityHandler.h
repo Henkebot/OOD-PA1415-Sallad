@@ -75,6 +75,7 @@ namespace Container
 		void initLines();
 
 		bool doorStatus[4];
+		float timeCollector;
 	};
 }
 

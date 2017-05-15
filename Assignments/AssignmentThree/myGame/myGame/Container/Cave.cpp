@@ -143,52 +143,37 @@ namespace Container
 			currentRoom->getLeftD() != nullptr)
 		{
 			changeRoom(currentRoom->getLeftD(), 18, 5);
-
-			for (int i = 0; i < aMap.size(); i++)
-			{
-				aMap[i].setPosition(sf::Vector2f(aMap[i].getPosition().x + aMap[i].getSize().x, aMap[i].getPosition().y));
-			}
+			updateMiniMap(1, 0);
 
 		} //DOOR UP: (10,0)
 		else if ((playerPos->getCoords().x / (Val::SPRITE_SIZE * Val::SCALE)) == doorUpX && (playerPos->getCoords().y / (Val::SPRITE_SIZE * Val::SCALE)) == doorUpY &&
 			currentRoom->getUpD() != nullptr)
 		{
 			changeRoom(currentRoom->getUpD(), 10, 9);
-			
-			for (int i = 0; i < aMap.size(); i++)
-			{
-				aMap[i].setPosition(sf::Vector2f(aMap[i].getPosition().x, aMap[i].getPosition().y + aMap[i].getSize().y));
-			}
-
+			updateMiniMap(0, 1);
 		}//DOOR RIGHT: (19,5)
 		else if ((playerPos->getCoords().x / (Val::SPRITE_SIZE * Val::SCALE)) == doorRightX && (playerPos->getCoords().y / (Val::SPRITE_SIZE * Val::SCALE)) == doorRightY &&
 			currentRoom->getRightD() != nullptr)
 		{
 			changeRoom(currentRoom->getRightD(), 1, 5);
-			for (int i = 0; i < aMap.size(); i++)
-			{
-				aMap[i].setPosition(sf::Vector2f(aMap[i].getPosition().x - aMap[i].getSize().x, aMap[i].getPosition().y));
-			}
+			updateMiniMap(-1, 0);
 		}//DOOR DOWN: (10,10)
 		else if ((playerPos->getCoords().x / (Val::SPRITE_SIZE * Val::SCALE)) == doorDownX && (playerPos->getCoords().y / (Val::SPRITE_SIZE * Val::SCALE)) == doorDownX &&
 			currentRoom->getDownD() != nullptr)
 		{
 			changeRoom(currentRoom->getDownD(), 10, 1);
-			for (int i = 0; i < aMap.size(); i++)
-			{
-				aMap[i].setPosition(sf::Vector2f(aMap[i].getPosition().x, aMap[i].getPosition().y - aMap[i].getSize().y));
-			}
+			updateMiniMap(0, -1);
 		}
 
 	}
 
 	void Cave::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	{
-		target.draw(*currentRoom);
 		for (int i = 0; i < aMap.size(); i++)
 		{
 			target.draw(aMap.at(i));
 		}
+		target.draw(*currentRoom);
 	}
 
 	bool Cave::connectRoom(Room * rootRoom, int role, int lastRoom)
@@ -360,6 +345,42 @@ namespace Container
 		{
 			aMap.push_back(roomPointers.at(i)->getMap());
 		}
+
+
+		aMap.at(0).setFillColor(sf::Color(128, 247, 101, 255));
+		aMap.at(0).setOutlineColor(sf::Color(42, 81, 34, 255));
+	}
+
+	void Cave::updateMiniMap(int xDir, int yDir)
+	{
+
+		for (int i = 0; i < aMap.size(); i++)
+		{
+			aMap[i].setPosition(sf::Vector2f(aMap[i].getPosition().x + (aMap[i].getSize().x * xDir), aMap[i].getPosition().y + (aMap[i].getSize().y * yDir)));
+		}
+
+
+		for (int i = 0; i < roomPointers.size(); i++)
+		{
+
+			if (i != 0 && roomPointers[i]->isDiscovered())
+			{
+				aMap[i].setFillColor(sf::Color(188, 188, 181, 155));
+				aMap[i].setOutlineColor(sf::Color(89, 88, 64, 255));
+			}
+			if (currentRoom == roomPointers[i])
+			{
+				if(i != 0)
+					aMap.at(0).setOutlineColor(sf::Color(42, 81, 34, 255));
+				aMap[i].setFillColor(sf::Color(188, 188, 181, 155));
+				currentRoom->setDiscovered();
+				aMap.at(i).setOutlineColor(sf::Color(168, 166, 74, 255));
+			}
+
+		}
+
+		aMap.at(0).setFillColor(sf::Color(128, 247, 101, 255));
+	
 	}
 
 	Cave::Cave()
@@ -374,6 +395,7 @@ namespace Container
 		tiles3 = new sf::Texture();
 		if (!tiles3->loadFromFile(".\\textures\\sheet3.png"))
 			std::cout << "Failed to load spritesheet!" << std::endl;
+		
 
 	}
 
@@ -424,7 +446,7 @@ namespace Container
 		bool result = twitterObj.authenticate();
 		if (result)
 		{
-			twitterObj.readFeed(user);
+			twitterObj.readFeed(user, (rand() % 100));
 		}
 		return result;
 	}
@@ -447,26 +469,6 @@ namespace Container
 	{
 		currentRoom->update(dt);
 		checkDoors();
-		aMap.at(0).setFillColor(sf::Color(128, 247, 101, 255));
-		aMap.at(0).setOutlineColor(sf::Color(42, 81, 34, 255));
-
-		for (int i = 0; i < roomPointers.size(); i++)
-		{
-			
-			if (i != 0 && roomPointers[i]->isDiscovered())
-			{
-				aMap[i].setFillColor(sf::Color(188, 188, 181, 155));
-				aMap[i].setOutlineColor(sf::Color(89, 88, 64, 255));
-			}
-			if (currentRoom == roomPointers[i])
-			{
-				currentRoom->setDiscovered();
-				aMap.at(i).setFillColor(sf::Color(242, 293, 101, 255));
-				aMap.at(i).setOutlineColor(sf::Color(168, 166, 74, 255));
-			}
-			
-		}
-		
 	}
 }
 
