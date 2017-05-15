@@ -42,7 +42,7 @@ namespace Container
 		void playerTurnDown();
 		void playerTurnRight();
 
-		void EnemyMove();
+		void EnemyMove(int index);
 
 		void handleInput(float dt);
 		void extraCon();
@@ -50,7 +50,7 @@ namespace Container
 		bool isFloor(Vector2f coords);
 		bool isCol(Vector2f firstCoord, Vector2f SecondCoord);
 		void removeItem(int index);
-
+		void remoceDead();
 		
 		Player* player;
 		sf::Clock inputTimer;
