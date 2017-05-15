@@ -27,6 +27,7 @@ void EntityHandler::extraCon()
 	nrOfEnemys = 0;
 	nrOfItems = 0;
 	nrOfStructures = 0;
+	inputTimer.restart().asSeconds();
 }
 
 EntityHandler::~EntityHandler()
@@ -57,7 +58,7 @@ void EntityHandler::update(float dt)
 	player->update(dt);
 	if (playersTurn == true)
 	{
-		handleInput();
+		handleInput(dt);
 	}
 	else
 	{
@@ -209,7 +210,7 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 }
 
 
-void EntityHandler::handleInput()
+void EntityHandler::handleInput(float dt)
 {
 	if (InputManager::keyPressed(sf::Keyboard::Q))
 	{
@@ -219,36 +220,44 @@ void EntityHandler::handleInput()
 	{
 		playerInteract();
 	}
-	else if (InputManager::keyPressed(sf::Keyboard::W) || InputManager::keyPressed(sf::Keyboard::Up))
+	else if (inputTimer.getElapsedTime().asSeconds() > 500 * dt)
 	{
-		playerTurnUp();
-		for (int i = 0; i < this->nrOfEnemies; i++)
+		
+		if (InputManager::keyPress(sf::Keyboard::W) || InputManager::keyPress(sf::Keyboard::Up))
 		{
-			this->enemys[i]->update(0);
+			playerTurnUp();
+			for (int i = 0; i < this->nrOfEnemies; i++)
+			{
+				this->enemys[i]->update(0);
+			}
+			this->inputTimer.restart();
 		}
-	}
-	else if (InputManager::keyPressed(sf::Keyboard::A) || InputManager::keyPressed(sf::Keyboard::Left))
-	{
-		playerTurnLeft();
-		for (int i = 0; i < this->nrOfEnemies; i++)
+		else if (InputManager::keyPress(sf::Keyboard::A) || InputManager::keyPress(sf::Keyboard::Left))
 		{
-			this->enemys[i]->update(0);
+			playerTurnLeft();
+			for (int i = 0; i < this->nrOfEnemies; i++)
+			{
+				this->enemys[i]->update(0);
+			}
+			this->inputTimer.restart();
 		}
-	}
-	else if (InputManager::keyPressed(sf::Keyboard::S) || InputManager::keyPressed(sf::Keyboard::Down))
-	{
-		playerTurnDown();
-		for (int i = 0; i < this->nrOfEnemies; i++)
+		else if (InputManager::keyPress(sf::Keyboard::S) || InputManager::keyPress(sf::Keyboard::Down))
 		{
-			this->enemys[i]->update(0);
+			playerTurnDown();
+			for (int i = 0; i < this->nrOfEnemies; i++)
+			{
+				this->enemys[i]->update(0);
+			}
+			this->inputTimer.restart();
 		}
-	}
-	else if (InputManager::keyPressed(sf::Keyboard::D) || InputManager::keyPressed(sf::Keyboard::Right))
-	{
-		playerTurnRight();
-		for (int i = 0; i < this->nrOfEnemies; i++)
+		else if (InputManager::keyPress(sf::Keyboard::D) || InputManager::keyPress(sf::Keyboard::Right))
 		{
-			this->enemys[i]->update(0);
+			playerTurnRight();
+			for (int i = 0; i < this->nrOfEnemies; i++)
+			{
+				this->enemys[i]->update(0);
+			}
+			this->inputTimer.restart();
 		}
 	}
 }

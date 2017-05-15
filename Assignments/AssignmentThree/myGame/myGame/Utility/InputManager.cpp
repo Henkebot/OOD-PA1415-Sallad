@@ -15,6 +15,11 @@ bool InputManager::keyPressed(sf::Keyboard::Key key)
 	return keyIsPressed;
 }
 
+bool InputManager::keyPress(sf::Keyboard::Key key)
+{
+	return sf::Keyboard::isKeyPressed(key);
+}
+
 int InputManager::getIndexOfKeyPressed()
 {
 	int key = -1;

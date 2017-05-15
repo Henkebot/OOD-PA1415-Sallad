@@ -44,7 +44,7 @@ namespace Container
 
 		void EnemyMove();
 
-		void handleInput();
+		void handleInput(float dt);
 		void extraCon();
 		//float calculateDmg(Stats attackerStats, Stats defenderStats);
 		bool isFloor(Vector2f coords);
@@ -52,6 +52,7 @@ namespace Container
 
 		
 		Player* player;
+		sf::Clock inputTimer;
 		sf::Texture* playerTexture;
 		Enemy** enemys;
 		int nrOfEnemies;
