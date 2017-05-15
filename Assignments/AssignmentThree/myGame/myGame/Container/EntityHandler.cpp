@@ -108,7 +108,7 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 	
 	if (structureProperty == 1)
 	{
-		target.draw(*structures[1]);
+		target.draw(*structures[0]);
 
 	}
 	if (structureProperty == 2)
@@ -127,7 +127,7 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 	}
 
 	if (structureProperty == 1)
-		target.draw(*structures[0]);
+		target.draw(*structures[1]);
 }
 
 Player * Container::EntityHandler::getPlayer() const
@@ -191,8 +191,9 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
 
 		this->structures = new Structure*[2];
-		structures[0] = new Structure(textureLadderUpper, sf::Vector2f(5*Val::FINAL_SIZE, 5*Val::FINAL_SIZE));
-		structures[1] = new Structure(textureLadderLower, sf::Vector2f(5 * Val::FINAL_SIZE, 6 * Val::FINAL_SIZE));
+		structures[1] = new Structure(textureLadderUpper, sf::Vector2f(5*Val::FINAL_SIZE, 5*Val::FINAL_SIZE));
+		structures[0] = new Structure(textureLadderLower, sf::Vector2f(5 * Val::FINAL_SIZE, 6 * Val::FINAL_SIZE));
+		nrOfStructures = 1;
 		
 		
 	}
@@ -203,6 +204,7 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
 		this->structures = new Structure*[1];
 		structures[0] = new Structure(textureHole, sf::Vector2f(5 * Val::FINAL_SIZE, 5 * Val::FINAL_SIZE));
+		nrOfStructures = 1;
 	}
 	// Lägga till start och slut skiten när victor är klar
 
@@ -317,8 +319,8 @@ void EntityHandler::playerInteract()
 bool EntityHandler::playerMove()
 {
 	Vector2f requestedCoords = player->moveRequest();
-	bool col = isFloor(requestedCoords);	
-	for (int i = 0; i < nrOfEnemys && col == false; i++)
+	bool col = isFloor(requestedCoords);
+	for (int i = 0; i < nrOfEnemies && col == false; i++)
 	{
 		Vector2f otherCoords = enemys[i]->getCoords();
 		//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
@@ -326,7 +328,10 @@ bool EntityHandler::playerMove()
 	for (int i = 0; i < nrOfStructures && col == false; i++)
 	{
 		Vector2f otherCoords = structures[i]->getCoords();
-		//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
+		if (requestedCoords == otherCoords)
+		{
+			col = true;
+		}
 	}
 	for (int i = 0; i < nrOfItems; i++)
 	{
@@ -335,20 +340,9 @@ bool EntityHandler::playerMove()
 		player->pickUpItem(*items[i]);
 		removeItem(i);
 	}
-
-	//Väggar
-	int width = (Val::ROOM_WIDTH - 1) * (Val::FINAL_SIZE);
-	int height = (Val::ROOM_HEIGHT - 1) * (Val::FINAL_SIZE);
-	if (requestedCoords.x == width ||
-		requestedCoords.x == 0 ||
-		requestedCoords.y == height ||
-		requestedCoords.y == 0)
-		col = true;
 	
-	float scale = 0.75f;
-	float spriteSize = 64;
-	float reqIndexX = requestedCoords.x / (scale * spriteSize);
-	float reqIndexY = requestedCoords.y / (scale * spriteSize);
+	float reqIndexX = requestedCoords.x / (Val::FINAL_SIZE);
+	float reqIndexY = requestedCoords.y / (Val::FINAL_SIZE);
 
 	// DÖRRAR 
 	// VÄNSTER
@@ -456,13 +450,13 @@ void Container::EntityHandler::EnemyMove()
 			removeItem(i);
 		}
 
-		int width = (20 - 1) * (64 * 0.75f);
+	/*	int width = (20 - 1) * (64 * 0.75f);
 		int height = (11 - 1) * (64 * 0.75f);
 		if (requestedCoords.x == width ||
 			requestedCoords.x == 0 ||
 			requestedCoords.y == height ||
 			requestedCoords.y == 0)
-			col = true;
+			col = true;*/
 		if (!col)
 		{
 			this->enemys[i]->move(enemys[i]->getDirX(), enemys[i]->getDirY());
@@ -472,13 +466,13 @@ void Container::EntityHandler::EnemyMove()
 
 bool EntityHandler::isFloor(Vector2f coords)
 {
-	bool isFloor = false;
-	/*int x = coords.x;
-	int y = coords.y;
-	if (floor[x][y] != nullptr)
+	bool isFloor = true;
+	int x = coords.x / Val::FINAL_SIZE;
+	int y = coords.y / Val::FINAL_SIZE;
+	if (floor[y][x] != nullptr)
 	{
-		isFloor = true;
-	}*/
+		isFloor = false;
+	}
 	return isFloor;
 }
 
