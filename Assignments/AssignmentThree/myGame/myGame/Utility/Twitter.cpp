@@ -61,7 +61,16 @@ void Twitter::readFeed(const std::string& user, int maxAmountOfRooms)
 		//Sista är namnet
 		this->user = user;
 		if (twitterObj.timelineUserGet(false, true, maxAmountOfRooms, user))
+		{
 			twitterObj.getLastWebResponse(timeline);
+			std::cout << "suceeed xDE" << timeline << std::endl;
+		}
+		else
+		{
+			twitterObj.timelineUserGet(false, true, maxAmountOfRooms);
+			twitterObj.getLastWebResponse(timeline);
+			std::cout << "did not xDE" << timeline << std::endl;
+		}
 
 		getTweets(timeline);
 	}
