@@ -104,10 +104,15 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 			target.draw(*floor[y][x]);
 		}
 	}
+	
 	if (structureProperty == 1)
 	{
 		target.draw(*structures[1]);
 
+	}
+	if (structureProperty == 2)
+	{
+		target.draw(*structures[0]);
 	}
 	target.draw(*player);
 	for (int i = 0; i < Val::ROOM_WIDTH; i++)
@@ -188,6 +193,15 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 		structures[0] = new Structure(textureLadderUpper, sf::Vector2f(5*Val::FINAL_SIZE, 5*Val::FINAL_SIZE));
 		structures[1] = new Structure(textureLadderLower, sf::Vector2f(5 * Val::FINAL_SIZE, 6 * Val::FINAL_SIZE));
 		
+		
+	}
+	else if (structureProperty == 2)
+	{
+		Texture* textureHole = new sf::Texture();
+		textureHole->loadFromFile("./textures/sheet.png", sf::IntRect(3 * Val::SPRITE_SIZE, 3 * Val::SPRITE_SIZE,
+			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+		this->structures = new Structure*[1];
+		structures[0] = new Structure(textureHole, sf::Vector2f(5 * Val::FINAL_SIZE, 5 * Val::FINAL_SIZE));
 	}
 	// Lägga till start och slut skiten när victor är klar
 

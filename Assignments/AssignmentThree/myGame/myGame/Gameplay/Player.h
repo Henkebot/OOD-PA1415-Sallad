@@ -21,10 +21,6 @@ public:
 	void pickUpItem(Item item);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const; 
 
-	
-	void setDirection(directions newDirection);
-	directions getDirection() const;
-	sf::Vector2f moveRequest();
 	void copy(Player player);
 };
 
