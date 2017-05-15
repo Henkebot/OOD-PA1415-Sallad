@@ -168,14 +168,15 @@ namespace Container
 
 	sf::RectangleShape Room::getMap() const
 	{
-		float x = ((33.0f / 16) * 9);
-		float y = (19.0f / 16) * 9;
+		float x = 50.0f;
+		float y = 28.0f;
 
 		sf::RectangleShape map(sf::Vector2f(x, y));
-		map.setPosition(sf::Vector2f(this->coord.x * x + Application::SCREEN_WIDTH * 0.87, this->coord.y * y + Application::SCREEN_HEIGHT * 0.1));
+		map.setPosition(sf::Vector2f(this->coord.x * x + Application::SCREEN_WIDTH * 0.84, this->coord.y * y + Application::SCREEN_HEIGHT * 0.15));
 		map.setFillColor(sf::Color(0, 0, 0, 0));
-		map.setOutlineThickness(-1.5);
+		map.setOutlineThickness(-3.0f);
 		map.setOutlineColor(sf::Color(0, 0, 0, 0));
+		
 
 		return map;
 	}

@@ -27,6 +27,7 @@ void EntityHandler::extraCon()
 	nrOfItems = 0;
 	nrOfStructures = 0;
 	inputTimer.restart().asSeconds();
+	timeCollector = 0;
 }
 
 int Container::EntityHandler::calculateDmg(Stats attackerStats, Stats defenderStats)
@@ -223,6 +224,7 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 
 void EntityHandler::handleInput(float dt)
 {
+	timeCollector += dt;
 	if (InputManager::keyPressed(sf::Keyboard::Q))
 	{
 		playerAttack();
@@ -233,24 +235,30 @@ void EntityHandler::handleInput(float dt)
 		playerInteract();
 		playersTurn = false;
 	}
-	else if (inputTimer.getElapsedTime().asSeconds() > 500 * dt)
-	{		
+	else if (timeCollector > 150 * dt)
+	{
+		
 		if (InputManager::keyPress(sf::Keyboard::W) || InputManager::keyPress(sf::Keyboard::Up))
 		{
 			playerTurnUp();
+			timeCollector = 0;
 		}
 		else if (InputManager::keyPress(sf::Keyboard::A) || InputManager::keyPress(sf::Keyboard::Left))
 		{
 			playerTurnLeft();
+			timeCollector = 0;
 		}
 		else if (InputManager::keyPress(sf::Keyboard::S) || InputManager::keyPress(sf::Keyboard::Down))
 		{
 			playerTurnDown();
+			timeCollector = 0;
 		}
 		else if (InputManager::keyPress(sf::Keyboard::D) || InputManager::keyPress(sf::Keyboard::Right))
 		{
 			playerTurnRight();
+			timeCollector = 0;			
 		}
+
 	}
 }
 
