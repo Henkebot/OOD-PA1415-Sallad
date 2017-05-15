@@ -52,6 +52,10 @@ namespace Container
 		void removeItem(int index);
 		void remoceDead();
 		
+		sf::Font statusFont;
+		sf::Text armorText;
+		sf::Text attackText;
+		sf::Text healthText;
 		Player* player;
 		sf::Clock inputTimer;
 		sf::Texture* playerTexture;

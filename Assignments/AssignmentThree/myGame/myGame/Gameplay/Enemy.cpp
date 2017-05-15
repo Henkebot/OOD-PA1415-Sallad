@@ -119,11 +119,6 @@ sf::Vector2f Enemy::interact()
 	return sf::Vector2f();
 }
 
-void Enemy::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	target.draw(this->getSprite(), states); 
-}
-
 states Enemy::getState() const
 {
 	return state;

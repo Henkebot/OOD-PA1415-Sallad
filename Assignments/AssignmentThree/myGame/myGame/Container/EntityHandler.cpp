@@ -104,6 +104,12 @@ void EntityHandler::update(float dt)
 		playersTurn = true;
 	}
 	remoceDead();
+
+	for (int i = 0; i < nrOfEnemies; i++)
+	{
+		enemys[i]->updateHealthbar();
+	}
+	player->updateHealthbar();
 }
 
 void Container::EntityHandler::render(sf::RenderTarget & target) const
@@ -417,7 +423,7 @@ void EntityHandler::playerTurnRight()
 	}
 	else
 	{
-		player->setCurrentSpriteFrame(0, 1);
+		player->setCurrentSpriteFrame(2, 1);
 		player->setDirection(right);
 	}
 }

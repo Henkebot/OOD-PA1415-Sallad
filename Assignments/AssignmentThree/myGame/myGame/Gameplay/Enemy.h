@@ -14,9 +14,10 @@ public:
 	void checkState(sf::Vector2f playerCoords);
 	void update(float dt); 
 	sf::Vector2f interact();
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const; 
 	
 	states getState() const;
 	void setState(states newState);
+
+	//virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 };
 #endif

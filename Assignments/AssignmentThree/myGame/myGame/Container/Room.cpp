@@ -46,7 +46,7 @@ namespace Container
 
 		currentTweet.setString(aTweet);
 		currentTweet.setCharacterSize(16);
-		currentTweet.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 140));
+		currentTweet.setPosition(sf::Vector2f(175, Application::SCREEN_HEIGHT - 140));
 		currentTweet.setFillColor(sf::Color::Black);
 
 		discovered = false;
@@ -121,7 +121,7 @@ namespace Container
 		tweetOwner.setFont(*tweetFont);
 		tweetOwner.setString("@" + this->owner);
 		tweetOwner.setCharacterSize(20);
-		tweetOwner.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 170));
+		tweetOwner.setPosition(sf::Vector2f(175, Application::SCREEN_HEIGHT - 170));
 		tweetOwner.setFillColor(sf::Color::Black);
 	}
 
@@ -172,7 +172,7 @@ namespace Container
 		float y = 28.0f;
 
 		sf::RectangleShape map(sf::Vector2f(x, y));
-		map.setPosition(sf::Vector2f(this->coord.x * x + Application::SCREEN_WIDTH * 0.84, this->coord.y * y + Application::SCREEN_HEIGHT * 0.15));
+		map.setPosition(sf::Vector2f(this->coord.x * x + Application::SCREEN_WIDTH * 0.853, this->coord.y * y + Application::SCREEN_HEIGHT * 0.22));
 		map.setFillColor(sf::Color(0, 0, 0, 0));
 		map.setOutlineThickness(-3.0f);
 		map.setOutlineColor(sf::Color(0, 0, 0, 0));

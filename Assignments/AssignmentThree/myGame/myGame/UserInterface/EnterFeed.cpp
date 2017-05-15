@@ -21,8 +21,9 @@ void EnterFeed::update(float dt)
 void EnterFeed::handleEvents()
 {
 	
+	
 	if (InputManager::keyPressed(sf::Keyboard::Return))
-	{
+	{		
 		this->gsm->changeState(new Game(this->gsm, this->input.substring(1, this->input.getSize())));
 	}
 	else if (InputManager::keyPressed(sf::Keyboard::Escape))

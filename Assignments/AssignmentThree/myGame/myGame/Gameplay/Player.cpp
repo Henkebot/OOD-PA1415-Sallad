@@ -27,7 +27,7 @@ void Player::create()
 
 void Player::update(float dt)
 {
-
+	
 }
 
 sf::Vector2f Player::interact()
@@ -40,10 +40,10 @@ void Player::pickUpItem(Item item)
 
 }
 
-void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-
-	target.draw(this->getSprite(), states); 
-}
+//void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
+//{
+//
+//	target.draw(this->getSprite(), states); 
+//}
 
 
