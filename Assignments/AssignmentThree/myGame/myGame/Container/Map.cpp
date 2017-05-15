@@ -27,7 +27,7 @@ namespace Container
 
 	void Map::render(sf::RenderTarget & target) const
 	{
-		target.draw(*hudSprite);
+		//target.draw(*hudSprite);
 		target.draw(caves);
 	}
 
