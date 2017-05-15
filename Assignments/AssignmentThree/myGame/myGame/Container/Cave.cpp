@@ -469,8 +469,6 @@ namespace Container
 	{
 		currentRoom->update(dt);
 		checkDoors();
-		
-		
 	}
 }
 
