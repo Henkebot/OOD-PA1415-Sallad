@@ -63,15 +63,14 @@ void Twitter::readFeed(const std::string& user, int maxAmountOfRooms)
 		if (twitterObj.timelineUserGet(false, true, maxAmountOfRooms, user))
 		{
 			twitterObj.getLastWebResponse(timeline);
-			std::cout << "suceeed xDE" << timeline << std::endl;
+			std::cout << timeline << std::endl;
+			if (timeline.find("{\"errors\":[{\"code\":34,\"message\":\"Sorry, that page does not exist.\"}]}") != -1)
+			{
+				twitterObj.timelineUserGet(false, true, maxAmountOfRooms);
+				twitterObj.getLastWebResponse(timeline);
+				this->user = "Local";
+			}
 		}
-		else
-		{
-			twitterObj.timelineUserGet(false, true, maxAmountOfRooms);
-			twitterObj.getLastWebResponse(timeline);
-			std::cout << "did not xDE" << timeline << std::endl;
-		}
-
 		getTweets(timeline);
 	}
 	else
