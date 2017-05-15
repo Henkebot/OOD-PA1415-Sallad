@@ -452,7 +452,7 @@ namespace Container
 
 		for (int i = 0; i < roomPointers.size(); i++)
 		{
-			
+
 			if (i != 0 && roomPointers[i]->isDiscovered())
 			{
 				aMap[i].setFillColor(sf::Color(188, 188, 181, 155));
@@ -464,9 +464,9 @@ namespace Container
 				//aMap.at(i).setFillColor(sf::Color(242, 293, 101, 255));
 				aMap.at(i).setOutlineColor(sf::Color(168, 166, 74, 255));
 			}
-			
+
 		}
-		
+
 	}
 }
 

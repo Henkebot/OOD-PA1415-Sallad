@@ -232,7 +232,7 @@ void EntityHandler::handleInput(float dt)
 		playerInteract();
 		playersTurn = false;
 	}
-	else if (timeCollector > 0.055f)
+	else if (timeCollector > 150 * dt)
 	{
 		
 		if (InputManager::keyPress(sf::Keyboard::W) || InputManager::keyPress(sf::Keyboard::Up))
