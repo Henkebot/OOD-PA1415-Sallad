@@ -5,10 +5,18 @@ namespace Container
 	Map::Map()
 	{
 		hudTexture = new sf::Texture();
-		if (hudTexture->loadFromFile(".\\textures\\hud.png"))
+		if (hudTexture->loadFromFile(".\\textures\\hud.png", sf::IntRect(957, 0, 1280 - 957, 720)))
 			std::cout << "HUD loading" << std::endl;
 		hudSprite = new sf::Sprite();
 		hudSprite->setTexture(*hudTexture);
+		hudSprite->setPosition(sf::Vector2f(957, 0));
+		//0, 528
+		tweetTexture = new sf::Texture();
+		tweetTexture->loadFromFile(".\\textures\\hud.png", sf::IntRect(0, 528, 1280, 1280 - 528));
+		tweetZone = new sf::Sprite();
+		tweetZone->setTexture(*tweetTexture);
+		tweetZone->setPosition(sf::Vector2f(0, 528));
+
 
 		//generateCave("PA1415_Sallad");
 		
@@ -18,6 +26,8 @@ namespace Container
 	{
 		delete hudTexture;
 		delete hudSprite;
+		delete tweetTexture;
+		delete tweetZone;
 	}
 
 	void Map::update(float dt)
@@ -27,8 +37,10 @@ namespace Container
 
 	void Map::render(sf::RenderTarget & target) const
 	{
-		//target.draw(*hudSprite);
+		target.draw(*tweetZone);
 		target.draw(caves);
+		
+		target.draw(*hudSprite);
 	}
 
 	void Map::generateCave(const std::string & user)

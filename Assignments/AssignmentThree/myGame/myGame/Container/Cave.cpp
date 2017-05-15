@@ -184,11 +184,11 @@ namespace Container
 
 	void Cave::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	{
-		target.draw(*currentRoom);
 		for (int i = 0; i < aMap.size(); i++)
 		{
 			target.draw(aMap.at(i));
 		}
+		target.draw(*currentRoom);
 	}
 
 	bool Cave::connectRoom(Room * rootRoom, int role, int lastRoom)
@@ -424,7 +424,7 @@ namespace Container
 		bool result = twitterObj.authenticate();
 		if (result)
 		{
-			twitterObj.readFeed(user);
+			twitterObj.readFeed(user, (rand() % 100));
 		}
 		return result;
 	}
@@ -461,7 +461,7 @@ namespace Container
 			if (currentRoom == roomPointers[i])
 			{
 				currentRoom->setDiscovered();
-				aMap.at(i).setFillColor(sf::Color(242, 293, 101, 255));
+				//aMap.at(i).setFillColor(sf::Color(242, 293, 101, 255));
 				aMap.at(i).setOutlineColor(sf::Color(168, 166, 74, 255));
 			}
 			
