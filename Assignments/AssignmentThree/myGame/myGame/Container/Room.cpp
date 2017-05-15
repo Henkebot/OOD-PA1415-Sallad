@@ -17,9 +17,6 @@ namespace Container
 
 	Room::Room(const std::string& tweet,int role)
 	{	
-	
-		
-
 		left = right = up = down = nullptr;
 		roomRole = role;
 		this->tweet = tweet;
@@ -51,6 +48,8 @@ namespace Container
 		currentTweet.setCharacterSize(16);
 		currentTweet.setPosition(sf::Vector2f(120, Application::SCREEN_HEIGHT - 140));
 		currentTweet.setFillColor(sf::Color::Black);
+
+		discovered = false;
 
 	}
 
@@ -165,6 +164,30 @@ namespace Container
 		doors[2] = (down != nullptr);
 		doors[3] = (left != nullptr);
 		return doors;
+	}
+
+	sf::RectangleShape Room::getMap() const
+	{
+		float x = ((33.0f / 16) * 9);
+		float y = (19.0f / 16) * 9;
+
+		sf::RectangleShape map(sf::Vector2f(x, y));
+		map.setPosition(sf::Vector2f(this->coord.x * x + Application::SCREEN_WIDTH * 0.87, this->coord.y * y + Application::SCREEN_HEIGHT * 0.1));
+		map.setFillColor(sf::Color(0, 0, 0, 0));
+		map.setOutlineThickness(-1.5);
+		map.setOutlineColor(sf::Color(0, 0, 0, 0));
+
+		return map;
+	}
+
+	void Room::setDiscovered()
+	{
+		discovered = true;
+	}
+
+	bool Room::isDiscovered() const
+	{
+		return discovered;
 	}
 
 	void Room::deleteSpriteArray()
