@@ -33,10 +33,7 @@
     <ClCompile Include="Gameplay\Player.cpp" />
     <ClCompile Include="Gameplay\Stats.cpp" />
     <ClCompile Include="Gameplay\Structure.cpp" />
-    <ClCompile Include="Main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Tests\main - kopia.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -67,7 +64,6 @@
     <ClCompile Include="Utility\Identifier.cpp" />
     <ClCompile Include="Utility\InputManager.cpp" />
     <ClCompile Include="Utility\MasterSpawner.cpp" />
-    <ClCompile Include="Utility\Textures.cpp" />
     <ClCompile Include="Utility\TweetAnalyzer.cpp" />
     <ClCompile Include="Utility\Twitter.cpp" />
   </ItemGroup>
@@ -111,9 +107,9 @@
     <ClInclude Include="Utility\Identifier.h" />
     <ClInclude Include="Utility\InputManager.h" />
     <ClInclude Include="Utility\MasterSpawner.h" />
-    <ClInclude Include="Utility\Textures.h" />
     <ClInclude Include="Utility\TweetAnalyzer.h" />
     <ClInclude Include="Utility\Twitter.h" />
+    <ClInclude Include="Utility\Values.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="libeay32.dll" />
@@ -143,7 +139,7 @@
     <Text Include="textures\This is text.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\ground.png" />
+    <Image Include="textures\brick.png" />
     <Image Include="textures\menu_wallpaper.jpg" />
     <Image Include="textures\menu_wallpaper2.jpg" />
     <Image Include="textures\player.png" />

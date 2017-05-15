@@ -6,9 +6,6 @@ Twitter::Twitter()
 	this->size = 0;
 
 	succAuth = false;
-
-	/*std::string theFeed = this->getFeed();
-	this->getTweets(theFeed);*/
 }
 
 Twitter::~Twitter()

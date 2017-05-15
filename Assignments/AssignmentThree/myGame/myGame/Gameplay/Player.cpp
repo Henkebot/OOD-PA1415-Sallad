@@ -1,8 +1,8 @@
 #include "Player.h"
 #include <iostream>
+#include "../Utility/Values.h"
 Player::Player(sf::Texture* texture, sf::Vector2f coords, int health) : Mob(texture,coords,health)
 {
-	direction = up;
 }
 
 Player::~Player()
@@ -27,7 +27,7 @@ void Player::create()
 
 void Player::update(float dt)
 {
-	
+
 }
 
 sf::Vector2f Player::interact()
@@ -61,7 +61,7 @@ sf::Vector2f Player::moveRequest()
 	sf::Vector2f request = getCoords();
 	// MÅSTE FIXA DETTA
 	
-	float tile = 0.75f * 64;
+	float tile = Val::SCALE * Val::SPRITE_SIZE;
 
 	if (direction == up)
 	{

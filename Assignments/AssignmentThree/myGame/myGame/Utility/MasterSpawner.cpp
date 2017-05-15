@@ -36,7 +36,11 @@ int MasterSpawner::spawnEnemies(Enemy **& enemies) const
 	int sizeOfEnemiesArr = this->getAmountOfEnemiesInRoom();
 	
 	int nrOfEmy = 0;
-	//enemies = new Enemy*[sizeOfEnemiesArr];
+	enemies = new Enemy*[sizeOfEnemiesArr];
+	sf::Texture* zombieTexture = new sf::Texture();
+	sf::Texture* goblinTexure = new sf::Texture();
+	zombieTexture->loadFromFile(".\\textures\\zombieSheet.png");
+	goblinTexure->loadFromFile(".\\textures\\goblinSheet.png");
 
 	for (int i = 0; i < this->size; i++)
 	{
@@ -44,7 +48,9 @@ int MasterSpawner::spawnEnemies(Enemy **& enemies) const
 		{
 			for (int k = 0; k < inRoom[i].getAmount(); k++)
 			{
-				//enemies[nrOfEmy++] = new Enemy("goblin");
+				int y = rand() % (static_cast<int>(Val::ROOM_HEIGHT) - 2) + 1;
+				int x = rand() % (static_cast<int>(Val::ROOM_WIDTH) - 2) + 1;
+				enemies[nrOfEmy++] = new Enemy(goblinTexure, sf::Vector2f(x * (Val::SPRITE_SIZE * Val::SCALE), y * (Val::SPRITE_SIZE * 0.75f)));
 			}
 		}
 		else if (this->inRoom[i].getId() == "spider")
@@ -65,12 +71,14 @@ int MasterSpawner::spawnEnemies(Enemy **& enemies) const
 		{
 			for (int k = 0; k < inRoom[i].getAmount(); k++)
 			{
-				//enemies[nrOfEmy++] = new Enemy("goblin");
+				int y = rand() % (static_cast<int>(Val::ROOM_HEIGHT) - 2) + 1;
+				int x = rand() % (static_cast<int>(Val::ROOM_WIDTH) - 2) + 1;
+				enemies[nrOfEmy++] = new Enemy(zombieTexture, sf::Vector2f(x * (Val::SPRITE_SIZE * Val::SCALE), y * (Val::SPRITE_SIZE * Val::SCALE)));
 			}
 		}
 	}
 
-	return sizeOfEnemiesArr;
+	return nrOfEmy;
 }
 
 int MasterSpawner::spawnItems(Item **& items) const

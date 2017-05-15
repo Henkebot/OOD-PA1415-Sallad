@@ -1,11 +1,9 @@
 #include "Cave.h"
 #include "../UserInterface/Application.h"
+#include "../Utility/Values.h"
 #include <iostream>
 namespace Container
 {
-	const float Cave::SCALE		= 0.75f;
-
-	const int Cave::SPRITE_SIZE = 64;
 	const int Cave::ROOM_WIDTH = 20;
 	const int Cave::ROOM_HEIGHT = 11;
 
@@ -28,16 +26,16 @@ namespace Container
 	{
 		sf::Sprite** spriteArray = new sf::Sprite*[20];
 
-		for (int i = 0; i < ROOM_WIDTH; i++)
+		for (int i = 0; i < Val::ROOM_WIDTH; i++)
 		{
 			spriteArray[i] = new sf::Sprite[11];
 
 		}
-		for (int i = 0; i < ROOM_WIDTH; i++)
+		for (int i = 0; i < Val::ROOM_WIDTH; i++)
 		{
 			for (int j = 0; j < ROOM_HEIGHT; j++)
 			{
-				spriteArray[i][j].scale(SCALE, SCALE);
+				spriteArray[i][j].scale(Val::SCALE, Val::SCALE);
 			}
 		}
 		for (unsigned i = 0; i < roomPointers.size(); i++)
@@ -45,41 +43,41 @@ namespace Container
 			tilesNumber = rand() % 3;
 
 			setSprite(spriteArray, 0, 0, 0, 0); // VÄNSTER UPP HÖRN
-			for (float i = 1; i < ROOM_WIDTH - 1; i++) // TOPPEN
+			for (float i = 1; i < Val::ROOM_WIDTH - 1; i++) // TOPPEN
 			{
 				setSprite(spriteArray, i, 0.0f, 1, 0);
 			}
-			setSprite(spriteArray, ROOM_WIDTH - 1, 0, 2, 0); // HÖGER UPP HÖRN
-			for (float i = 1; i < ROOM_HEIGHT - 1; i++) // VÄNSTER
+			setSprite(spriteArray, Val::ROOM_WIDTH - 1, 0, 2, 0); // HÖGER UPP HÖRN
+			for (float i = 1; i < Val::ROOM_HEIGHT - 1; i++) // VÄNSTER
 			{
 				setSprite(spriteArray, 0, i, 0, 1);
 			}
-			for (float i = 1; i < ROOM_HEIGHT - 1; i++) // HÖGER
+			for (float i = 1; i < Val::ROOM_HEIGHT - 1; i++) // HÖGER
 			{
-				setSprite(spriteArray, ROOM_WIDTH - 1, i, 2, 1);
+				setSprite(spriteArray, Val::ROOM_WIDTH - 1, i, 2, 1);
 			}
-			for (float x = 1; x < ROOM_WIDTH - 1; x++) // MITTEN
+			for (float x = 1; x < Val::ROOM_WIDTH - 1; x++) // MITTEN
 			{
-				for (float y = 1; y < ROOM_HEIGHT - 1; y++)
+				for (float y = 1; y < Val::ROOM_HEIGHT - 1; y++)
 				{
 					setSprite(spriteArray, x, y, 1, 1);
 				}
 			}
-			for (float i = 0; i < ROOM_WIDTH; i++) // BOTTEN
+			for (float i = 0; i < Val::ROOM_WIDTH; i++) // BOTTEN
 			{
-				setSprite(spriteArray, i, ROOM_HEIGHT - 1, 0, 2);
+				setSprite(spriteArray, i, Val::ROOM_HEIGHT - 1, 0, 2);
 			}
 
 			//Ladders
 			if (roomPointers.at(i)->getRole() == 1)
 			{
-				setSprite(spriteArray, ROOM_HEIGHT - 1, 5, 3, 1);
-				setSprite(spriteArray, ROOM_HEIGHT - 1, 6, 3, 2);
+				setSprite(spriteArray, Val::ROOM_HEIGHT - 1, 5, 3, 1);
+				setSprite(spriteArray, Val::ROOM_HEIGHT - 1, 6, 3, 2);
 			}
 			else
 			{
-				setSprite(spriteArray, ROOM_HEIGHT - 1, 5, 1, 1);
-				setSprite(spriteArray, ROOM_HEIGHT - 1, 6, 1, 1);
+				setSprite(spriteArray, Val::ROOM_HEIGHT - 1, 5, 1, 1);
+				setSprite(spriteArray, Val::ROOM_HEIGHT - 1, 6, 1, 1);
 			}
 
 			if (roomPointers.at(i)->getRole() == 2)
@@ -95,14 +93,14 @@ namespace Container
 				setSprite(spriteArray, 0, 5, 0, 1);
 
 			if (roomPointers.at(i)->getUpD() != nullptr)
-				setSprite(spriteArray, ROOM_HEIGHT - 1, 0, 2, 2);
+				setSprite(spriteArray, Val::ROOM_HEIGHT - 1, 0, 2, 2);
 			else
-				setSprite(spriteArray, ROOM_HEIGHT - 1, 0, 1, 0);
+				setSprite(spriteArray, Val::ROOM_HEIGHT - 1, 0, 1, 0);
 
 			if (roomPointers.at(i)->getRightD() != nullptr)
-				setSprite(spriteArray, ROOM_WIDTH - 1, 5, 3, 0);
+				setSprite(spriteArray, Val::ROOM_WIDTH - 1, 5, 3, 0);
 			else
-				setSprite(spriteArray, ROOM_WIDTH - 1, 5, 2, 1);
+				setSprite(spriteArray, Val::ROOM_WIDTH - 1, 5, 2, 1);
 
 			if (roomPointers.at(i)->getDownD() != nullptr)
 			{
@@ -131,7 +129,7 @@ namespace Container
 		Player* currentPlayer = currentRoom->getCurrentEntityHandler().getPlayer();
 		currentRoom = newRoom;
 		currentRoom->getCurrentEntityHandler().setPlayer(currentPlayer);
-		currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(startX * 64 * SCALE, startY * 64 * SCALE));
+		currentRoom->getCurrentEntityHandler().getPlayer()->setCoords(sf::Vector2f(startX * Val::SPRITE_SIZE * Val::SCALE, startY * Val::SPRITE_SIZE * Val::SCALE));
 		currentRoom->getCurrentEntityHandler().setDoors(currentRoom->getDoorStatus());
 	}
 
@@ -139,24 +137,24 @@ namespace Container
 	{
 		Player* playerPos = currentRoom->getCurrentEntityHandler().getPlayer();
 		//DOOR LEFT (0,5)
-		if ((playerPos->getCoords().x / (64 * SCALE)) == doorLeftX && (playerPos->getCoords().y / (64 * SCALE)) == doorLeftY &&
+		if ((playerPos->getCoords().x / (Val::SPRITE_SIZE * Val::SCALE)) == doorLeftX && (playerPos->getCoords().y / (Val::SPRITE_SIZE * Val::SCALE)) == doorLeftY &&
 			currentRoom->getLeftD() != nullptr)
 		{
 			changeRoom(currentRoom->getLeftD(), 18, 5);
 
 		} //DOOR UP: (10,0)
-		else if ((playerPos->getCoords().x / (64 * SCALE)) == doorUpX && (playerPos->getCoords().y / (64 * SCALE)) == doorUpY &&
+		else if ((playerPos->getCoords().x / (Val::SPRITE_SIZE * Val::SCALE)) == doorUpX && (playerPos->getCoords().y / (Val::SPRITE_SIZE * Val::SCALE)) == doorUpY &&
 			currentRoom->getUpD() != nullptr)
 		{
 			changeRoom(currentRoom->getUpD(), 10, 9);
 
 		}//DOOR RIGHT: (19,5)
-		else if ((playerPos->getCoords().x / (64 * SCALE)) == doorRightX && (playerPos->getCoords().y / (64 * SCALE)) == doorRightY &&
+		else if ((playerPos->getCoords().x / (Val::SPRITE_SIZE * Val::SCALE)) == doorRightX && (playerPos->getCoords().y / (Val::SPRITE_SIZE * Val::SCALE)) == doorRightY &&
 			currentRoom->getRightD() != nullptr)
 		{
 			changeRoom(currentRoom->getRightD(), 1, 5);
 		}//DOOR DOWN: (10,10)
-		else if ((playerPos->getCoords().x / (64 * SCALE)) == doorDownX && (playerPos->getCoords().y / (64 * SCALE)) == doorDownX &&
+		else if ((playerPos->getCoords().x / (Val::SPRITE_SIZE * Val::SCALE)) == doorDownX && (playerPos->getCoords().y / (Val::SPRITE_SIZE * Val::SCALE)) == doorDownX &&
 			currentRoom->getDownD() != nullptr)
 		{
 			changeRoom(currentRoom->getDownD(), 10, 1);
@@ -379,7 +377,8 @@ namespace Container
 
 		Texture* texture = new Texture();
 		texture->loadFromFile(".\\textures\\playerCool.png");
-		Player* player = new Player(texture, sf::Vector2f((SPRITE_SIZE*SCALE)*5, 5 * (Cave::SPRITE_SIZE * Cave::SCALE)));
+
+		Player* player = new Player(texture, sf::Vector2f((Val::SPRITE_SIZE*Val::SCALE)*6, 5 * (Val::SPRITE_SIZE * Val::SCALE)));
 
 		currentRoom->getCurrentEntityHandler().setPlayer(player);
 		currentRoom->getCurrentEntityHandler().setDoors(currentRoom->getDoorStatus());
@@ -406,8 +405,8 @@ namespace Container
 			spritesArray[xDex][yDex].setTexture(*tiles2);
 		else
 			spritesArray[xDex][yDex].setTexture(*tiles3);
-		spritesArray[xDex][yDex].setTextureRect(sf::IntRect(xSheet*64, ySheet* 64, 64, 64));
-		spritesArray[xDex][yDex].setPosition(sf::Vector2f(64 * xIndex * SCALE, 64 * yIndex * SCALE));
+		spritesArray[xDex][yDex].setTextureRect(sf::IntRect(xSheet*Val::SPRITE_SIZE, ySheet* Val::SPRITE_SIZE, Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+		spritesArray[xDex][yDex].setPosition(sf::Vector2f(Val::SPRITE_SIZE * xIndex * Val::SCALE, Val::SPRITE_SIZE * yIndex * Val::SCALE));
 
 	}
 	void Cave::update(float dt)

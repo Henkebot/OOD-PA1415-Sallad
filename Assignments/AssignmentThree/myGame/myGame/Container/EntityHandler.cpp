@@ -1,15 +1,12 @@
 #include "EntityHandler.h"
 using namespace Container;
-#include "Cave.h"
+#include "../Utility/Values.h"
 EntityHandler::EntityHandler()
 {
 	player = nullptr;
 	extraCon();
 	initLines();
-	enemys = new Enemy*[1];
-	sf::Texture* tjena = new sf::Texture();
-	tjena->loadFromFile(".\\textures\\zombieSheet.png");
-	enemys[0] = new Enemy(tjena, sf::Vector2f(5* (64 * 0.75f), 5* (64 * 0.75f)));
+	
 }
 
 EntityHandler::EntityHandler(Player* player)
@@ -101,12 +98,15 @@ void EntityHandler::update(float dt)
 void Container::EntityHandler::render(sf::RenderTarget & target) const
 {
 	target.draw(*player);
-	for (int i = 0; i < Cave::ROOM_WIDTH; i++)
+	/*for (int i = 0; i < Val::ROOM_WIDTH; i++)
 		target.draw(lineX[i], 2, sf::Lines);	
-	for (int i = 0; i < Cave::ROOM_HEIGHT; i++)
-		target.draw(lineY[i], 2, sf::Lines);
+	for (int i = 0; i < Val::ROOM_HEIGHT; i++)
+		target.draw(lineY[i], 2, sf::Lines);*/
 
-	target.draw(*enemys[0]);
+	for (int i = 0; i < nrOfEnemies; i++)
+	{
+		target.draw(*enemys[i]);
+	}
 	
 }
 
@@ -133,6 +133,14 @@ void Container::EntityHandler::setDoors(bool * doors)
 	}
 }
 
+void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
+{
+	MasterSpawner spawner(inRoom, size);
+	nrOfEnemies = spawner.spawnEnemies(enemys);
+
+}
+
+
 void EntityHandler::handleInput()
 {
 	if (InputManager::keyPressed(sf::Keyboard::Q))
@@ -146,18 +154,34 @@ void EntityHandler::handleInput()
 	else if (InputManager::keyPressed(sf::Keyboard::W) || InputManager::keyPressed(sf::Keyboard::Up))
 	{
 		playerTurnUp();
+		for (int i = 0; i < this->nrOfEnemies; i++)
+		{
+			this->enemys[i]->update(0);
+		}
 	}
 	else if (InputManager::keyPressed(sf::Keyboard::A) || InputManager::keyPressed(sf::Keyboard::Left))
 	{
 		playerTurnLeft();
+		for (int i = 0; i < this->nrOfEnemies; i++)
+		{
+			this->enemys[i]->update(0);
+		}
 	}
 	else if (InputManager::keyPressed(sf::Keyboard::S) || InputManager::keyPressed(sf::Keyboard::Down))
 	{
 		playerTurnDown();
+		for (int i = 0; i < this->nrOfEnemies; i++)
+		{
+			this->enemys[i]->update(0);
+		}
 	}
 	else if (InputManager::keyPressed(sf::Keyboard::D) || InputManager::keyPressed(sf::Keyboard::Right))
 	{
 		playerTurnRight();
+		for (int i = 0; i < this->nrOfEnemies; i++)
+		{
+			this->enemys[i]->update(0);
+		}
 	}
 }
 
@@ -269,6 +293,7 @@ void EntityHandler::playerTurnUp()
 		{
 			player->move(0, -1);
 		}
+		EnemyMove();
 		//player->move(0, -1);//ta bort efter att playerMove är färdig
 		
 	}
@@ -287,6 +312,7 @@ void EntityHandler::playerTurnLeft()
 		{
 			player->move(-1, 0);
 		}
+		EnemyMove();
 		//player->move(-1,0);//ta bort efter att playerMove är färdig
 	}
 	else
@@ -304,6 +330,7 @@ void EntityHandler::playerTurnDown()
 		{
 			player->move(0, 1);
 		}
+		EnemyMove();
 		//player->move(0, 1);//ta bort efter att playerMove är färdig
 	}
 	else
@@ -321,12 +348,47 @@ void EntityHandler::playerTurnRight()
 		{
 			player->move(1, 0);
 		}
+		EnemyMove(); 
 		//player->move(1,0);//ta bort efter att playerMove är färdig
 	}
 	else
 	{
 		player->setCurrentSpriteFrame(0, 1);
 		player->setDirection(right);
+	}
+}
+
+void Container::EntityHandler::EnemyMove()
+{
+	for (int i = 0; i < this->nrOfEnemies; i++)
+	{
+		Vector2f requestedCoords = enemys[i]->moveRequest();
+		bool col = isFloor(requestedCoords);
+
+		for (int i = 0; i < nrOfStructures && col == false; i++)
+		{
+			Vector2f otherCoords = structures[i]->getCoords();
+			//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
+		}
+		for (int i = 0; i < nrOfItems; i++)
+		{
+			Vector2f otherCoords = items[i]->getCoords();
+			//col = ColLisionHandler::isCol(requestedCoords, otherCoords);
+			player->pickUpItem(*items[i]);
+			removeItem(i);
+		}
+
+		int width = (20 - 1) * (64 * 0.75f);
+		int height = (11 - 1) * (64 * 0.75f);
+		if (requestedCoords.x == width ||
+			requestedCoords.x == 0 ||
+			requestedCoords.y == height ||
+			requestedCoords.y == 0)
+			col = true;
+		if (!col)
+		{
+			this->enemys[i]->move(enemys[i]->getDirX(), enemys[i]->getDirY());
+		}
 	}
 }
 
@@ -348,18 +410,18 @@ void Container::EntityHandler::removeItem(int index)
 
 void Container::EntityHandler::initLines()
 {
-	for (int i = 0; i < Cave::ROOM_WIDTH; i++)
+	for (int i = 0; i < Val::ROOM_WIDTH; i++)
 	{
-		lineX[i][0].position = sf::Vector2f(i * (Cave::SPRITE_SIZE * Cave::SCALE), 0);
+		lineX[i][0].position = sf::Vector2f(i * (Val::SPRITE_SIZE * Val::SCALE), 0);
 		lineX[i][0].color = sf::Color::Red;
-		lineX[i][1].position = sf::Vector2f(i * (Cave::SPRITE_SIZE * Cave::SCALE), (Cave::SPRITE_SIZE * Cave::SCALE) * 11);
+		lineX[i][1].position = sf::Vector2f(i * (Val::SPRITE_SIZE * Val::SCALE), (Val::SPRITE_SIZE * Val::SCALE) * 11);
 		lineX[i][1].color = sf::Color::Red;
 	}
-	for (int i = 0; i < Cave::ROOM_HEIGHT; i++)
+	for (int i = 0; i < Val::ROOM_WIDTH; i++)
 	{
-		lineY[i][0].position = sf::Vector2f(0, i * (Cave::SPRITE_SIZE * Cave::SCALE));
+		lineY[i][0].position = sf::Vector2f(0, i * (Val::SPRITE_SIZE * Val::SCALE));
 		lineY[i][0].color = sf::Color::Red;
-		lineY[i][1].position = sf::Vector2f(20 * (Cave::SPRITE_SIZE * Cave::SCALE), i* (Cave::SPRITE_SIZE * Cave::SCALE));
+		lineY[i][1].position = sf::Vector2f(20 * (Val::SPRITE_SIZE * Val::SCALE), i* (Val::SPRITE_SIZE * Val::SCALE));
 		lineY[i][1].color = sf::Color::Red;
 	}
 }
