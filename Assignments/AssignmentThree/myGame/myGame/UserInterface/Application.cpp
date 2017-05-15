@@ -32,7 +32,7 @@ void Application::run()
 		this->window.setTitle("TwitterNethack\t\t" + std::to_string(fps));
 		while (this->window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed || this->gsm->emptyStack()) 
+			if (event.type == sf::Event::Closed || this->gsm->emptyStack())
 			{
 				this->window.close();
 			}

@@ -30,6 +30,7 @@ namespace Container
 		void destroyPlayer();
 		
 		void setDoors(bool* doors);
+		void setStructureProperty(int role, int spriteSheet);
 		void createEntities(Identifier* inRoom, int size);
 	private:
 		//player intraction
@@ -43,7 +44,7 @@ namespace Container
 
 		void EnemyMove();
 
-		void handleInput();
+		void handleInput(float dt);
 		void extraCon();
 		int calculateDmg(Stats attackerStats, Stats defenderStats);
 		bool isFloor(Vector2f coords);
@@ -52,6 +53,7 @@ namespace Container
 
 		
 		Player* player;
+		sf::Clock inputTimer;
 		sf::Texture* playerTexture;
 		Enemy** enemys;		
 		Structure** structures;
@@ -59,8 +61,10 @@ namespace Container
 		Floor* floor[11][20];
 
 		int nrOfEnemies;
+		int structureProperty;
 		int nrOfStructures;
 		int nrOfItems;
+		int floorSheet;
 
 		bool playersTurn;
 

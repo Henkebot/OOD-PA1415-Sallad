@@ -64,7 +64,7 @@ sf::Vector2f Mob::moveRequest()
 	sf::Vector2f request = getCoords();
 	// MÅSTE FIXA DETTA
 
-	float tile = Val::SCALE * Val::SPRITE_SIZE;
+	float tile = Val::FINAL_SIZE;
 
 	if (m_direction == up)
 	{

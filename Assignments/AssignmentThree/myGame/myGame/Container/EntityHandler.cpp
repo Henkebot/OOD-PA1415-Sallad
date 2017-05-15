@@ -26,6 +26,7 @@ void EntityHandler::extraCon()
 	playersTurn = true;
 	nrOfItems = 0;
 	nrOfStructures = 0;
+	inputTimer.restart().asSeconds();
 }
 
 int Container::EntityHandler::calculateDmg(Stats attackerStats, Stats defenderStats)
@@ -50,9 +51,10 @@ EntityHandler::~EntityHandler()
 	}
 	delete structures;
 
-	for (int i = 0; i <  Val::ROOM_HEIGHT; i++)
+
+	for (int i = 1; i < Val::ROOM_HEIGHT - 1; i++)
 	{
-		for (int j = 0; j <  Val::ROOM_WIDTH; j++)
+		for (int j = 1; j < Val::ROOM_WIDTH - 1; j++)
 		{
 			delete floor[i][j];
 		}
@@ -64,7 +66,7 @@ void EntityHandler::update(float dt)
 	player->update(dt);
 	if (playersTurn == true)
 	{
-		handleInput();
+		handleInput(dt);
 	}
 	else
 	{
@@ -99,11 +101,28 @@ void EntityHandler::update(float dt)
 
 void Container::EntityHandler::render(sf::RenderTarget & target) const
 {
+	for (int y = 1; y < Val::ROOM_HEIGHT - 1; y++)
+	{
+		for (int x = 1; x < Val::ROOM_WIDTH - 1; x++)
+		{
+			target.draw(*floor[y][x]);
+		}
+	}
+	
+	if (structureProperty == 1)
+	{
+		target.draw(*structures[0]);
+
+	}
+	if (structureProperty == 2)
+	{
+		target.draw(*structures[0]);
+	}
 	target.draw(*player);
-	/*for (int i = 0; i < Val::ROOM_WIDTH; i++)
+	for (int i = 0; i < Val::ROOM_WIDTH; i++)
 		target.draw(lineX[i], 2, sf::Lines);	
 	for (int i = 0; i < Val::ROOM_HEIGHT; i++)
-		target.draw(lineY[i], 2, sf::Lines);*/
+		target.draw(lineY[i], 2, sf::Lines);
 
 	for (int i = 0; i < nrOfEnemies; i++)
 	{
@@ -112,7 +131,9 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 			target.draw(*enemys[i]);
 		}
 	}
-	
+
+	if (structureProperty == 1)
+		target.draw(*structures[1]);
 }
 
 Player * Container::EntityHandler::getPlayer() const
@@ -138,15 +159,66 @@ void Container::EntityHandler::setDoors(bool * doors)
 	}
 }
 
+void Container::EntityHandler::setStructureProperty(int role, int spriteSheet)
+{
+	structureProperty = role;
+	floorSheet = spriteSheet;
+}
+
 void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 {
 	MasterSpawner spawner(inRoom, size);
 	nrOfEnemies = spawner.spawnEnemies(enemys);
 
+	sf::Texture* tiles = new sf::Texture();
+	if(floorSheet == 0)
+		tiles->loadFromFile("./textures/sheet.png", sf::IntRect(Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+	else if(floorSheet == 1)
+		tiles->loadFromFile("./textures/sheet2.png", sf::IntRect(Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+	else 
+		tiles->loadFromFile("./textures/sheet3.png", sf::IntRect(Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE * 1, Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+
+	for (int y = 1; y < Val::ROOM_HEIGHT - 1; y++)
+	{
+		for (int x = 1; x < Val::ROOM_WIDTH - 1; x++)
+		{
+			floor[y][x] = new Floor(tiles, sf::Vector2f(x * Val::FINAL_SIZE, y * Val::FINAL_SIZE));
+		}
+	}
+
+	if (structureProperty == 1)
+	{
+		std::cout << "köres!!!!!!!!";
+		Texture* textureLadderLower = new sf::Texture();
+		Texture* textureLadderUpper = new sf::Texture();
+		textureLadderLower->loadFromFile("./textures/sheet.png", sf::IntRect(3 * Val::SPRITE_SIZE, 2 * Val::SPRITE_SIZE,
+			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+		textureLadderUpper->loadFromFile("./textures/sheet.png", sf::IntRect(3 * Val::SPRITE_SIZE, 1 * Val::SPRITE_SIZE,
+			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+
+		this->structures = new Structure*[2];
+		structures[1] = new Structure(textureLadderUpper, sf::Vector2f(5*Val::FINAL_SIZE, 5*Val::FINAL_SIZE));
+		structures[0] = new Structure(textureLadderLower, sf::Vector2f(5 * Val::FINAL_SIZE, 6 * Val::FINAL_SIZE));
+		nrOfStructures = 1;
+		
+		
+	}
+	else if (structureProperty == 2)
+	{
+		Texture* textureHole = new sf::Texture();
+		textureHole->loadFromFile("./textures/sheet.png", sf::IntRect(3 * Val::SPRITE_SIZE, 3 * Val::SPRITE_SIZE,
+			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+		this->structures = new Structure*[1];
+		structures[0] = new Structure(textureHole, sf::Vector2f(5 * Val::FINAL_SIZE, 5 * Val::FINAL_SIZE));
+		nrOfStructures = 1;
+	}
+	// Lägga till start och slut skiten när victor är klar
+
+
 }
 
 
-void EntityHandler::handleInput()
+void EntityHandler::handleInput(float dt)
 {
 	if (InputManager::keyPressed(sf::Keyboard::Q))
 	{
@@ -158,7 +230,7 @@ void EntityHandler::handleInput()
 		playerInteract();
 		playersTurn = false;
 	}
-	else if (InputManager::keyPressed(sf::Keyboard::W) || InputManager::keyPressed(sf::Keyboard::Up))
+	else if (inputTimer.getElapsedTime().asSeconds() > 500 * dt)
 	{
 		playerTurnUp();
 	}
@@ -233,8 +305,7 @@ bool EntityHandler::playerMove()
 {
 	playersTurn = false;
 	Vector2f requestedCoords = player->moveRequest();
-	//bool col = isFloor(requestedCoords);	
-	bool col = false;
+	bool col = isFloor(requestedCoords);
 	for (int i = 0; i < nrOfEnemies && col == false; i++)
 	{
 		Vector2f otherCoords = enemys[i]->getCoords();
@@ -243,7 +314,10 @@ bool EntityHandler::playerMove()
 	for (int i = 0; i < nrOfStructures && col == false; i++)
 	{
 		Vector2f otherCoords = structures[i]->getCoords();
-		col = isCol(requestedCoords, otherCoords);
+		if (requestedCoords == otherCoords)
+		{
+			col = true;
+		}
 	}
 	for (int i = 0; i < nrOfItems; i++)
 	{
@@ -252,19 +326,9 @@ bool EntityHandler::playerMove()
 		player->pickUpItem(*items[i]);
 		removeItem(i);
 	}
-
-	int width = (20 - 1) * (64 * 0.75f);
-	int height = (11 - 1) * (64 * 0.75f);
-	if (requestedCoords.x == width ||
-		requestedCoords.x == 0 ||
-		requestedCoords.y == height ||
-		requestedCoords.y == 0)
-		col = true;
 	
-	float scale = 0.75f;
-	float spriteSize = 64;
-	float reqIndexX = requestedCoords.x / (scale * spriteSize);
-	float reqIndexY = requestedCoords.y / (scale * spriteSize);
+	float reqIndexX = requestedCoords.x / (Val::FINAL_SIZE);
+	float reqIndexY = requestedCoords.y / (Val::FINAL_SIZE);
 
 	// DÖRRAR 
 	// VÄNSTER
@@ -373,13 +437,13 @@ void Container::EntityHandler::EnemyMove()
 			removeItem(i);
 		}
 
-		int width = (20 - 1) * (64 * 0.75f);
+	/*	int width = (20 - 1) * (64 * 0.75f);
 		int height = (11 - 1) * (64 * 0.75f);
 		if (requestedCoords.x == width ||
 			requestedCoords.x == 0 ||
 			requestedCoords.y == height ||
 			requestedCoords.y == 0)
-			col = true;
+			col = true;*/
 		if (!col)
 		{
 			this->enemys[i]->move(enemys[i]->getDirX(), enemys[i]->getDirY());
@@ -389,12 +453,13 @@ void Container::EntityHandler::EnemyMove()
 
 bool EntityHandler::isFloor(Vector2f coords)
 {
-	bool isFloor = false;
-	int x = coords.x;
-	int y = coords.y;
-	if (floor[x][y] != nullptr)
+
+	bool isFloor = true;
+	int x = coords.x / Val::FINAL_SIZE;
+	int y = coords.y / Val::FINAL_SIZE;
+	if (floor[y][x] != nullptr)
 	{
-		isFloor = true;
+		isFloor = false;
 	}
 	return isFloor;
 }

@@ -15,11 +15,16 @@ bool InputManager::keyPressed(sf::Keyboard::Key key)
 	return keyIsPressed;
 }
 
+bool InputManager::keyPress(sf::Keyboard::Key key)
+{
+	return sf::Keyboard::isKeyPressed(key);
+}
+
 int InputManager::getIndexOfKeyPressed()
 {
 	int key = -1;
 	bool shiftPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift);
-	bool altPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt);
+	bool altPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) || sf::Keyboard::isKeyPressed(sf::Keyboard::RAlt);
 	bool foundKey = false;
 	//Letters
 	for (int i = sf::Keyboard::A; i <= sf::Keyboard::Z && !foundKey; i++)
@@ -48,10 +53,41 @@ int InputManager::getIndexOfKeyPressed()
 			std::cout << "look at this: " << key << std::endl;
 			if (shiftPressed)
 			{
-				if (i == 26)
+				if (i == sf::Keyboard::Num0)
 					key += 35;
 				else
 					key += 6;
+			}
+			else if (altPressed)
+			{
+				if (i == sf::Keyboard::Num2)
+				{
+					key = static_cast<int>('@');
+				}
+				else if (i == sf::Keyboard::Num3)
+				{
+					key = static_cast<int>('£');
+				}
+				else if (i == sf::Keyboard::Num4)
+				{
+					key = static_cast<int>('$');
+				}
+				else if (i == sf::Keyboard::Num7)
+				{
+					key = static_cast<int>('{');
+				}
+				else if (i == sf::Keyboard::Num8)
+				{
+					key = static_cast<int>('[');
+				}
+				else if (i == sf::Keyboard::Num9)
+				{
+					key = static_cast<int>(']');
+				}
+				else if (i == sf::Keyboard::Num0)
+				{
+					key = static_cast<int>('}');
+				}
 			}
 			else
 			{
@@ -71,7 +107,62 @@ int InputManager::getIndexOfKeyPressed()
 			key -= 27;
 		}
 	}
-
+	//RestOfTheSHIIIT
+	if (!foundKey)
+	{
+		if (InputManager::keyPressed(sf::Keyboard::Comma))
+		{
+			if (shiftPressed)
+			{
+				key = static_cast<int>(';');
+			}
+			else
+			{
+				key = static_cast<int>(',');
+			}
+		}
+		else if (InputManager::keyPressed(sf::Keyboard::Period))
+		{
+			if (shiftPressed)
+			{
+				key = static_cast<int>(':');
+			}
+			else
+			{
+				key = static_cast<int>('.');
+			}
+		}
+		else if (InputManager::keyPressed(sf::Keyboard::Dash))
+		{
+			if (shiftPressed)
+			{
+				key = 95;
+			}
+			else
+			{
+				key = static_cast<int>('-');
+			}
+		}
+		else if (InputManager::keyPressed(sf::Keyboard::Equal))
+		{
+			if (shiftPressed)
+			{
+				key = static_cast<int>('?');
+			}
+			else if (altPressed)
+			{
+				key = static_cast<int>('\\');
+			}
+			else
+			{
+				key = static_cast<int>('+');
+			}
+		}
+		else if (InputManager::keyPressed(sf::Keyboard::Space))
+		{
+			key = static_cast<int>(' ');
+		}
+	}
 
 
 
