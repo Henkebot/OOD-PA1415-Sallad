@@ -26,7 +26,7 @@ namespace Twitter
 		if (twitterObj.timelineUserGet(true, true, 0))
 		{
 			twitterObj.getLastWebResponse(timeline);
-			printf("\ntwitterClient:: twitCurl::timelineUserGet web response:\n%s\n", timeline.c_str());
+			//printf("\ntwitterClient:: twitCurl::timelineUserGet web response:\n%s\n", timeline.c_str());
 		}
 		return timeline;
 	}
