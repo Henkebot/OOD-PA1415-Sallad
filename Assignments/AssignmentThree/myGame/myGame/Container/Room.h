@@ -29,6 +29,10 @@ namespace Container
 		sf::Text currentTweet;
 		sf::Sprite** spritesArray;
 		
+		//map vars
+		bool discovered;
+
+
 	public:
 		Room(const std::string& tweet, int role = 0);
 		virtual~Room();
@@ -36,8 +40,6 @@ namespace Container
 		void setEh(EntityHandler eh);
 
 		EntityHandler& getCurrentEntityHandler();
-
-
 		
 		sf::Vector2i getCoord() const;
 		void setCoord(const sf::Vector2i & coord);
@@ -60,7 +62,10 @@ namespace Container
 		void update(float dt);
 
 		bool* getDoorStatus() const;
-
+		
+		sf::RectangleShape getMap() const;
+		void setDiscovered();
+		bool isDiscovered() const;
 	private:
 
 		void deleteSpriteArray();

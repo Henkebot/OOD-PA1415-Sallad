@@ -25,8 +25,6 @@ namespace Container
 		void update(float dt);
 
 	private:
-
-
 		std::string twitterUser;
 		Room* currentRoom;
 		int tilesNumber;
@@ -36,11 +34,14 @@ namespace Container
 		std::vector<Room*> roomPointers;
 		Twitter twitterObj;
 
+		std::vector<sf::RectangleShape> aMap;
+
 		void applyRoomTextures();
 		void changeRoom(Room* newRoom, int startX, int startY);
 		void checkDoors();
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 		bool connectRoom(Room* rootRoom, int role, int lastRoom = 0); //role is what type of room: 0 Basic, 1 start, 2 end
+		void importMap();
 
 
 	};

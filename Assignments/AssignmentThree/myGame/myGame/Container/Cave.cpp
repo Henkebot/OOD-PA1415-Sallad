@@ -144,22 +144,40 @@ namespace Container
 		{
 			changeRoom(currentRoom->getLeftD(), 18, 5);
 
+			for (int i = 0; i < aMap.size(); i++)
+			{
+				aMap[i].setPosition(sf::Vector2f(aMap[i].getPosition().x + aMap[i].getSize().x, aMap[i].getPosition().y));
+			}
+
 		} //DOOR UP: (10,0)
 		else if ((playerPos->getCoords().x / (Val::SPRITE_SIZE * Val::SCALE)) == doorUpX && (playerPos->getCoords().y / (Val::SPRITE_SIZE * Val::SCALE)) == doorUpY &&
 			currentRoom->getUpD() != nullptr)
 		{
 			changeRoom(currentRoom->getUpD(), 10, 9);
+			
+			for (int i = 0; i < aMap.size(); i++)
+			{
+				aMap[i].setPosition(sf::Vector2f(aMap[i].getPosition().x, aMap[i].getPosition().y + aMap[i].getSize().y));
+			}
 
 		}//DOOR RIGHT: (19,5)
 		else if ((playerPos->getCoords().x / (Val::SPRITE_SIZE * Val::SCALE)) == doorRightX && (playerPos->getCoords().y / (Val::SPRITE_SIZE * Val::SCALE)) == doorRightY &&
 			currentRoom->getRightD() != nullptr)
 		{
 			changeRoom(currentRoom->getRightD(), 1, 5);
+			for (int i = 0; i < aMap.size(); i++)
+			{
+				aMap[i].setPosition(sf::Vector2f(aMap[i].getPosition().x - aMap[i].getSize().x, aMap[i].getPosition().y));
+			}
 		}//DOOR DOWN: (10,10)
 		else if ((playerPos->getCoords().x / (Val::SPRITE_SIZE * Val::SCALE)) == doorDownX && (playerPos->getCoords().y / (Val::SPRITE_SIZE * Val::SCALE)) == doorDownX &&
 			currentRoom->getDownD() != nullptr)
 		{
 			changeRoom(currentRoom->getDownD(), 10, 1);
+			for (int i = 0; i < aMap.size(); i++)
+			{
+				aMap[i].setPosition(sf::Vector2f(aMap[i].getPosition().x, aMap[i].getPosition().y - aMap[i].getSize().y));
+			}
 		}
 
 	}
@@ -167,6 +185,10 @@ namespace Container
 	void Cave::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	{
 		target.draw(*currentRoom);
+		for (int i = 0; i < aMap.size(); i++)
+		{
+			target.draw(aMap.at(i));
+		}
 	}
 
 	bool Cave::connectRoom(Room * rootRoom, int role, int lastRoom)
@@ -332,6 +354,14 @@ namespace Container
 		return newRoomCreated;
 	}
 
+	void Cave::importMap()
+	{
+		for (int i = 0; i < roomPointers.size(); i++)
+		{
+			aMap.push_back(roomPointers.at(i)->getMap());
+		}
+	}
+
 	Cave::Cave()
 	{
 		tilesNumber = 0;
@@ -375,6 +405,8 @@ namespace Container
 		while (!lastRoomCreated) lastRoomCreated = connectRoom(currentRoom, 2);
 
 
+		importMap();
+
 		applyRoomTextures();
 
 		Texture* texture = new Texture();
@@ -415,6 +447,26 @@ namespace Container
 	{
 		currentRoom->update(dt);
 		checkDoors();
+		aMap.at(0).setFillColor(sf::Color(128, 247, 101, 255));
+		aMap.at(0).setOutlineColor(sf::Color(42, 81, 34, 255));
+
+		for (int i = 0; i < roomPointers.size(); i++)
+		{
+			
+			if (i != 0 && roomPointers[i]->isDiscovered())
+			{
+				aMap[i].setFillColor(sf::Color(188, 188, 181, 155));
+				aMap[i].setOutlineColor(sf::Color(89, 88, 64, 255));
+			}
+			if (currentRoom == roomPointers[i])
+			{
+				currentRoom->setDiscovered();
+				aMap.at(i).setFillColor(sf::Color(242, 293, 101, 255));
+				aMap.at(i).setOutlineColor(sf::Color(168, 166, 74, 255));
+			}
+			
+		}
+		
 	}
 }
 
