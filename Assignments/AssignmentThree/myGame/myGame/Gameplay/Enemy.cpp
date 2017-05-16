@@ -7,7 +7,7 @@
 Enemy::Enemy(sf::Texture* texture, sf::Vector2f coords)  : Mob(texture,coords)
 {
 	agro = 4;
-	stupidity = 3;
+	stupidity = 2;
 	state = states::idle;
 	getStats()->setStrength(2.0f);
 }
