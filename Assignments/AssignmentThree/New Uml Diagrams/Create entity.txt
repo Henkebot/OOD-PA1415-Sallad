@@ -1,0 +1,24 @@
+@startuml
+title Create Entity
+hide footbox
+participant ":EntityHandler" as eh
+participant ":MasterSpawner" as ms
+participant ":Enemy" as emy
+
+[->eh : createEntities(inRoom[], size)
+activate eh
+	eh -> ms : spawner = MasterSpawner(inRoom[], size)
+	activate ms
+	deactivate ms
+	eh -> ms : nrOfEnemies = spawnEnemies(Enemies**)
+	activate ms
+		loop size
+			ms -> emy : Enemies** = Enemy()
+			activate emy
+			deactivate emy
+		end
+	deactivate ms
+deactivate eh
+
+
+@enduml
