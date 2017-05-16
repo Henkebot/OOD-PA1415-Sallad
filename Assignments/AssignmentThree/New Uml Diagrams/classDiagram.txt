@@ -439,12 +439,12 @@ Room *---"1" TweetAnalyser
 MasterSpawner *--"0..50" Identifier
 
 
-EntityHandler o-"1" Player
-EntityHandler *-"0..3" Enemy
-EntityHandler *-"0..10" Structure
-EntityHandler *-"190" Floor
-EntityHandler *-"0..5" Item
-EntityHandler *-"1" MasterSpawner
+EntityHandler o---"1" Player
+EntityHandler *---"0..3" Enemy
+EntityHandler *---"0..10" Structure
+EntityHandler *---"190" Floor
+EntityHandler *---"0..5" Item
+EntityHandler *---"1" MasterSpawner
 Player *--"1" Inventory
 
 Inventory *--"0..28" Item
