@@ -108,19 +108,53 @@ void Enemy::checkState(sf::Vector2f playerCoords)
 		else
 		{
 			state = states::idle;
-			int direction = (rand() % 4) + 1;
+			rng = (rand() % 15) + 1;
 
-			if (direction == 1)
+			if (rng < 3)
+			{
+				rng = (rand() % 4) + 1;
+				if (rng == 1)
+				{
+					this->setDirection(directions::up);
+					this->setCurrentSpriteFrame(0, 0);
+				}
+				else if (rng == 2)
+				{
+					this->setDirection(directions::right);
+					this->setCurrentSpriteFrame(0, 1);
+				}
+				else if (rng == 3)
+				{
+					this->setDirection(directions::down);
+					this->setCurrentSpriteFrame(0, 2);
+				}
+				else
+				{
+					this->setDirection(directions::left);
+					this->setCurrentSpriteFrame(0, 3);
+				}
+			}
+		}
+	}
+	else
+	{
+		state = states::idle;
+		int rng = (rand() % 15) + 1;
+
+		if (rng < 3)
+		{
+			rng = (rand() % 4) + 1;
+			if (rng == 1)
 			{
 				this->setDirection(directions::up);
 				this->setCurrentSpriteFrame(0, 0);
 			}
-			else if (direction == 2)
+			else if (rng == 2)
 			{
 				this->setDirection(directions::right);
 				this->setCurrentSpriteFrame(0, 1);
 			}
-			else if (direction == 3)
+			else if (rng == 3)
 			{
 				this->setDirection(directions::down);
 				this->setCurrentSpriteFrame(0, 2);
@@ -130,32 +164,6 @@ void Enemy::checkState(sf::Vector2f playerCoords)
 				this->setDirection(directions::left);
 				this->setCurrentSpriteFrame(0, 3);
 			}
-		}
-	}
-	else
-	{
-		state = states::idle;
-		int direction = (rand() % 4) + 1;
-
-		if (direction == 1)
-		{
-			this->setDirection(directions::up);
-			this->setCurrentSpriteFrame(0, 0);
-		}
-		else if (direction == 2)
-		{
-			this->setDirection(directions::right);
-			this->setCurrentSpriteFrame(0, 1);
-		}
-		else if (direction == 3)
-		{
-			this->setDirection(directions::down);
-			this->setCurrentSpriteFrame(0, 2);
-		}
-		else
-		{
-			this->setDirection(directions::left);
-			this->setCurrentSpriteFrame(0, 3);
 		}
 	}
 		

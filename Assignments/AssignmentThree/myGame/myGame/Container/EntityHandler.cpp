@@ -60,7 +60,7 @@ float Container::EntityHandler::calculateDmg(Stats attackerStats, Stats defender
 	int dogeRole = rand() % static_cast<int>(defenderStats.getAgility()) + 1;
 	if (dogeRole < attackRole)
 	{
-		dmg = attackerStats.getAttack();
+		dmg = attackerStats.getAttackFloat();
 		float defenceModifier = 1 - defenderStats.getDefence();
 		dmg *= defenceModifier;
 	}
@@ -380,6 +380,7 @@ void EntityHandler::playerInteract()
 			if (structures[i]->getEffect() == heal)
 			{
 				player->getStats()->takeDMG(-1);
+				gameLog->addMessage("You drank from the fountain");
 			}		
 		}
 	}

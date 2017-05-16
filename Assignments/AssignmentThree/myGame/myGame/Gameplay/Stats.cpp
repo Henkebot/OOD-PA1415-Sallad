@@ -104,4 +104,9 @@ void Stats::takeDMG(float dmg)
 	{
 		health = maxHealth;
 	}
+	else if (health < 0)
+	{
+		health = 0;
+	}
+
 }
