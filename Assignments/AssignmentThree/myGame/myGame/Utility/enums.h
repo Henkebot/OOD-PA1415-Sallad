@@ -16,7 +16,15 @@ enum states
 	interact
 };
 
-enum roomRoles
+enum effects
+{
+	ladderUp,
+	ladderDown,
+	heal,
+	art
+};
+
+enum roomRoles //används inte 
 {
 	start,
 	basic,

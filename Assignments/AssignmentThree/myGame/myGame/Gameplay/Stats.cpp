@@ -17,6 +17,7 @@ Stats::Stats(float weaponModifier, float defence, float health, float strength, 
 	this->agility = agility;
 	this->strength = strength;
 	this->accuracy = accuracy;
+	this->maxHealth = health;
 }
 
 Stats::~Stats()
@@ -99,4 +100,8 @@ void Stats::setAccuracy(float accuracy)
 void Stats::takeDMG(float dmg)
 {
 	this->health -= dmg;
+	if (health > maxHealth)
+	{
+		health = maxHealth;
+	}
 }

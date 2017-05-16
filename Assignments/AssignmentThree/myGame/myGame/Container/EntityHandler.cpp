@@ -150,14 +150,13 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 		}
 	}
 	
-	if (structureProperty == 1)
+	for (int i = 0; i < nrOfStructures; i++)
 	{
-		target.draw(*structures[0]);
-
-	}
-	if (structureProperty == 2)
-	{
-		target.draw(*structures[0]);
+		if (structures[i]->getEffect() != art)
+		{
+			target.draw(*structures[i]);
+		}
+		
 	}
 	target.draw(*player);
 	//for (int i = 0; i < Val::ROOM_WIDTH; i++)
@@ -170,9 +169,14 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 		target.draw(*enemys[i]);	
 	}
 
-	if (structureProperty == 1)
-		target.draw(*structures[1]);
+	for (int i = 0; i < nrOfStructures; i++)
+	{
+		if (structures[i]->getEffect() == art)
+		{
+			target.draw(*structures[i]);
+		}
 
+	}
 	target.draw(armorText);
 	target.draw(attackText);
 	target.draw(healthText);
@@ -238,21 +242,25 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 		textureLadderUpper->loadFromFile("./textures/sheet.png", sf::IntRect(3 * Val::SPRITE_SIZE, 1 * Val::SPRITE_SIZE,
 			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
 
-		this->structures = new Structure*[2];
-		structures[1] = new Structure(textureLadderUpper, sf::Vector2f(5*Val::FINAL_SIZE, 5*Val::FINAL_SIZE));
-		structures[0] = new Structure(textureLadderLower, sf::Vector2f(5 * Val::FINAL_SIZE, 6 * Val::FINAL_SIZE));
-		nrOfStructures = 1;
+		this->structures = new Structure*[3];
+		structures[1] = new Structure(art,textureLadderUpper, sf::Vector2f(5*Val::FINAL_SIZE, 5*Val::FINAL_SIZE));
+		structures[0] = new Structure(ladderUp,textureLadderLower, sf::Vector2f(5 * Val::FINAL_SIZE, 6 * Val::FINAL_SIZE));
+		nrOfStructures = 2;
 		
 		
 	}
 	else if (structureProperty == 2)
 	{
 		Texture* textureHole = new sf::Texture();
+		Texture* textureLadderUpper = new sf::Texture();
 		textureHole->loadFromFile("./textures/sheet.png", sf::IntRect(3 * Val::SPRITE_SIZE, 3 * Val::SPRITE_SIZE,
 			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
-		this->structures = new Structure*[1];
-		structures[0] = new Structure(textureHole, sf::Vector2f(5 * Val::FINAL_SIZE, 5 * Val::FINAL_SIZE));
-		nrOfStructures = 1;
+		textureLadderUpper->loadFromFile("./textures/sheet.png", sf::IntRect(1 * Val::SPRITE_SIZE, 1 * Val::SPRITE_SIZE,
+			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+		this->structures = new Structure*[2];
+		structures[0] = new Structure(ladderDown, textureHole, sf::Vector2f(5 * Val::FINAL_SIZE, 5 * Val::FINAL_SIZE));
+		structures[1] = new Structure(heal, textureLadderUpper, sf::Vector2f(14 * Val::FINAL_SIZE, 7 * Val::FINAL_SIZE));
+		nrOfStructures = 2;
 	}
 	// Lägga till start och slut skiten när victor är klar
 
@@ -346,9 +354,13 @@ void EntityHandler::playerInteract()
 	{
 		Vector2f structureCoord = structures[i]->getCoords();
 
-		//col =isCol(attackCoord, enemyCoord);
+		col =isCol(interactCoord, structureCoord);
 		if (col == true)
 		{
+			if (structures[i]->getEffect() == heal)
+			{
+				player->getStats()->takeDMG(-1);
+			}		
 		}
 	}
 }
@@ -365,8 +377,11 @@ bool EntityHandler::playerMove()
 	}
 	for (int i = 0; i < nrOfStructures && col == false; i++)
 	{
-		Vector2f otherCoords = structures[i]->getCoords();
-		col = isCol(requestedCoords, otherCoords);
+		if (structures[i]->getEffect() != art)
+		{
+			Vector2f otherCoords = structures[i]->getCoords();
+			col = isCol(requestedCoords, otherCoords);
+		}		
 	}
 	for (int i = 0; i < nrOfItems; i++)
 	{
@@ -472,8 +487,11 @@ void Container::EntityHandler::EnemyMove(int index)
 	}
 	for (int i = 0; i < nrOfStructures && col == false; i++)
 	{
-		Vector2f otherCoords = structures[i]->getCoords();
-		col = isCol(requestedCoords, otherCoords);
+		if (structures[i]->getEffect() != art)
+		{
+			Vector2f otherCoords = structures[i]->getCoords();
+			col = isCol(requestedCoords, otherCoords);
+		}		
 	}
 	for (int i = 0; i < nrOfItems; i++)
 	{
