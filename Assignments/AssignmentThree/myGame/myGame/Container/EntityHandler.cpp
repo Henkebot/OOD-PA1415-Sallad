@@ -51,8 +51,6 @@ void EntityHandler::extraCon()
 	healthText.setString("10");
 	healthText.setCharacterSize(20);
 	healthText.setPosition(1212, 314);
-	
-
 
 }
 

@@ -18,6 +18,5 @@ public:
 	states getState() const;
 	void setState(states newState);
 
-	//virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 };
 #endif

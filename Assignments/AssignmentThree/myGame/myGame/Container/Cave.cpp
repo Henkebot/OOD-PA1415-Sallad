@@ -4,10 +4,6 @@
 #include <iostream>
 namespace Container
 {
-	const int Cave::ROOM_WIDTH = 20;
-	const int Cave::ROOM_HEIGHT = 11;
-
-
 	const float doorLeftX		= 0;
 	const float doorLeftY		= 5;
 
@@ -33,7 +29,7 @@ namespace Container
 		}
 		for (int i = 0; i < Val::ROOM_WIDTH; i++)
 		{
-			for (int j = 0; j < ROOM_HEIGHT; j++)
+			for (int j = 0; j < Val::ROOM_HEIGHT; j++)
 			{
 				spriteArray[i][j].scale(Val::SCALE, Val::SCALE);
 			}

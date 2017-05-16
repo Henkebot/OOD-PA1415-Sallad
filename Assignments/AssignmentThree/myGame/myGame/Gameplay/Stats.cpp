@@ -60,7 +60,7 @@ void Stats::setAgility(float agility)
 	this->agility = agility;
 }
 
-float Stats::getAgility()
+float Stats::getAgility() const
 {
 	return agility;
 }

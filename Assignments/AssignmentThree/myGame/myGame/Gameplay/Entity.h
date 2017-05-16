@@ -22,10 +22,7 @@ public:
 	sf::Texture getTexture() const; 
 	void setSprite(const sf::Sprite& sprite); 
 	sf::Sprite getSprite() const;
-	void setTileXIndex(int tileX); 
-	int getTileXIndex();
-	void setTileYIndex(int tileY); 
-	int getTileYIndex(); 
+
 	virtual void update(float dt) = 0;
 	virtual void create() = 0; 
 };

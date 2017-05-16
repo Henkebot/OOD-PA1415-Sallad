@@ -6,10 +6,7 @@
 class Mob : public Entity
 {
 private:
-	bool isAllowedLeft; 
-	bool isAllowedRight; 
-	bool isAllowedUp; 
-	bool isAllowedDown; 
+
 	directions m_direction;
 	Stats* stats;
 	sf::RectangleShape entireHealthBar;
@@ -28,15 +25,6 @@ public:
 	virtual sf::Vector2f interact() = 0; 
 
 	void updateHealthbar();
-
-	/*bool getIsAllowedLeft(); 
-	void setIsAllowedLeft(bool isAllowed); 
-	bool getIsAllowedRight(); 
-	void setIsAllowedRight(bool isAllowed); 
-	bool getIsAllowedUp(); 
-	void setIsAllowedUp(bool isAllowed); 
-	bool getIsAllowedDown(); 
-	void setIsAllowedDown(bool isAllowed);*/
 
 	directions getDirection(); 
 	void setDirection(directions direction);

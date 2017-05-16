@@ -5,8 +5,7 @@ Game::Game(GameStateManager * gsm, std::string user) :
 {
 	std::cout << "Game State pushed!\n";
 	this->map.createMap(user);
-	this->shape.setSize(sf::Vector2f(200, 200));
-	this->shape.setFillColor(sf::Color(255, 100, 55));
+
 
 }
 
@@ -46,7 +45,7 @@ Game & Game::operator=(const Game & other)
 	if (this != &other)
 	{
 		State::operator=(other);
-		//more stuff
+
 	}
 
 	return *this;
@@ -56,5 +55,5 @@ Game & Game::operator=(const Game & other)
 void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	this->map.render(target);
-	//target.draw(this->shape, states);
+
 }

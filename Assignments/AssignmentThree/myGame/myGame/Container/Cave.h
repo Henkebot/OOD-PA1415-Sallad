@@ -10,17 +10,12 @@ namespace Container
 {
 
 	class Cave : public sf::Drawable
-	{
-	public:
-		static const int ROOM_WIDTH;
-		static const int ROOM_HEIGHT;
-	
+	{	
 	public:
 		Cave();
 		virtual~Cave();
 		void generateCave();
 		bool selectTwitterFeed(const std::string& user = "");
-		void setSprite(sf::Sprite** spritesArray, float xIndex, float yIndex, int xSheet, int ySheet);
 		
 		void update(float dt);
 
@@ -36,6 +31,7 @@ namespace Container
 
 		std::vector<sf::RectangleShape> aMap;
 
+		void setSprite(sf::Sprite** spritesArray, float xIndex, float yIndex, int xSheet, int ySheet);
 		void applyRoomTextures();
 		void changeRoom(Room* newRoom, int startX, int startY);
 		void checkDoors();
