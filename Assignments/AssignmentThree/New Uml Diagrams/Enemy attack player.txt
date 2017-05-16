@@ -1,0 +1,42 @@
+@startuml
+title Enemy attack player
+hide footbox
+
+participant ":EntityHandler" as eh
+participant ":Player" as player
+participant ":Enemy" as emy
+
+[->eh : update(dt)
+activate eh
+	eh -> player : update(dt)
+		activate player
+		deactivate player
+		eh -> player : playerCoords = getCoords()
+		activate player
+		player --> eh : coords
+		deactivate player
+		loop : nrOfEnemies
+			eh -> emy : updateState(playerCoords)
+			activate emy
+			deactivate emy
+			eh -> emy : getState()
+			activate emy
+				emy --> eh : state : enum
+			deactivate emy
+			eh -> emy : enemyStats = getStats()
+			activate emy
+				emy --> eh : stats
+			deactivate emy
+			eh -> player : playerStats = getStats()
+			activate player
+				player --> eh : stats
+			deactivate player
+			eh -> eh : dmg = calculateDmg(enemyStats, playerStats)
+			activate eh
+			deactivate eh
+			eh -> player : takeDmg(dmg)
+			activate player
+			deactivate player
+		end
+deactivate eh
+@enduml

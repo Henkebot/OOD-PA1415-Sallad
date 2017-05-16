@@ -443,7 +443,7 @@ namespace Container
 		if (result)
 		{
 			int max = rand() % 200;
-			while (max == 1)
+			while (max == 1 || max == 2)
 			{
 				max = rand() % 200;
 			}
