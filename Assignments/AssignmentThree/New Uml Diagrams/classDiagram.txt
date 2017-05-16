@@ -417,37 +417,37 @@ class MasterSpawner {
 	-size : int
 }
 
-Application -- GameStateManager
+Application *--"1" GameStateManager
 
-GameStateManager -- State
+GameStateManager *--"1..*" State
 
-State <|-- Pause
-State <|-- EnterFeed
-State <|-- Menu
-State <|-- Game
+State <|--- Pause
+State <|--- EnterFeed
+State <|--- Menu
+State <|--- Game
 
-Game - Map
+Game *-"1" Map
 
-Map -- Cave
+Map *--"1" Cave
 
-Cave -- Twitter
-Cave -- Room
+Cave *-"1" Twitter
+Cave *--"3..200" Room
 
-Room -- EntityHandler
-Room -- TweetAnalyser
+Room *--"1" EntityHandler
+Room *---"1" TweetAnalyser
 
-MasterSpawner -- Identifier
+MasterSpawner *--"0..50" Identifier
 
 
-EntityHandler -- Player
-EntityHandler -- Enemy
-EntityHandler -- Structure
-EntityHandler -- Floor
-EntityHandler -- Item
-EntityHandler -- MasterSpawner
-Player -- Inventory
+EntityHandler o-"1" Player
+EntityHandler *-"0..3" Enemy
+EntityHandler *-"0..10" Structure
+EntityHandler *-"190" Floor
+EntityHandler *-"0..5" Item
+EntityHandler *-"1" MasterSpawner
+Player *--"1" Inventory
 
-Inventory -- Item
+Inventory *--"0..28" Item
 
 Entity <|-- Item
 
@@ -458,7 +458,7 @@ NonMovable <|-- Floor
 
 Mob <|-- Player
 Mob <|-- Enemy
-Mob -- Stats
+Mob *--"1" Stats
 @enduml
 
 

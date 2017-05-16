@@ -255,8 +255,7 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 		Texture* textureLadderUpper = new sf::Texture();
 		textureHole->loadFromFile("./textures/sheet.png", sf::IntRect(3 * Val::SPRITE_SIZE, 3 * Val::SPRITE_SIZE,
 			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
-		textureLadderUpper->loadFromFile("./textures/sheet.png", sf::IntRect(1 * Val::SPRITE_SIZE, 1 * Val::SPRITE_SIZE,
-			Val::SPRITE_SIZE, Val::SPRITE_SIZE));
+		textureLadderUpper->loadFromFile("./textures/fountain.png");
 		this->structures = new Structure*[2];
 		structures[0] = new Structure(ladderDown, textureHole, sf::Vector2f(5 * Val::FINAL_SIZE, 5 * Val::FINAL_SIZE));
 		structures[1] = new Structure(heal, textureLadderUpper, sf::Vector2f(14 * Val::FINAL_SIZE, 7 * Val::FINAL_SIZE));
