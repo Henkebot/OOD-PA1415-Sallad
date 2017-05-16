@@ -17,7 +17,7 @@ namespace Container
 		tweetZone->setTexture(*tweetTexture);
 		tweetZone->setPosition(sf::Vector2f(0, 528));
 		gameLog = new Log();
-		gameLog->setPosition(1000, 365);
+		gameLog->setPosition(992, 365);
 		
 		//generateCave("PA1415_Sallad");
 	}
