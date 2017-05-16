@@ -26,6 +26,13 @@ Mob::Mob(sf::Texture* texture, sf::Vector2f coords) : Entity(texture,coords)
 		this->setCurrentSpriteFrame(0, 3);
 	}
 	stats = new Stats(10,0.2f,10);
+
+	entireHealthBar.setSize(sf::Vector2f(48, 8));
+	entireHealthBar.setFillColor(sf::Color::Red);
+
+	healthLeftBar.setSize(sf::Vector2f(48, 8));
+	healthLeftBar.setFillColor(sf::Color::Green);
+
 }
 
 Mob::~Mob()
@@ -147,47 +154,17 @@ sf::Vector2f Mob::interact()
 {
 	return sf::Vector2f(0, 0);
 }
-
-bool Mob::getIsAllowedLeft()
+void Mob::updateHealthbar()
 {
-	return this->isAllowedLeft; 
-}
+	int coordX = getSprite().getPosition().x;
+	int coordY = getSprite().getPosition().y;
+	float barModifier = getStats()->getHealth() / 10;
 
-void Mob::setIsAllowedLeft(bool isAllowed)
-{
-	this->isAllowedLeft = isAllowed; 
-}
+	healthLeftBar.setSize(sf::Vector2f(48 * barModifier,8));
+	healthLeftBar.setPosition(sf::Vector2f(coordX, coordY - 20));
+	entireHealthBar.setPosition(sf::Vector2f(coordX, coordY - 20));
 
-bool Mob::getIsAllowedRight()
-{
-	return this->isAllowedRight; 
 }
-
-void Mob::setIsAllowedRight(bool isAllowed)
-{
-	this->isAllowedRight = isAllowed;
-}
-
-bool Mob::getIsAllowedUp()
-{
-	return this->isAllowedUp; 
-}
-
-void Mob::setIsAllowedUp(bool isAllowed)
-{
-	this->isAllowedUp = isAllowed; 
-}
-
-bool Mob::getIsAllowedDown()
-{
-	return this->isAllowedDown; 
-}
-
-void Mob::setIsAllowedDown(bool isAllowed)
-{
-	this->isAllowedDown = isAllowed; 
-}
-
 //Rätt uppfattat? 
 bool Mob::isDead() const
 {
@@ -207,5 +184,7 @@ void Mob::update(float dt)
 
 void Mob::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	target.draw(entireHealthBar);
+	target.draw(healthLeftBar);
 	target.draw(this->getSprite(), states); 
 }

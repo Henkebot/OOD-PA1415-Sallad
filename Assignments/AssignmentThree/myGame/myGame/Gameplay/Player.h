@@ -18,7 +18,6 @@ public:
 	void update(float dt);
 	sf::Vector2f interact();
 	void pickUpItem(Item item);
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const; 
 
 };
 

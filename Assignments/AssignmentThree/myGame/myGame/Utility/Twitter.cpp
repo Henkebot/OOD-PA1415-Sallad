@@ -73,7 +73,7 @@ void Twitter::readFeed(const std::string& user, int maxAmountOfRooms)
 				twitterObj.getLastWebResponse(timeline);
 				this->user = "Local";
 			}
-			else if (timeline.find("{\"request\":\"\\ / 1.1\\ / statuses\\ / user_timeline.json\",\"error\":\"Not authorized.\"}") != -1)
+			else if (timeline.find("\"error\":\"Not authorized.\"") != -1)
 			{
 				twitterObj.timelineUserGet(false, true, maxAmountOfRooms);
 				twitterObj.getLastWebResponse(timeline);

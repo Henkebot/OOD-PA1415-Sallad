@@ -8,6 +8,7 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2f coords)  : Mob(texture,coords)
 {
 	agro = 3;
 	state = states::idle;
+	getStats()->setAttack(2.0f);
 }
 
 Enemy::~Enemy()
@@ -115,11 +116,6 @@ void Enemy::update(float dt)
 sf::Vector2f Enemy::interact()
 {
 	return sf::Vector2f();
-}
-
-void Enemy::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	target.draw(this->getSprite(), states); 
 }
 
 states Enemy::getState() const

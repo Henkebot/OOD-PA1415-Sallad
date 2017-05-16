@@ -101,9 +101,6 @@
     <Image Include="textures\brick.png" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="font\D3Stonism.ttf" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="libeay32.dll" />
     <None Include="openal32.dll" />
     <None Include="sfml-audio-2.dll" />

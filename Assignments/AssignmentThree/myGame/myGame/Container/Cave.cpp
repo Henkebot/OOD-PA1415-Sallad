@@ -446,7 +446,12 @@ namespace Container
 		bool result = twitterObj.authenticate();
 		if (result)
 		{
-			twitterObj.readFeed(user, (rand() % 100));
+			int max = rand() % 200;
+			while (max == 1)
+			{
+				max = rand() % 200;
+			}
+			twitterObj.readFeed(user, max);
 		}
 		return result;
 	}
