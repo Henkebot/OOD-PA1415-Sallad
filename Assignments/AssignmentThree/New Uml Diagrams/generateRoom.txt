@@ -1,0 +1,51 @@
+@startuml
+title Generate Room
+hide footbox
+
+participant ":Room" as room
+participant ":EntityHandler" as eh
+participant ":TweetAnalyser" as ta
+participant ":Identifier" as id
+
+[->room : Room(tweet, role)
+activate room
+	room-> eh : eh = eh()
+	activate eh
+	deactivate eh
+deactivate room
+
+[->room : customizeRoom(tilesnumber)
+activate room
+	room -> ta : size  = getInRoom(tweet, inRoom)
+	activate ta
+		loop nrOfTweets
+			ta -> id : inRoom = identifier()
+			activate id
+			deactivate id
+			
+			ta -> id : setNewID(id) 
+			activate id
+			deactivate id
+
+			ta -> id : setNewAmount(nr)
+			activate id
+			deactivate id
+
+		end
+	
+	ta --> room : size
+	deactivate ta
+
+	room -> eh : setStructureProperty(role, spritesheet)
+	activate eh
+
+	deactivate eh
+
+	room -> eh : createEntities(inRoom, size)
+	activate eh
+
+	deactivate eh
+deactivate room
+
+
+@enduml

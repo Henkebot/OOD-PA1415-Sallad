@@ -1,0 +1,67 @@
+@startuml
+title Enemy Attack Player
+hide footbox
+
+participant ":EntityHandler" as eh
+participant ":Player" as player
+participant ":InputManager" as im
+participant ":Enemy" as enemy
+
+[->eh : update(dt)
+activate eh
+	eh -> player : update(dt)
+	activate player
+
+	deactivate player
+
+	eh -> eh : handleInput(dt)
+	activate eh
+		eh -> im : keyPress(sf::Keyboard::Q)
+		activate im
+		im--> eh : result
+		deactivate im
+
+
+		eh -> eh : playerAttack()
+		activate eh
+			eh -> player : attackCoord  = attack()
+			activate player
+			deactivate player
+
+			loop nrOfEnemies
+			eh -> enemy : otherCoord = getCoords()
+			activate enemy
+			deactivate enemy
+
+			eh -> eh : col = isCol(otherCoords, attackCoord)
+			activate eh
+			deactivate eh
+
+			alt col == true
+			
+				eh -> player : playerStats = getStats
+				activate player
+				deactivate player
+
+				eh -> enemy : enemyStats = getStats()
+				activate enemy
+				deactivate enemy
+
+				eh -> eh : dmg = calculateDmg(playerStats, enemyStats)
+				activate eh
+				deactivate eh
+
+				eh -> player : takeDmg(dmg)
+				activate player
+				deactivate player
+			end
+			end
+		deactivate eh
+		
+	deactivate eh
+	
+
+deactivate eh
+
+
+@enduml
