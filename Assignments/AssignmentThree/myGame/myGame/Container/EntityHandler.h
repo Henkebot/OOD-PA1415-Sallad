@@ -79,6 +79,8 @@ namespace Container
 
 		bool playersTurn;
 
+		bool debug;
+
 		//DEBUG
 		sf::Vertex lineX[20][2];
 		sf::Vertex lineY[11][2];

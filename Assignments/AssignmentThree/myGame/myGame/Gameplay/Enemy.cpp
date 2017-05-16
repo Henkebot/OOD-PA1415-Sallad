@@ -6,7 +6,8 @@
 
 Enemy::Enemy(sf::Texture* texture, sf::Vector2f coords)  : Mob(texture,coords)
 {
-	agro = 3;
+	agro = 4;
+	stupidity = 3;
 	state = states::idle;
 	getStats()->setStrength(2.0f);
 }
@@ -53,55 +54,83 @@ void Enemy::checkState(sf::Vector2f playerCoords)
 	else if (distance <= tile * agro)
 	{
 		state = states::move;
-		int rng = rand() % 2;
-		if (rng = 0)
+		int rng = rand() % 10;
+		if (rng > stupidity)
 		{
-			if (playerCoords.x < getCoords().x)
+			rng = rand() % 2;
+			if (rng = 0)
 			{
-				this->setDirection(directions::left);
-				this->setCurrentSpriteFrame(0, 3);
+				if (playerCoords.x < getCoords().x)
+				{
+					this->setDirection(directions::left);
+					this->setCurrentSpriteFrame(0, 3);
+				}
+				else if (playerCoords.x > getCoords().x)
+				{
+					this->setDirection(directions::right);
+					this->setCurrentSpriteFrame(0, 1);
+				}
+				else if (playerCoords.y < getCoords().y)
+				{
+					this->setDirection(directions::up);
+					this->setCurrentSpriteFrame(0, 0);
+				}
+				else if (playerCoords.y > getCoords().y)
+				{
+					this->setDirection(directions::down);
+					this->setCurrentSpriteFrame(0, 2);
+				}
 			}
-			else if (playerCoords.x > getCoords().x)
+			else
 			{
-				this->setDirection(directions::right);
-				this->setCurrentSpriteFrame(0, 1);
-			}
-			else if (playerCoords.y < getCoords().y)
-			{
-				this->setDirection(directions::up);
-				this->setCurrentSpriteFrame(0, 0);
-			}
-			else if (playerCoords.y > getCoords().y)
-			{
-				this->setDirection(directions::down);
-				this->setCurrentSpriteFrame(0, 2);
+				if (playerCoords.y < getCoords().y)
+				{
+					this->setDirection(directions::up);
+					this->setCurrentSpriteFrame(0, 0);
+				}
+				else if (playerCoords.y > getCoords().y)
+				{
+					this->setDirection(directions::down);
+					this->setCurrentSpriteFrame(0, 2);
+				}
+				else if (playerCoords.x < getCoords().x)
+				{
+					this->setDirection(directions::left);
+					this->setCurrentSpriteFrame(0, 3);
+				}
+				else if (playerCoords.x > getCoords().x)
+				{
+					this->setDirection(directions::right);
+					this->setCurrentSpriteFrame(0, 1);
+				}
 			}
 		}
 		else
 		{
-			if (playerCoords.y < getCoords().y)
+			state = states::idle;
+			int direction = (rand() % 4) + 1;
+
+			if (direction == 1)
 			{
 				this->setDirection(directions::up);
 				this->setCurrentSpriteFrame(0, 0);
 			}
-			else if (playerCoords.y > getCoords().y)
-			{
-				this->setDirection(directions::down);
-				this->setCurrentSpriteFrame(0, 2);
-			}
-			else if (playerCoords.x < getCoords().x)
-			{
-				this->setDirection(directions::left);
-				this->setCurrentSpriteFrame(0, 3);
-			}
-			else if (playerCoords.x > getCoords().x)
+			else if (direction == 2)
 			{
 				this->setDirection(directions::right);
 				this->setCurrentSpriteFrame(0, 1);
 			}
+			else if (direction == 3)
+			{
+				this->setDirection(directions::down);
+				this->setCurrentSpriteFrame(0, 2);
+			}
+			else
+			{
+				this->setDirection(directions::left);
+				this->setCurrentSpriteFrame(0, 3);
+			}
 		}
-		
-		
 	}
 	else
 	{
@@ -129,6 +158,8 @@ void Enemy::checkState(sf::Vector2f playerCoords)
 			this->setCurrentSpriteFrame(0, 3);
 		}
 	}
+		
+	
 }
 
 void Enemy::update(float dt)

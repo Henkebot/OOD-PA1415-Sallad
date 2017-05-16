@@ -7,7 +7,6 @@ EntityHandler::EntityHandler()
 	player = nullptr;
 	extraCon();
 	initLines();
-	
 }
 
 EntityHandler::EntityHandler(Player* player)
@@ -59,7 +58,7 @@ void EntityHandler::extraCon()
 float Container::EntityHandler::calculateDmg(Stats attackerStats, Stats defenderStats)
 {
 	float dmg = 0;
-	int attackRole = rand() % static_cast<int>(attackerStats.getAgility()) + 1;
+	int attackRole = rand() % static_cast<int>(attackerStats.getAccuracy()) + 1;
 	int dogeRole = rand() % static_cast<int>(defenderStats.getAgility()) + 1;
 	if (dogeRole < attackRole)
 	{
@@ -369,10 +368,7 @@ bool EntityHandler::playerMove()
 	for (int i = 0; i < nrOfStructures && col == false; i++)
 	{
 		Vector2f otherCoords = structures[i]->getCoords();
-		if (requestedCoords == otherCoords)
-		{
-			col = true;
-		}
+		col = isCol(requestedCoords, otherCoords);
 	}
 	for (int i = 0; i < nrOfItems; i++)
 	{

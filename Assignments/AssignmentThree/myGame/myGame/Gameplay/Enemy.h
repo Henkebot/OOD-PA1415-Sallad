@@ -7,6 +7,7 @@ class Enemy : public Mob
 private:
 	states state;
 	int agro;
+	int stupidity;
 public:
 	Enemy(sf::Texture* texture = nullptr, sf::Vector2f coords = sf::Vector2f(0,0));
 	~Enemy();

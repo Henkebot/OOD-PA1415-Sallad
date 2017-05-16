@@ -9,13 +9,14 @@ Stats::Stats()
 	this->health = 10.0f;
 }
 
-Stats::Stats(float weaponModifier, float defence, float health, float strength, float agility)
+Stats::Stats(float weaponModifier, float defence, float health, float strength, float agility, float accuracy)
 {
 	this->defence = defence;
 	this->weaponModifier = weaponModifier;
 	this->health = health;
 	this->agility = agility;
 	this->strength = strength;
+	this->accuracy = accuracy;
 }
 
 Stats::~Stats()
@@ -83,6 +84,16 @@ float Stats::getStrength() const
 void Stats::setStrength(float strength)
 {
 	this->strength = strength;
+}
+
+float Stats::getAccuracy()
+{
+	return accuracy;
+}
+
+void Stats::setAccuracy(float accuracy)
+{
+	this->accuracy = accuracy;
 }
 
 void Stats::takeDMG(float dmg)

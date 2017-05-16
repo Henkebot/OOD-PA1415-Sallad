@@ -7,10 +7,11 @@ private:
 	float weaponModifier; //minimum 1
 	float strength;
 	float agility;
+	float accuracy;
 	float health;
 public:
 	Stats();
-	Stats(float weaponModifier, float defence, float health, float strength, float agility);
+	Stats(float weaponModifier = 5, float defence = 5, float health = 5, float strength = 5, float agility = 5, float accuracy = 5);
 	~Stats();
 
 	float getDefence() const;
@@ -25,6 +26,8 @@ public:
 	float getHealth() const;
 	float getStrength() const;
 	void setStrength(float strength);
+	float getAccuracy();
+	void setAccuracy(float accuracy);
 	void takeDMG(float dmg);
 };
 #endif

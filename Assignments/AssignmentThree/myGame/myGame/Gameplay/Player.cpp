@@ -3,7 +3,7 @@
 #include "../Utility/Values.h"
 Player::Player(sf::Texture* texture, sf::Vector2f coords) : Mob(texture,coords)
 {
-	this->getStats()->setAgility(7);
+	this->getStats()->setAccuracy(7);
 }
 
 Player::~Player()
