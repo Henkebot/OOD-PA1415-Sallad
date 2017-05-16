@@ -52,14 +52,7 @@ namespace Container
 			{
 				setSprite(spriteArray, Val::ROOM_WIDTH - 1, i, 2, 1);
 			}
-			// Detta sköter entityHandler
-			//for (float x = 1; x < Val::ROOM_WIDTH - 1; x++) // MITTEN
-			//{
-			//	for (float y = 1; y < Val::ROOM_HEIGHT - 1; y++)
-			//	{
-			//		setSprite(spriteArray, x, y, 1, 1);
-			//	}
-			//}
+			
 			for (float i = 0; i < Val::ROOM_WIDTH; i++) // BOTTEN
 			{
 				setSprite(spriteArray, i, Val::ROOM_HEIGHT - 1, 0, 2);
@@ -113,6 +106,8 @@ namespace Container
 			}
 			roomPointers.at(i)->customizeRoom(tilesNumber);
 			roomPointers.at(i)->setSpriteArray(spriteArray);
+
+			roomPointers[i]->giveEhLog(gameLog);
 
 		}
 		for (int i = 0; i < 20; i++)
@@ -369,9 +364,16 @@ namespace Container
 				if(i != 0)
 					aMap.at(0).setOutlineColor(sf::Color(42, 81, 34, 255));
 				aMap[i].setFillColor(sf::Color(188, 188, 181, 155));
-				currentRoom->setDiscovered();
+				if (!currentRoom->isDiscovered())
+				{
+					currentRoom->setDiscovered();
+					gameLog->addMessage("Discovered a new room!");
+				}
+				
 				aMap.at(i).setOutlineColor(sf::Color(168, 166, 74, 255));
 			}
+
+
 
 		}
 
@@ -434,7 +436,8 @@ namespace Container
 
 		currentRoom->getCurrentEntityHandler().setPlayer(player);
 		currentRoom->getCurrentEntityHandler().setDoors(currentRoom->getDoorStatus());
-		
+		currentRoom->setDiscovered();
+
 	}
 
 	bool Cave::selectTwitterFeed(const std::string & user)
@@ -470,6 +473,10 @@ namespace Container
 	{
 		currentRoom->update(dt);
 		checkDoors();
+	}
+	void Cave::setLog(Log * gameLog)
+	{
+		this->gameLog = gameLog;
 	}
 }
 

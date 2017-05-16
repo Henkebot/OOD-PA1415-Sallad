@@ -60,7 +60,7 @@ float Container::EntityHandler::calculateDmg(Stats attackerStats, Stats defender
 	int dogeRole = rand() % static_cast<int>(defenderStats.getAgility()) + 1;
 	if (dogeRole < attackRole)
 	{
-		dmg = attackerStats.getAttack();
+		dmg = attackerStats.getAttackFloat();
 		float defenceModifier = 1 - defenderStats.getDefence();
 		dmg *= defenceModifier;
 	}
@@ -109,9 +109,16 @@ void EntityHandler::update(float dt)
 			{
 				Stats enemyStat = *enemys[i]->getStats();
 				Stats playerStat = *player->getStats();
-
 				float dmg = calculateDmg(enemyStat, playerStat);
+				if (dmg != 0)
+				{
+					gameLog->addMessage("Enemy attacked for " + std::to_string(dmg).erase(std::to_string(dmg).find_first_not_of('0') + 3, std::string::npos) + " dmg");
+				}
+				else
+				{
+					gameLog->addMessage("Enemy missed!");
 
+				}
 				player->getStats()->takeDMG(dmg);
 			}
 			else if (enemys[i]->getState() == move)
@@ -266,6 +273,11 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 
 }
 
+void Container::EntityHandler::setLog(Log * gameLog)
+{
+	this->gameLog = gameLog;
+}
+
 
 void EntityHandler::handleInput(float dt)
 {
@@ -320,9 +332,18 @@ void EntityHandler::playerAttack()
 		{
 			Stats enemyStat = *enemys[i]->getStats();
 			Stats playerStat = *player->getStats();
-
+			
 			float dmg = calculateDmg(playerStat, enemyStat);
+			if (dmg != 0)
+			{
+				gameLog->addMessage("You attacked for " + std::to_string(dmg).erase(std::to_string(dmg).find_first_not_of('0') + 3, std::string::npos) + " dmg");
+			}
+			else
+			{
+				gameLog->addMessage("You missed!");
 
+			}
+			
 			
 			enemys[i]->getStats()->takeDMG(dmg);
 		}
@@ -359,6 +380,7 @@ void EntityHandler::playerInteract()
 			if (structures[i]->getEffect() == heal)
 			{
 				player->getStats()->takeDMG(-1);
+				gameLog->addMessage("You drank from the fountain");
 			}		
 		}
 	}

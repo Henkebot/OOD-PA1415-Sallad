@@ -5,6 +5,7 @@
 #include <string>
 #include "../Utility/TweetAnalyzer.h"
 #include "../Utility/Identifier.h"
+#include "../UserInterface/Log.h"
 
 namespace Container
 {
@@ -66,6 +67,8 @@ namespace Container
 		sf::RectangleShape getMap() const;
 		void setDiscovered();
 		bool isDiscovered() const;
+
+		void giveEhLog(Log * gameLog);
 	private:
 
 		void deleteSpriteArray();

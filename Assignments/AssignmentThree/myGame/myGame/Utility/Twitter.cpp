@@ -56,7 +56,6 @@ void Twitter::readFeed(const std::string& user, int maxAmountOfRooms)
 {
 	if (succAuth)
 	{
-		std::cout << "köres1" << std::endl;
 		std::string timeline = "";
 		//Sista är namnet
 		if (user == "")
@@ -66,7 +65,6 @@ void Twitter::readFeed(const std::string& user, int maxAmountOfRooms)
 		if (twitterObj.timelineUserGet(false, true, maxAmountOfRooms, user))
 		{
 			twitterObj.getLastWebResponse(timeline);
-			std::cout << timeline << std::endl;
 			if (timeline.find("{\"errors\":[{\"code\":34,\"message\":\"Sorry, that page does not exist.\"}]}") != -1)
 			{
 				twitterObj.timelineUserGet(false, true, maxAmountOfRooms);
@@ -84,7 +82,6 @@ void Twitter::readFeed(const std::string& user, int maxAmountOfRooms)
 	}
 	else
 	{
-		std::cout << "köres2" << std::endl;
 		getTweets(getFeed());
 	}
 }

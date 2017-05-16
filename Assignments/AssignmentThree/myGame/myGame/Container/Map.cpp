@@ -16,10 +16,10 @@ namespace Container
 		tweetZone = new sf::Sprite();
 		tweetZone->setTexture(*tweetTexture);
 		tweetZone->setPosition(sf::Vector2f(0, 528));
-
-
-		//generateCave("PA1415_Sallad");
+		gameLog = new Log();
+		gameLog->setPosition(992, 365);
 		
+		//generateCave("PA1415_Sallad");
 	}
 
 	Map::~Map()
@@ -28,6 +28,7 @@ namespace Container
 		delete hudSprite;
 		delete tweetTexture;
 		delete tweetZone;
+		delete gameLog;
 	}
 
 	void Map::update(float dt)
@@ -41,10 +42,12 @@ namespace Container
 		target.draw(caves);
 		
 		target.draw(*hudSprite);
+		target.draw(*gameLog);
 	}
 
 	void Map::generateCave(const std::string & user)
 	{
+		caves.setLog(gameLog);
 		std::cout << "Authenticating twitter..." << std::endl;
 		if (caves.selectTwitterFeed(user))
 			std::cout << "Succesfully authenticated!" << std::endl;
