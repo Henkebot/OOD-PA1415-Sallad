@@ -51,7 +51,8 @@ int MasterSpawner::spawnEnemies(Enemy **& enemies) const
 				int y = rand() % (static_cast<int>(Val::ROOM_HEIGHT) - 2) + 1;
 				int x = rand() % (static_cast<int>(Val::ROOM_WIDTH) - 2) + 1;
 				enemies[nrOfEmy++] = new Enemy(goblinTexure, sf::Vector2f(x * (Val::SPRITE_SIZE * Val::SCALE), y * (Val::SPRITE_SIZE * 0.75f)));
-				enemies[nrOfEmy - 1]->getStats()->setStrength(0.8f);
+				enemies[nrOfEmy - 1]->getStats()->setStrength(1.8f);
+				enemies[nrOfEmy - 1]->getStats()->setAccuracy(5);
 			}
 		}
 		else if (this->inRoom[i].getId() == "spider")

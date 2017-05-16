@@ -9,6 +9,7 @@ private:
 	float agility;
 	float accuracy;
 	float health;
+	float maxHealth;
 public:
 	Stats();
 	Stats(float weaponModifier = 5, float defence = 5, float health = 5, float strength = 5, float agility = 5, float accuracy = 5);
