@@ -25,7 +25,7 @@ Mob::Mob(sf::Texture* texture, sf::Vector2f coords) : Entity(texture,coords)
 		this->m_direction = directions::left; 
 		this->setCurrentSpriteFrame(0, 3);
 	}
-	stats = new Stats(10,0.2f,10);
+	stats = new Stats(1.0f,0.2f,10.0f,10.0f,5.0f);
 
 	entireHealthBar.setSize(sf::Vector2f(48, 8));
 	entireHealthBar.setFillColor(sf::Color::Red);

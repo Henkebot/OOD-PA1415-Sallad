@@ -4,20 +4,27 @@ class Stats
 {
 private:
 	float defence;
-	float attack;
+	float weaponModifier; //minimum 1
+	float strength;
+	float agility;
 	float health;
 public:
 	Stats();
-	Stats(int attack, float defence, int health);
+	Stats(float weaponModifier, float defence, float health, float strength, float agility);
 	~Stats();
 
 	float getDefence() const;
-	int getAttack() const;
+	float getAttack() const;
 	void setDefence(float defence);
-	void setAttack(float attack);
+	void setweaponModifier(float weaponModifier);
+	float getweaponModifier();
+	void setAgility(float agility);
+	float getAgility();
 	void setHealth(float health);
 	float getHealth() const;
-	void takeDMG(int dmg);
+	float getStrength() const;
+	void setStrength(float strength);
+	void takeDMG(float dmg);
 };
 #endif
 

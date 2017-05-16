@@ -3,15 +3,19 @@
 Stats::Stats()
 {
 	this->defence = 0.2f;
-	this->attack = 10.0f;
+	this->weaponModifier = 1;
+	this->strength = 10;
+	this->agility = 5;
 	this->health = 10.0f;
 }
 
-Stats::Stats(int attack, float defence, int health)
+Stats::Stats(float weaponModifier, float defence, float health, float strength, float agility)
 {
 	this->defence = defence;
-	this->attack = attack;
+	this->weaponModifier = weaponModifier;
 	this->health = health;
+	this->agility = agility;
+	this->strength = strength;
 }
 
 Stats::~Stats()
@@ -24,9 +28,10 @@ float Stats::getDefence() const
 	return this->defence;
 }
 
-int Stats::getAttack() const
+float Stats::getAttack() const
 {
-	return this->attack;
+	float attack = strength * weaponModifier;
+	return attack;
 }
 
 void Stats::setDefence(float defence)
@@ -34,9 +39,24 @@ void Stats::setDefence(float defence)
 	this->defence = defence;
 }
 
-void Stats::setAttack(float attack)
+void Stats::setweaponModifier(float weaponModifier)
 {
-	this->attack = attack;
+	this->weaponModifier = weaponModifier;
+}
+
+float Stats::getweaponModifier()
+{
+	return weaponModifier;
+}
+
+void Stats::setAgility(float agility)
+{
+	this->agility = agility;
+}
+
+float Stats::getAgility()
+{
+	return agility;
 }
 
 void Stats::setHealth(float health)
@@ -49,7 +69,17 @@ float Stats::getHealth() const
 	return this->health;
 }
 
-void Stats::takeDMG(int dmg)
+float Stats::getStrength() const
+{
+	return strength;
+}
+
+void Stats::setStrength(float strength)
+{
+	this->strength = strength;
+}
+
+void Stats::takeDMG(float dmg)
 {
 	this->health -= dmg;
 }

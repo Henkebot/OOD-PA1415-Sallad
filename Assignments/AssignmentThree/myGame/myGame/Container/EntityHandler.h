@@ -46,7 +46,7 @@ namespace Container
 
 		void handleInput(float dt);
 		void extraCon();
-		int calculateDmg(Stats attackerStats, Stats defenderStats);
+		float calculateDmg(Stats attackerStats, Stats defenderStats);
 		bool isFloor(Vector2f coords);
 		bool isCol(Vector2f firstCoord, Vector2f SecondCoord);
 		void removeItem(int index);

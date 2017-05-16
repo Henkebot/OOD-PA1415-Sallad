@@ -56,11 +56,17 @@ void EntityHandler::extraCon()
 
 }
 
-int Container::EntityHandler::calculateDmg(Stats attackerStats, Stats defenderStats)
+float Container::EntityHandler::calculateDmg(Stats attackerStats, Stats defenderStats)
 {
-	int dmg = attackerStats.getAttack();
-	float defenceModifier = 1 - defenderStats.getDefence();
-	dmg *= defenceModifier;
+	float dmg = 0;
+	int attackRole = rand() % static_cast<int>(attackerStats.getAgility()) + 1;
+	int dogeRole = rand() % static_cast<int>(defenderStats.getAgility()) + 1;
+	if (dogeRole < attackRole)
+	{
+		dmg = attackerStats.getAttack();
+		float defenceModifier = 1 - defenderStats.getDefence();
+		dmg *= defenceModifier;
+	}
 	return dmg;
 }
 
@@ -107,7 +113,7 @@ void EntityHandler::update(float dt)
 				Stats enemyStat = *enemys[i]->getStats();
 				Stats playerStat = *player->getStats();
 
-				int dmg = calculateDmg(enemyStat, playerStat);
+				float dmg = calculateDmg(enemyStat, playerStat);
 
 				player->getStats()->takeDMG(dmg);
 			}
