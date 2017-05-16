@@ -5,6 +5,7 @@
 #include "Room.h"
 #include <vector>
 #include "../Utility/Twitter.h"
+#include "../UserInterface/Log.h"
 
 namespace Container
 {
@@ -18,6 +19,8 @@ namespace Container
 		bool selectTwitterFeed(const std::string& user = "");
 		
 		void update(float dt);
+
+		void setLog(Log * gameLog);
 
 	private:
 		std::string twitterUser;
@@ -39,6 +42,8 @@ namespace Container
 		bool connectRoom(Room* rootRoom, int role, int lastRoom = 0); //role is what type of room: 0 Basic, 1 start, 2 end
 		void importMap();
 		void updateMiniMap(int xDir, int yDir);
+
+		Log* gameLog;
 
 	};
 

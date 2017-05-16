@@ -191,6 +191,11 @@ namespace Container
 		return discovered;
 	}
 
+	void Room::giveEhLog(Log * gameLog)
+	{
+		this->eh.setLog(gameLog);
+	}
+
 	void Room::deleteSpriteArray()
 	{
 		for (int x = 0; x < 20; x++)

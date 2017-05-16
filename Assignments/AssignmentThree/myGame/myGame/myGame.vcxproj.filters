@@ -43,6 +43,7 @@
     <ClCompile Include="Container\EntityHandler.cpp" />
     <ClCompile Include="UserInterface\EnterFeed.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="UserInterface\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container\Cave.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="Utility\MasterSpawner.h" />
     <ClInclude Include="UserInterface\EnterFeed.h" />
     <ClInclude Include="Utility\Values.h" />
+    <ClInclude Include="UserInterface\Log.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\twitcurl.lib" />

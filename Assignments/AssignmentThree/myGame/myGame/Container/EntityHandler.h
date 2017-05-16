@@ -9,6 +9,7 @@
 #include "../Utility/InputManager.h"
 #include "../Utility/Identifier.h"
 #include "../Utility/MasterSpawner.h"
+#include "../UserInterface/Log.h"
 
 using namespace sf;
 namespace Container
@@ -32,6 +33,8 @@ namespace Container
 		void setDoors(bool* doors);
 		void setStructureProperty(int role, int spriteSheet);
 		void createEntities(Identifier* inRoom, int size);
+		void setLog(Log * gameLog);
+
 	private:
 		//player intraction
 		bool playerMove();
@@ -59,6 +62,7 @@ namespace Container
 		sf::Text armorText;
 		sf::Text attackText;
 		sf::Text healthText;
+		Log* gameLog;
 
 		void updateStatusText();
 

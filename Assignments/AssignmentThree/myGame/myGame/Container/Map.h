@@ -4,6 +4,7 @@
 #include <string>
 #include "Cave.h"
 #include <SFML\Graphics.hpp>
+#include "../UserInterface/Log.h"
 namespace Container
 {
 	class Map 
@@ -13,6 +14,8 @@ namespace Container
 		sf::Texture* tweetTexture;
 		sf::Sprite* hudSprite;
 		sf::Sprite* tweetZone;
+		Log* gameLog;
+
 		Cave caves;
 	public:
 		Map();

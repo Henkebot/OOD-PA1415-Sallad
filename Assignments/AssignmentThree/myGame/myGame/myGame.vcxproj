@@ -58,6 +58,7 @@
     <ClCompile Include="UserInterface\EnterFeed.cpp" />
     <ClCompile Include="UserInterface\Game.cpp" />
     <ClCompile Include="UserInterface\GameStateManager.cpp" />
+    <ClCompile Include="UserInterface\Log.cpp" />
     <ClCompile Include="UserInterface\Menu.cpp" />
     <ClCompile Include="UserInterface\Pause.cpp" />
     <ClCompile Include="UserInterface\State.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="UserInterface\Game.h" />
     <ClInclude Include="UserInterface\GameStateManager.h" />
     <ClInclude Include="UserInterface\IStack.h" />
+    <ClInclude Include="UserInterface\Log.h" />
     <ClInclude Include="UserInterface\Menu.h" />
     <ClInclude Include="UserInterface\Pause.h" />
     <ClInclude Include="UserInterface\Stack.h" />

@@ -259,6 +259,11 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 
 }
 
+void Container::EntityHandler::setLog(Log * gameLog)
+{
+	this->gameLog = gameLog;
+}
+
 
 void EntityHandler::handleInput(float dt)
 {
