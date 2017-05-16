@@ -27,7 +27,7 @@ void EntityHandler::extraCon()
 	playersTurn = true;
 	nrOfItems = 0;
 	nrOfStructures = 0;
-	inputTimer.restart().asSeconds();
+	inputTimer.restart().asMilliseconds();
 	timeCollector = 0;
 
 	statusTexture.loadFromFile(".\\textures\\hud.png", sf::IntRect(960, 293, 320, 427));
@@ -265,7 +265,7 @@ void Container::EntityHandler::createEntities(Identifier * inRoom, int size)
 
 void EntityHandler::handleInput(float dt)
 {
-	timeCollector += dt;
+	timeCollector += inputTimer.restart().asMilliseconds();;
 	if (InputManager::keyPressed(sf::Keyboard::Q))
 	{
 		playerAttack();
@@ -276,7 +276,7 @@ void EntityHandler::handleInput(float dt)
 		playerInteract();
 		playersTurn = false;
 	}
-	else if (timeCollector > 0.005f)
+	else if (timeCollector > 100.0f)
 	{
 		
 		if (InputManager::keyPress(sf::Keyboard::W) || InputManager::keyPress(sf::Keyboard::Up))

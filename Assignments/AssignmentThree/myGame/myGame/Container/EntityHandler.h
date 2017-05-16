@@ -87,6 +87,7 @@ namespace Container
 
 		bool doorStatus[4];
 		float timeCollector;
+
 	};
 }
 
