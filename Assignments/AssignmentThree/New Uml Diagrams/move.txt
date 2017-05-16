@@ -1,0 +1,77 @@
+@startuml
+title Move
+hide footbox
+
+participant ":EntityHandler" as eh
+participant ":Player" as player
+participant ":InputManager" as im
+participant ":Enemy" as emy
+participant ":Structure" as struct
+
+[->eh : update(dt)
+activate eh
+	
+	eh -> player : update(dt)
+	activate player
+	deactivate player
+
+	eh -> eh : handleInput(dt)
+	activate eh	
+		eh -> im : keyPress(sf::Keyboard::W)
+		activate im
+			im --> eh : result
+		deactivate im
+
+		eh -> eh : playerTurnUp()
+		activate eh 
+			eh -> player : getDirection()
+			activate player
+			player --> eh : direction : enum
+			deactivate player
+			
+			eh -> eh : playerMove()
+			activate eh
+				eh -> player : moveRequest()
+				activate player
+				player --> eh : requestedCoords : sf::Vector2f
+				deactivate player
+
+				eh -> eh : isNotFloor(requestCoords)
+				activate eh
+				deactivate eh
+				loop col == false && nrOfEnemies
+					eh -> emy : getCoords()
+					activate emy
+					emy --> eh : otherCoords
+					deactivate emy
+
+					eh -> eh : col = isCol(otherCoords, requestedCoords)
+					activate eh
+					deactivate eh
+
+				end
+
+				loop col == false && nrOfStructures
+					eh -> struct : getCoords()
+					activate struct
+					struct --> eh : otherCoords
+					deactivate struct
+
+					eh -> eh : col = isCol(otherCoords, requestedCoords)
+					activate eh
+					deactivate eh
+
+
+				end
+			deactivate eh
+			eh -> player : move(0,-1)
+			activate player
+			deactivate player
+			
+		deactivate eh
+	deactivate eh
+	
+deactivate eh
+
+
+@enduml

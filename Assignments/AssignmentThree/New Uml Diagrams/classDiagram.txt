@@ -1,0 +1,464 @@
+@startuml
+class Application {
+	+ Application()
+	+ SCREEN_WIDTH : static const int
+	+ SCREEN_HEIGHT : static const int
+	- run() : void
+	- update(dt : float) : void
+	- draw(target : sf::RenderTarget&, states : sf::RenderStates) const : void
+	- window : sf::RenderWindow
+	- gsm : GameStateManager*
+
+}
+
+class GameStateManager {
+	+ GameStateManager()
+	+ GameStateMangaer(other : const GameStateManager&)
+	+ emptyStack() const : bool
+	+ changeState(state : State*) : void
+	+ pushState(state : State*) : void
+	+ popState(amount : int) : void
+	+ update(dt : float) : void
+
+	+ operator=(other : const GameStateManager&) : GameStateManager&
+	- draw(target : sf::RenderTarget&, states : sf::RenderStates) : void
+	- states : Stack<State*>
+}
+
+abstract State {
+	+ State(gsm : GameStateManager*) 
+	+ State(other : const State&)
+	+ update(dt : float) = 0 : virtual void
+	+ handleEvents() = 0 : virtual void
+	+ operator=(other : const State&) = 0 : virtual void
+	- gsm : GameStateManager*
+}
+
+class EnterFeed {
+	+ EnterFeed(gsm : GameStateManager*)
+	+ update(dt : float) : void
+	+ handleEvents() : void
+	- initiateVars() : void
+	- initiateText() : void
+	- intiiateBox() : void
+	- draw(target : sf::RenderTarget&, states : sf::RenderStates) const : void
+	- texture : sf::Texture
+	- wallpaper : sf::Sprite
+	- aFont : sf::Font
+	- inputFont : sf::Font
+	- input : sf::String
+	- enterFeed : sf::Text
+	- aFeed : sf::Text
+	- goBack : sf::Text
+
+	- inputBox : sf::RectangleShape
+}
+
+class Pause {
+	+ Pause(gsm : GameStateManager*)
+	+ update(dt : float) : void
+	+ handleEvents() : void
+
+	- draw(target : sf::RenderTarget&, states : sf::RenderStates) const : virtual void
+	- initiateText() : void
+	- tBg : sf::Texture
+	- sBg : sf::Sprite
+	- pause : sf::Text
+	- goToGame : sf::Text
+	- goToMenu : sf::Text
+	- aFont : sf::Font
+
+}
+
+class Menu {
+	+ Menu(gsm : GameStateManager*)
+	+ Menu(other : const Menu&)
+	+ update(dt : float) : void
+	+ handleEvents() : void
+
+	+ operator=(other : const Menu&) : Menu&
+	- draw(target : sf::RenderTarget&, states : sf::RenderStates) const : void
+	- initiateVars() : void
+	- initiateText() : void
+	- timeCollector : float
+	- texture : sf::Texture
+	- wallpaper : sf::Sprite
+	- alpha : float
+	- aFont : sf::Font
+	- startGame : sf::Text
+	- endGame : sf::Text
+	- nethack : sf::Text
+}
+
+
+class Game {
+	+ Game(gsm : GameStateManager*, user : string)
+	+ Game(other : const Game&)
+	+ update(dt : float) : void
+	+ handleEvents() : void
+
+	+ operator=(other : const Game&) : Game&
+	- draw(target : sf::RenderTarget&, states : sf::RenderStates) const : void
+	- map : Map
+}
+
+class Map {
+	- hudTexture : sf::Texture*
+	- tweetTexture : sf::Texture*
+	- hudSprite : sf::Sprite*
+	- tweetZone : sf::Sprite*
+	- caves : Cave
+	+ Map()
+	+ update(dt : float) : void
+	+ render(target : sf::RenderTarget&) const : void
+	+ generateCave(user : const string&) : void
+	+ createMap(rootUser : string&) : void[MaL[
+
+}
+
+class Cave {
+	+ Cave()
+	+ generateCave() : void
+	+ selectTwitterFeed(user : const string&) : bool
+	- setSprite(spriteArray : sf::Sprite**, xIndex : float, yIndex : float, xSheet : int, ySheet : int) : void
+	+ update(dt : float) : void
+	- twitterUser : string
+	- currentRoom : Room*
+	- tilesNumber : int
+	- tiles1 : sf::Texture*
+	- tiles2 : sf::Texture*
+	- tiles3 : sf::Texture*
+	- roomPointers : vector<Room*>
+	- twitterObj : Twitter
+	- aMap : vector<sf::RectangleShape>
+	- applyRoomTextures() : void
+	- changeRoom(newRoom : Room*, startX : int, startY : int) : void
+	- checkDoors() : void
+	- draw(target : sf::RenderTarget&, states : sf::RenderStates)  const : virtual void
+	- connectRoom(rootRoom : Room*, role : int, lastRoom : int ) : bool
+	- importMap() : void
+	- updateMiniMap(xDir : int, yDir : int) : void
+}
+
+class Twitter {
+	+ Twitter()
+	+ getRandomTweet() const : string
+	+ authenticate() : bool
+	+ readFeed(user : const string&, maxAmountRooms : int) : void
+	+ getNumberOfTweets() const : int
+	+ getAllTweets() const : string*
+	+ getUser() const : string
+	- getFeed() const : string
+	- getTweets(feed : const string) : void
+	- tweets : string*
+	- usedTweets : bool*
+	- size : int
+	- twitterObj : twitCurl
+	- succAuth : bool
+	- user : string
+
+}
+
+class Room {
+	- left : Room*
+	- right : Room*
+	- up : Room*
+	- down : Room*
+
+	- coord : sf::Vector2i
+	- roomRole : int
+	- eh : EntityHandler
+	- tweetFont : sf::Font*
+	- owner : const string
+	- tweetOwner : sf::Text
+	- tweet : string
+	- currentTweet : sf::Text
+	- spritesArray : sf::Sprite*
+	- discovered : bool
+	+ Room(tweet : const string&, role : int)
+	+ setEh(eh : EntityHandler) : void
+	+ getCurrentEntityHandler() : EntityHandler&
+	+ getCoord() const : sf::Vector2i
+	+ setCoord(coord : const sf::Vector2i) : void
+	+ setLeftD(room : Room*) : void
+	+ setRightD(room : Room*) : void
+	+ setUpD(room : Room*) : void
+	+ setDownD(room : Room*) : void
+	+ getLeftD() const : Room*
+	+ getRightD() const : Room*
+	+ getUpD() const : Room*
+	+ getDownD() const : Room*
+
+	+ getRole() const : int
+	+ setOwner(owner : const string&) : void
+	+ customizeRoom(spriteSheet : int) : void
+	+ setSpriteArray(array : sf::Sprite**) : void
+	+ update(dt : float) : void
+	+ getDoorStatus() const : bool*
+	+ getMap() const : sf::RectangleShape
+	+ setDiscovered() : void
+	+ isDiscovered() const : bool
+	- deleteSpriteArray() : void
+	- draw(target : sf::RenderTarget& , states : sf::RenderStates) const : virtual void
+}
+
+class EntityHandler {
+	+ EntityHandler()
+	+ EntityHandler(player : Player*) 
+	+ Entityhandler(player : Player*, playerCoords : sf::Vector2f)
+	+ updte(dt : float) : void
+	+ render(target : sf::RenderTarget&) : void
+	+ getPlayer() const : Player*
+	+ setPlayer(player : Player*) : void
+	+ destroyPlayer() : void
+	+ setDoors(doors : bool*) : void
+	+ setStructureProperty(role : int , spriteSheet : int) : void
+	+ createEntities(inRoom : Identifier*, size : int) : void
+	- playerMove() : bool
+	- playerInteract() : boid
+	- playerAttack() : void
+	- playerTurnUp() : void
+	- playerTurnLeft() : void
+	- playerTurnDown() : void
+	- playerTurnRight() : void
+	- EnemyMove(index : int) : void
+	- handleInput(dt : float) : void
+	- extraCon() : void
+	- calculateDmg(attackerStats : Stats, defenderStas : Stats) : float
+	- isFloor(coords : sf::Vector2f) : bool
+	- isCol(firstCoord : sf::Vector2f, secondCoord : sf::Vector) : bool
+	- removeItem(index : int) : void
+	- remoceDead() : void
+
+	- statusTexture : sf::Texture
+	- statusSprite : sf::Sprite
+	- statusFont : sf::Font
+	- armorText : sf::Text
+	- attackText : sf::Text
+	- healthText : sf::Text
+
+	- updateStatusText() : void
+	- player : Player*
+	- inputTimer : sf::Clock
+	- playerTexture : sf::Texture* 
+	- enemys : Enemy**
+	- structures : Structure**
+	- items : Item**
+	- floor[11][20] : Floor*
+
+	- nrOfEnemies : int
+	- structureProperty : int
+	- nrOfStructures : int
+	- nrOfItems : int
+	- floorSheet : int
+
+	- playersTurn : bool
+	- doorStatus[4] : bool
+	- timeCollector : float
+
+}
+abstract Entity {
+	- coords : sf::Vector2f
+	- texture : sf::Texture
+	- sprite : sf::Sprite
+	- draw(target : sf::RenderTarget&, states : sf::RenderStates) const : void
+	- tileX : int
+	- tileY : int
+	+ Entity(texture : sf::Texture*, coords : sf::Vector2f)
+	+ setCoords(coords : sf::Vector2f) : void
+	+ getCoords() const : sf::Vector2f
+	+ setTexture(texture : const sf::Texture&) : void
+	+ setCurrentSpriteFrame(x : int, y : int) : void
+	+ getTexture() const : sf::Texture
+	+ setSprite(sprite : const sf::Sprite&) : void
+	+ getSprite() const : sf::Sprite
+	+ update(dt : float) = 0 : virtual void
+	+ create() = 0 : virtual void
+}
+
+class NonMovable {
+	+ NonMoveable(texture : sf::Texture*, coords : sf::Vector2f)
+
+}
+
+class Structure {
+	+ Structure(texture : sf::Texture*, coords : sf::Vector2f)
+	+ create() : void
+	+ getInteractionEffect() : string
+	+ update(dt : float) : void
+	+ draw(target : sf::RenderTarget&, states : sf::RenderStates) const : void
+
+}
+
+class Floor {
+	+ Floor(texture : sf::Texture*, coords : sf::Vector2f)
+	+ create() : void
+	+ update(dt : float) : void
+	+ draw(target : sf::RenderTarget&, states : sf::RenderStates) const : void
+}
+
+abstract Mob {
+	- m_direction : directions
+	- stats : Stats*
+	- entireHealthBar : sf::RectangleShape
+	- healthLeftBar : sf::RectangleShape
+	+ Mob(texture : sf::Texture*, coords : sf::Vector2f)
+	+ attack() : sf::Vector2f
+	+ moveRequest() : sf::Vector2f
+	+ move(xDir : int, yDir : int) : void
+	+ getStats() const : Stats*
+	+ setPos(coords : sf::Vector2f ) : void
+	+ interact() = 0 : virtual sf::Vector2f
+	+ updateHealthbar() : void
+	+ getDirection() : directions
+	+ setDirection(direction : directions) : void
+	+ getDirX() const : int
+	+ getDirY() const : int
+	+ isDead() const : bool
+	+ update(dt : float) : void
+	+ draw(target : sf::RenderTarget&, states : sf::RenderStates) const : virtual void
+
+
+}
+
+class Stats {
+	- defence : float
+	- weaponModifier : float
+	- strength : float
+	- agility : float
+	- health : float
+	+ Stats()
+	+ Stats(weaponModifier : float, defence : float, health : float, strenght : float, agility : float)
+	+ getDefence() const : float
+	+ getAttack() const : int
+	+ getAttackFloat() const : float
+	+ setDefence(defence : float) : void
+	+ setWeaponModifier(weaponModifier : float) : void
+	+ getWeaponModifier() : float
+	+ setAgility( agility : float) : void
+	+ getAgility() const : float
+	+ setHealth(health : float) : void
+	+ getHealth() const : float
+	+ getStrength() const : float
+	+ void setStrength(strength : float) : void
+	+ void takeDMG(dmg : float) : void
+
+}
+class Player {
+	- xp : long
+	- inventory : Inventory*
+	+ Player(texture : sf::Texture*, coords : sf::Vector2f)
+	+ setXP(xp : long) : void
+	+ getXP() const : long
+	+ create() : void
+	+ update(dt : float) : void
+	+ interact() : sf::Vector2f
+	+ pickUpItem(item Item) : void
+
+}
+
+class Enemy {
+	- state : states
+	- agro : int
+	+ Enemy(texture : sf::Texture*, coords : sf::Vector2f)
+	+ create() : void
+	+ checkState(playerCoords : sf::Vector2f) : void
+	+ update(dt : float) : void
+	+ interact() : sf::Vector2f
+
+	+ getState() const : states
+	+ setState(newState : states) : void 
+
+}
+
+class Inventory {
+	- INVENTORY_SIZE : const static int
+	- itemArray[INVENTORY_SIZE] : Item
+
+	+ Inventory()
+	+ getItems() : Item*
+}
+
+class Item {
+	+ Item(texture : sf::Texture*, coords : sf::Vector2f)
+	+ create() : void
+	+ update(dt : float) : void
+	+ draw(target : sf::RenderTarget&, states : sf::RenderStates) const
+
+}
+
+class Identifier {
+	+ Identifier(id : const string&, amount : int)
+	+ setNewId(id : const string& ) : void
+	+ setNewAmount(amount : int) : void
+	+ getId() const : string
+	+ getAmount() const : int
+	- id : string
+	- amount : int
+	
+}
+
+class TweetAnalyser {
+	+ getInRoom(tweet : const string&, inRoom : Identifier*&) : static int
+	- filterTweet(tweet : const string&) : static string
+	- toLower(tweet : const string&) : static string
+}
+
+class MasterSpawner {
+	+ MasterSpawner(inRoom : Identifier*, size : int)
+	+ floorType() const : int
+	+ spawnEnemies(enemies : Enemy**&) const : int
+	+ spawnItems(items : Item**&) const : int
+	+ spawnStructures(structures : Structure**&) const : int
+	- getAmountOfEnemiesInRoom() const : int
+	- getAmountOfItemsInRoom() const : int
+	- getAmountOfStructuresInRoom() const : int
+	- inRoom : Identifier*
+	-size : int
+}
+
+Application -- GameStateManager
+
+GameStateManager -- State
+
+State <|-- Pause
+State <|-- EnterFeed
+State <|-- Menu
+State <|-- Game
+
+Game - Map
+
+Map -- Cave
+
+Cave -- Twitter
+Cave -- Room
+
+Room -- EntityHandler
+Room -- TweetAnalyser
+
+MasterSpawner -- Identifier
+
+
+EntityHandler -- Player
+EntityHandler -- Enemy
+EntityHandler -- Structure
+EntityHandler -- Floor
+EntityHandler -- Item
+EntityHandler -- MasterSpawner
+Player -- Inventory
+
+Inventory -- Item
+
+Entity <|-- Item
+
+Entity <|-- Mob
+Entity <|-- NonMovable
+NonMovable <|-- Structure
+NonMovable <|-- Floor
+
+Mob <|-- Player
+Mob <|-- Enemy
+Mob -- Stats
+@enduml
+
+

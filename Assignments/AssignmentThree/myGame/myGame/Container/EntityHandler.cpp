@@ -6,7 +6,7 @@ EntityHandler::EntityHandler()
 {
 	player = nullptr;
 	extraCon();
-	initLines();
+	//initLines();
 }
 
 EntityHandler::EntityHandler(Player* player)
@@ -160,10 +160,10 @@ void Container::EntityHandler::render(sf::RenderTarget & target) const
 		target.draw(*structures[0]);
 	}
 	target.draw(*player);
-	for (int i = 0; i < Val::ROOM_WIDTH; i++)
-		target.draw(lineX[i], 2, sf::Lines);	
-	for (int i = 0; i < Val::ROOM_HEIGHT; i++)
-		target.draw(lineY[i], 2, sf::Lines);
+	//for (int i = 0; i < Val::ROOM_WIDTH; i++)
+	//	target.draw(lineX[i], 2, sf::Lines);	
+	//for (int i = 0; i < Val::ROOM_HEIGHT; i++)
+	//	target.draw(lineY[i], 2, sf::Lines);
 
 	for (int i = 0; i < nrOfEnemies; i++)
 	{

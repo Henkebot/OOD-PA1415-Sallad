@@ -5,7 +5,7 @@ const int Application::SCREEN_HEIGHT = 720;
 
 Application::Application()
 {
-	srand(static_cast<unsigned>(time(0)));
+	//srand((unsigned)time(NULL));
 	std::cout << "Application created\n";
 	this->window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "TwitterNethack");
 	this->gsm = new GameStateManager();

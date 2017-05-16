@@ -1,0 +1,41 @@
+@startuml
+title Start Singleplayer
+hide footbox
+
+participant ":Application" as app
+participant ":GameStateManager" as gsm
+participant ":Menu" as menu
+participant ":InputManager" as im
+
+[->app : run()
+activate app
+	app -> gsm : pushState(	menu, gsm)
+	activate gsm
+		
+	deactivate gsm
+
+	loop game runnning
+		app ->gsm : update(dt)
+		activate gsm
+			gsm -> menu : update(dt)
+			activate menu
+				menu -> menu : handleEvents()
+				activate menu
+					menu -> im : keyPressed(sf::Keyboard::Return)
+					activate im	
+					im --> menu : isPressed
+					deactivate im
+					alt isPressed = true
+						menu -> gsm : pushState(enterFeed, gsm)
+						
+					end 
+				deactivate menu
+
+
+			deactivate menu
+
+		deactivate gsm
+	end loop
+
+deactivate app
+@enduml
