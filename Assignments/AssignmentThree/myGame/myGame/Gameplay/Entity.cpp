@@ -51,26 +51,6 @@ sf::Sprite Entity::getSprite() const
 	return this->sprite; 
 }
 
-void Entity::setTileXIndex(int tileX)
-{
-	this->tileX = tileX; 
-}
-
-int Entity::getTileXIndex()
-{
-	return this->tileX;
-}
-
-void Entity::setTileYIndex(int tileY)
-{
-	this->tileY = tileY; 
-}
-
-int Entity::getTileYIndex()
-{
-	return this->tileX;
-}
-
 void Entity::update(float dt)
 {
 	

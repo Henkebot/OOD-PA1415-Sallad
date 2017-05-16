@@ -1,0 +1,29 @@
+@startuml
+title Select twitter feed
+hide footbox
+participant ":Game" as game
+participant ":Map" as map
+participant ":Cave" as cave
+participant ":Twitter" as twitter
+
+[->game : Game(gsm, user)
+activate game
+	game -> map : Map()
+	activate map
+	deactivate map
+	game -> map : generateCave(user)
+	activate map
+		map -> cave : selectTwitterFeed(user)
+		activate cave
+			cave -> twitter : result = authenticate()
+			activate twitter
+				twitter --> cave : result
+			deactivate twitter
+			cave -> twitter : readFeed(user, max)
+			activate twitter
+			deactivate twitter
+			cave --> map : result
+		deactivate cave
+	deactivate map
+deactivate game
+@enduml

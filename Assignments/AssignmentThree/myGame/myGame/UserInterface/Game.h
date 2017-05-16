@@ -21,6 +21,5 @@ private:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 private:
 	Container::Map map;
-	sf::RectangleShape shape;
 };
 #endif // !GAME_H

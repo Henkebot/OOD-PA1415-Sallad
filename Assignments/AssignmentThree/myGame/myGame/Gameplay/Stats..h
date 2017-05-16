@@ -21,7 +21,7 @@ public:
 	void setweaponModifier(float weaponModifier);
 	float getweaponModifier();
 	void setAgility(float agility);
-	float getAgility();
+	float getAgility() const ;
 	void setHealth(float health);
 	float getHealth() const;
 	float getStrength() const;
