@@ -28,7 +28,13 @@ float Stats::getDefence() const
 	return this->defence;
 }
 
-float Stats::getAttack() const
+int Stats::getAttack() const
+{
+	float attack = strength * weaponModifier;
+	return attack;
+}
+
+float Stats::getAttackFloat() const
 {
 	float attack = strength * weaponModifier;
 	return attack;

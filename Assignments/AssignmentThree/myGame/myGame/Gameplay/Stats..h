@@ -14,7 +14,8 @@ public:
 	~Stats();
 
 	float getDefence() const;
-	float getAttack() const;
+	int getAttack() const;
+	float getAttackFloat() const;
 	void setDefence(float defence);
 	void setweaponModifier(float weaponModifier);
 	float getweaponModifier();
