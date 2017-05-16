@@ -1,0 +1,126 @@
+@startuml
+
+package Container {
+	class Cave [
+
+	}
+
+	class EntityHandler {
+
+	}
+
+	class Inventory {
+
+	}
+
+	class Map {
+
+
+	}
+
+	class Room {
+
+	}
+
+	
+
+}
+
+
+package Gameplay {
+
+	class Enemy {
+
+	}
+
+	class Entity {
+
+	}
+
+	class Floor {
+
+	}
+
+	class Item {
+
+	}
+
+	class Mob {
+
+	}
+
+	class NonMovable {
+
+	}
+
+	class Player {
+
+	}
+
+
+	class Stats {
+
+	}
+
+	class Structure {
+
+	}
+}
+
+
+package UserInterface {
+	class Application {
+
+	}
+
+	class EnterFeed {
+
+	}
+
+	class Game {
+
+	}
+
+	class GameStateManager {
+
+	}
+
+	class Menu {
+
+	}
+
+	class Pause {
+
+	}
+
+	class State {
+
+	}
+
+}
+
+package Utility {
+
+	class Identifier {
+
+	}
+
+	class InputManager {
+
+	}
+
+	class MasterSpawner {
+
+	}
+
+	class TweetAnalayser {
+
+	}
+
+	class Twitter {
+
+	}
+
+}
+
+

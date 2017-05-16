@@ -417,6 +417,13 @@ class MasterSpawner {
 	-size : int
 }
 
+class InputManager {
+	+ keyPressed(key : sf::Keyboard::Key) : static bool
+	+ keyPress(key sf::Keyboard::Key) : static bool
+	+ getIndexOfKeyPressed() : static int
+	- buttons[200] : static bool
+}
+
 Application *--"1" GameStateManager
 
 GameStateManager *--"1..*" State
