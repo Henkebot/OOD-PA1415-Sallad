@@ -78,7 +78,6 @@ void EntityHandler::update(float dt)
 			enemys[i]->update(dt);
 			if (enemys[i]->getState() == attack)
 			{
-				std::cout << "attack" << std::endl;
 				Stats enemyStat = *enemys[i]->getStats();
 				Stats playerStat = *player->getStats();
 
@@ -88,12 +87,10 @@ void EntityHandler::update(float dt)
 			}
 			else if (enemys[i]->getState() == move)
 			{
-				std::cout << "move" << std::endl;
 				EnemyMove(i);
 			}
 			else
 			{
-				std::cout << "idle" << std::endl;
 				int rng = rand() % 10;
 				if (rng < 4)
 				{
@@ -235,7 +232,7 @@ void EntityHandler::handleInput(float dt)
 		playerInteract();
 		playersTurn = false;
 	}
-	else if (timeCollector > 150 * dt)
+	else if (timeCollector > 0.005f)
 	{
 		
 		if (InputManager::keyPress(sf::Keyboard::W) || InputManager::keyPress(sf::Keyboard::Up))

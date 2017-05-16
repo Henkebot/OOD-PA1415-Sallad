@@ -24,7 +24,6 @@ void Enemy::checkState(sf::Vector2f playerCoords)
 {
 	float distance = sqrt(pow((playerCoords.x - getCoords().x),2) + (pow((playerCoords.y - getCoords().y),2)));
 	float tile = Val::SPRITE_SIZE;
-	std::cout << "distance = " << distance << std::endl << "tile = " << tile << std::endl;
 	if (distance <= tile)
 	{
 		state = states::attack;
